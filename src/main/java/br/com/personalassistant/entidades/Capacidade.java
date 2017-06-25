@@ -8,10 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-@Table(name = "TB_CATEGORIA_SERVICO", uniqueConstraints = {
-		@UniqueConstraint(name = "UC_CATEGORIA_SERVICO",columnNames = {"nome"})})
-@Entity(name = "CategoriaServico")
-public class CategoriaServico {
+@Entity(name = "Capacidade")
+@Table(name = "TB_CAPACIDADE") //, uniqueConstraints = {@UniqueConstraint(name = "UC_CAPACIDADE", columnNames = {"nome"})}
+public class Capacidade {	   // restrição de unicidade Para evitar duplicação no banco..
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -20,11 +19,11 @@ public class CategoriaServico {
 	@Column(nullable = false)
 	private String nome;
 
-	public CategoriaServico(){
+	public Capacidade() {
 		super();
 	}
-	
-	public CategoriaServico(String nome) {
+
+	public Capacidade(String nome) {
 		super();
 		this.nome = nome;
 	}
@@ -32,11 +31,15 @@ public class CategoriaServico {
 	public int getId() {
 		return id;
 	}
-
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
-
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -58,7 +61,7 @@ public class CategoriaServico {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CategoriaServico other = (CategoriaServico) obj;
+		Capacidade other = (Capacidade) obj;
 		if (id != other.id)
 			return false;
 		if (nome == null) {
@@ -71,7 +74,7 @@ public class CategoriaServico {
 
 	@Override
 	public String toString() {
-		return "CategoriaServico [id=" + id + ", nome=" + nome + "]";
+		return "Capacidade [id=" + id + ", nome=" + nome + "]";
 	}
 	
 }

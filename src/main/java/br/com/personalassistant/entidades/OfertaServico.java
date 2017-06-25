@@ -3,20 +3,25 @@ package br.com.personalassistant.entidades;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import br.com.personalassistant.enums.ESTADO_OFERTA;
 
+@Entity
 public class OfertaServico {
 
+	@Id
 	private int id;
+	
 	private int duracaoOferta;
 	private double precoInicial;
-	private Date dataRealizacaoServico;
 	private ESTADO_OFERTA status;
-
 	private Endereco endereco; // unidirecional
 	private CategoriaServico categoriaServico; // unidirecional
 	private Contratante contratante; // bidirecional
 	private ArrayList<Lance> lances; // bidirecional
+	private DataRealizacaoServico dataRealizacaoServico; // unidirecional
 
 	public int getId() {
 		return id;
@@ -40,14 +45,6 @@ public class OfertaServico {
 
 	public void setPrecoInicial(double precoInicial) {
 		this.precoInicial = precoInicial;
-	}
-
-	public Date getDataRealizacaoServico() {
-		return dataRealizacaoServico;
-	}
-
-	public void setDataRealizacaoServico(Date dataRealizacaoServico) {
-		this.dataRealizacaoServico = dataRealizacaoServico;
 	}
 
 	public ESTADO_OFERTA getStatus() {
@@ -88,6 +85,14 @@ public class OfertaServico {
 
 	public void setLances(ArrayList<Lance> lances) {
 		this.lances = lances;
+	}
+	
+	public DataRealizacaoServico getDataRealizacaoServico() {
+		return dataRealizacaoServico;
+	}
+
+	public void setDataRealizacaoServico(DataRealizacaoServico dataRealizacaoServico) {
+		this.dataRealizacaoServico = dataRealizacaoServico;
 	}
 
 }

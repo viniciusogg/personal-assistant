@@ -1,8 +1,14 @@
 package br.com.personalassistant.entidades;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "Endereco")
 public class Endereco {
 
+	@Id
 	private int id;
+	
 	private int numero;
 	private String rua;
 	private String referencia;

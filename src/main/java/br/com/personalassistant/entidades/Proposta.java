@@ -1,20 +1,26 @@
 package br.com.personalassistant.entidades;
 
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import br.com.personalassistant.enums.ESTADO_NEGOCIACAO;
 
+@Table(name = "TB_PROPOSTA")
+@Entity(name = "Proposta")
 public class Proposta {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private int id;
+	
 	private double preco;
-	private Date dataRealizacao;
 	private String comentario;
 	private ESTADO_NEGOCIACAO status;
-
 	private Endereco endereco; // unidirecional
-//	private Assistente assistente;
-//	private Contratante contratante;
+	private DataRealizacaoServico dataRealizacaoServico;
 
 	public int getId() {
 		return id;
@@ -30,14 +36,6 @@ public class Proposta {
 
 	public void setPreco(double preco) {
 		this.preco = preco;
-	}
-
-	public Date getDataRealizacao() {
-		return dataRealizacao;
-	}
-
-	public void setDataRealizacao(Date dataRealizacao) {
-		this.dataRealizacao = dataRealizacao;
 	}
 
 	public String getComentario() {
@@ -64,20 +62,11 @@ public class Proposta {
 		this.endereco = endereco;
 	}
 
-/*	public Assistente getAssistente() {
-		return assistente;
+	public DataRealizacaoServico getDataRealizacaoServico() {
+		return dataRealizacaoServico;
 	}
 
-	public void setAssistente(Assistente assistente) {
-		this.assistente = assistente;
+	public void setDataRealizacaoServico(DataRealizacaoServico dataRealizacaoServico) {
+		this.dataRealizacaoServico = dataRealizacaoServico;
 	}
-
-	public Contratante getContratante() {
-		return contratante;
-	}
-
-	public void setContratante(Contratante contratante) {
-		this.contratante = contratante;
-	}
-*/
 }

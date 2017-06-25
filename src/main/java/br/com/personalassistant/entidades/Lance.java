@@ -1,17 +1,35 @@
 package br.com.personalassistant.entidades;
 
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import br.com.personalassistant.enums.ESTADO_LANCE;
 
+@Table(name = "TB_LANCE")
+@Entity(name = "Lance")
 public class Lance {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private int id;
-	private Date dataRealizacaoServico;
+	
+	@Column(nullable = false)
 	private double valor;
+	
 	private ESTADO_LANCE status;
+	
+	@ManyToOne
+	@JoinColumn(name = "assistente_FK")
 	private Assistente assistente; // bidirecional
+	
 	private OfertaServico oferstaServico; // bidirecional
+	private DataRealizacaoServico dataRealizacaoServico; // unidirecional
 
 	public int getId() {
 		return id;
@@ -19,14 +37,6 @@ public class Lance {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Date getDataRealizacaoServico() {
-		return dataRealizacaoServico;
-	}
-
-	public void setDataRealizacaoServico(Date dataRealizacaoServico) {
-		this.dataRealizacaoServico = dataRealizacaoServico;
 	}
 
 	public double getValor() {
@@ -59,5 +69,13 @@ public class Lance {
 
 	public void setOferstaServico(OfertaServico oferstaServico) {
 		this.oferstaServico = oferstaServico;
+	}
+	
+	public DataRealizacaoServico getDataRealizacaoServico() {
+		return dataRealizacaoServico;
+	}
+
+	public void setDataRealizacaoServico(DataRealizacaoServico dataRealizacaoServico) {
+		this.dataRealizacaoServico = dataRealizacaoServico;
 	}
 }

@@ -2,8 +2,18 @@ package br.com.personalassistant.entidades;
 
 import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Table(name = "TB_CONTRATANTE")
+@Entity(name = "Contratante")
+@DiscriminatorValue("Contratante")
 public class Contratante extends Usuario{
 
+	private static final long serialVersionUID = 1L;
+	
+	
 	private List<Assistente> assistentesFavoritos; // unidirecional
 	private List<Endereco> enderecos; // unidirecional
 	private List<Proposta> propostas; // unidirecional

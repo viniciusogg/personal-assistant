@@ -1,13 +1,44 @@
 package br.com.personalassistant.entidades;
 
-public abstract class Usuario {
+import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "TIPO", discriminatorType = DiscriminatorType.STRING)
+@Table(name = "TB_USUARIO", uniqueConstraints = {
+		@UniqueConstraint(name = "UC_USUARIO", columnNames = {"email"})})
+@Entity(name = "Usuario")
+public abstract class Usuario implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private int id;
+	
+	@Column(nullable = false)
 	private String nome;
+	
+	@Column(nullable = false)
 	private String email;
-	private String senha;
-	private String numTelefonico;
 
+	@Column(nullable = false)
+	private String senha;
+	
+	@Column(nullable = false)
+	private String numTelefonico;
+	
 	public int getId() {
 		return id;
 	}
