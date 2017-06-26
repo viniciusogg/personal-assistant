@@ -1,16 +1,19 @@
 package br.com.personalassistant.entidades;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity(name = "Capacidade")
 @Table(name = "TB_CAPACIDADE") //, uniqueConstraints = {@UniqueConstraint(name = "UC_CAPACIDADE", columnNames = {"nome"})}
-public class Capacidade {	   // restrição de unicidade Para evitar duplicação no banco..
+public class Capacidade implements Serializable{	   // restrição de unicidade Para evitar duplicação no banco..
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)

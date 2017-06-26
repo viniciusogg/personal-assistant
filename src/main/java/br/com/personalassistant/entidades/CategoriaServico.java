@@ -1,5 +1,7 @@
 package br.com.personalassistant.entidades;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,9 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "TB_CATEGORIA_SERVICO", uniqueConstraints = {
 		@UniqueConstraint(name = "UC_CATEGORIA_SERVICO",columnNames = {"nome"})})
 @Entity(name = "CategoriaServico")
-public class CategoriaServico {
+public class CategoriaServico implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
