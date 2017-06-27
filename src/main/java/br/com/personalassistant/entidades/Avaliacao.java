@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Table(name = "TB_AVALIACAO")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "TIPO", discriminatorType = DiscriminatorType.STRING)
-public abstract class Avaliacao implements Serializable{
+public class Avaliacao implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 

@@ -23,13 +23,14 @@
 		<class>br.com.personalassistant.entidades.DataRealizacaoServico</class>
 		
 		<properties>
+		
 			<!-- Configuração Hibernate SGBD MySQL -->
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/atividadeJPA?useSSL=false&amp;serverTimezone=UTC" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/personal-assistant?useSSL=false&amp;serverTimezone=UTC" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect" />
 			<property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" />
 			<property name="hibernate.connection.username" value="root" />
 			<property name="hibernate.connection.password" value="root" />
-			<property name="hibernate.default_schema" value="atividadeJPA" />
+			<property name="hibernate.default_schema" value="personal-assistant" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />

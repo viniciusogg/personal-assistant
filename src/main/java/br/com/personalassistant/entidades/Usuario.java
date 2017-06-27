@@ -19,7 +19,7 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "TB_USUARIO", uniqueConstraints = {
 		@UniqueConstraint(name = "UC_USUARIO", columnNames = {"email"})})
 @Entity(name = "Usuario")
-public abstract class Usuario implements Serializable{
+public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
