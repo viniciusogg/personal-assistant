@@ -58,7 +58,7 @@ public class OfertaServicoDAO extends DAO {
 		EntityManager entityManager = getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
-		OfertaServico administradorAtualizado = ofertaServico; 
+		OfertaServico ofertaServicoAtualizada = ofertaServico; 
 		
 		try{
 			entityManager.find(ofertaServico.getClass(), ofertaServico.getId());
@@ -74,7 +74,7 @@ public class OfertaServicoDAO extends DAO {
 			entityManager.close();
 		}
 		
-		return administradorAtualizado;
+		return ofertaServicoAtualizada;
 	}
 	
 	public List<OfertaServico> getAll() throws PersistenciaException {
@@ -97,7 +97,7 @@ public class OfertaServicoDAO extends DAO {
 		return ofertasServicos;
 	}
 	
-	public OfertaServico getById(Integer id) throws PersistenciaException {
+	public OfertaServico getById(Long id) throws PersistenciaException {
 		
 		EntityManager entityManager = getEntityManager();
 		OfertaServico ofertaServico = null;

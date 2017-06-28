@@ -25,7 +25,7 @@ public class Usuario implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private int id;
+	private long id;
 	
 	@Column(nullable = false)
 	private String nome;
@@ -39,7 +39,7 @@ public class Usuario implements Serializable{
 	@Column(nullable = false)
 	private String numTelefonico;
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -79,7 +79,7 @@ public class Usuario implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + id;
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((numTelefonico == null) ? 0 : numTelefonico.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());

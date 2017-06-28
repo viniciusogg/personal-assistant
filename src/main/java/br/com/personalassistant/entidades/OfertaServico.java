@@ -27,7 +27,7 @@ public class OfertaServico implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private int id;
+	private long id;
 	
 	@Column(nullable = false)
 	private int duracaoOferta;
@@ -74,12 +74,8 @@ public class OfertaServico implements Serializable{
 		this.dataRealizacaoServico = dataRealizacaoServico;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public int getDuracaoOferta() {
@@ -155,7 +151,7 @@ public class OfertaServico implements Serializable{
 		result = prime * result + ((dataRealizacaoServico == null) ? 0 : dataRealizacaoServico.hashCode());
 		result = prime * result + duracaoOferta;
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result + id;
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((lances == null) ? 0 : lances.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(precoInicial);

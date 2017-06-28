@@ -19,7 +19,7 @@ public class CategoriaServico implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private int id;
+	private long id;
 	
 	@Column(nullable = false)
 	private String nome;
@@ -33,7 +33,7 @@ public class CategoriaServico implements Serializable{
 		this.nome = nome;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -49,7 +49,7 @@ public class CategoriaServico implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}

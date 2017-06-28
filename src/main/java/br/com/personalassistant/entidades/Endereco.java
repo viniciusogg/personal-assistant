@@ -16,7 +16,7 @@ public class Endereco implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private int id;
+	private long id;
 	
 	private int numero;
 	private String rua;
@@ -42,7 +42,7 @@ public class Endereco implements Serializable{
 		this.estado = estado;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -110,7 +110,7 @@ public class Endereco implements Serializable{
 		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
 		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
 		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
-		result = prime * result + id;
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + numero;
 		result = prime * result + ((referencia == null) ? 0 : referencia.hashCode());
 		result = prime * result + ((rua == null) ? 0 : rua.hashCode());

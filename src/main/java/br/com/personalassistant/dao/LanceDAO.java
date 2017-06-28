@@ -58,7 +58,7 @@ public class LanceDAO extends DAO {
 		EntityManager entityManager = getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
-		Lance administradorAtualizado = lance; 
+		Lance lanceAtualizado = lance; 
 		
 		try{
 			entityManager.find(lance.getClass(), lance.getId());
@@ -74,7 +74,7 @@ public class LanceDAO extends DAO {
 			entityManager.close();
 		}
 		
-		return administradorAtualizado;
+		return lanceAtualizado;
 	}
 	
 	public List<Lance> getAll() throws PersistenciaException {
@@ -97,7 +97,7 @@ public class LanceDAO extends DAO {
 		return lances;
 	}
 	
-	public Lance getById(Integer id) throws PersistenciaException {
+	public Lance getById(Long id) throws PersistenciaException {
 		
 		EntityManager entityManager = getEntityManager();
 		Lance lance = null;

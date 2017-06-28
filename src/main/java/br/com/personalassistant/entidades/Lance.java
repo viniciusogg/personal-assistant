@@ -25,7 +25,7 @@ public class Lance implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private int id;
+	private long id;
 	
 	@Column(nullable = false)
 	private double valor;
@@ -61,12 +61,8 @@ public class Lance implements Serializable{
 		this.dataRealizacaoServico = dataRealizacaoServico;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public double getValor() {
@@ -115,6 +111,7 @@ public class Lance implements Serializable{
 		int result = 1;
 		result = prime * result + ((assistente == null) ? 0 : assistente.hashCode());
 		result = prime * result + ((dataRealizacaoServico == null) ? 0 : dataRealizacaoServico.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((oferstaServico == null) ? 0 : oferstaServico.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		long temp;
@@ -141,6 +138,8 @@ public class Lance implements Serializable{
 			if (other.dataRealizacaoServico != null)
 				return false;
 		} else if (!dataRealizacaoServico.equals(other.dataRealizacaoServico))
+			return false;
+		if (id != other.id)
 			return false;
 		if (oferstaServico == null) {
 			if (other.oferstaServico != null)

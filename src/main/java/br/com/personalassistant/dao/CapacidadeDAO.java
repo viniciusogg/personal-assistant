@@ -58,7 +58,7 @@ public class CapacidadeDAO extends DAO {
 		EntityManager entityManager = getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
-		Capacidade administradorAtualizado = capacidade; 
+		Capacidade capacidadeAtualizada = capacidade; 
 		
 		try{
 			entityManager.find(capacidade.getClass(), capacidade.getId());
@@ -74,7 +74,7 @@ public class CapacidadeDAO extends DAO {
 			entityManager.close();
 		}
 		
-		return administradorAtualizado;
+		return capacidadeAtualizada;
 	}
 	
 	public List<Capacidade> getAll() throws PersistenciaException {
@@ -97,7 +97,7 @@ public class CapacidadeDAO extends DAO {
 		return capacidades;
 	}
 	
-	public Capacidade getById(Integer id) throws PersistenciaException {
+	public Capacidade getById(Long id) throws PersistenciaException {
 		
 		EntityManager entityManager = getEntityManager();
 		Capacidade capacidade = null;

@@ -58,7 +58,7 @@ public class AvaliacaoDAO extends DAO {
 		EntityManager entityManager = getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
-		Avaliacao administradorAtualizado = avaliacao; 
+		Avaliacao avaliacaoAtualizada = avaliacao; 
 		
 		try{
 			entityManager.find(avaliacao.getClass(), avaliacao.getId());
@@ -74,7 +74,7 @@ public class AvaliacaoDAO extends DAO {
 			entityManager.close();
 		}
 		
-		return administradorAtualizado;
+		return avaliacaoAtualizada;
 	}
 	
 	public List<Avaliacao> getAll() throws PersistenciaException {
@@ -97,7 +97,7 @@ public class AvaliacaoDAO extends DAO {
 		return avaliacoes;
 	}
 	
-	public Avaliacao getById(Integer id) throws PersistenciaException {
+	public Avaliacao getById(Long id) throws PersistenciaException {
 		
 		EntityManager entityManager = getEntityManager();
 		Avaliacao avaliacao = null;

@@ -58,7 +58,7 @@ public class PropostaDAO extends DAO {
 		EntityManager entityManager = getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
-		Proposta administradorAtualizado = proposta; 
+		Proposta propostaAtualizada = proposta; 
 		
 		try{
 			entityManager.find(proposta.getClass(), proposta.getId());
@@ -74,7 +74,7 @@ public class PropostaDAO extends DAO {
 			entityManager.close();
 		}
 		
-		return administradorAtualizado;
+		return propostaAtualizada;
 	}
 	
 	public List<Proposta> getAll() throws PersistenciaException {
@@ -97,7 +97,7 @@ public class PropostaDAO extends DAO {
 		return propostas;
 	}
 	
-	public Proposta getById(Integer id) throws PersistenciaException {
+	public Proposta getById(Long id) throws PersistenciaException {
 		
 		EntityManager entityManager = getEntityManager();
 		Proposta proposta = null;

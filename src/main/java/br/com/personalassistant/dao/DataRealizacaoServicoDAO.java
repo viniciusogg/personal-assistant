@@ -58,7 +58,7 @@ public class DataRealizacaoServicoDAO extends DAO {
 		EntityManager entityManager = getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
-		DataRealizacaoServico administradorAtualizado = dataRealizacaoServico; 
+		DataRealizacaoServico dataRealizacaoServicoAtualizada = dataRealizacaoServico; 
 		
 		try{
 			entityManager.find(dataRealizacaoServico.getClass(), dataRealizacaoServico.getId());
@@ -74,7 +74,7 @@ public class DataRealizacaoServicoDAO extends DAO {
 			entityManager.close();
 		}
 		
-		return administradorAtualizado;
+		return dataRealizacaoServicoAtualizada;
 	}
 	
 	public List<DataRealizacaoServico> getAll() throws PersistenciaException {
@@ -97,7 +97,7 @@ public class DataRealizacaoServicoDAO extends DAO {
 		return datasRealizacoesServicos;
 	}
 	
-	public DataRealizacaoServico getById(Integer id) throws PersistenciaException {
+	public DataRealizacaoServico getById(Long id) throws PersistenciaException {
 		
 		EntityManager entityManager = getEntityManager();
 		DataRealizacaoServico dataRealizacaoServico = null;

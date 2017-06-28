@@ -20,7 +20,7 @@ public class DataRealizacaoServico implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private int id;
+	private long id;
 	
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
@@ -69,7 +69,7 @@ public class DataRealizacaoServico implements Serializable{
 		this.horaRealizacaoServico = horaRealizacaoServico;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -80,7 +80,7 @@ public class DataRealizacaoServico implements Serializable{
 		result = prime * result + ((dataRealizacaoInicial == null) ? 0 : dataRealizacaoInicial.hashCode());
 		result = prime * result + ((dataRealizacaoLimite == null) ? 0 : dataRealizacaoLimite.hashCode());
 		result = prime * result + ((horaRealizacaoServico == null) ? 0 : horaRealizacaoServico.hashCode());
-		result = prime * result + id;
+		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 

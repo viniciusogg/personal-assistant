@@ -58,7 +58,7 @@ public class UsuarioDAO extends DAO {
 		EntityManager entityManager = getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
-		Usuario administradorAtualizado = usuario; 
+		Usuario usuarioAtualizado = usuario; 
 		
 		try{
 			entityManager.find(usuario.getClass(), usuario.getId());
@@ -74,7 +74,7 @@ public class UsuarioDAO extends DAO {
 			entityManager.close();
 		}
 		
-		return administradorAtualizado;
+		return usuarioAtualizado;
 	}
 	
 	public List<Usuario> getAll() throws PersistenciaException {
@@ -97,7 +97,7 @@ public class UsuarioDAO extends DAO {
 		return usuarios;
 	}
 	
-	public Usuario getById(Integer id) throws PersistenciaException {
+	public Usuario getById(Long id) throws PersistenciaException {
 		
 		EntityManager entityManager = getEntityManager();
 		Usuario usuario = null;

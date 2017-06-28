@@ -17,7 +17,7 @@ public class Capacidade implements Serializable{	   // restrição de unicidade 
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private int id;
+	private long id;
 	
 	@Column(nullable = false)
 	private String nome;
@@ -31,7 +31,7 @@ public class Capacidade implements Serializable{	   // restrição de unicidade 
 		this.nome = nome;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 	
@@ -47,11 +47,13 @@ public class Capacidade implements Serializable{	   // restrição de unicidade 
 		this.nome = nome;
 	}
 
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}

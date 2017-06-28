@@ -58,7 +58,7 @@ public class EnderecoDAO extends DAO {
 		EntityManager entityManager = getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
-		Endereco administradorAtualizado = endereco; 
+		Endereco enderecoAtualizado = endereco; 
 		
 		try{
 			entityManager.find(endereco.getClass(), endereco.getId());
@@ -74,7 +74,7 @@ public class EnderecoDAO extends DAO {
 			entityManager.close();
 		}
 		
-		return administradorAtualizado;
+		return enderecoAtualizado;
 	}
 	
 	public List<Endereco> getAll() throws PersistenciaException {
@@ -97,7 +97,7 @@ public class EnderecoDAO extends DAO {
 		return enderecos;
 	}
 	
-	public Endereco getById(Integer id) throws PersistenciaException {
+	public Endereco getById(Long id) throws PersistenciaException {
 		
 		EntityManager entityManager = getEntityManager();
 		Endereco endereco = null;

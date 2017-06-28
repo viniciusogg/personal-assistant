@@ -24,7 +24,7 @@ public class Avaliacao implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private int id;
+	private long id;
 	
 	@Column(nullable = false)
 	private int cordialidade;
@@ -35,7 +35,7 @@ public class Avaliacao implements Serializable{
 	private Date data;
 	private String comentario;
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -78,7 +78,7 @@ public class Avaliacao implements Serializable{
 		result = prime * result + ((comentario == null) ? 0 : comentario.hashCode());
 		result = prime * result + cordialidade;
 		result = prime * result + ((data == null) ? 0 : data.hashCode());
-		result = prime * result + id;
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + pontualidade;
 		return result;
 	}
