@@ -5,11 +5,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
+import javax.faces.convert.FacesConverter;
 
 import br.com.personalassistant.dao.AvaliacaoContratanteDAO;
 import br.com.personalassistant.entidades.AvaliacaoContratante;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
+@FacesConverter(forClass = AvaliacaoContratante.class)
 public class AvaliacaoContratanteConverter implements Converter {
 
 	private AvaliacaoContratanteDAO avaliacaoContratanteDAO = new AvaliacaoContratanteDAO();

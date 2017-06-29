@@ -1,0 +1,68 @@
+@CHARSET "UTF-8";
+
+/*Cabecalho/Rodapé*/
+.ui-layout-north{
+	padding: 0px !important;
+	margin: 0px !important;
+	border: none !important;
+}
+
+.ui-menu, .ui-menu-child{
+	background: none;
+	padding: 0px !important;
+}
+
+.ui-menubar{
+	border: none !important;
+	padding: 0px !important;
+}
+
+.ui-layout-unit-content{
+	padding: 0px !important;
+	margin: 0px !important;
+	background: none;
+}
+
+.ui-layout-pane-north{
+	padding: 0px !important;
+	margin: 0px !important;
+}
+
+.ui-panel, .ui-panel-content{
+	padding: 0px !important;
+	margin: 0px !important;
+}
+
+.ui-widget-header {
+	border:none;
+	background:none;
+	color:gray;
+	font-weight:normal;
+}
+
+/*menus*/
+.ui-menuitem-link {
+    font-weight: 400;
+    line-height: 16px;
+    cursor: pointer;
+}
+
+.ui-menuitem-icon{
+	height: 24px !important; 
+	width: 24px !important;  
+	margin: 5px;            
+	cursor: pointer;
+	border-radius: 0px !important;
+}
+
+/*icones*/
+
+.ui-icon{
+	height:28px !important;
+	width:28px !important;
+	top: 41% !important;
+}
+
+.ui-button-icon-left ui-icon ui-c menu{
+	top: 41% !important;
+}

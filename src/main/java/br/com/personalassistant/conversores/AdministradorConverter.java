@@ -5,11 +5,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
+import javax.faces.convert.FacesConverter;
 
 import br.com.personalassistant.dao.AdministradorDAO;
 import br.com.personalassistant.entidades.Administrador;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
+@FacesConverter(forClass = Administrador.class)
 public class AdministradorConverter implements Converter {
 
 	private AdministradorDAO adminDAO = new AdministradorDAO();

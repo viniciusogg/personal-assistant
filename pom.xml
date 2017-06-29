@@ -13,7 +13,16 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<hibernate.version>5.2.10.Final</hibernate.version>
 	</properties>
-
+	
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+ 	
  	<dependencies>
 		<dependency>
 			<groupId>javax</groupId>
@@ -31,7 +40,11 @@
 			<artifactId>omnifaces</artifactId>
 			<version>2.5.1</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>flick</artifactId>
+			<version>1.0.10</version>
+		</dependency>
 		<!-- Implementação do JPA: Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -58,4 +71,36 @@
 			<version>6.0.6</version>
 		</dependency> 
 	</dependencies>
+	
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<webResources>
+						<resource>
+							<directory>lib</directory>
+							<includes>
+								<include>**/*.jar</include>
+							</includes>
+							<targetPath>WEB-INF/lib</targetPath>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

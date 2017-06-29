@@ -5,11 +5,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
+import javax.faces.convert.FacesConverter;
 
 import br.com.personalassistant.dao.LanceDAO;
 import br.com.personalassistant.entidades.Lance;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
+@FacesConverter(forClass = Lance.class)
 public class LanceConverter implements Converter{
 
 	private LanceDAO lanceDAO = new LanceDAO();

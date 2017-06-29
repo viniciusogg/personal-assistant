@@ -5,11 +5,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
+import javax.faces.convert.FacesConverter;
 
 import br.com.personalassistant.dao.EnderecoDAO;
 import br.com.personalassistant.entidades.Endereco;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
+@FacesConverter(forClass = Endereco.class)
 public class EnderecoConverter implements Converter {
 
 	private EnderecoDAO enderecoDAO = new EnderecoDAO();

@@ -25,7 +25,7 @@
 		<properties>
 		
 			<!-- Configuração Hibernate SGBD MySQL -->
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/personal-assistant?useSSL=false&amp;serverTimezone=UTC" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/personal-assistant?useSSL=false&amp;serverTimezone=GMT-3" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect" />
 			<property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" />
 			<property name="hibernate.connection.username" value="root" />
