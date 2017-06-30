@@ -7,21 +7,12 @@ import javax.faces.bean.ViewScoped;
 
 @ViewScoped
 @ManagedBean
-public class IndexBean implements Serializable{
+public class TemplateBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String nomeTarefaFiltro;
 	private boolean menuVisivel=true; 
 	private String modo;
-	
-	public String getNomeTarefaFiltro(){
-		return nomeTarefaFiltro;
-	}
-	
-	public void setNomeTarefaFiltro(String nomeTarefaFiltro){
-		this.nomeTarefaFiltro = nomeTarefaFiltro;
-	}
 	
 	public boolean getMenuVisivel(){
 		return menuVisivel;
@@ -38,10 +29,6 @@ public class IndexBean implements Serializable{
 	public void setModo(String modo){
 		this.modo = modo;
 	}
-
-	public void limpar() {
-		nomeTarefaFiltro = "";
-	}
 	
 	public void acionarMenuLateral(){
 
@@ -53,18 +40,6 @@ public class IndexBean implements Serializable{
 			menuVisivel=true;
 			modo = "'show'";
 		}
-		
-		//acionarEfeitoSlide();
-		System.out.println(getModo());
+
 	}
-	
-	public void acionarEfeitoSlide(){
-		if(modo.equals("hide")){
-			modo = "'show'";
-		}
-		else{
-			modo = "'hide'";
-		}
-	}
-	
 }

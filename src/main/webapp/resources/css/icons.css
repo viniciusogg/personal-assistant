@@ -1,9 +1,9 @@
 .menu{
-	background-image: url(../images/icons/menu.png) !important;
+	background-image: url(../icons/menu.png) !important;
 	cursor: pointer;
 }
 
 .plus{
-	background-image: url(../images/icons/plus.png) !important;
+	background-image: url(../icons/plus.png) !important;
 	cursor: pointer;
 }

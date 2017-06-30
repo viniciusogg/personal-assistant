@@ -8,7 +8,6 @@
 }
 
 .ui-menu, .ui-menu-child{
-	background: none;
 	padding: 0px !important;
 }
 
@@ -20,7 +19,6 @@
 .ui-layout-unit-content{
 	padding: 0px !important;
 	margin: 0px !important;
-	background: none;
 }
 
 .ui-layout-pane-north{
@@ -35,8 +33,6 @@
 
 .ui-widget-header {
 	border:none;
-	background:none;
-	color:gray;
 	font-weight:normal;
 }
 
@@ -55,9 +51,29 @@
 	border-radius: 0px !important;
 }
 
+/*datepicker*/
+.ui-datepicker{
+	border: 0.5px solid #00C853;;
+}
+
+/*sombra*/
+.ui-shadow {
+	-moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: 2.5px 2.5px 5px 0px rgba(0,0,0,.26) !important;
+}
+
+/*combobox*/
+.ui-selectonemenu .ui-selectonemenu-trigger{
+    width: 24px;
+    height: 100%;
+    top: -1px;
+    padding: 0px 8px 0px 3px;
+}
+
 /*icones*/
 
-.ui-icon{
+/*.ui-icon{
 	height:28px !important;
 	width:28px !important;
 	top: 41% !important;
@@ -65,4 +81,4 @@
 
 .ui-button-icon-left ui-icon ui-c menu{
 	top: 41% !important;
-}
+}*/

@@ -7,72 +7,43 @@
 	
 	<ui:composition template="/WEB-INF/templates/__pageLayout.xhtml">
 		
+		<ui:define name="opcoes-menu">
+			<p:menuitem value="ASSISTENTES"/>				
+			<p:menuitem value="CONTRATANTES"/>
+		</ui:define>
+		
 		<ui:define name="conteudo">
 			
 			<p:layout>
 			
 				<p:layoutUnit position="north">
 					<p:messages id="idMessages" autoUpdate="true" closable="true" showDetail="true"/>
-					
-					<h:form id="formFiltro"> 
-						<div style="float:left">
-							<p:outputLabel id="labelFiltro" for="campoFiltro" value="NOME DA TAREFA"/>								
-							<p:inputText id="campoFiltro" style="width:350px"/>
-						</div>
-						
-						<div style="float:left">
-							<p:commandButton id="botaoFiltrar" value="FILTRAR" update="dataTableTarefas"/>
-							<p:commandButton id="botaoLimpar" value="LIMPAR" action="#{indexBean.limpar}" update="formFiltro" process="@this"/>
-						</div>			
 
-					</h:form>
 				</p:layoutUnit>
 				
-				<p:layoutUnit position="center" style="border:none !important;">
+				<p:layoutUnit position="center" styleClass="ui-g" style="border:none !important;">
 
 					<div class="ui-g-12" style="padding-left:none !important;">
-						<p:dataTable id="dataTableTarefas" style="min-width: 100px !important;"> 
-							<p:column> 
-								<f:facet name="header"> 
-									<p:outputLabel value="ID"/> 
-								</f:facet>
-							</p:column>
-							
-							<p:column> 
-								<f:facet name="header">
-									<p:outputLabel value="NOME"/>
-								</f:facet>
-							</p:column>
-							
-							<p:column> 
-								<f:facet name="header">
-									<p:outputLabel value="DESCRIÇÃO"/>
-								</f:facet>
-							</p:column>
-							
-							<p:column> 
-								<f:facet name="header">
-									<p:outputLabel value="DATA PREVISTA" />
-								</f:facet>
-							</p:column>
-							
-							<p:column> 
-								<f:facet name="header">
-									<p:outputLabel value="DATA REALIZAÇÃO"/>
-								</f:facet>
-							</p:column>
-							
-							<p:column>
-								<f:facet name="header">EDITAR</f:facet>
-							</p:column>
-							
-							<p:column>
-								<f:facet name="header">REMOVER</f:facet>
-							</p:column>
-						</p:dataTable>
+						<ui:include src="/WEB-INF/templates/_infoPanel.xhtml"> 
+							<ui:param name="valor" value="1500"/>
+							<ui:param name="descricao" value="Novas negociações iniciadas hoje"/>
+						</ui:include>
 					</div>
+					
+					<div class="ui-g-12" style="padding-left:none !important;">
+						<ui:include src="/WEB-INF/templates/_infoPanel.xhtml"> 
+						</ui:include>
+					</div>
+					
+					<p:calendar
+						locale="pt_BR" 
+						id="cal"
+						pattern="dd/MM/yyyy"
+						yearRange="-30:+10">
+						<f:convertDateTime pattern="dd-MM-yyyy" /> 
+					</p:calendar>
+					
 				</p:layoutUnit>
-			
 			</p:layout>
 			
 		</ui:define>		

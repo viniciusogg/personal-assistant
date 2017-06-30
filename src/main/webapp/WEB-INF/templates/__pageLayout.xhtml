@@ -9,9 +9,11 @@
 	<h:head>
 		<title><ui:insert name="title"> PERSONAL ASSISTANT </ui:insert></title>
 		
-		<link rel="stylesheet" href="resources/css/person-style.css?v=1.1" />
-		<link rel="stylesheet" href="resources/css/prime-faces-style-edited.css?v=1.0" />
-		<link rel="stylesheet" href="resources/css/icons.css?v=1.1"/>
+		<link rel="stylesheet" type="text/css" href="resources/css/person-style.css?v=3.3" />
+		<link rel="stylesheet" type="text/css" href="resources/css/prime-faces-style-edited.css?v=3.3" />
+	    <link rel="stylesheet" type="text/css" href="resources/css/jquery-ui-1.12.icon-font.css?v=3.6" /> 
+		<link rel="stylesheet" type="text/css" href="resources/css/icons.css?v=3.3"/>
+
 	</h:head>
 	
 	<h:body>
@@ -19,34 +21,30 @@
 		<p:layout fullPage="true" >
 	
 			<p:layoutUnit position="north">
-				<h:form id="barra-superior" class="painel">
-					
+				<h:form class="painel">
 					<p:toolbar id="menubar" styleClass="menu-bar">
 						<f:facet name="left">
-							<p:commandButton id="botaoMenu" styleClass="item-menu" style="width:48px !important; height:48px !important; cursor:pointer;" update=":conteudo" icon="menu" actionListener="#{indexBean.acionarMenuLateral}" />
-						</f:facet>
-						<f:facet name="left">
-							<p:outputLabel style="color:white; text-align:center" value="DASHBOARD"></p:outputLabel>
-						</f:facet>
+							<p:commandButton id="botaoMenu" styleClass="item-menu" style="width:48px !important; height:48px !important; cursor:pointer;" update=":conteudo" icon="ui-icon-bars" actionListener="#{templateBean.acionarMenuLateral}" />
+							
+							<p:outputLabel class="titulo" value="DASHBOARD"/>
+						</f:facet>					
 					</p:toolbar>
-					
 				</h:form>
 			</p:layoutUnit>		
 			
 			<p:layoutUnit position="center" styleClass="painel">
-				
-				<h:panelGroup id="conteudo" >
+				<h:panelGroup id="conteudo">
 					<p:layout fullPage="false" style="height:100%">
+					
 						<p:layoutUnit position="west" styleClass="painel" style="box-shadow: 1px 1px 5px 0px #EEEEEE !important; ">
-							<h:form rendered="#{indexBean.menuVisivel}">
+							<h:form rendered="#{templateBean.menuVisivel}">
 								<p:megaMenu style="text-align: right !important" styleClass="painel" orientation="vertical">
-									<p:menuitem value="ASSISTENTES"/>				
-									<p:menuitem value="CONTRATANTES"/>				
+									<ui:insert name="opcoes-menu"></ui:insert>				
 								</p:megaMenu>
 							</h:form>
 						</p:layoutUnit>
 			
-						<p:layoutUnit id="content" styleClass="painel" position="center" style="border:none !important; margin-left:5px !important">
+						<p:layoutUnit styleClass="painel" position="center" style="border:none !important; margin-left:5px !important">
 							<ui:insert name="conteudo"/>
 						</p:layoutUnit>
 					
@@ -56,7 +54,7 @@
 			</p:layoutUnit>
 			
 			<ui:insert name="rodape">
-				<p:layoutUnit style="text-align:center; border-bottom-color: none !important" position="south" footer="RODAPÉ" />
+				<p:layoutUnit style="text-align:center; border-bottom-color: none !important" position="south"/>
 			</ui:insert>
 
 		</p:layout>

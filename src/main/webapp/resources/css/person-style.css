@@ -32,9 +32,9 @@
 
 div{
 	border-radius: 0px !important;
-	box-shadow: none !important;
-	overflow: auto;
-	/*overflow-x: hidden !important;*/ /*SE ESTIVER DEFINIDO O CONTEÚDO SOME*/
+	box-shadow: none;
+	/*overflow: auto;
+	overflow-x: hidden !important;*/ /*SE ESTIVER DEFINIDO O CONTEÚDO SOME*/
 }
 
 .painel{
@@ -52,13 +52,12 @@ form{
 }
 
 input[type=text]{
-	margin:5px !important;
-	box-shadow: none !important;
-	border-radius: 0px !important;
-	padding-botton: 20% !important;
-	background: white !important;
-	color: black !important;
-	/*box-shadow: 2.5px 2.5px 5px 0px rgba(0,0,0,.26) !important;*/
+	margin:5px ;
+	box-shadow: none ;
+	border-radius: 0px ;
+	padding-botton: 20% ;
+	background: white ;
+	color: black;
 }
 
 input[type=text]:focus{
@@ -70,7 +69,7 @@ label{
 	margin-right:10px !important;
 }
 
-tr, td{
+/*tr, td{
 	border:none !important;
 	text-align: center !important;
 }
@@ -82,14 +81,14 @@ th{
 
 tbody{
 	border: none !important;
-}
+}*/
 
 a{
 	letter-spacing: 3px !important;
 	text-decoration: none;
 	text-shadow: none !important;
 	box-shadow: none !important;
-	border-radius: 0px !important;
+	border-radius: 1.5px !important;
 	outline: none !important;
 }
 
@@ -101,4 +100,21 @@ a{
 .span-label{
 	padding-top:5px; 
 	padding-bottom:5px;
+}
+
+.titulo{
+	font-weight: bold;
+	font-size: 22px !important;
+	margin-left: 150px !important;
+	color:white; 
+}
+
+.info-panel{
+	border:1px solid #00C853;
+	margin: 5px;
+	padding: 40px;
+}
+
+.info-panel:hover{
+	box-shadow: 2.5px 2.5px 5px 0px rgba(0,0,0,.26);
 }
