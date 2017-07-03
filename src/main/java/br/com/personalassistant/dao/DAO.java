@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 
 public abstract class DAO {
 
-	protected static EntityManagerFactory entityManagerFactory;
+	static EntityManagerFactory entityManagerFactory;
 	
 	static {
 		entityManagerFactory = Persistence.createEntityManagerFactory("personal-assistant");
@@ -16,7 +16,7 @@ public abstract class DAO {
 		return entityManagerFactory.createEntityManager();
 	}
 	
-	protected void closeEntityManager(){
+	public void closeEntityManager(){
 		if(entityManagerFactory.isOpen()){
 			entityManagerFactory.close();
 		}

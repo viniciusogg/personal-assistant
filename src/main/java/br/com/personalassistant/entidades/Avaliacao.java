@@ -3,9 +3,10 @@ package br.com.personalassistant.entidades;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
+import javax.persistence.Basic;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
 @Table(name = "TB_AVALIACAO")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "TIPO", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("Avaliacao")
 public class Avaliacao implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -26,10 +28,10 @@ public class Avaliacao implements Serializable{
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private long id;
 	
-	@Column(nullable = false)
+	@Basic(optional = false)
 	private int cordialidade;
 	
-	@Column(nullable = false)
+	@Basic(optional = false)
 	private int pontualidade;
 	
 	private Date data;

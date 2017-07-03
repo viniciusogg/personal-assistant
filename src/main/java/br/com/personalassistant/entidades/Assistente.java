@@ -2,8 +2,8 @@ package br.com.personalassistant.entidades;
 
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -20,20 +20,18 @@ public class Assistente extends Usuario{
 	
 	private int experiencia; // quantidade de assistencias prestadas
 
-	@Column(nullable = false)
+	@Basic(optional = false)
 	private double precoFixo;
 	
-	@Column(nullable = false)
+	@Basic(optional = false)
 	private double precoHora;
 	
-	@JoinColumn(name = "endereco_FK")
+	@JoinColumn(name = "endereco_FK", nullable = false)
 	@OneToOne(cascade = CascadeType.ALL)
-	@Column(nullable = false)
 	private Endereco endereco; // unidirecional
 
 	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
-	@Column(nullable = false)
-	@JoinColumn(name = "assistente_FK")
+	@JoinColumn(name = "assistente_FK", nullable = false)
 	private List<CategoriaServico> categoriasServicos; // unidirecional
 
 	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "assistente")

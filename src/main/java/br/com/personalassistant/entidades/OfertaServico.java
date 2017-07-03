@@ -3,6 +3,7 @@ package br.com.personalassistant.entidades;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,10 +30,10 @@ public class OfertaServico implements Serializable{
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private long id;
 	
-	@Column(nullable = false)
+	@Basic(optional = false)
 	private int duracaoOferta;
 	
-	@Column(nullable = false)
+	@Basic(optional = false)
 	private double precoInicial;
 	
 	@Enumerated(EnumType.STRING)
@@ -42,21 +43,18 @@ public class OfertaServico implements Serializable{
 	private Endereco endereco; // unidirecional
 	
 	@ManyToOne
-	@JoinColumn(name = "categoria_servico_FK")
-	@Column(nullable = false)
+	@JoinColumn(name = "categoria_servico_FK", nullable = false)
 	private CategoriaServico categoriaServico; // unidirecional
 	
 	@ManyToOne
-	@JoinColumn(name = "contratante_FK")
-	@Column(nullable = false)
+	@JoinColumn(name = "contratante_FK", nullable=false)
 	private Contratante contratante; // bidirecional
 	
 	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "oferstaServico")
 	private List<Lance> lances; // bidirecional
 	
 	@OneToOne(cascade = {CascadeType.PERSIST})
-	@JoinColumn(name = "data_realizacao_servico_FK")
-	@Column(nullable = false)
+	@JoinColumn(name = "data_realizacao_servico_FK", nullable = false)
 	private DataRealizacaoServico dataRealizacaoServico; // unidirecional
 	
 	public OfertaServico() {

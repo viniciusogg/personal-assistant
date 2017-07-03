@@ -37,7 +37,8 @@
 html .ui-icon {
   background-image: none !important;
   display: inline-block;
-  font: normal normal normal 24px/26px sans-serif;
+  /*font: normal normal normal 24px/26px sans-serif;*/
+  font: normal normal normal 16px/16px sans-serif;
   height: 28px;
   line-height: 2.5em;
   margin: 0;
@@ -99,7 +100,7 @@ html .ui-button-icon-only .ui-icon {
   left: 50%;
   margin: -0.6em 0 0 -.6em;
   position: absolute;
-  top: 50%;
+  top: 47%;
 }
 html .ui-selectmenu-button .ui-icon {
   margin: -.6em 0 0 0;
@@ -535,7 +536,10 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670'; }
 .ui-icon-clock:after { content: '\e6d9'; }
 .ui-icon-clock-b:after { content: '\e6da'; }
 .ui-icon-close:after,
-.ui-icon-delete:after { content: '\e676'; }
+.ui-icon-delete:after { content: '\e676'; 
+	top: .7em !important;
+    left: .6em !important;
+}
 .ui-icon-closethick:after { content: '\e679'; }
 .ui-icon-cloud:after { content: '\e6dc'; }
 .ui-icon-cloud-b:after { content: '\e6dd'; }
@@ -624,7 +628,10 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670'; }
 .ui-icon-mail-send:after { content: '\e70c'; }
 .ui-icon-marker:after { content: '\e72c'; }
 .ui-icon-menu:after,
-.ui-icon-bars:after { content: '\e6c3'; }
+.ui-icon-bars:after { content: '\e6c3'; 
+	font: normal normal normal 26px/24px sans-serif;
+    top: .4em !important;
+}
 .ui-icon-microphone:after { content: '\e6b2'; }
 .ui-icon-microphone-off:after { content: '\e6b3'; }
 .ui-icon-minus:after { content: '\e67c'; }
@@ -644,7 +651,10 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670'; }
 .ui-icon-palette:after { content: '\e729'; }
 .ui-icon-pause:after { content: '\e6ad'; }
 .ui-icon-pencil:after,
-.ui-icon-edit:after { content: '\e688'; }
+.ui-icon-edit:after { content: '\e688'; 
+    top: .7em !important;
+    left: .65em !important;
+}
 .ui-icon-person:after,
 .ui-icon-user:after { content: '\e6d0'; }
 .ui-icon-persons:after,

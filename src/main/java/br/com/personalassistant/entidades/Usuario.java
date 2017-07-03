@@ -2,9 +2,10 @@ package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
+import javax.persistence.Basic;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,7 @@ import javax.persistence.UniqueConstraint;
 
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "TIPO", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("Usuario")
 @Table(name = "TB_USUARIO", uniqueConstraints = {
 		@UniqueConstraint(name = "UC_USUARIO", columnNames = {"email"})})
 @Entity(name = "Usuario")
@@ -27,16 +29,16 @@ public class Usuario implements Serializable{
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private long id;
 	
-	@Column(nullable = false)
+	@Basic(optional = false)
 	private String nome;
 	
-	@Column(nullable = false)
+	@Basic(optional = false)
 	private String email;
 
-	@Column(nullable = false)
+	@Basic(optional = false)
 	private String senha;
 	
-	@Column(nullable = false)
+	@Basic(optional = false)
 	private String numTelefonico;
 	
 	public long getId() {

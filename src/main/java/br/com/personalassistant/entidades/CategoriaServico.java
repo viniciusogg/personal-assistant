@@ -2,7 +2,7 @@ package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +21,7 @@ public class CategoriaServico implements Serializable{
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private long id;
 	
-	@Column(nullable = false)
+	@Basic(optional = false)
 	private String nome;
 
 	public CategoriaServico(){

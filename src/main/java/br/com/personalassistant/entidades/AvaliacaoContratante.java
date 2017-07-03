@@ -1,6 +1,6 @@
 package br.com.personalassistant.entidades;
 
-import javax.persistence.Column;
+import javax.persistence.Basic;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,7 +12,7 @@ public class AvaliacaoContratante extends Avaliacao{
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(nullable = false)
+	@Basic(optional = false)
 	private int facilidadePagamento;
 	
 	public AvaliacaoContratante() {

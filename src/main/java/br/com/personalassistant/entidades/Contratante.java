@@ -3,7 +3,6 @@ package br.com.personalassistant.entidades;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -21,9 +20,8 @@ public class Contratante extends Usuario{
 	@JoinColumn(name = "favorito_do_contratante_FK")
 	private List<Assistente> assistentesFavoritos; // unidirecional
 	
-	@JoinColumn(name = "contratante_FK")
+	@JoinColumn(name = "contratante_FK", nullable = false)
 	@OneToMany(cascade = {CascadeType.ALL})
-	@Column(nullable = false)
 	private List<Endereco> enderecos; // unidirecional
 	
 	@OneToMany

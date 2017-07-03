@@ -18,6 +18,6 @@
 		<param-value>tema</param-value>
 	</context-param>
 	<welcome-file-list>
-		<welcome-file>administrador/dashboard.xhtml</welcome-file>
+		<welcome-file>admDashboard.xhtml</welcome-file>
 	</welcome-file-list>
 </web-app>

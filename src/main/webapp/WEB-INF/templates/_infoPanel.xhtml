@@ -13,7 +13,7 @@
 			deferredMode="visible">
 			
 			<p:outputLabel 
-				style="padding:20px; font-weight: bold; font-size: 40px !important;" 
+				style="padding:20px;" 
 				value="#{valor != null ? valor : 'VALOR'}">
 			</p:outputLabel>
 			
@@ -22,14 +22,12 @@
 				value="#{descricao != null ? descricao : 'DESCRICAO'}">
 			</p:outputLabel>
 			
-			<p:selectOneMenu style="float:right; margin-left: 150px !important; margin-right: 150px !important"
-				value="#{painelControleBean.opcaoFiltro}">
-				<f:selectItem itemLabel="Filtrar por:" itemValue=""/>
-				<f:selectItem itemLabel="Hoje" itemValue="Hoje"/>
-				<f:selectItem itemLabel="Semana" itemValue="Semana"/>
-				<f:selectItem itemLabel="Mês" itemValue="Mês"/>
-				<f:selectItem itemLabel="Todos" itemValue="Todos"/>			
+			<p:selectOneMenu value="#{painelControleBean.opcaoFiltro}" style="float:right; font-weight:normal !important; font-size: 18px !important" >
+				<f:selectItems value="#{painelControleBean.opcoesFiltro}" var="opcao"
+					itemLabel="#{opcao}" itemValue="#{opcao}" />	
 			</p:selectOneMenu>
+			<p:outputLabel style="float:right; margin-right:5px; font-size:20px !important" value="Filtrar por"/>
+			
 		</p:outputPanel>
 	</ui:composition>
 </html>

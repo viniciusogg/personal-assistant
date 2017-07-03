@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:h="http://xmlns.jcp.org/jsf/html"
+ 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+  	xmlns:p="http://primefaces.org/ui"
+  	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  	template="admDashboard.xhtml">
+
+	<ui:define name="titulo">
+		<p:outputLabel class="titulo" value="CATEGORIAS DE SERVIÇOS"/>
+	</ui:define>
+	
+	<div class="ui-g">
+		<ui:define name="conteudo">
+			<div class="ui-g-12">
+				<p:panel header="NOVA CATEGORIA">
+					<div class="ui-g-12" style="padding:40px; border: 1px solid lightgray">
+						<h:form>
+							<div class="ui-g-4 align-element">
+								<p:outputLabel value="NOME" style="float:right"/>
+							</div>
+							<div class="ui-g-4 align-element">
+								<p:inputText id="campoNomeCategoria" 
+											 placeholder="Digite o nome da categoria" style="width: 250px;"
+											 required="true"/>
+							</div>				
+							<div class="ui-g-4 align-element">
+								<p:commandButton id="botaoSalvarCategoria" icon="ui-icon-save" value="SALVAR"/>
+							</div>
+						</h:form>
+					</div>
+				</p:panel>
+			</div>
+			
+			<div class="ui-g-12" style="margin-top: 40px; padding: 0px;">
+				<p:outputLabel value="CATEGORIAS DE SERVIÇOS CADASTRADAS"/>
+			</div>
+			
+			<div class="ui-g-12">
+				<p:dataTable id="tabela" var="item" value="#{categoriaServicoAdmBean.lista}" rows="5"
+                         paginator="true"
+                         paginatorTemplate="{PageLinks}">
+					<p:column headerText="NOME">						
+						<h:outputText value="#{item}"/>
+					</p:column>
+					<p:column headerText="GERENCIAR">						
+						<h:form>
+							<p:commandButton icon="ui-icon-delete" title="Remover categoria de serviço"/>
+							<p:commandButton icon="ui-icon-edit" title="Editar categoria de serviço"/>
+						</h:form>
+					</p:column>
+				</p:dataTable>
+			</div>
+		</ui:define>	
+	</div>
+</ui:composition>
+

@@ -2,8 +2,8 @@ package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -27,7 +27,7 @@ public class Proposta implements Serializable{
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private long id;
 	
-	@Column(nullable = false)
+	@Basic(optional = false)
 	private double preco;
 	
 	private String comentario;
@@ -40,8 +40,7 @@ public class Proposta implements Serializable{
 	private Endereco endereco; // unidirecional
 	
 	@OneToOne
-	@Column(nullable = false)
-	@JoinColumn(name = "data_realizacao_servico")
+	@JoinColumn(name = "data_realizacao_servico", nullable = false)
 	private DataRealizacaoServico dataRealizacaoServico; // unidirecional
 	
 	public Proposta() {

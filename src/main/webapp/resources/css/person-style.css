@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-.menu-bar{
+.barra-superior{
 	background: #1976D2 !important;
 	margin-bottom: 7px !important;
 	box-shadow: 0px 2.5px 5px 0px rgba(0,0,0,.26) !important;
@@ -8,16 +8,16 @@
 	overflow: hidden !important;
 }
 
-.item-menu{
+.botao-menu-lateral{
 	background: #1976D2 !important;
 	border: none !important;
 }
 
-.item-menu:hover{
+.botao-menu-lateral:hover{
 	background: #1976D2 !important;
 }
 
-.item-menu:focus{
+.botao-menu-lateral:focus{
 	outline-color: #1976D2 !important;
     outline-style: none !important;
     outline-width: 0px !important;
@@ -28,6 +28,12 @@
 	width: 20%;
 	padding: 1% !important;
 	min-width: 280px;
+}
+
+.align-element{ /*APLICAR NAS <div>s*/
+	height: 50px;
+    text-align: center;
+    line-height: 2.2em;
 }
 
 div{
@@ -52,16 +58,22 @@ form{
 }
 
 input[type=text]{
-	margin:5px ;
+    margin: 0px !important;
 	box-shadow: none ;
 	border-radius: 0px ;
 	padding-botton: 20% ;
-	background: white ;
-	color: black;
+	background: white !important;
+    color: #3f3f3f !important;
+    border: 1px solid gray !important;
+    border-radius: 2px;
 }
 
 input[type=text]:focus{
 	border-color:#1e88e5 !important;
+}
+
+button{
+	outline:none !important;
 }
 
 label{
@@ -84,7 +96,7 @@ tbody{
 }*/
 
 a{
-	letter-spacing: 3px !important;
+	letter-spacing: 1px !important;
 	text-decoration: none;
 	text-shadow: none !important;
 	box-shadow: none !important;
@@ -105,14 +117,19 @@ a{
 .titulo{
 	font-weight: bold;
 	font-size: 22px !important;
-	margin-left: 150px !important;
+	margin-left: 180px !important;
 	color:white; 
 }
 
 .info-panel{
-	border:1px solid #00C853;
+	border:none;
+	color: #212121;
+	background: #00C853;
 	margin: 5px;
 	padding: 40px;
+	
+	font-weight: bold; 
+	font-size: 40px !important;
 }
 
 .info-panel:hover{

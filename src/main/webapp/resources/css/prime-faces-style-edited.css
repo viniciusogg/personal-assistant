@@ -11,9 +11,30 @@
 	padding: 0px !important;
 }
 
+.ui-widget-content{
+	border:none !important;
+}
+
+.ui-menu .ui-menuitem-link {
+    display: block;
+    text-decoration: none;
+    font-weight: 200;
+    border: solid 1px transparent;
+    float: left;
+    line-height: 28px;
+    padding: .3em;
+    cursor: pointer;
+}
+
+.ui-menubar .ui-menuitem-link {
+    width: auto;
+    min-width: 230px;
+}
+
 .ui-menubar{
 	border: none !important;
 	padding: 0px !important;
+	min-width: 230px;
 }
 
 .ui-layout-unit-content{
@@ -37,10 +58,14 @@
 }
 
 /*menus*/
+
 .ui-menuitem-link {
-    font-weight: 400;
-    line-height: 16px;
-    cursor: pointer;
+    text-align: left;
+}
+
+.ui-menuitem-text{
+	margin-left:8px;
+	margin-right: 8px;
 }
 
 .ui-menuitem-icon{
@@ -71,7 +96,27 @@
     padding: 0px 8px 0px 3px;
 }
 
+/*panel*/
+
+.ui-widget-content{
+	border: 1px solid lightgray;
+}
+
 /*icones*/
+
+.ui-button-text-icon-left .ui-icon{
+	top: 0.2em;
+}
+
+.ui-button-icon-left{
+	left: .1em;
+}
+
+/*Tabela*/
+.ui-datatable tbody td{
+	text-align: center;
+    border: 1px solid lightgray;	
+}
 
 /*.ui-icon{
 	height:28px !important;

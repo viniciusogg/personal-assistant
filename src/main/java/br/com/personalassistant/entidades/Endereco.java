@@ -2,6 +2,7 @@ package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,12 +19,24 @@ public class Endereco implements Serializable{
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private long id;
 	
+	@Basic(optional = false)
 	private int numero;
+	
+	@Basic(optional = false)
 	private String rua;
+	
 	private String referencia;
+	
+	@Basic(optional = false)
 	private String cep;
+	
+	@Basic(optional = false)
 	private String bairro;
+	
+	@Basic(optional = false)
 	private String cidade;
+	
+	@Basic(optional = false)
 	private String estado;
 	
 	public Endereco() {

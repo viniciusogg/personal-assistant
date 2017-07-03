@@ -2,8 +2,8 @@ package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -27,25 +27,22 @@ public class Lance implements Serializable{
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private long id;
 	
-	@Column(nullable = false)
+	@Basic(optional = false)
 	private double valor;
 	
 	@Enumerated(EnumType.STRING)
 	private ESTADO_LANCE status;
 	
 	@ManyToOne
-	@Column(nullable = false)
-	@JoinColumn(name = "assistente_FK")
+	@JoinColumn(name = "assistente_FK", nullable = false)
 	private Assistente assistente; // bidirecional
 	
 	@ManyToOne
-	@Column(nullable = false)
-	@JoinColumn(name = "oferta_servico_FK")
+	@JoinColumn(name = "oferta_servico_FK", nullable = false)
 	private OfertaServico oferstaServico; // bidirecional
 	
-	@Column(nullable = false)
 	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "data_realizacao_servico_FK")
+	@JoinColumn(name = "data_realizacao_servico_FK", nullable = false)
 	private DataRealizacaoServico dataRealizacaoServico; // unidirecional
 	
 	public Lance() {
