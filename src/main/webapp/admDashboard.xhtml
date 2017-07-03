@@ -12,20 +12,16 @@
 	</ui:define>
 	
 	<ui:define name="opcoes-menu">
-		<p:menuitem icon="ui-icon-home" value="INÍCIO"/>							
-		<p:menuitem value="ASSISTENTES"/>				
-		<p:menuitem value="CONTRATANTES"/>
-		<p:menuitem value="ADMINISTRADORES"/>
-		<p:menuitem value="CATEGORIAS DE SERVIÇO" outcome="admCategoriaServicoEdit.xhtml"/>	
+		<p:menuitem value="INÍCIO" outcome="admDashboard.xhtml" icon="ui-icon-home"/>							
+		<p:menuitem value="ASSISTENTES" outcome="admAssistentes.xhtml" icon="ui-icon-users"/>				
+		<p:menuitem value="CONTRATANTES" outcome="admContratantes.xhtml" icon="ui-icon-users"/>
+		<p:menuitem value="ADMINISTRADORES" outcome="admAdministradores.xhtml" icon="ui-icon-users"/>
+		<p:menuitem value="SERVIÇOS" outcome="admCategoriasServicos.xhtml" icon="ui-icon-bullets"/>	
 	</ui:define>
 	
 	<ui:define name="conteudo">
 		
 		<p:layout>
-		
-			<p:layoutUnit position="north">
-				<p:messages id="idMessages" autoUpdate="true" closable="true" showDetail="true"/>
-			</p:layoutUnit>
 			
 			<p:layoutUnit position="center" styleClass="ui-g" style="border:none !important;">
 

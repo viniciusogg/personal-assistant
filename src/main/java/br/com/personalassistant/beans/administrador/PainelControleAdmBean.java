@@ -3,13 +3,12 @@ package br.com.personalassistant.beans.administrador;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
-@RequestScoped
+@ViewScoped
 @ManagedBean
-public class PainelControleBean {
+public class PainelControleAdmBean {
 
 	private String opcaoFiltro;
 	private List<String> opcoesFiltro;
@@ -25,7 +24,7 @@ public class PainelControleBean {
 	}
 	*/
 	
-	public PainelControleBean(){
+	public PainelControleAdmBean(){
 		opcoesFiltro = new ArrayList<String>();
 		opcoesFiltro.add("Hoje");
 		opcoesFiltro.add("Semana");

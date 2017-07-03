@@ -62,7 +62,7 @@ html .ui-icon:after {
   text-align: center;
   text-indent: 0;
   text-transform: none;
-  top: 50%;
+  top: 55%;
   vertical-align: middle;
   width: 1em;
   -webkit-font-smoothing: antialiased;
@@ -736,7 +736,10 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670'; }
 .ui-icon-transform:after { content: '\e739'; }
 .ui-icon-translate:after { content: '\e740'; }
 .ui-icon-trash:after,
-.ui-icon-recycle:after { content: '\e690'; }
+.ui-icon-recycle:after { content: '\e690'; 
+	left: 35% !important;
+    top: 40% !important;
+}
 .ui-icon-trash-b:after { content: '\e691'; }
 .ui-icon-triangle-1-e:after { content: '\e647'; }
 .ui-icon-triangle-1-e-stop:after,

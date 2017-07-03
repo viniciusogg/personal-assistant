@@ -5,12 +5,13 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 import br.com.personalassistant.dao.CategoriaServicoDAO;
 import br.com.personalassistant.entidades.CategoriaServico;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
-@RequestScoped
+@ViewScoped
 @ManagedBean
 public class CategoriaServicoAdmBean {
 

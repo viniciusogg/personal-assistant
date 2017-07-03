@@ -13,6 +13,9 @@
 	
 	<div class="ui-g">
 		<ui:define name="conteudo">
+			
+			<p:growl id="mensagem" escape="false" showDetail="false"/>
+			
 			<div class="ui-g-12">
 				<p:panel header="NOVA CATEGORIA">
 					<div class="ui-g-12" style="padding:40px; border: 1px solid lightgray">
@@ -33,20 +36,21 @@
 				</p:panel>
 			</div>
 			
-			<div class="ui-g-12" style="margin-top: 40px; padding: 0px;">
-				<p:outputLabel value="CATEGORIAS DE SERVIÇOS CADASTRADAS"/>
-			</div>
-			
 			<div class="ui-g-12">
 				<p:dataTable id="tabela" var="item" value="#{categoriaServicoAdmBean.lista}" rows="5"
                          paginator="true"
                          paginatorTemplate="{PageLinks}">
-					<p:column headerText="NOME">						
-						<h:outputText value="#{item}"/>
+                    
+                    <f:facet name="header">
+           				CATEGORIAS DE SERVIÇOS CADASTRADAS
+      				</f:facet>
+                     
+					<p:column headerText="NOME">
+						<p:outputLabel value="#{item}"/>							
 					</p:column>
 					<p:column headerText="GERENCIAR">						
 						<h:form>
-							<p:commandButton icon="ui-icon-delete" title="Remover categoria de serviço"/>
+							<p:commandButton icon="ui-icon-recycle" title="Remover categoria de serviço"/>
 							<p:commandButton icon="ui-icon-edit" title="Editar categoria de serviço"/>
 						</h:form>
 					</p:column>
