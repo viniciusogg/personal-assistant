@@ -5,7 +5,14 @@
  	xmlns:f="http://xmlns.jcp.org/jsf/core"
   	xmlns:p="http://primefaces.org/ui"
   	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  	xmlns:o="http://omnifaces.org/ui"
   	template="admDashboard.xhtml">
+
+	<f:metadata>
+		<o:viewParam name="categoriaServico" value="#{categoriaServicoAdmBean.categoriaServico}"
+			converter="categoriaServicoConverter" />
+			<f:event listener="#{categoriaServicoAdmBean.init()}" type="preRenderView" />
+	</f:metadata>
 
 	<ui:define name="titulo">
 		<p:outputLabel class="titulo" value="CATEGORIAS DE SERVIÇOS"/>
@@ -24,12 +31,14 @@
 								<p:outputLabel value="NOME" style="float:right"/>
 							</div>
 							<div class="ui-g-4 align-element">
-								<p:inputText id="campoNomeCategoria" 
+								<p:inputText id="campoNomeCategoria"
+											 value="#{categoriaServicoAdmBean.categoriaServico.nome}"
+											 update=":tabelaCategoriasServicos"
 											 placeholder="Digite o nome da categoria" style="width: 250px;"
 											 required="true"/>
 							</div>				
 							<div class="ui-g-4 align-element">
-								<p:commandButton id="botaoSalvarCategoria" icon="ui-icon-save" value="SALVAR"/>
+								<p:commandButton id="botaoSalvarCategoria" action="#{categoriaServicoAdmBean.salvarCategoriaServico}" icon="ui-icon-save" value="SALVAR"/>
 							</div>
 						</h:form>
 					</div>

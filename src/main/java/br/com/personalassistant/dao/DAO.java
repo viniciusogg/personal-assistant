@@ -9,7 +9,7 @@ public abstract class DAO {
 	static EntityManagerFactory entityManagerFactory;
 	
 	static {
-		entityManagerFactory = Persistence.createEntityManagerFactory("personal-assistant");
+		entityManagerFactory = Persistence.createEntityManagerFactory("personalassistant");
 	}
 	
 	protected EntityManager getEntityManager(){

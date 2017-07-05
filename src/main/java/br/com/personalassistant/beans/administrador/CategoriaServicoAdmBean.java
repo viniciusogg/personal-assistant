@@ -1,10 +1,9 @@
 package br.com.personalassistant.beans.administrador;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 
 import br.com.personalassistant.dao.CategoriaServicoDAO;
@@ -16,33 +15,35 @@ import br.com.personalassistant.excecoes.PersistenciaException;
 public class CategoriaServicoAdmBean {
 
 	private CategoriaServico categoriaServico;
-	//private CategoriaServicoDAO categoriaServicoDAO = new CategoriaServicoDAO();
-	private List<String> lista;
+	private CategoriaServicoDAO categoriaServicoDAO;
+	private List<CategoriaServico> lista;
+	
+	public void init(){
+		if(this.categoriaServico == null){
+			this.categoriaServico = new CategoriaServico();
+		}
+	}
 	
 	public CategoriaServicoAdmBean(){
-		
-		lista = new ArrayList<String>();
-		lista.add("Categoria 1");
-		lista.add("Categoria 2");
-		lista.add("Categoria 3");
-		lista.add("Categoria 4");
-		lista.add("Categoria 5");
-		lista.add("Categoria 6");
-		lista.add("Categoria 7");
-		lista.add("Categoria 8");
-		lista.add("Categoria 9");
-		lista.add("Categoria 10");
 
+		this.categoriaServicoDAO = new CategoriaServicoDAO();	
+		
+		try {
+			this.lista = categoriaServicoDAO.getAll();
+		} 
+		catch (PersistenciaException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void salvarCategoriaServico(){
 		
-		/*try {
+		try {
 			categoriaServicoDAO.save(categoriaServico);
 		} 
 		catch (PersistenciaException e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
 	
 	public CategoriaServico getCategoriaServico() {
@@ -53,11 +54,11 @@ public class CategoriaServicoAdmBean {
 		this.categoriaServico = categoriaServico;
 	}
 	
-	public List<String> getLista() {
+	public List<CategoriaServico> getLista() {
 		return lista;
 	}
 
-	public void setLista(List<String> lista) {
+	public void setLista(List<CategoriaServico> lista) {
 		this.lista = lista;
 	}
 		

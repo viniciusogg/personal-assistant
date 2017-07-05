@@ -64,12 +64,12 @@
 			<version>${hibernate.version}</version>
 		</dependency> 
 
-		<!-- JDBC Driver do MySQL -->
+		<!-- JDBC Driver do MySQL
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>6.0.6</version>
-		</dependency> 
+		</dependency> -->
 	</dependencies>
 	
 	<build>

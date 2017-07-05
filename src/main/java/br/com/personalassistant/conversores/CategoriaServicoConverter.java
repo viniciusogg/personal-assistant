@@ -11,7 +11,7 @@ import br.com.personalassistant.dao.CategoriaServicoDAO;
 import br.com.personalassistant.entidades.CategoriaServico;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
-@FacesConverter(forClass = CategoriaServico.class)
+@FacesConverter(value = "categoriaServicoConverter")
 public class CategoriaServicoConverter implements Converter {
 
 	private CategoriaServicoDAO categoriaServicoDAO = new CategoriaServicoDAO();

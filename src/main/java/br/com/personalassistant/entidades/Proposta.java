@@ -40,7 +40,7 @@ public class Proposta implements Serializable{
 	private Endereco endereco; // unidirecional
 	
 	@OneToOne
-	@JoinColumn(name = "data_realizacao_servico", nullable = false)
+	@JoinColumn(name = "data_realizacao_servico_FK", nullable = false)
 	private DataRealizacaoServico dataRealizacaoServico; // unidirecional
 	
 	public Proposta() {
