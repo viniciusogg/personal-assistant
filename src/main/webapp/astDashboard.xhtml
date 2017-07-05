@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/templates/__pageLayout.xhtml">
+		
+	<ui:define name="titulo">
+		<p:outputLabel class="titulo" value="PAINEL DE CONTROLE"/>
+	</ui:define>
+	
+	<ui:define name="opcoes-menu">
+		<p:menuitem value="INÍCIO" outcome="astDashboard.xhtml" icon="ui-icon-home"/>							
+		<p:menuitem value="PERFIL" icon="ui-icon-person"/>				
+		<p:menuitem value="NEGOCIAÇÕES" icon="ui-icon-transferthick-e-w"/>
+		<p:menuitem value="BUSCAR OFERTAS" icon="ui-icon-search"/>
+		<p:menuitem value="LANCES" icon="ui-icon-list"/>
+		<p:menuitem value="ÁREAS DE ATUAÇÃO" icon="ui-icon-list"/>
+		<p:menuitem value="AVALIAÇÕES" icon="ui-icon-star"/>
+	</ui:define>
+	
+	
+	<ui:define name="conteudo">
+		
+		<div class="ui-g">
+		
+			<div class="ui-g-12" style="padding: 2px !important">
+				<p:outputPanel styleClass="info-panel ui-g" deferred="true" deferredMode="visible" style="padding:2px;">
+					
+					<div class="ui-g-6" style="padding:2px; text-align:center">
+						<p:outputLabel value="SUA EXPERIÊNCIA" style="line-height: 120px;"/>				
+					</div>
+					
+					<div class="ui-g-6" style="padding:2px; text-align:center">
+						<div class="ui-g-12" style="padding-top:15.5px !important; padding-bottom:0px !important;">
+							<p:outputLabel value="#{painelControleAstBean.nivelExperiencia}"/>										
+						</div>
+		
+						<div class="ui-g-12" style="padding-top:0px !important; padding-bottom:14.5px !important;">
+							<p:outputLabel value="#{painelControleAstBean.quantAssistencias}" style="font-size: 24px !important"/>		
+							<p:outputLabel value="assistencias prestadas" style="font-size: 24px !important"/>
+						</div>					
+					</div>
+				</p:outputPanel>
+			</div>
+		
+			<div class="ui-g-12" style="padding: 2px !important">
+				<p:outputPanel styleClass="info-panel ui-g" deferred="true" deferredMode="visible" style="padding:2px;">
+					
+					<div class="ui-g-6" style="padding:2px; text-align:center">
+						<p:outputLabel value="SUA REPUTAÇÃO" style="line-height: 120px;"/>				
+					</div>
+					
+					<div class="ui-g-6" style="padding:2px; text-align:center">
+						<div class="ui-g-12" style="padding-top:15.5px !important; padding-bottom:0px !important;">
+							<p:outputLabel value="#{painelControleAstBean.reputacao}"/>										
+						</div>
+		
+						<div class="ui-g-12" style="padding-top:0px !important; padding-bottom:14.5px !important;">
+							<div class="ui-g-6" style="padding: 2px;">
+								<p:rating style="width:100px !important; float: right;" value="#{painelControleAstBean.quantEstrelas}" readonly="true"/>
+							</div>
+							<div class="ui-g-6" style="padding: 2px;text-align: left;">
+								<p:outputLabel value="#{painelControleAstBean.totalAvaliacoes}" style="font-size: 24px !important"/>										
+								<p:outputLabel value="AVALIAÇÕES" style="font-size: 24px !important"/>
+							</div>
+						</div>					
+					</div>
+				</p:outputPanel>
+			</div>
+		
+			<div class="ui-g-12" style="padding:7px !important">
+				<p:dataTable id="tabelaAssistencias" var="#" value="#" rows="5"
+                         paginator="true"
+                         paginatorTemplate="{PageLinks}">
+                    
+                    <f:facet name="header">
+           				ASSISTENCIAS PRESTADAS
+      				</f:facet>
+                     
+					<p:column headerText="DATA">
+						<p:outputLabel value="01/04/2017 11:40"/>							
+					</p:column>
+					<p:column headerText="AVALIAÇÃO RECEBIDA">
+						<p:rating value="#{painelControleAstBean.quantEstrelas}" readonly="true"/>
+					</p:column>
+					<p:column headerText="">						
+						<h:form>
+							<p:commandButton icon="ui-icon-recycle" title="Remove assistencia"/>
+							<p:commandButton icon="ui-icon-search" title="Mais informações"/>
+						</h:form>
+					</p:column>
+				</p:dataTable>
+			</div>
+		
+		</div>
+
+	</ui:define>		
+					
+</ui:composition>

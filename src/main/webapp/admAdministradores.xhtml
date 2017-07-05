@@ -11,13 +11,13 @@
 		<p:outputLabel class="titulo" value="ADMINISTRADORES"/>
 	</ui:define>
 
-	<div class="ui-g">
-		<ui:define name="conteudo">
+	<ui:define name="conteudo">
+		<div class="ui-g">
 			
 			<p:growl id="mensagem" escape="false" showDetail="false"/>
 			
 			<div class="ui-g-12">
-				<p:dataTable id="tabela" var="item" value="#" rows="11"
+				<p:dataTable id="tabelaAdm" var="#" value="#" rows="11"
                          paginator="true"
                          paginatorTemplate="{PageLinks}">
                     
@@ -41,7 +41,7 @@
 					</p:column>
 				</p:dataTable>
 			</div>
-		</ui:define>	
-	</div>
+		</div>
+	</ui:define>	
 	
 </ui:composition>

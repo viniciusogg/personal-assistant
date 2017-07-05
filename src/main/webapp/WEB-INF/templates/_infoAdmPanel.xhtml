@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version='1.0' encoding="UTF-8" ?>
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -22,8 +23,8 @@
 				value="#{descricao != null ? descricao : 'DESCRICAO'}">
 			</p:outputLabel>
 			
-			<p:selectOneMenu value="#{painelControleBean.opcaoFiltro}" style="float:right; font-weight:normal !important; font-size: 18px !important" >
-				<f:selectItems value="#{painelControleBean.opcoesFiltro}" var="opcao"
+			<p:selectOneMenu value="#{painelControleAdmBean.opcaoFiltro}" style="float:right; font-weight:normal !important; font-size: 18px !important" >
+				<f:selectItems value="#{painelControleAdmBean.opcoesFiltro}" var="opcao"
 					itemLabel="#{opcao}" itemValue="#{opcao}" />	
 			</p:selectOneMenu>
 			<p:outputLabel style="float:right; margin-right:5px; font-size:20px !important" value="Filtrar por"/>
