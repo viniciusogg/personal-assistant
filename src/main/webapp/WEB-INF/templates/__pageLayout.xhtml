@@ -9,9 +9,9 @@
 	<h:head>
 		<title><ui:insert name="title"> PERSONAL ASSISTANT </ui:insert></title>
 		
-		<link rel="stylesheet" type="text/css" href="resources/css/person-style.css?v=7.1" />
-		<link rel="stylesheet" type="text/css" href="resources/css/prime-faces-style-edited.css?v=7.1" />
-	    <link rel="stylesheet" type="text/css" href="resources/css/jquery-ui-1.12.icon-font.css?v=7.4" /> 
+		<link rel="stylesheet" type="text/css" href="resources/css/person-style.css?v=8.2" />
+		<link rel="stylesheet" type="text/css" href="resources/css/prime-faces-style-edited.css?v=8.1" />
+	    <link rel="stylesheet" type="text/css" href="resources/css/jquery-ui-1.12.icon-font.css?v=9.6" /> 
 
 	</h:head>
 	
@@ -22,10 +22,15 @@
 				
 					<p:toolbar id="menubar" styleClass="barra-superior">
 						<f:facet name="left">
-							<p:commandButton id="botaoMenu" update=":conteudo" actionListener="#{templateBean.acionarMenuLateral}" styleClass="botao-menu-lateral" style="width:48px !important; height:48px !important; cursor:pointer;" icon="ui-icon-bars" />
-							
+							<p:commandButton id="botaoMenu" update=":conteudo" 
+								actionListener="#{templateBean.acionarMenuLateral}" 
+								styleClass="botao-menu-lateral" style="width:48px !important; height:48px !important; cursor:pointer;" 
+								icon="ui-icon-bars" />
 							<ui:insert name="titulo"/>
-						</f:facet>					
+						</f:facet>
+						<f:facet name="right">
+							<ui:insert name="conteudo-menu-superior"/>
+						</f:facet>		
 					</p:toolbar>
 				</h:form>
 			</p:layoutUnit>		

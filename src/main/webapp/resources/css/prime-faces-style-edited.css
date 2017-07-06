@@ -118,6 +118,46 @@
     border: 1px solid lightgray;	
 }
 
+/*Mensagem*/
+.ui-growl {
+	right:160px;
+}
+
+.ui-growl-item-container{	
+	width:450px !important;
+	opacity: initial;
+}
+
+.ui-growl-message{
+	float: left !important;
+	margin-left: 10px !important;
+	margin-top: 10px !important;
+    margin-right: 0px !important;
+	width:350px !important;
+}
+
+.ui-growl-item{
+	padding-bottom: 10px !important;
+    padding-top: 10px !important;
+    padding-left: 5px !important;
+    padding-right: 10px !important;
+}
+
+.ui-growl-image{
+    margin-top: 5px;
+    margin-bottom: 10px
+}
+
+/* icones mensagens*/
+.ui-growl-image-error{
+	background-image: url(../icons/alert-box.png) !important;
+}
+
+.ui-growl-image-info{
+	background-image: url(../icons/checkbox-marked.png) !important;
+	background-position: initial;
+}
+
 /*.ui-icon{
 	height:28px !important;
 	width:28px !important;

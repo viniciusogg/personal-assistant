@@ -694,7 +694,10 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670'; }
 .ui-icon-script:after,
 .ui-icon-file-script:after { content: '\e6a2'; }
 .ui-icon-search:after,
-.ui-input-search:after { content: '\e6f2'; }
+.ui-input-search:after { content: '\e6f2'; 
+    left: 10px !important;
+    top: 11px !important;
+}
 .ui-icon-select:after { content: '\e72d'; }
 .ui-icon-selectbox:after { content: '\e6f6'; }
 .ui-icon-server:after { content: '\e730'; }

@@ -23,13 +23,6 @@
     outline-width: 0px !important;
 }
 
-.center-div{
-	margin:auto;
-	width: 20%;
-	padding: 1% !important;
-	min-width: 280px;
-}
-
 .align-element{ /*APLICAR NAS <div>s*/
 	height: 50px;
     text-align: center;
@@ -39,8 +32,6 @@
 div{
 	border-radius: 0px !important;
 	box-shadow: none;
-	/*overflow: auto;
-	overflow-x: hidden !important;*/ /*SE ESTIVER DEFINIDO O CONTEÚDO SOME*/
 }
 
 .painel{
@@ -60,8 +51,6 @@ form{
 input[type=text]{
     margin: 0px !important;
 	box-shadow: none ;
-	border-radius: 0px ;
-	padding-botton: 20% ;
 	background: white !important;
     color: #3f3f3f !important;
     border: 1px solid gray !important;
@@ -69,6 +58,19 @@ input[type=text]{
 }
 
 input[type=text]:focus{
+	border-color:#1e88e5 !important;
+}
+
+input[type="password"]{
+    margin: 0px !important;
+	box-shadow: none ;
+	background: white !important;
+    color: #3f3f3f !important;
+    border: 1px solid gray !important;
+    border-radius: 2px;
+}
+
+input[type="password"]:focus{
 	border-color:#1e88e5 !important;
 }
 
@@ -80,20 +82,6 @@ label{
 	margin-left:10px !important;
 	margin-right:10px !important;
 }
-
-/*tr, td{
-	border:none !important;
-	text-align: center !important;
-}
-
-th{
-	text-align: center !important;
-	border: none !important
-}
-
-tbody{
-	border: none !important;
-}*/
 
 a{
 	letter-spacing: 1px !important;
@@ -134,4 +122,24 @@ a{
 
 .info-panel:hover{
 	box-shadow: 2.5px 2.5px 5px 0px rgba(0,0,0,.26);
+}
+
+.botao-pagina-login{
+	background: #43A047 !important;
+	color: white !important;
+	border: 1px solid #43A047 !important;
+	border-radius: 5px !important;
+    margin-left: 3px;
+    height: 38px !important;
+    top: 4px;
+}
+
+.botao-pagina-login:hover{
+	background: #388E3C !important;
+	border: 1px solid #388E3C !important;
+}
+
+.botao-pagina-login:active{
+	background: #2E7D32 !important;
+	border: 1px solid #2E7D32 !important;	
 }

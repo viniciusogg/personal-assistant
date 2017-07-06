@@ -2,9 +2,10 @@ package br.com.personalassistant.beans.administrador;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.personalassistant.dao.CategoriaServicoDAO;
 import br.com.personalassistant.entidades.CategoriaServico;
@@ -38,10 +39,15 @@ public class CategoriaServicoAdmBean {
 	
 	public void salvarCategoriaServico(){
 		
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		
 		try {
 			categoriaServicoDAO.save(categoriaServico);
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Categoria '" + categoriaServico.getNome() + "' salva", ""));
 		} 
 		catch (PersistenciaException e) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro", ""));
 			e.printStackTrace();
 		}
 	}

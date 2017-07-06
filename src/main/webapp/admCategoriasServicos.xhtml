@@ -9,9 +9,7 @@
   	template="admDashboard.xhtml">
 
 	<f:metadata>
-		<o:viewParam name="categoriaServico" value="#{categoriaServicoAdmBean.categoriaServico}"
-			converter="categoriaServicoConverter" />
-			<f:event listener="#{categoriaServicoAdmBean.init()}" type="preRenderView" />
+		<f:event listener="#{categoriaServicoAdmBean.init()}" type="preRenderView" />
 	</f:metadata>
 
 	<ui:define name="titulo">
@@ -20,11 +18,11 @@
 	
 	<div class="ui-g">
 		<ui:define name="conteudo">
-			
-			<p:growl id="mensagem" escape="false" showDetail="false"/>
-			
 			<div class="ui-g-12">
-				<p:panel header="NOVA CATEGORIA">
+
+				<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
+				
+				<p:panel header="NOVA CATEGORIA DE SERVIÇO">
 					<div class="ui-g-12" style="padding:40px; border: 1px solid lightgray">
 						<h:form>
 							<div class="ui-g-4 align-element">
@@ -33,20 +31,25 @@
 							<div class="ui-g-4 align-element">
 								<p:inputText id="campoNomeCategoria"
 											 value="#{categoriaServicoAdmBean.categoriaServico.nome}"
-											 update=":tabelaCategoriasServicos"
-											 placeholder="Digite o nome da categoria" style="width: 250px;"
-											 required="true"/>
+											 placeholder="Nome da categoria de serviço" style="width: 250px;"
+											 required="true"
+											 requiredMessage="Você esqueceu de digitar o nome da categoria de serviço que deseja cadastrar"/>
 							</div>				
 							<div class="ui-g-4 align-element">
-								<p:commandButton id="botaoSalvarCategoria" action="#{categoriaServicoAdmBean.salvarCategoriaServico}" icon="ui-icon-save" value="SALVAR"/>
+								<p:commandButton id="botaoSalvarCategoria" 
+												 actionListener="#{categoriaServicoAdmBean.salvarCategoriaServico}" 
+												 action="admCategoriasServicos?faces-redirect=true"
+												 icon="ui-icon-save" value="SALVAR"
+												 required="true"
+												 update="msg"/> <!-- msg-info -->
 							</div>
 						</h:form>
 					</div>
 				</p:panel>
 			</div>
-			
+						
 			<div class="ui-g-12">
-				<p:dataTable id="tabelaCategoriasServicos" var="item" value="#{categoriaServicoAdmBean.lista}" rows="5"
+				<p:dataTable  var="categoriaServico" value="#{categoriaServicoAdmBean.lista}" rows="5"
                          paginator="true"
                          paginatorTemplate="{PageLinks}">
                     
@@ -55,7 +58,7 @@
       				</f:facet>
                      
 					<p:column headerText="NOME">
-						<p:outputLabel value="#{item}"/>							
+						<p:outputLabel value="#{categoriaServico.nome}"/>							
 					</p:column>
 					<p:column headerText="GERENCIAR">						
 						<h:form>
