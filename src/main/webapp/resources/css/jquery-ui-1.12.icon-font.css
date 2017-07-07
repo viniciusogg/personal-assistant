@@ -37,7 +37,6 @@
 html .ui-icon {
   background-image: none !important;
   display: inline-block;
-  /*font: normal normal normal 24px/26px sans-serif;*/
   font: normal normal normal 16px/16px sans-serif;
   height: 28px;
   line-height: 2.5em;

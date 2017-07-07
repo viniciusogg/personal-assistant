@@ -13,6 +13,7 @@ public class TemplateBean implements Serializable{
 
 	private boolean menuVisivel=true; 
 	private String modo;
+	private String cssMenuLateral = "border-right: 1px solid lightgray !important;";
 	
 	public boolean getMenuVisivel(){
 		return menuVisivel;
@@ -30,15 +31,25 @@ public class TemplateBean implements Serializable{
 		this.modo = modo;
 	}
 	
+	public String getCssMenuLateral() {
+		return cssMenuLateral;
+	}
+
+	public void setCssMenuLateral(String cssMenuLateral) {
+		this.cssMenuLateral = cssMenuLateral;
+	}
+
 	public void acionarMenuLateral(){
 
 		if(menuVisivel){
 			menuVisivel=false;
 			modo = "'hide'";
+			cssMenuLateral = "border-right: 0px solid lightgray !important;";
 		}
 		else{
 			menuVisivel=true;
 			modo = "'show'";
+			cssMenuLateral = "border-right: 1px solid lightgray !important;";
 		}
 
 	}

@@ -9,9 +9,9 @@
 	<h:head>
 		<title><ui:insert name="title"> PERSONAL ASSISTANT </ui:insert></title>
 		
-		<link rel="stylesheet" type="text/css" href="resources/css/person-style.css?v=8.2" />
-		<link rel="stylesheet" type="text/css" href="resources/css/prime-faces-style-edited.css?v=8.1" />
-	    <link rel="stylesheet" type="text/css" href="resources/css/jquery-ui-1.12.icon-font.css?v=9.6" /> 
+		<link rel="stylesheet" type="text/css" href="resources/css/person-style.css?v=8.6" />
+		<link rel="stylesheet" type="text/css" href="resources/css/prime-faces-style-edited.css?v=8.8" />
+	    <link rel="stylesheet" type="text/css" href="resources/css/jquery-ui-1.12.icon-font.css?v=10.0" /> 
 
 	</h:head>
 	
@@ -22,10 +22,12 @@
 				
 					<p:toolbar id="menubar" styleClass="barra-superior">
 						<f:facet name="left">
-							<p:commandButton id="botaoMenu" update=":conteudo" 
-								actionListener="#{templateBean.acionarMenuLateral}" 
-								styleClass="botao-menu-lateral" style="width:48px !important; height:48px !important; cursor:pointer;" 
-								icon="ui-icon-bars" />
+							<ui:insert name="botao-menu">
+								<p:commandButton id="botaoMenu" update=":conteudo" 
+									actionListener="#{templateBean.acionarMenuLateral}" 
+									styleClass="botao-menu-lateral" style="width:48px !important; height:48px !important; cursor:pointer;" 
+									icon="ui-icon-bars" />
+							</ui:insert>
 							<ui:insert name="titulo"/>
 						</f:facet>
 						<f:facet name="right">
@@ -39,13 +41,15 @@
 				<h:panelGroup id="conteudo">
 					<p:layout fullPage="false" style="height:100%">
 					
-						<p:layoutUnit position="west" styleClass="painel" style="box-shadow: 1px -3px 5px 0px rgba(0, 0, 0, 0.26) !important; ">
-							<h:form rendered="#{templateBean.menuVisivel}">
-								<p:megaMenu style="text-align: right !important; min-width:230px !important" styleClass="painel" orientation="vertical">
-									<ui:insert name="opcoes-menu" />				
-								</p:megaMenu>
-							</h:form>
-						</p:layoutUnit>
+						<ui:insert name="menu-lateral">
+							<p:layoutUnit position="west" styleClass="painel" style="#{templateBean.cssMenuLateral}">
+								<h:form rendered="#{templateBean.menuVisivel}">
+									<p:megaMenu style="text-align: right !important; min-width:230px !important" styleClass="painel" orientation="vertical">
+										<ui:insert name="opcoes-menu" />				
+									</p:megaMenu>
+								</h:form>
+							</p:layoutUnit>
+						</ui:insert>
 						
 						<p:layoutUnit position="center" styleClass="painel" style="border:none !important; margin-left:5px !important">
 							<ui:insert name="conteudo"/>

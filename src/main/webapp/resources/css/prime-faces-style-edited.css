@@ -1,5 +1,20 @@
 @CHARSET "UTF-8";
 
+/*fonte*/
+.ui-widget{
+	font-family:'Roboto Condensed', sans-serif;
+}
+
+/*fonte-campo-texto*/
+.ui-widget-content .ui-inputfield{
+	font-family:'Roboto Condensed', sans-serif;
+}
+
+/*fonte-botões*/
+.ui-button .ui-button-text{
+	font-family:'Roboto Condensed', sans-serif;
+}
+
 /*Cabecalho/Rodapé*/
 .ui-layout-north{
 	padding: 0px !important;
@@ -9,10 +24,6 @@
 
 .ui-menu, .ui-menu-child{
 	padding: 0px !important;
-}
-
-.ui-widget-content{
-	border:none !important;
 }
 
 .ui-menu .ui-menuitem-link {
@@ -47,9 +58,29 @@
 	margin: 0px !important;
 }
 
-.ui-panel, .ui-panel-content{
-	padding: 0px !important;
-	margin: 0px !important;
+/*Cabeçalho tabela*/
+.ui-datatable .ui-datatable-header{
+	border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+}
+
+/*paginator-bottom*/
+.ui-paginator.ui-paginator-bottom{
+	border-bottom-left-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+}
+
+/*Cabeçalho painel*/
+.ui-panel .ui-panel-titlebar{
+	border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+    text-align: center;
+}
+
+/*painel*/
+.ui-panel{
+	border-radius: 4px !important;
+	border: 1px solid lightgray !important;
 }
 
 .ui-widget-header {
@@ -58,7 +89,6 @@
 }
 
 /*menus*/
-
 .ui-menuitem-link {
     text-align: left;
 }
@@ -97,13 +127,11 @@
 }
 
 /*panel*/
-
 .ui-widget-content{
 	border: 1px solid lightgray;
 }
 
 /*icones*/
-
 .ui-button-text-icon-left .ui-icon{
 	top: 0.2em;
 }
@@ -157,13 +185,3 @@
 	background-image: url(../icons/checkbox-marked.png) !important;
 	background-position: initial;
 }
-
-/*.ui-icon{
-	height:28px !important;
-	width:28px !important;
-	top: 41% !important;
-}
-
-.ui-button-icon-left ui-icon ui-c menu{
-	top: 41% !important;
-}*/

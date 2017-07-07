@@ -7,26 +7,34 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	template="/WEB-INF/templates/__pageLayout.xhtml">
 		
-	<ui:define name="titulo">
-		<p:outputLabel class="titulo" value="PERSONAL ASSISTANT"/>
+	<ui:define name="botao-menu">
+		<div class="ui-g-12" style="height:48px; width: 48px;"></div>
 	</ui:define>
+		
+	<ui:define name="titulo" />
 	
 	<ui:define name="conteudo-menu-superior">
 		<p:commandButton value="QUERO TRABALHAR" styleClass="botao-pagina-login"/>
 		<p:commandButton value="QUERO CONTRATAR" styleClass="botao-pagina-login"/>
 	</ui:define>
 	
-	<ui:define name="opcoes-menu">
-		<p:menuitem value="HOME" outcome="loginUsuario.xhtml" icon="ui-icon-home"/>							
-		<p:menuitem value="CONTATO" icon="ui-icon-mail"/>
-		<p:menuitem value="SOBRE" icon="ui-icon-info"/>
-	</ui:define>
+	<ui:define name="menu-lateral"/>
 	
 	<ui:define name="conteudo">
 		
 		<div class="ui-g">
-		
-			<p:panel header="LOGIN" styleClass="ui-g-12" style="margin-left:35% !important; margin-right:35% !important; margin-top:15% !important; border: 1px solid lightgray !important">
+			
+			<div class="ui-g-12" style="padding-top: 0px; margin-left: 35% !important; margin-right: 35% !important; text-align: center">
+				<div class="ui-g-12" style="padding-bottom: 0px; padding-top: 0px;">
+					<p:outputLabel style="font-family:'Roboto Condensed Light', sans-serif; font-size:50px; float: left" value="PERSONAL"/>
+				</div>
+	
+				<div class="ui-g-12" style="padding-top: 0px;">
+					<p:outputLabel style="font-family:'Roboto Condensed Light', sans-serif; font-size:50px; float:right" value="ASSISTANT"/>
+				</div>
+			</div>
+			
+			<p:panel header="LOGIN" styleClass="ui-g-12" style="margin-left:35% !important; margin-right:35% !important;"> <!-- margin-top:10% !important; -->
 
 				<div class="ui-g-12" style= "margin-bottom: 1px; padding-bottom: 0px">
 					<p:outputLabel value="E-MAIL" style="margin-left:0px !important"/>
