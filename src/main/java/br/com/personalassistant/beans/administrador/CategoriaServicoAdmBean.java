@@ -2,6 +2,7 @@ package br.com.personalassistant.beans.administrador;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -19,14 +20,9 @@ public class CategoriaServicoAdmBean {
 	private CategoriaServicoDAO categoriaServicoDAO;
 	private List<CategoriaServico> lista;
 	
+	@PostConstruct
 	public void init(){
-		if(this.categoriaServico == null){
-			this.categoriaServico = new CategoriaServico();
-		}
-	}
-	
-	public CategoriaServicoAdmBean(){
-
+		
 		this.categoriaServicoDAO = new CategoriaServicoDAO();	
 		
 		try {
@@ -37,6 +33,13 @@ public class CategoriaServicoAdmBean {
 		}
 	}
 	
+	public void preRenderView(){
+		
+		if(this.categoriaServico == null){
+			this.categoriaServico = new CategoriaServico();
+		}
+	}
+
 	public void salvarCategoriaServico(){
 		
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -44,7 +47,7 @@ public class CategoriaServicoAdmBean {
 		
 		try {
 			categoriaServicoDAO.save(categoriaServico);
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Categoria '" + categoriaServico.getNome() + "' salva", ""));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Categoria '" + categoriaServico.getNome() + "' cadastrada com sucesso", ""));
 		} 
 		catch (PersistenciaException e) {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro", ""));
@@ -67,5 +70,5 @@ public class CategoriaServicoAdmBean {
 	public void setLista(List<CategoriaServico> lista) {
 		this.lista = lista;
 	}
-		
+
 }

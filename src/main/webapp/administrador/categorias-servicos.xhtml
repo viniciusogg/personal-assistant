@@ -6,10 +6,10 @@
   	xmlns:p="http://primefaces.org/ui"
   	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
   	xmlns:o="http://omnifaces.org/ui"
-  	template="admDashboard.xhtml">
+  	template="dashboard.xhtml">
 
 	<f:metadata>
-		<f:event listener="#{categoriaServicoAdmBean.init()}" type="preRenderView" />
+		<f:event listener="#{categoriaServicoAdmBean.preRenderView()}" type="preRenderView" />
 	</f:metadata>
 
 	<ui:define name="titulo">
@@ -22,26 +22,26 @@
 
 				<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
 				
-				<p:panel class="ui-g-12" style="border: 1px solid lightgray !important" header="NOVA CATEGORIA DE SERVIÇO">
-					<div class="ui-g-12" style="padding:40px;">
+				<p:panel class="ui-g-12" header="NOVA CATEGORIA DE SERVIÇO">
+					<div class="ui-g-12" id="div-painel-cadastro">
 						<h:form>
 							<div class="ui-g-4 align-element">
-								<p:outputLabel value="NOME" style="float:right"/>
+								<p:outputLabel value="NOME" styleClass="label-nome-categoria"/>
 							</div>
 							<div class="ui-g-4 align-element">
-								<p:inputText id="campoNomeCategoria"
+								<p:inputText styleClass="campo-nome-categoria"
 											 value="#{categoriaServicoAdmBean.categoriaServico.nome}"
-											 placeholder="Nome da categoria de serviço" style="width: 250px;"
+											 placeholder="Nome da categoria de serviço"
 											 required="true"
 											 requiredMessage="Você esqueceu de digitar o nome da categoria de serviço que deseja cadastrar"/>
 							</div>				
 							<div class="ui-g-4 align-element">
 								<p:commandButton id="botaoSalvarCategoria" 
 												 actionListener="#{categoriaServicoAdmBean.salvarCategoriaServico}" 
-												 action="admCategoriasServicos?faces-redirect=true"
+												 action="categorias-servicos?faces-redirect=true"
 												 icon="ui-icon-save" value="SALVAR"
 												 required="true"
-												 update="msg"/> <!-- msg-info -->
+												 update="msg"/>
 							</div>
 						</h:form>
 					</div>

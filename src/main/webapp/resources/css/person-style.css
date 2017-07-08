@@ -11,6 +11,9 @@
 .botao-menu-lateral{
 	background: #1976D2 !important;
 	border: none !important;
+	width:48px !important; 
+	height:48px !important; 
+	cursor:pointer;
 }
 
 .botao-menu-lateral:hover{
@@ -110,12 +113,12 @@ a{
 }
 
 .info-panel{
-	border:none;
+	border: 1px solid #78909C;
+	border-radius: 4px !important;
 	color: white;
 	background: #78909C;
 	margin: 5px;
 	padding: 40px;
-	
 	font-weight: bold; 
 	font-size: 40px !important;
 }
@@ -128,7 +131,7 @@ a{
 	background: #43A047 !important;
 	color: white !important;
 	border: 1px solid #43A047 !important;
-	border-radius: 5px !important;
+	border-radius: 4px !important;
     margin-left: 3px;
     height: 38px !important;
     top: 4px;
@@ -142,4 +145,111 @@ a{
 .botao-pagina-login:active{
 	background: #2E7D32 !important;
 	border: 1px solid #2E7D32 !important;	
+}
+
+#div-pagina-superior{
+	height:48px; 
+	width: 48px;
+}
+
+#painel-login{
+	margin-left:35% !important; 
+	margin-right:35% !important;
+}
+
+#div-label-email{
+	margin-bottom: 1px; 
+	padding-bottom: 0px;
+}
+
+#label-email{
+	margin-left:0px !important;
+}
+
+#div-campo-email{
+	margin-top: 1px; 
+	padding-top: 0px;
+}
+
+#campo-email{
+	width: 94%; 
+	padding:10px;
+}
+
+#div-label-senha{
+	margin-bottom: 1px; 
+	padding-bottom: 0px;
+}
+
+#label-senha{
+	margin-left:0px !important;
+}
+
+#div-campo-senha{
+	margin-top: 1px; padding-top: 0px;
+}
+
+#campo-senha{
+	width: 94%; padding:10px;
+}
+
+#botao-entrar{
+	width: 100%; padding:15px;
+}
+
+#div-titulo-login{
+	padding-top: 0px; 
+	margin-left: 35% !important; 
+	margin-right: 35% !important; 
+	text-align: center;
+}
+
+#div-titulo-um-login{
+	padding-bottom: 0px; 
+	padding-top: 0px;
+}
+
+#titulo-um-login{
+	font-family:'Roboto Condensed Light', sans-serif; 
+	font-size:50px; 
+	float: left;
+}
+
+#div-titulo-dois-login{
+	padding-top: 0px;
+}
+
+#titulo-dois-login{
+	font-family:'Roboto Condensed Light', sans-serif; 
+	font-size:50px; 
+	float:right;
+}
+
+#p-layout-central{
+	height:100%;
+}
+
+.mega-menu-visivel{	
+	border-right: 1px solid lightgray !important;
+}
+
+.mega-menu-oculto{
+	border-right: 0px solid white !important;
+}
+
+#mega-menu-lateral{
+	text-align: right !important; 
+	min-width:230px !important
+}
+
+#layout-unit-rodape{
+	text-align:center; 
+	border-top:1px solid lightgray !important;
+}
+
+#div-titulo-cadastro{
+	width: 600px;
+	height: 48px;
+	padding-top: 10px;
+	padding-left: 48px;
 }

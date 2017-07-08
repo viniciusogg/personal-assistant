@@ -1,0 +1,58 @@
+.div-info-panel{
+	padding:2px !important;
+}
+
+.div-info{
+	padding:2px;
+}
+
+.div-label{
+	padding:2px; 
+	text-align:center;
+}
+
+.label-titulo-infopanel{
+	line-height: 120px;
+}
+
+#div-label-nivel-experiencia{
+	padding-top:15.5px !important; 
+	padding-bottom:0px !important;
+}
+
+#div-labels-direita{
+	padding-top:0px !important; 
+	padding-bottom:14.5px !important
+}
+
+.label-direita{
+	font-size: 24px !important;
+}
+
+#div-label-nivel-reputacao{
+	padding-top:15.5px !important; 
+	padding-bottom:0px !important;
+}
+
+#div-labels-avalicao{
+	padding-top:0px !important; 
+	padding-bottom:14.5px !important;
+}
+
+#avaliacao{
+	width:100px !important; 
+	float: right;
+}
+
+#div-label-total-avaliacoes{
+	padding: 2px;
+	text-align: left;
+}
+
+#div-info-reputacao{
+	padding: 1px;
+}
+
+#div-tabela{
+	padding:7px !important;
+}

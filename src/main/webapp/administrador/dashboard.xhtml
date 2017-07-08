@@ -8,42 +8,42 @@
 	template="/WEB-INF/templates/__pageLayout.xhtml">
 		
 	<ui:define name="titulo">
-		<p:outputLabel class="titulo" value="PAINEL DE CONTROLE"/>
+		<p:outputLabel styleClass="titulo" value="PAINEL DE CONTROLE"/>
 	</ui:define>
 	
 	<ui:define name="opcoes-menu">
-		<p:menuitem value="INÍCIO" outcome="admDashboard.xhtml" icon="ui-icon-home"/>							
-		<p:menuitem value="ASSISTENTES" outcome="admAssistentes.xhtml" icon="ui-icon-users"/>				
-		<p:menuitem value="CONTRATANTES" outcome="admContratantes.xhtml" icon="ui-icon-users"/>
-		<p:menuitem value="ADMINISTRADORES" outcome="admAdministradores.xhtml" icon="ui-icon-users"/>
-		<p:menuitem value="SERVIÇOS" outcome="admCategoriasServicos.xhtml" icon="ui-icon-bullets"/>	
+		<p:menuitem value="INÍCIO" outcome="dashboard.xhtml" icon="ui-icon-home"/>							
+		<p:menuitem value="ASSISTENTES" outcome="assistentes.xhtml" icon="ui-icon-users"/>				
+		<p:menuitem value="CONTRATANTES" outcome="contratantes.xhtml" icon="ui-icon-users"/>
+		<p:menuitem value="ADMINISTRADORES" outcome="administradores.xhtml" icon="ui-icon-users"/>
+		<p:menuitem value="SERVIÇOS" outcome="categorias-servicos.xhtml" icon="ui-icon-bullets"/>	
 	</ui:define>
 	
 	<ui:define name="conteudo">
 
 		<div class="ui-g">
-			<div class="ui-g-12" style="padding: 2px !important">
+			<div class="ui-g-12 div-painel-info">
 				<ui:include src="/WEB-INF/templates/_infoAdmPanel.xhtml"> 
 					<ui:param name="valor" value="1.500"/>
 					<ui:param name="descricao" value="Novas negociações iniciadas hoje" />
 				</ui:include>
 			</div>
 			
-			<div class="ui-g-12" style="padding: 2px !important">
+			<div class="ui-g-12 div-painel-info">
 				<ui:include src="/WEB-INF/templates/_infoAdmPanel.xhtml">
 					<ui:param name="valor" value="500"/>
 					<ui:param name="descricao" value="Novos assistentes cadastrados" />
 				</ui:include>
 			</div>
 			
-			<div class="ui-g-12" style="padding: 2px !important">
+			<div class="ui-g-12 div-painel-info">
 				<ui:include src="/WEB-INF/templates/_infoAdmPanel.xhtml">
 					<ui:param name="valor" value="1.000"/>
 					<ui:param name="descricao" value="Novos contratantes cadastrados" />
 				</ui:include>
 			</div>
 			
-			<div class="ui-g-12" style="padding: 2px !important">
+			<div class="ui-g-12 div-painel-info">
 				<ui:include src="/WEB-INF/templates/_infoAdmPanel.xhtml">
 					<ui:param name="valor" value="700"/>
 					<ui:param name="descricao" value="Novas ofertas de serviços criadas" />

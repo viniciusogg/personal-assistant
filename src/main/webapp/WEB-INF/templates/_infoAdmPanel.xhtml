@@ -14,20 +14,20 @@
 			deferredMode="visible">
 			
 			<p:outputLabel 
-				style="padding:20px;" 
+				styleClass="label-valor-infopanel" 
 				value="#{valor != null ? valor : 'VALOR'}">
 			</p:outputLabel>
 			
 			<p:outputLabel
-				style="padding:20px; font-size: 24px !important" 
+				styleClass="label-descricao-infopanel" 
 				value="#{descricao != null ? descricao : 'DESCRICAO'}">
 			</p:outputLabel>
 			
-			<p:selectOneMenu value="#{painelControleAdmBean.opcaoFiltro}" style="float:right; font-weight:normal !important; font-size: 18px !important" >
+			<p:selectOneMenu value="#{painelControleAdmBean.opcaoFiltro}" styleClass="combobox-infopanel" >
 				<f:selectItems value="#{painelControleAdmBean.opcoesFiltro}" var="opcao"
 					itemLabel="#{opcao}" itemValue="#{opcao}" />	
 			</p:selectOneMenu>
-			<p:outputLabel style="float:right; margin-right:5px; font-size:20px !important" value="Filtrar por"/>
+			<p:outputLabel styleClass="label-combobox" value="Filtrar por"/>
 			
 		</p:outputPanel>
 	</ui:composition>
