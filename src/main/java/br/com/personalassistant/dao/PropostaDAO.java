@@ -40,7 +40,7 @@ public class PropostaDAO extends DAO {
 		entityTransaction.begin();
 		
 		try{
-			entityManager.remove(proposta);
+			entityManager.remove(entityManager.getReference(proposta.getClass(), proposta.getId()));
 			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){

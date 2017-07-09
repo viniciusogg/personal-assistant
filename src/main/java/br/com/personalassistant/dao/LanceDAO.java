@@ -40,7 +40,7 @@ public class LanceDAO extends DAO {
 		entityTransaction.begin();
 		
 		try{
-			entityManager.remove(lance);
+			entityManager.remove(entityManager.getReference(lance.getClass(), lance.getId()));
 			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){

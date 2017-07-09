@@ -40,7 +40,7 @@ public class AdministradorDAO extends DAO {
 		entityTransaction.begin();
 		
 		try{
-			entityManager.remove(administrador);
+			entityManager.remove(entityManager.getReference(administrador.getClass(), administrador.getId()));
 			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){

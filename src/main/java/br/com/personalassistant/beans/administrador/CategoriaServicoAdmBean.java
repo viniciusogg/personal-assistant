@@ -1,10 +1,13 @@
 package br.com.personalassistant.beans.administrador;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
@@ -14,8 +17,9 @@ import br.com.personalassistant.excecoes.PersistenciaException;
 
 @ViewScoped
 @ManagedBean
-public class CategoriaServicoAdmBean {
+public class CategoriaServicoAdmBean implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private CategoriaServico categoriaServico;
 	private CategoriaServicoDAO categoriaServicoDAO;
 	private List<CategoriaServico> lista;
@@ -55,6 +59,22 @@ public class CategoriaServicoAdmBean {
 		}
 	}
 	
+	public void deletarCategoriaServico(){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		
+		String nomeCategoriaRemovida = categoriaServico.getNome();
+		
+		try {
+			categoriaServicoDAO.delete(categoriaServico);
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Categoria '" + nomeCategoriaRemovida + "' removida com sucesso", ""));
+		} 
+		catch (PersistenciaException e) {
+			e.printStackTrace();
+		}		
+	}
+	
 	public CategoriaServico getCategoriaServico() {
 		return categoriaServico;
 	}
@@ -62,13 +82,22 @@ public class CategoriaServicoAdmBean {
 	public void setCategoriaServico(CategoriaServico categoriaServico) {
 		this.categoriaServico = categoriaServico;
 	}
-	
+
 	public List<CategoriaServico> getLista() {
 		return lista;
 	}
 
 	public void setLista(List<CategoriaServico> lista) {
 		this.lista = lista;
+	}
+
+	public void print(){
+		if(this.categoriaServico == null){
+			System.out.println("nulo");
+		}
+		else{
+			System.out.println(this.categoriaServico.toString());
+		}
 	}
 
 }

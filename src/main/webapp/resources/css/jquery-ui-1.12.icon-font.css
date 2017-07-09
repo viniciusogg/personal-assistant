@@ -134,6 +134,7 @@ html .ui-dialog .ui-dialog-titlebar-close {
   margin: -0.9em 0 0 0;
   right: 0.3em;
   width: 1.8em;
+  margin-top: 1px;
 }
 /* resizable on dialog */
 html .ui-dialog .ui-resizable-se {
@@ -348,7 +349,9 @@ li.has-left-icon {
 .ui-icon-addon:after,
 .ui-icon-puzzle:after { content: '\e6ca'; }
 .ui-icon-address:after { content: '\e702'; }
-.ui-icon-alert:after { content: '\e65f'; }
+.ui-icon-alert:after { content: '\e65f'; 
+	top: 10px !important;
+}
 .ui-icon-alert-b:after { content: '\e660'; }
 .ui-icon-anchor:after { content: '\e6ba'; }
 .ui-icon-archive:after { content: '\e70d'; }
@@ -539,7 +542,9 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670'; }
 	top: .7em !important;
     left: .6em !important;
 }
-.ui-icon-closethick:after { content: '\e679'; }
+.ui-icon-closethick:after { content: '\e679'; 
+	top: 14px !important;
+}
 .ui-icon-cloud:after { content: '\e6dc'; }
 .ui-icon-cloud-b:after { content: '\e6dd'; }
 .ui-icon-cloud-download:after { content: '\e6de'; }

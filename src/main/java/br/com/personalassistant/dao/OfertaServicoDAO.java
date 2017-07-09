@@ -40,7 +40,7 @@ public class OfertaServicoDAO extends DAO {
 		entityTransaction.begin();
 		
 		try{
-			entityManager.remove(ofertaServico);
+			entityManager.remove(entityManager.getReference(ofertaServico.getClass(), ofertaServico.getId()));
 			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){

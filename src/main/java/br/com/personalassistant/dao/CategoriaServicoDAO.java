@@ -40,7 +40,7 @@ public class CategoriaServicoDAO extends DAO {
 		entityTransaction.begin();
 		
 		try{
-			entityManager.remove(categoriaServico);
+			entityManager.remove(entityManager.getReference(categoriaServico.getClass(), categoriaServico.getId()));
 			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){

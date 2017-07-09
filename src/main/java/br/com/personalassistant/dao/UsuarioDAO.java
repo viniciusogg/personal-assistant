@@ -40,7 +40,7 @@ public class UsuarioDAO extends DAO {
 		entityTransaction.begin();
 		
 		try{
-			entityManager.remove(usuario);
+			entityManager.remove(entityManager.getReference(usuario.getClass(), usuario.getId()));
 			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){

@@ -140,6 +140,12 @@
 	left: .1em;
 }
 
+.ui-dialog .ui-dialog-titlebar-close:hover{
+	border: 0px solid #78909C !important;
+	background: #78909C !important;
+	padding: 1px !important;
+}
+
 /*Tabela*/
 .ui-datatable tbody td{
 	text-align: center;

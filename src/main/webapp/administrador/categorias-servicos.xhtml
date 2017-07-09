@@ -22,6 +22,15 @@
 
 				<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
 				
+				<!-- <p:confirmDialog global="true" widgetVar="dialog-remove">
+				
+					<p:commandButton value="REMOVER" 
+							action="categorias-servicos?faces-redirect=true"/>
+					<p:commandButton value="CANCELAR" 
+							onclick="PF('dialog-remove').hide()"/>
+							
+				</p:confirmDialog> -->
+				
 				<p:panel class="ui-g-12" header="NOVA CATEGORIA DE SERVIÇO">
 					<div class="ui-g-12" id="div-painel-cadastro">
 						<h:form>
@@ -61,10 +70,25 @@
 						<p:outputLabel value="#{categoriaServico.nome}"/>							
 					</p:column>
 					<p:column headerText="GERENCIAR">						
-						<h:form>
-							<p:commandButton icon="ui-icon-recycle" title="Remover categoria de serviço"/>
-							<p:commandButton icon="ui-icon-edit" title="Editar categoria de serviço"/>
-						</h:form>
+						<p:commandButton icon="ui-icon-recycle" title="Remover categoria de serviço"
+								update="msg"
+								onclick="PF('dialog').show()">
+							<f:setPropertyActionListener target="#{categoriaServicoAdmBean.categoriaServico}" 
+									value="#{categoriaServico}" /> 
+						</p:commandButton>
+								
+						<p:confirmDialog appendTo="@(body)" widgetVar="dialog" header="CONFIRMAÇÃO" 
+								message="Tem certeza que deseja remover a categoria de serviço selecionada ?">
+							<h:form>
+								<p:commandButton value="REMOVER"
+										actionListener="#{categoriaServicoAdmBean.deletarCategoriaServico}"
+										action="categorias-servicos?faces-redirect=true"/>
+								<p:commandButton value="CANCELAR" 
+										onclick="PF('dialog').hide()"/>
+							</h:form>
+						</p:confirmDialog>
+							
+						<p:commandButton icon="ui-icon-edit" title="Editar categoria de serviço"/>
 					</p:column>
 				</p:dataTable>
 			</div>
@@ -72,3 +96,26 @@
 	</div>
 </ui:composition>
 
+<!-- 
+
+_________BOTÃO REMOVER
+<p:commandButton icon="ui-icon-recycle" title="Remover categoria de serviço"
+		update="msg"
+		action="#{categoriaServicoAdmBean.print}">
+	<f:setPropertyActionListener target="#{categoriaServicoAdmBean.categoriaServico}" 
+			value="#{categoriaServico}" /> 
+</p:commandButton>
+
+
+_________DIALOG SIMPLE precisa do atributo onclick="PF('dialog').show()"
+<p:confirmDialog widgetVar="dialog-remove" header="CONFIRMAÇÃO" message="Tem certeza que deseja remover a categoria #{categoriaServico.nome} ?">
+	<p:commandButton value="REMOVER" 
+			action="categorias-servicos?faces-redirect=true"/>
+	<p:commandButton value="CANCELAR" 
+			onclick="PF('dialog-remove').hide()"/>
+</p:confirmDialog>
+
+
+_________DIALOG GLOBAL
+<p:confirm header="CONFIRMAÇÃO" 
+		message="Tem certeza que deseja remover a categoria categoriaServico.nome ?"/> -->

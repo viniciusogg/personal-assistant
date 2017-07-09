@@ -40,7 +40,7 @@ public class AvaliacaoAssistenteDAO extends DAO {
 		entityTransaction.begin();
 		
 		try{
-			entityManager.remove(avaliacaoAssistente);
+			entityManager.remove(entityManager.getReference(avaliacaoAssistente.getClass(), avaliacaoAssistente.getId()));
 			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){

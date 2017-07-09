@@ -40,7 +40,7 @@ public class AvaliacaoContratanteDAO extends DAO{
 		entityTransaction.begin();
 		
 		try{
-			entityManager.remove(avaliacaoContratante);
+			entityManager.remove(entityManager.getReference(avaliacaoContratante.getClass(), avaliacaoContratante.getId()));
 			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){

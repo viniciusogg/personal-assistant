@@ -40,7 +40,7 @@ public class EnderecoDAO extends DAO {
 		entityTransaction.begin();
 		
 		try{
-			entityManager.remove(endereco);
+			entityManager.remove(entityManager.getReference(endereco.getClass(), endereco.getId()));
 			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){

@@ -40,7 +40,7 @@ public class AssistenteDAO extends DAO {
 		entityTransaction.begin();
 		
 		try{
-			entityManager.remove(assistente);
+			entityManager.remove(entityManager.getReference(assistente.getClass(), assistente.getId()));
 			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){

@@ -40,7 +40,7 @@ public class CapacidadeDAO extends DAO {
 		entityTransaction.begin();
 		
 		try{
-			entityManager.remove(capacidade);
+			entityManager.remove(entityManager.getReference(capacidade.getClass(), capacidade.getId()));
 			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){

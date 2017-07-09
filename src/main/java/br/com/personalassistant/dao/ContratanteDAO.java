@@ -40,7 +40,7 @@ public class ContratanteDAO extends DAO {
 		entityTransaction.begin();
 		
 		try{
-			entityManager.remove(contratante);
+			entityManager.remove(entityManager.getReference(contratante.getClass(), contratante.getId()));
 			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){

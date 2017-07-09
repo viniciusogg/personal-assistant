@@ -40,7 +40,7 @@ public class DataRealizacaoServicoDAO extends DAO {
 		entityTransaction.begin();
 		
 		try{
-			entityManager.remove(dataRealizacaoServico);
+			entityManager.remove(entityManager.getReference(dataRealizacaoServico.getClass(), dataRealizacaoServico.getId()));
 			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
