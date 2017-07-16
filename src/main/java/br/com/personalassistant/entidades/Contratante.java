@@ -20,7 +20,7 @@ public class Contratante extends Usuario{
 	@JoinColumn(name = "favorito_do_contratante_FK")
 	private List<Assistente> assistentesFavoritos; // unidirecional
 	
-	@JoinColumn(name = "contratante_FK", nullable = false)
+	//@JoinColumn(name = "contratante_FK")
 	@OneToMany(cascade = {CascadeType.ALL})
 	private List<Endereco> enderecos; // unidirecional
 	

@@ -1,24 +1,19 @@
 package br.com.personalassistant.dao;
 
+import java.io.Serializable;
+
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
-public abstract class DAO {
+public abstract class DAO implements Serializable{
 
-	static EntityManagerFactory entityManagerFactory;
+	private static final long serialVersionUID = 1L;
 	
-	static {
-		entityManagerFactory = Persistence.createEntityManagerFactory("personalassistant");
-	}
+	@Inject
+	private EntityManager entityManager;
 	
 	protected EntityManager getEntityManager(){
-		return entityManagerFactory.createEntityManager();
+		return this.entityManager;
 	}
-	
-	public void closeEntityManager(){
-		if(entityManagerFactory.isOpen()){
-			entityManagerFactory.close();
-		}
-	}
+
 }

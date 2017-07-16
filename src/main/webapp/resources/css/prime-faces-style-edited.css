@@ -191,3 +191,15 @@
 	background-image: url(../icons/checkbox-marked.png) !important;
 	background-position: initial;
 }
+
+/*fieldset*/
+.ui-fieldset-legend {
+    color: #1976D2 !important;
+    padding: 5px !important;
+    background: none !important;
+    border:none !important;
+}
+
+.ui-fieldset{
+	padding: 8px !important;
+}

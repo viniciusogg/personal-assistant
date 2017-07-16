@@ -24,23 +24,19 @@ public class CategoriaServicoAdmBean implements Serializable{
 	private CategoriaServicoDAO categoriaServicoDAO;
 	private List<CategoriaServico> lista;
 	
-	@PostConstruct
-	public void init(){
+	public void preRenderView(){
 		
-		this.categoriaServicoDAO = new CategoriaServicoDAO();	
+		categoriaServicoDAO = new CategoriaServicoDAO();
 		
+		if(this.categoriaServico == null){
+			this.categoriaServico = new CategoriaServico();
+		}
+
 		try {
 			this.lista = categoriaServicoDAO.getAll();
 		} 
 		catch (PersistenciaException e) {
 			e.printStackTrace();
-		}
-	}
-	
-	public void preRenderView(){
-		
-		if(this.categoriaServico == null){
-			this.categoriaServico = new CategoriaServico();
 		}
 	}
 
@@ -54,7 +50,7 @@ public class CategoriaServicoAdmBean implements Serializable{
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Categoria '" + categoriaServico.getNome() + "' cadastrada com sucesso", ""));
 		} 
 		catch (PersistenciaException e) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro", ""));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
 			e.printStackTrace();
 		}
 	}
@@ -71,6 +67,7 @@ public class CategoriaServicoAdmBean implements Serializable{
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Categoria '" + nomeCategoriaRemovida + "' removida com sucesso", ""));
 		} 
 		catch (PersistenciaException e) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
 			e.printStackTrace();
 		}		
 	}
@@ -90,14 +87,4 @@ public class CategoriaServicoAdmBean implements Serializable{
 	public void setLista(List<CategoriaServico> lista) {
 		this.lista = lista;
 	}
-
-	public void print(){
-		if(this.categoriaServico == null){
-			System.out.println("nulo");
-		}
-		else{
-			System.out.println(this.categoriaServico.toString());
-		}
-	}
-
 }

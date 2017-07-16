@@ -12,6 +12,11 @@ import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class AdministradorDAO extends DAO {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public void save(Administrador administrador) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();

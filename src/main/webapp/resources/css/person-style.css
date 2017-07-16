@@ -95,6 +95,12 @@ a{
 	outline: none !important;
 }
 
+.link{}
+
+.link:hover{
+	color: #1976D2;
+}
+
 .span-icone{
 	margin:4px; 
 	margin-right:0px !important;
@@ -252,4 +258,22 @@ a{
 	height: 48px;
 	padding-top: 10px;
 	padding-left: 48px;
+}
+
+#div-formulario-cadastro{
+	margin-left: 10% !important; 
+	margin-right: 10% !important;
+}
+
+#fieldset-info-pessoal{
+	margin-bottom: 20px;
+}
+
+.campo-formulario{
+	text-align:center; 
+	width:97%;
+}
+
+.componente-acao-cadastro-contratante{
+	float:right;
 }

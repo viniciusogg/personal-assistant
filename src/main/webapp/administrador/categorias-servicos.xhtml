@@ -22,15 +22,6 @@
 
 				<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
 				
-				<!-- <p:confirmDialog global="true" widgetVar="dialog-remove">
-				
-					<p:commandButton value="REMOVER" 
-							action="categorias-servicos?faces-redirect=true"/>
-					<p:commandButton value="CANCELAR" 
-							onclick="PF('dialog-remove').hide()"/>
-							
-				</p:confirmDialog> -->
-				
 				<p:panel class="ui-g-12" header="NOVA CATEGORIA DE SERVIÇO">
 					<div class="ui-g-12" id="div-painel-cadastro">
 						<h:form>
@@ -49,7 +40,6 @@
 												 actionListener="#{categoriaServicoAdmBean.salvarCategoriaServico}" 
 												 action="categorias-servicos?faces-redirect=true"
 												 icon="ui-icon-save" value="SALVAR"
-												 required="true"
 												 update="msg"/>
 							</div>
 						</h:form>
@@ -95,27 +85,3 @@
 		</ui:define>	
 	</div>
 </ui:composition>
-
-<!-- 
-
-_________BOTÃO REMOVER
-<p:commandButton icon="ui-icon-recycle" title="Remover categoria de serviço"
-		update="msg"
-		action="#{categoriaServicoAdmBean.print}">
-	<f:setPropertyActionListener target="#{categoriaServicoAdmBean.categoriaServico}" 
-			value="#{categoriaServico}" /> 
-</p:commandButton>
-
-
-_________DIALOG SIMPLE precisa do atributo onclick="PF('dialog').show()"
-<p:confirmDialog widgetVar="dialog-remove" header="CONFIRMAÇÃO" message="Tem certeza que deseja remover a categoria #{categoriaServico.nome} ?">
-	<p:commandButton value="REMOVER" 
-			action="categorias-servicos?faces-redirect=true"/>
-	<p:commandButton value="CANCELAR" 
-			onclick="PF('dialog-remove').hide()"/>
-</p:confirmDialog>
-
-
-_________DIALOG GLOBAL
-<p:confirm header="CONFIRMAÇÃO" 
-		message="Tem certeza que deseja remover a categoria categoriaServico.nome ?"/> -->
