@@ -261,11 +261,11 @@ a{
 }
 
 #div-formulario-cadastro{
-	margin-left: 10% !important; 
-	margin-right: 10% !important;
+	margin-left: 20% !important; 
+	margin-right: 20% !important;
 }
 
-#fieldset-info-pessoal{
+.fieldset-cadastro{
 	margin-bottom: 20px;
 }
 
@@ -274,6 +274,6 @@ a{
 	width:97%;
 }
 
-.componente-acao-cadastro-contratante{
+.componente-acao-cadastro-usuario{
 	float:right;
 }

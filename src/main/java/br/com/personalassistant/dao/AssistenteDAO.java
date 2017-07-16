@@ -3,7 +3,6 @@ package br.com.personalassistant.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
@@ -11,20 +10,18 @@ import br.com.personalassistant.entidades.Assistente;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class AssistenteDAO extends DAO {
-	
+
+	private static final long serialVersionUID = 1L;
+
 	public void save(Assistente assistente) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.persist(assistente);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao salvar assistente");
 		}
 		finally{
@@ -36,16 +33,12 @@ public class AssistenteDAO extends DAO {
 	public void delete(Assistente assistente) throws PersistenciaException{	
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.remove(entityManager.getReference(assistente.getClass(), assistente.getId()));
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao remover assistente");
 		}
 		finally{
@@ -56,18 +49,14 @@ public class AssistenteDAO extends DAO {
 	public Assistente update(Assistente assistente) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		Assistente assistenteAtualizado = assistente; 
 		
 		try{
 			entityManager.find(assistente.getClass(), assistente.getId());
 			entityManager.merge(assistente);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao atualizar assistente");
 		}
 		finally{

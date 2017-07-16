@@ -3,7 +3,6 @@ package br.com.personalassistant.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
@@ -12,19 +11,17 @@ import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class CategoriaServicoDAO extends DAO {
 
+	private static final long serialVersionUID = 1L;
+
 	public void save(CategoriaServico categoriaServico) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.persist(categoriaServico);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao salvar categoriaServico");
 		}
 		finally{
@@ -36,16 +33,12 @@ public class CategoriaServicoDAO extends DAO {
 	public void delete(CategoriaServico categoriaServico) throws PersistenciaException{	
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.remove(entityManager.getReference(categoriaServico.getClass(), categoriaServico.getId()));
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao remover categoriaServico");
 		}
 		finally{
@@ -56,18 +49,14 @@ public class CategoriaServicoDAO extends DAO {
 	public CategoriaServico update(CategoriaServico categoriaServico) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		CategoriaServico categoriaServicoAtualizada = categoriaServico; 
 		
 		try{
 			entityManager.find(categoriaServico.getClass(), categoriaServico.getId());
 			entityManager.merge(categoriaServico);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao atualizar categoriaServico");
 		}
 		finally{

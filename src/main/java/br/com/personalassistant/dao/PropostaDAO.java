@@ -3,7 +3,6 @@ package br.com.personalassistant.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
@@ -12,19 +11,17 @@ import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class PropostaDAO extends DAO {
 
+	private static final long serialVersionUID = 1L;
+
 	public void save(Proposta proposta) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.persist(proposta);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao salvar proposta");
 		}
 		finally{
@@ -36,16 +33,12 @@ public class PropostaDAO extends DAO {
 	public void delete(Proposta proposta) throws PersistenciaException{	
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.remove(entityManager.getReference(proposta.getClass(), proposta.getId()));
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao remover proposta");
 		}
 		finally{
@@ -56,18 +49,14 @@ public class PropostaDAO extends DAO {
 	public Proposta update(Proposta proposta) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		Proposta propostaAtualizada = proposta; 
 		
 		try{
 			entityManager.find(proposta.getClass(), proposta.getId());
 			entityManager.merge(proposta);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao atualizar proposta");
 		}
 		finally{

@@ -3,7 +3,6 @@ package br.com.personalassistant.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
@@ -12,19 +11,17 @@ import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class LanceDAO extends DAO {
 
+	private static final long serialVersionUID = 1L;
+
 	public void save(Lance lance) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.persist(lance);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao salvar lance");
 		}
 		finally{
@@ -36,16 +33,12 @@ public class LanceDAO extends DAO {
 	public void delete(Lance lance) throws PersistenciaException{	
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.remove(entityManager.getReference(lance.getClass(), lance.getId()));
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao remover lance");
 		}
 		finally{
@@ -56,18 +49,14 @@ public class LanceDAO extends DAO {
 	public Lance update(Lance lance) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		Lance lanceAtualizado = lance; 
 		
 		try{
 			entityManager.find(lance.getClass(), lance.getId());
 			entityManager.merge(lance);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao atualizar lance");
 		}
 		finally{

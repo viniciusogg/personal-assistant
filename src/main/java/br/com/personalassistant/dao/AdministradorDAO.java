@@ -3,7 +3,6 @@ package br.com.personalassistant.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
@@ -12,24 +11,17 @@ import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class AdministradorDAO extends DAO {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public void save(Administrador administrador) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.persist(administrador);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao salvar administrador");
 		}
 		finally{
@@ -41,16 +33,12 @@ public class AdministradorDAO extends DAO {
 	public void delete(Administrador administrador) throws PersistenciaException{	
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.remove(entityManager.getReference(administrador.getClass(), administrador.getId()));
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao remover administrador");
 		}
 		finally{
@@ -61,18 +49,14 @@ public class AdministradorDAO extends DAO {
 	public Administrador update(Administrador administrador) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		Administrador administradorAtualizado = administrador; 
 		
 		try{
 			entityManager.find(administrador.getClass(), administrador.getId());
 			entityManager.merge(administrador);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao atualizar administrador");
 		}
 		finally{

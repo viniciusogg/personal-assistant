@@ -1,10 +1,13 @@
 package br.com.personalassistant.beans.administrador;
 
-import javax.faces.bean.ManagedBean;
+import java.io.Serializable;
+
 import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
 
 @ViewScoped
-@ManagedBean
-public class AssistenteAdmBean {
+@Named
+public class AssistenteAdmBean implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 }

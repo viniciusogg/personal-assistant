@@ -3,7 +3,6 @@ package br.com.personalassistant.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
@@ -12,19 +11,17 @@ import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class DataRealizacaoServicoDAO extends DAO {
 
+	private static final long serialVersionUID = 1L;
+
 	public void save(DataRealizacaoServico dataRealizacaoServico) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.persist(dataRealizacaoServico);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao salvar dataRealizacaoServico");
 		}
 		finally{
@@ -36,16 +33,12 @@ public class DataRealizacaoServicoDAO extends DAO {
 	public void delete(DataRealizacaoServico dataRealizacaoServico) throws PersistenciaException{	
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.remove(entityManager.getReference(dataRealizacaoServico.getClass(), dataRealizacaoServico.getId()));
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao remover dataRealizacaoServico");
 		}
 		finally{
@@ -56,18 +49,14 @@ public class DataRealizacaoServicoDAO extends DAO {
 	public DataRealizacaoServico update(DataRealizacaoServico dataRealizacaoServico) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		DataRealizacaoServico dataRealizacaoServicoAtualizada = dataRealizacaoServico; 
 		
 		try{
 			entityManager.find(dataRealizacaoServico.getClass(), dataRealizacaoServico.getId());
 			entityManager.merge(dataRealizacaoServico);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao atualizar dataRealizacaoServico");
 		}
 		finally{

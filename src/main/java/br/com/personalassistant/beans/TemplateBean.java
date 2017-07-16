@@ -2,11 +2,11 @@ package br.com.personalassistant.beans;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 @ViewScoped
-@ManagedBean
+@Named
 public class TemplateBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;

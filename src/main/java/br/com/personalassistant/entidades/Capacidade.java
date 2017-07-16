@@ -17,7 +17,7 @@ public class Capacidade implements Serializable{	   // restrição de unicidade 
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private long id;
+	private Long id;
 	
 	@Basic(optional = false)
 	private String nome;
@@ -31,12 +31,8 @@ public class Capacidade implements Serializable{	   // restrição de unicidade 
 		this.nome = nome;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	public String getNome() {

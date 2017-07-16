@@ -3,7 +3,6 @@ package br.com.personalassistant.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
@@ -12,19 +11,17 @@ import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class ContratanteDAO extends DAO {
 
+	private static final long serialVersionUID = 1L;
+
 	public void save(Contratante contratante) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.persist(contratante);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao salvar contratante");
 		}
 		finally{
@@ -36,16 +33,12 @@ public class ContratanteDAO extends DAO {
 	public void delete(Contratante contratante) throws PersistenciaException{	
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.remove(entityManager.getReference(contratante.getClass(), contratante.getId()));
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao remover contratante");
 		}
 		finally{
@@ -56,18 +49,14 @@ public class ContratanteDAO extends DAO {
 	public Contratante update(Contratante contratante) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		Contratante contratanteAtualizado = contratante; 
 		
 		try{
 			entityManager.find(contratante.getClass(), contratante.getId());
 			entityManager.merge(contratante);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao atualizar contratante");
 		}
 		finally{

@@ -32,7 +32,7 @@
 				<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
 				
 				<h:form>
-					<p:fieldset id="fieldset-info-pessoal" legend="INFORMAÇÕES PESSOAIS">
+					<p:fieldset legend="INFORMAÇÕES PESSOAIS" styleClass="fieldset-cadastro">
 						<div class="ui-g-7">
 							<div class="ui-g-12">
 								<p:outputLabel value="NOME*"/>
@@ -95,83 +95,10 @@
 							</div>
 						</div>
 					</p:fieldset>
-
-					<p:fieldset legend="INFORMAÇÕES DE ENDEREÇO">
-						<div class="ui-g-6">
-							<div class="ui-g-12">
-								<p:outputLabel value="RUA"/>
-							</div>
-							<div class="ui-g-12">
-								<p:inputText placeholder="NOME DA SUA RUA" styleClass="campo-formulario"
-										value="#{cadastroContratanteBean.endereco.rua}"/>
-							</div>
-						</div>
-						
-						<div class="ui-g-3" >
-							<div class="ui-g-12">
-								<p:outputLabel value="NÚMERO"/>
-							</div>
-							<div class="ui-g-12">
-								<p:inputMask maxlength="5" mask="9?9999" styleClass="campo-formulario" 
-										placeholder="NÚMERO DA CASA"
-										value="#{cadastroContratanteBean.endereco.numero}"/>
-							</div>
-						</div>
-						
-						<div class="ui-g-3">
-							<div class="ui-g-12">
-								<p:outputLabel value="CEP"/>
-							</div>
-							<div class="ui-g-12">
-								<p:inputMask mask="999.99-999" placeholder="DIGITE O CEP" styleClass="campo-formulario"
-										value="#{cadastroContratanteBean.endereco.cep}"/>
-							</div>
-						</div>
-						
-						<div class="ui-g-5">
-							<div class="ui-g-12">
-								<p:outputLabel value="BAIRRO"/>
-							</div>
-							<div class="ui-g-12">
-								<p:inputText styleClass="campo-formulario" placeholder="DIGITE SEU BAIRRO"
-										value="#{cadastroContratanteBean.endereco.bairro}"/>
-							</div>
-						</div>
-						
-						<div class="ui-g-6">
-							<div class="ui-g-12">
-								<p:outputLabel value="CIDADE"/>
-							</div>
-							<div class="ui-g-12">
-								<p:inputText styleClass="campo-formulario" placeholder="NOME DA SUA CIDADE"
-										value="#{cadastroContratanteBean.endereco.cidade}"/>
-							</div>
-						</div>
-						
-						<div class="ui-g-4">
-							<div class="ui-g-12">
-								<p:outputLabel value="ESTADO"/>
-							</div>
-							<div class="ui-g-12">
-								<p:inputText styleClass="campo-formulario" placeholder="NOME DO SEU ESTADO"
-										value="#{cadastroContratanteBean.endereco.estado}"/>
-							</div>
-						</div>
-						
-						<div class="ui-g-8">
-							<div class="ui-g-12">
-								<p:outputLabel value="REFERÊNCIA"/>
-							</div>
-							<div class="ui-g-12">
-								<p:inputText styleClass="campo-formulario" placeholder="DIGITE UMA REFERÊNCIA"
-										value="#{cadastroContratanteBean.endereco.referencia}"/>
-							</div>
-						</div>
-					</p:fieldset>
 					
 					<div class="ui-g-12">
 						<div class="ui-g-12">
-							<p:commandButton actionListener="#{cadastroContratanteBean.salvarContratante}" value="CADASTRAR" styleClass="componente-acao-cadastro-contratante"
+							<p:commandButton actionListener="#{cadastroContratanteBean.salvarContratante}" value="CADASTRAR" styleClass="componente-acao-cadastro-usuario"
 									action="index?faces-redirect=true"
 									update="msg"/>
 						</div>
@@ -179,8 +106,8 @@
 				</h:form>
 				
 				<div class="ui-g-12">
-					<p:commandLink action="index?faces-redirect=true" styleClass="componente-acao-cadastro-contratante link" value="FAÇA LOGIN" />
-					<p:outputLabel styleClass="componente-acao-cadastro-contratante" value="Já tem uma conta ?"/>
+					<p:commandLink action="index?faces-redirect=true" styleClass="componente-acao-cadastro-usuario link" value="FAÇA LOGIN" />
+					<p:outputLabel styleClass="componente-acao-cadastro-usuario" value="Já tem uma conta ?"/>
 				</div>
 			</div>
 		</div>

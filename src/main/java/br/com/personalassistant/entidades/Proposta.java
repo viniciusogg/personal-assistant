@@ -25,7 +25,7 @@ public class Proposta implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private long id;
+	private Long id;
 	
 	@Basic(optional = false)
 	private double preco;
@@ -55,7 +55,7 @@ public class Proposta implements Serializable{
 		this.dataRealizacaoServico = dataRealizacaoServico;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 

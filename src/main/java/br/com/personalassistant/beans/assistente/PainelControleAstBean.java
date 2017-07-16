@@ -1,12 +1,15 @@
 package br.com.personalassistant.beans.assistente;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import java.io.Serializable;
 
-@ManagedBean
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+
+@Named
 @ViewScoped
-public class PainelControleAstBean {
-	
+public class PainelControleAstBean implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private long quantAssistencias = 120;
 	private long totalAvaliacoes = 800;
 	private int quantEstrelas = 4;

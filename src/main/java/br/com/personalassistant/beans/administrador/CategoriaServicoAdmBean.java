@@ -2,40 +2,37 @@ package br.com.personalassistant.beans.administrador;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-import br.com.personalassistant.dao.CategoriaServicoDAO;
 import br.com.personalassistant.entidades.CategoriaServico;
-import br.com.personalassistant.excecoes.PersistenciaException;
+import br.com.personalassistant.excecoes.ServiceException;
+import br.com.personalassistant.services.CategoriaServicoService;
 
 @ViewScoped
-@ManagedBean
+@Named
 public class CategoriaServicoAdmBean implements Serializable{
 
+	@Inject
+	private CategoriaServicoService categoriaServicoService;
+	
 	private static final long serialVersionUID = 1L;
 	private CategoriaServico categoriaServico;
-	private CategoriaServicoDAO categoriaServicoDAO;
 	private List<CategoriaServico> lista;
 	
 	public void preRenderView(){
-		
-		categoriaServicoDAO = new CategoriaServicoDAO();
-		
+				
 		if(this.categoriaServico == null){
 			this.categoriaServico = new CategoriaServico();
 		}
 
 		try {
-			this.lista = categoriaServicoDAO.getAll();
-		} 
-		catch (PersistenciaException e) {
+			this.lista = categoriaServicoService.getAll();
+		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
 	}
@@ -46,10 +43,10 @@ public class CategoriaServicoAdmBean implements Serializable{
 		context.getExternalContext().getFlash().setKeepMessages(true);
 		
 		try {
-			categoriaServicoDAO.save(categoriaServico);
+			categoriaServicoService.save(categoriaServico);
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Categoria '" + categoriaServico.getNome() + "' cadastrada com sucesso", ""));
 		} 
-		catch (PersistenciaException e) {
+		catch (ServiceException e) {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
 			e.printStackTrace();
 		}
@@ -63,10 +60,10 @@ public class CategoriaServicoAdmBean implements Serializable{
 		String nomeCategoriaRemovida = categoriaServico.getNome();
 		
 		try {
-			categoriaServicoDAO.delete(categoriaServico);
+			categoriaServicoService.delete(categoriaServico);
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Categoria '" + nomeCategoriaRemovida + "' removida com sucesso", ""));
 		} 
-		catch (PersistenciaException e) {
+		catch (ServiceException e) {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
 			e.printStackTrace();
 		}		

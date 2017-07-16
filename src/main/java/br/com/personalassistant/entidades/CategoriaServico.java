@@ -19,7 +19,7 @@ public class CategoriaServico implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private long id;
+	private Long id;
 	
 	@Basic(optional = false)
 	private String nome;
@@ -33,7 +33,7 @@ public class CategoriaServico implements Serializable{
 		this.nome = nome;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 

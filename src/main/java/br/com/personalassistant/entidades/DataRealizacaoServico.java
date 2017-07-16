@@ -20,7 +20,7 @@ public class DataRealizacaoServico implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private long id;
+	private Long id;
 	
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
@@ -69,7 +69,7 @@ public class DataRealizacaoServico implements Serializable{
 		this.horaRealizacaoServico = horaRealizacaoServico;
 	}
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 

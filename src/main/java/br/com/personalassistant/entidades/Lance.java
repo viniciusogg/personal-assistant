@@ -25,7 +25,7 @@ public class Lance implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private long id;
+	private Long id;
 	
 	@Basic(optional = false)
 	private double valor;
@@ -58,7 +58,7 @@ public class Lance implements Serializable{
 		this.dataRealizacaoServico = dataRealizacaoServico;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 

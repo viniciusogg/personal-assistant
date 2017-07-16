@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="index.xhtml">
+
+	<f:metadata>
+		<f:event listener="#{cadastroContratanteBean.preRenderView()}" type="preRenderView" />
+	</f:metadata>
+
+	<ui:define name="botao-menu"/>
+
+	<ui:define name="titulo">
+		<div id="div-titulo-cadastro" class="ui-g-12">
+			<p:outputLabel value="CADASTRO DE ASSISTENTE" styleClass="titulo"/>
+		</div>
+	</ui:define>		
+	
+	<ui:define name="conteudo-menu-superior" />
+	
+	<ui:define name="menu-lateral"/>
+	
+	<ui:define name="conteudo">
+		
+		<div class="ui-g">
+			
+			<div id="div-formulario-cadastro" class="ui-g-12"> 
+				
+				<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
+				
+				<h:form>
+					<p:fieldset legend="INFORMAÇÕES PESSOAIS" styleClass="fieldset-cadastro">
+						<div class="ui-g-7">
+							<div class="ui-g-12">
+								<p:outputLabel value="NOME*"/>
+							</div>
+							<div class="ui-g-12">
+								<p:inputText required="true" 
+										placeholder="DIGITE SEU NOME" styleClass="campo-formulario"
+										requiredMessage="Você esqueceu de preencher o campo: 'NOME'"
+										value="#{cadastroAssistenteBean.assistente.nome}"/>
+							</div>
+						</div>
+						
+						<div class="ui-g-5">
+							<div class="ui-g-12">
+								<p:outputLabel value="E-MAIL*"/>
+							</div>
+							<div class="ui-g-12">
+								<p:inputText required="true" 
+										placeholder="DIGITE SEU E-MAIL" styleClass="campo-formulario"
+										requiredMessage="Você esqueceu de preencher o campo: 'E-MAIL'"
+										value="#{cadastroAssistenteBean.assistente.email}"/>
+							</div>
+						</div>
+						
+						<div class="ui-g-4">
+							<div class="ui-g-12">
+								<p:outputLabel value="SENHA*"/>
+							</div>
+							<div class="ui-g-12">
+								<p:password required="true" id="campo-senha-cadastro" 
+										match="campo-senha-cadastro-confirmacao" styleClass="campo-formulario" 
+										placeholder="CRIE UMA SENHA"
+										requiredMessage="Você esqueceu de preencher o campo: 'SENHA'"
+										value="#{cadastroAssistenteBean.assistente.senha}"
+										validatorMessage="AS SENHAS ESTÃO DIFERENTES: As duas senhas devem ser iguais !"/>
+							</div>
+						</div>
+						
+						<div class="ui-g-4">
+							<div class="ui-g-12">
+								<p:outputLabel value="CONFIRMAÇÃO DE SENHA*"/>
+							</div>
+							<div class="ui-g-12">
+								<p:password required="true" id="campo-senha-cadastro-confirmacao" styleClass="campo-formulario" 
+										placeholder="DIGITE A SENHA NOVAMENTE"
+										requiredMessage="Você esqueceu de preencher o campo: 'CONFIRMAÇÃO DE SENHA'"
+										update="msg"/>
+							</div>
+						</div>
+						
+						<div class="ui-g-4">
+							<div class="ui-g-12">
+								<p:outputLabel value="TELEFONE PARA CONTATO*"/>
+							</div>
+							<div class="ui-g-12">
+								<p:inputMask required="true" mask="(99) 99999-9999" styleClass="campo-formulario" 
+										placeholder="NÚMERO TELEFONICO"
+										requiredMessage="Você esqueceu de preencher o campo: 'TELEFONE PARA CONTATO'"
+										value="#{cadastroAssistenteBean.assistente.numTelefonico}"/>
+							</div>
+						</div>
+					</p:fieldset>
+					
+					<p:fieldset legend="INFORMAÇÕES PROFISSIONAIS" styleClass="fieldset-cadastro">
+					</p:fieldset>
+					
+					<div class="ui-g-12">
+						<div class="ui-g-12">
+							<p:commandButton actionListener="#{cadastroAssistenteBean.salvarAssistente}" value="CADASTRAR" styleClass="componente-acao-cadastro-usuario"
+									action="index?faces-redirect=true"
+									update="msg"/>
+						</div>
+					</div>
+				</h:form>
+				
+				<div class="ui-g-12">
+					<p:commandLink action="index?faces-redirect=true" styleClass="componente-acao-cadastro-usuario link" value="FAÇA LOGIN" />
+					<p:outputLabel styleClass="componente-acao-cadastro-usuario" value="Já tem uma conta ?"/>
+				</div>
+			</div>
+		</div>
+	</ui:define>		
+</ui:composition>

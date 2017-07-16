@@ -3,7 +3,6 @@ package br.com.personalassistant.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
@@ -12,19 +11,17 @@ import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class AvaliacaoDAO extends DAO {
 
+	private static final long serialVersionUID = 1L;
+
 	public void save(Avaliacao avaliacao) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.persist(avaliacao);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao salvar avaliacao");
 		}
 		finally{
@@ -36,16 +33,12 @@ public class AvaliacaoDAO extends DAO {
 	public void delete(Avaliacao avaliacao) throws PersistenciaException{	
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.remove(entityManager.getReference(avaliacao.getClass(), avaliacao.getId()));
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao remover avaliacao");
 		}
 		finally{
@@ -56,18 +49,14 @@ public class AvaliacaoDAO extends DAO {
 	public Avaliacao update(Avaliacao avaliacao) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		Avaliacao avaliacaoAtualizada = avaliacao; 
 		
 		try{
 			entityManager.find(avaliacao.getClass(), avaliacao.getId());
 			entityManager.merge(avaliacao);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao atualizar avaliacao");
 		}
 		finally{

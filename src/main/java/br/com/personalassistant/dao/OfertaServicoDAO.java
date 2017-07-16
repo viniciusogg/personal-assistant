@@ -3,7 +3,6 @@ package br.com.personalassistant.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
@@ -12,19 +11,17 @@ import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class OfertaServicoDAO extends DAO {
 
+	private static final long serialVersionUID = 1L;
+
 	public void save(OfertaServico ofertaServico) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.persist(ofertaServico);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao salvar ofertaServico");
 		}
 		finally{
@@ -36,16 +33,12 @@ public class OfertaServicoDAO extends DAO {
 	public void delete(OfertaServico ofertaServico) throws PersistenciaException{	
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.remove(entityManager.getReference(ofertaServico.getClass(), ofertaServico.getId()));
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao remover ofertaServico");
 		}
 		finally{
@@ -56,18 +49,14 @@ public class OfertaServicoDAO extends DAO {
 	public OfertaServico update(OfertaServico ofertaServico) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		OfertaServico ofertaServicoAtualizada = ofertaServico; 
 		
 		try{
 			entityManager.find(ofertaServico.getClass(), ofertaServico.getId());
 			entityManager.merge(ofertaServico);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao atualizar ofertaServico");
 		}
 		finally{

@@ -26,7 +26,7 @@ public class Avaliacao implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private long id;
+	private Long id;
 	
 	@Basic(optional = false)
 	private int cordialidade;
@@ -37,7 +37,7 @@ public class Avaliacao implements Serializable{
 	private Date data;
 	private String comentario;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 

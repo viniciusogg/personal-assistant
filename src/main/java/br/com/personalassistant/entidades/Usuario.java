@@ -7,6 +7,8 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +16,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import br.com.personalassistant.enums.TIPO_USUARIO;
 
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "TIPO", discriminatorType = DiscriminatorType.STRING)
@@ -27,7 +31,7 @@ public class Usuario implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private long id;
+	private Long id;
 	
 	@Basic(optional = false)
 	private String nome;
@@ -41,7 +45,10 @@ public class Usuario implements Serializable{
 	@Basic(optional = false)
 	private String numTelefonico;
 	
-	public long getId() {
+	@Enumerated(EnumType.STRING)
+	private TIPO_USUARIO tipoUsuario;
+	
+	public Long getId() {
 		return id;
 	}
 
@@ -74,6 +81,14 @@ public class Usuario implements Serializable{
 
 	public void setNumTelefonico(String numTelefonico) {
 		this.numTelefonico = numTelefonico;
+	}
+
+	public TIPO_USUARIO getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(TIPO_USUARIO tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 
 	@Override

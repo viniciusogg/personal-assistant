@@ -17,7 +17,7 @@ public class Endereco implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private long id;
+	private Long id;
 	
 	@Basic(optional = false)
 	private int numero;
@@ -55,7 +55,7 @@ public class Endereco implements Serializable{
 		this.estado = estado;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 

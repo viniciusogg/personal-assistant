@@ -3,7 +3,6 @@ package br.com.personalassistant.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
@@ -11,20 +10,18 @@ import br.com.personalassistant.entidades.AvaliacaoContratante;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class AvaliacaoContratanteDAO extends DAO{
-	
+
+	private static final long serialVersionUID = 1L;
+
 	public void save(AvaliacaoContratante avaliacaoContratante) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.persist(avaliacaoContratante);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao salvar avaliacaoContratante");
 		}
 		finally{
@@ -36,16 +33,12 @@ public class AvaliacaoContratanteDAO extends DAO{
 	public void delete(AvaliacaoContratante avaliacaoContratante) throws PersistenciaException{	
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		
 		try{
 			entityManager.remove(entityManager.getReference(avaliacaoContratante.getClass(), avaliacaoContratante.getId()));
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao remover avaliacaoContratante");
 		}
 		finally{
@@ -56,18 +49,14 @@ public class AvaliacaoContratanteDAO extends DAO{
 	public AvaliacaoContratante update(AvaliacaoContratante avaliacaoContratante) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
 		AvaliacaoContratante avaliacaoContratanteAtualizada = avaliacaoContratante; 
 		
 		try{
 			entityManager.find(avaliacaoContratante.getClass(), avaliacaoContratante.getId());
 			entityManager.merge(avaliacaoContratante);
-			entityTransaction.commit();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			entityTransaction.rollback();
 			throw new PersistenciaException("Erro ao atualizar avaliacaoContratante");
 		}
 		finally{
