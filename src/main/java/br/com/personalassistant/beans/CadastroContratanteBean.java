@@ -16,9 +16,7 @@ import br.com.personalassistant.services.ContratanteService;
 @Named
 public class CadastroContratanteBean implements Serializable{
 
-	@Inject
-	private ContratanteService contratanteService;
-	
+	@Inject private ContratanteService contratanteService;
 	private static final long serialVersionUID = 1L;
 	private Contratante contratante;
 	

@@ -1,6 +1,6 @@
 package br.com.personalassistant.entidades;
 
-import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,14 +12,14 @@ public class AvaliacaoAssistente extends Avaliacao{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Basic(optional = false)
-	private int qualidadeServico;
+	@Column(nullable = false)
+	private Integer qualidadeServico;
 	
 	public AvaliacaoAssistente(){
 		super();
 	}
 	
-	public AvaliacaoAssistente(int cordialidade, int pontualidade, int qualidadeServico, String comentario) {
+	public AvaliacaoAssistente(Integer cordialidade, Integer pontualidade, Integer qualidadeServico, String comentario) {
 		super();
 		this.setCordialidade(cordialidade);
 		this.setPontualidade(pontualidade);
@@ -27,11 +27,11 @@ public class AvaliacaoAssistente extends Avaliacao{
 		this.setComentario(comentario);
 	}
 
-	public int getQualidadeServico() {
+	public Integer getQualidadeServico() {
 		return qualidadeServico;
 	}
 
-	public void setQualidadeServico(int qualidadeServico) {
+	public void setQualidadeServico(Integer qualidadeServico) {
 		this.qualidadeServico = qualidadeServico;
 	}
 
@@ -39,7 +39,7 @@ public class AvaliacaoAssistente extends Avaliacao{
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + qualidadeServico;
+		result = prime * result + ((qualidadeServico == null) ? 0 : qualidadeServico.hashCode());
 		return result;
 	}
 
@@ -52,7 +52,10 @@ public class AvaliacaoAssistente extends Avaliacao{
 		if (getClass() != obj.getClass())
 			return false;
 		AvaliacaoAssistente other = (AvaliacaoAssistente) obj;
-		if (qualidadeServico != other.qualidadeServico)
+		if (qualidadeServico == null) {
+			if (other.qualidadeServico != null)
+				return false;
+		} else if (!qualidadeServico.equals(other.qualidadeServico))
 			return false;
 		return true;
 	}

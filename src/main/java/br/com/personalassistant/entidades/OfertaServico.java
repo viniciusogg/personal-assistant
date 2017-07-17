@@ -3,8 +3,8 @@ package br.com.personalassistant.entidades;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -29,11 +29,11 @@ public class OfertaServico implements Serializable{
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 	
-	@Basic(optional = false)
-	private int duracaoOferta;
+	@Column(nullable = false)
+	private Integer duracaoOferta;
 	
-	@Basic(optional = false)
-	private double precoInicial;
+	@Column(nullable = false)
+	private Double precoInicial;
 	
 	@Enumerated(EnumType.STRING)
 	private ESTADO_OFERTA status;
@@ -60,7 +60,7 @@ public class OfertaServico implements Serializable{
 		super();
 	}
 	
-	public OfertaServico(int duracaoOferta, double precoInicial, Endereco endereco, CategoriaServico categoriaServico,
+	public OfertaServico(Integer duracaoOferta, Double precoInicial, Endereco endereco, CategoriaServico categoriaServico,
 			Contratante contratante, DataRealizacaoServico dataRealizacaoServico) {
 		super();
 		this.duracaoOferta = duracaoOferta;
@@ -75,19 +75,19 @@ public class OfertaServico implements Serializable{
 		return id;
 	}
 
-	public int getDuracaoOferta() {
+	public Integer getDuracaoOferta() {
 		return duracaoOferta;
 	}
 
-	public void setDuracaoOferta(int duracaoOferta) {
+	public void setDuracaoOferta(Integer duracaoOferta) {
 		this.duracaoOferta = duracaoOferta;
 	}
 
-	public double getPrecoInicial() {
+	public Double getPrecoInicial() {
 		return precoInicial;
 	}
 
-	public void setPrecoInicial(double precoInicial) {
+	public void setPrecoInicial(Double precoInicial) {
 		this.precoInicial = precoInicial;
 	}
 
@@ -146,13 +146,11 @@ public class OfertaServico implements Serializable{
 		result = prime * result + ((categoriaServico == null) ? 0 : categoriaServico.hashCode());
 		result = prime * result + ((contratante == null) ? 0 : contratante.hashCode());
 		result = prime * result + ((dataRealizacaoServico == null) ? 0 : dataRealizacaoServico.hashCode());
-		result = prime * result + duracaoOferta;
+		result = prime * result + ((duracaoOferta == null) ? 0 : duracaoOferta.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lances == null) ? 0 : lances.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(precoInicial);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((precoInicial == null) ? 0 : precoInicial.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
@@ -181,21 +179,30 @@ public class OfertaServico implements Serializable{
 				return false;
 		} else if (!dataRealizacaoServico.equals(other.dataRealizacaoServico))
 			return false;
-		if (duracaoOferta != other.duracaoOferta)
+		if (duracaoOferta == null) {
+			if (other.duracaoOferta != null)
+				return false;
+		} else if (!duracaoOferta.equals(other.duracaoOferta))
 			return false;
 		if (endereco == null) {
 			if (other.endereco != null)
 				return false;
 		} else if (!endereco.equals(other.endereco))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (lances == null) {
 			if (other.lances != null)
 				return false;
 		} else if (!lances.equals(other.lances))
 			return false;
-		if (Double.doubleToLongBits(precoInicial) != Double.doubleToLongBits(other.precoInicial))
+		if (precoInicial == null) {
+			if (other.precoInicial != null)
+				return false;
+		} else if (!precoInicial.equals(other.precoInicial))
 			return false;
 		if (status != other.status)
 			return false;
@@ -209,5 +216,5 @@ public class OfertaServico implements Serializable{
 				+ ", contratante=" + contratante + ", lances=" + lances + ", dataRealizacaoServico="
 				+ dataRealizacaoServico + "]";
 	}
-	
+
 }

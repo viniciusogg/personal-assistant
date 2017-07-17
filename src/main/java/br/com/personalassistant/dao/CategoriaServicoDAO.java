@@ -105,4 +105,25 @@ public class CategoriaServicoDAO extends DAO {
 		return categoriaServico;
 	}
 	
+	public CategoriaServico getByName(String nome) throws PersistenciaException{
+		
+		EntityManager entityManager = getEntityManager();
+		CategoriaServico categoriaServico = null;
+		
+		try {
+			TypedQuery<CategoriaServico> typedQuery = entityManager.createQuery("SELECT c FROM CategoriaServico c WHERE c.nome = :nome", CategoriaServico.class);
+			typedQuery.setParameter("nome", nome);
+			categoriaServico = typedQuery.getSingleResult();
+		} 
+		catch (PersistenceException ex) {
+			ex.printStackTrace();
+			throw new PersistenciaException("Erro ao recuperar categoria de serviço pelo nome.");
+		} 
+		finally {
+			entityManager.close();
+		}
+		
+		return categoriaServico;
+	}
+	
 }

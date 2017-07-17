@@ -203,3 +203,8 @@
 .ui-fieldset{
 	padding: 8px !important;
 }
+
+/*chips(tags)*/
+.ui-chips-container{
+	width:100%;	
+}

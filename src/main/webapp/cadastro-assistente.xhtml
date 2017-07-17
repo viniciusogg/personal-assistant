@@ -8,7 +8,7 @@
 	template="index.xhtml">
 
 	<f:metadata>
-		<f:event listener="#{cadastroContratanteBean.preRenderView()}" type="preRenderView" />
+		<f:event listener="#{cadastroAssistenteBean.preRenderView()}" type="preRenderView" />
 	</f:metadata>
 
 	<ui:define name="botao-menu"/>
@@ -97,6 +97,44 @@
 					</p:fieldset>
 					
 					<p:fieldset legend="INFORMAÇÕES PROFISSIONAIS" styleClass="fieldset-cadastro">
+						<div class="ui-g-8">
+							<div class="ui-g-12">
+								<p:outputLabel value="CATEGORIAS DE SERVIÇOS"/>
+							</div>
+							<div class="ui-g-12">
+								<p:selectOneMenu value="#{cadastroAssistenteBean.nomeCategoriaServico}">
+									<f:selectItems value="#{cadastroAssistenteBean.nomesCategoriasServicos}" var="categoria"
+											itemLabel="#{categoria}" itemValue="#{categoria}" />
+								</p:selectOneMenu>
+							</div>
+						</div>
+						
+						<div class="ui-g-6">
+							<div class="ui-g-12">
+								<p:outputLabel value="PREÇO COBRADO POR HORA TRABALHADA"/>
+							</div>
+							<div class="ui-g-12">
+								<p:inputNumber value="#{cadastroAssistenteBean.assistente.precoHora}"/>
+							</div>
+						</div>
+						
+						<div class="ui-g-6">
+							<div class="ui-g-12">
+								<p:outputLabel value="PREÇO FIXO COBRADO POR TRABALHO REALIZADO"/>
+							</div>
+							<div class="ui-g-12">
+								<p:inputNumber value="#{cadastroAssistenteBean.assistente.precoFixo}"/>
+							</div>
+						</div>
+						
+						<div class="ui-g-8">
+							<div class="ui-g-12">
+								<p:outputLabel value="SUAS QUALIDADES"/>
+							</div>
+							<div class="ui-g-12">
+								<p:chips value="#{cadastroAssistenteBean.nomesCapacidades}"/>
+							</div>
+						</div>
 					</p:fieldset>
 					
 					<div class="ui-g-12">

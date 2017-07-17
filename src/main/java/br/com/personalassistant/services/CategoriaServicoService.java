@@ -65,4 +65,13 @@ public class CategoriaServicoService implements Serializable {
 			throw new ServiceException(ex.getMessage());
 		}
 	}
+	
+	public CategoriaServico getByName(String nome) throws ServiceException{
+		try{
+			return this.categoriaServicoDAO.getByName(nome);
+		}
+		catch(PersistenciaException ex){
+			throw new ServiceException(ex.getMessage());
+		}
+	}
 }

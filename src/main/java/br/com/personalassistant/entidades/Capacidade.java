@@ -2,7 +2,7 @@ package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +19,7 @@ public class Capacidade implements Serializable{	   // restrição de unicidade 
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 	
-	@Basic(optional = false)
+	@Column(nullable = false)
 	private String nome;
 
 	public Capacidade() {
@@ -43,13 +43,11 @@ public class Capacidade implements Serializable{	   // restrição de unicidade 
 		this.nome = nome;
 	}
 
-	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
@@ -63,7 +61,10 @@ public class Capacidade implements Serializable{	   // restrição de unicidade 
 		if (getClass() != obj.getClass())
 			return false;
 		Capacidade other = (Capacidade) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)

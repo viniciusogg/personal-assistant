@@ -2,19 +2,19 @@ package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import br.com.personalassistant.enums.TIPO_USUARIO;
@@ -33,19 +33,19 @@ public class Usuario implements Serializable{
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 	
-	@Basic(optional = false)
+	@Column(nullable = false)
 	private String nome;
 	
-	@Basic(optional = false)
+	@Column(nullable = false)
 	private String email;
 
-	@Basic(optional = false)
+	@Column(nullable = false)
 	private String senha;
 	
-	@Basic(optional = false)
+	@Column(nullable = false)
 	private String numTelefonico;
 	
-	@Enumerated(EnumType.STRING)
+	@Transient
 	private TIPO_USUARIO tipoUsuario;
 	
 	public Long getId() {

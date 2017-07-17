@@ -26,15 +26,15 @@ public class EntityManagerProdutor {
 	
 	@Produces 
 	@RequestScoped
-	public EntityManager getEntityManager(EntityManagerFactory entityManagerFactory){
+	public EntityManager criarEntityManager(EntityManagerFactory entityManagerFactory){
 		return entityManagerFactory.createEntityManager();
 	}
 	
-	public void closeEntityManager(@Disposes EntityManager entityManager){
+	public void fecharEntityManager(@Disposes EntityManager entityManager){
 		entityManager.close();
 	}
 	
-	public void closeEntityManagerFactory(@Disposes EntityManagerFactory entityManagerFactory){
+	public void fecharEntityManagerFactory(@Disposes EntityManagerFactory entityManagerFactory){
 		entityManagerFactory.close();
 	}
 }

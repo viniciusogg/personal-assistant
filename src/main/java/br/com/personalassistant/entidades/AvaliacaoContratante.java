@@ -1,6 +1,6 @@
 package br.com.personalassistant.entidades;
 
-import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,25 +12,25 @@ public class AvaliacaoContratante extends Avaliacao{
 
 	private static final long serialVersionUID = 1L;
 
-	@Basic(optional = false)
-	private int facilidadePagamento;
+	@Column(nullable = false)
+	private Integer facilidadePagamento;
 	
 	public AvaliacaoContratante() {
 		super();
 	}
 
-	public AvaliacaoContratante(int cordialidade, int pontualidade, int facilidadePagamento) {
+	public AvaliacaoContratante(Integer cordialidade, Integer pontualidade, Integer facilidadePagamento) {
 		super();
 		this.setCordialidade(cordialidade);
 		this.setPontualidade(pontualidade);
 		this.facilidadePagamento = facilidadePagamento;
 	}
 
-	public int getFacilidadePagamento() {
+	public Integer getFacilidadePagamento() {
 		return facilidadePagamento;
 	}
 
-	public void setFacilidadePagamento(int facilidadePagamento) {
+	public void setFacilidadePagamento(Integer facilidadePagamento) {
 		this.facilidadePagamento = facilidadePagamento;
 	}
 
@@ -38,7 +38,7 @@ public class AvaliacaoContratante extends Avaliacao{
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + facilidadePagamento;
+		result = prime * result + ((facilidadePagamento == null) ? 0 : facilidadePagamento.hashCode());
 		return result;
 	}
 
@@ -51,7 +51,10 @@ public class AvaliacaoContratante extends Avaliacao{
 		if (getClass() != obj.getClass())
 			return false;
 		AvaliacaoContratante other = (AvaliacaoContratante) obj;
-		if (facilidadePagamento != other.facilidadePagamento)
+		if (facilidadePagamento == null) {
+			if (other.facilidadePagamento != null)
+				return false;
+		} else if (!facilidadePagamento.equals(other.facilidadePagamento))
 			return false;
 		return true;
 	}
@@ -62,4 +65,6 @@ public class AvaliacaoContratante extends Avaliacao{
 				+ ", getCordialidade()=" + getCordialidade() + ", getPontualidade()=" + getPontualidade()
 				+ ", getData()=" + getData() + ", getComentario()=" + getComentario() + "]";
 	}
+
+	
 }

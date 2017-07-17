@@ -2,8 +2,8 @@ package br.com.personalassistant.entidades;
 
 import java.util.List;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -18,21 +18,21 @@ public class Assistente extends Usuario{
 
 	private static final long serialVersionUID = 1L;
 	
-	private int experiencia; // quantidade de assistencias prestadas
+	private Integer experiencia; // quantidade de assistencias prestadas
 
-	@Basic(optional = false)
-	private double precoFixo;
+	@Column(nullable = false)
+	private Double precoFixo;
 	
-	@Basic(optional = false)
-	private double precoHora;
+	@Column(nullable = false)
+	private Double precoHora;
 	
 	@JoinColumn(name = "endereco_FK", nullable = false)
 	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco; // unidirecional
 
-	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
-	//@JoinColumn(name = "assistente_FK")//, nullable = false)
-	private List<CategoriaServico> categoriasServicos; // unidirecional
+	@OneToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+	@JoinColumn(name = "assistente_FK", nullable = false)
+	private CategoriaServico categoriaServico; // unidirecional
 
 	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "assistente")
 	private List<Lance> lances; // bidirecional
@@ -58,9 +58,9 @@ public class Assistente extends Usuario{
 	}
 	
 	public Assistente(String nome, String email, String senha, String numTelefonico, 
-					  double precoFixo, double precoHora, Endereco endereco,
-					  List<CategoriaServico> categoriasServicos, 
-					  List<Capacidade> capacidades) {
+			Double precoFixo, Double precoHora, Endereco endereco,
+			CategoriaServico categoriaServico, 
+			List<Capacidade> capacidades) {
 		super();
 		this.setNome(nome);
 		this.setEmail(email);
@@ -69,40 +69,40 @@ public class Assistente extends Usuario{
 		this.precoFixo = precoFixo;
 		this.precoHora = precoHora;
 		this.endereco = endereco;
-		this.categoriasServicos = categoriasServicos;
+		this.categoriaServico = categoriaServico;
 		this.capacidades = capacidades;
 	}
 
-	public double getPrecoFixo() {
+	public Double getPrecoFixo() {
 		return precoFixo;
 	}
 
-	public void setPrecoFixo(double precoFixo) {
+	public void setPrecoFixo(Double precoFixo) {
 		this.precoFixo = precoFixo;
 	}
 	
-	public double getPrecoHora() {
+	public Double getPrecoHora() {
 		return precoHora;
 	}
 
-	public void setPrecoHora(double precoHora) {
+	public void setPrecoHora(Double precoHora) {
 		this.precoHora = precoHora;
 	}
 
-	public int getExperiencia() {
+	public Integer getExperiencia() {
 		return experiencia;
 	}
 
-	public void setExperiencia(int experiencia) {
+	public void setExperiencia(Integer experiencia) {
 		this.experiencia = experiencia;
 	}
 
-	public List<CategoriaServico> getCategoriasServicos() {
-		return categoriasServicos;
+	public CategoriaServico getCategoriaServico() {
+		return categoriaServico;
 	}
 
-	public void setCategoriasServicos(List<CategoriaServico> categoriasServicos) {
-		this.categoriasServicos = categoriasServicos;
+	public void setCategoriaServico(CategoriaServico categoriaServico) {
+		this.categoriaServico = categoriaServico;
 	}
 
 	public List<Lance> getLances() {
@@ -149,25 +149,23 @@ public class Assistente extends Usuario{
 		return capacidades;
 	}
 
-	public void setPalavrasChave(List<Capacidade> capacidades){
+	public void setCapacidades(List<Capacidade> capacidades){
 		this.capacidades = capacidades;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((avaliacoesFeitas == null) ? 0 : avaliacoesFeitas.hashCode());
 		result = prime * result + ((avaliacoesRecebidas == null) ? 0 : avaliacoesRecebidas.hashCode());
-		result = prime * result + ((categoriasServicos == null) ? 0 : categoriasServicos.hashCode());
+		result = prime * result + ((capacidades == null) ? 0 : capacidades.hashCode());
+		result = prime * result + ((categoriaServico == null) ? 0 : categoriaServico.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result + experiencia;
+		result = prime * result + ((experiencia == null) ? 0 : experiencia.hashCode());
 		result = prime * result + ((lances == null) ? 0 : lances.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(precoFixo);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(precoHora);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((precoFixo == null) ? 0 : precoFixo.hashCode());
+		result = prime * result + ((precoHora == null) ? 0 : precoHora.hashCode());
 		result = prime * result + ((propostas == null) ? 0 : propostas.hashCode());
 		return result;
 	}
@@ -176,7 +174,7 @@ public class Assistente extends Usuario{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -191,26 +189,40 @@ public class Assistente extends Usuario{
 				return false;
 		} else if (!avaliacoesRecebidas.equals(other.avaliacoesRecebidas))
 			return false;
-		if (categoriasServicos == null) {
-			if (other.categoriasServicos != null)
+		if (capacidades == null) {
+			if (other.capacidades != null)
 				return false;
-		} else if (!categoriasServicos.equals(other.categoriasServicos))
+		} else if (!capacidades.equals(other.capacidades))
+			return false;
+		if (categoriaServico == null) {
+			if (other.categoriaServico != null)
+				return false;
+		} else if (!categoriaServico.equals(other.categoriaServico))
 			return false;
 		if (endereco == null) {
 			if (other.endereco != null)
 				return false;
 		} else if (!endereco.equals(other.endereco))
 			return false;
-		if (experiencia != other.experiencia)
+		if (experiencia == null) {
+			if (other.experiencia != null)
+				return false;
+		} else if (!experiencia.equals(other.experiencia))
 			return false;
 		if (lances == null) {
 			if (other.lances != null)
 				return false;
 		} else if (!lances.equals(other.lances))
 			return false;
-		if (Double.doubleToLongBits(precoFixo) != Double.doubleToLongBits(other.precoFixo))
+		if (precoFixo == null) {
+			if (other.precoFixo != null)
+				return false;
+		} else if (!precoFixo.equals(other.precoFixo))
 			return false;
-		if (Double.doubleToLongBits(precoHora) != Double.doubleToLongBits(other.precoHora))
+		if (precoHora == null) {
+			if (other.precoHora != null)
+				return false;
+		} else if (!precoHora.equals(other.precoHora))
 			return false;
 		if (propostas == null) {
 			if (other.propostas != null)
@@ -223,10 +235,11 @@ public class Assistente extends Usuario{
 	@Override
 	public String toString() {
 		return "Assistente [experiencia=" + experiencia + ", precoFixo=" + precoFixo + ", precoHora=" + precoHora
-				+ ", endereco=" + endereco + ", categoriasServicos=" + categoriasServicos + ", lances=" + lances
+				+ ", endereco=" + endereco + ", categoriaServico=" + categoriaServico + ", lances=" + lances
 				+ ", avaliacoesRecebidas=" + avaliacoesRecebidas + ", avaliacoesFeitas=" + avaliacoesFeitas
-				+ ", propostas=" + propostas + ", getId()=" + getId() + ", getNome()=" + getNome() + ", getEmail()="
-				+ getEmail() + ", getSenha()=" + getSenha() + ", getNumTelefonico()=" + getNumTelefonico() + "]";
+				+ ", propostas=" + propostas + ", capacidades=" + capacidades + ", getId()=" + getId() + ", getNome()="
+				+ getNome() + ", getEmail()=" + getEmail() + ", getSenha()=" + getSenha() + ", getNumTelefonico()="
+				+ getNumTelefonico() + ", getTipoUsuario()=" + getTipoUsuario() + "]";
 	}
-
+	
 }

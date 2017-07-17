@@ -2,8 +2,8 @@ package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -27,8 +27,8 @@ public class Lance implements Serializable{
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 	
-	@Basic(optional = false)
-	private double valor;
+	@Column(nullable = false)
+	private Double valor;
 	
 	@Enumerated(EnumType.STRING)
 	private ESTADO_LANCE status;
@@ -49,7 +49,7 @@ public class Lance implements Serializable{
 		super();
 	}
 
-	public Lance(double valor, Assistente assistente, OfertaServico oferstaServico,
+	public Lance(Double valor, Assistente assistente, OfertaServico oferstaServico,
 			DataRealizacaoServico dataRealizacaoServico) {
 		super();
 		this.valor = valor;
@@ -62,11 +62,11 @@ public class Lance implements Serializable{
 		return id;
 	}
 
-	public double getValor() {
+	public Double getValor() {
 		return valor;
 	}
 
-	public void setValor(double valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 
@@ -108,12 +108,10 @@ public class Lance implements Serializable{
 		int result = 1;
 		result = prime * result + ((assistente == null) ? 0 : assistente.hashCode());
 		result = prime * result + ((dataRealizacaoServico == null) ? 0 : dataRealizacaoServico.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((oferstaServico == null) ? 0 : oferstaServico.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(valor);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
 		return result;
 	}
 
@@ -136,7 +134,10 @@ public class Lance implements Serializable{
 				return false;
 		} else if (!dataRealizacaoServico.equals(other.dataRealizacaoServico))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (oferstaServico == null) {
 			if (other.oferstaServico != null)
@@ -145,7 +146,10 @@ public class Lance implements Serializable{
 			return false;
 		if (status != other.status)
 			return false;
-		if (Double.doubleToLongBits(valor) != Double.doubleToLongBits(other.valor))
+		if (valor == null) {
+			if (other.valor != null)
+				return false;
+		} else if (!valor.equals(other.valor))
 			return false;
 		return true;
 	}

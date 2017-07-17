@@ -2,8 +2,8 @@ package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -27,8 +27,8 @@ public class Proposta implements Serializable{
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 	
-	@Basic(optional = false)
-	private double preco;
+	@Column(nullable = false)
+	private Double preco;
 	
 	private String comentario;
 	
@@ -47,7 +47,7 @@ public class Proposta implements Serializable{
 		super();
 	}
 	
-	public Proposta(double preco, String comentario, Endereco endereco, DataRealizacaoServico dataRealizacaoServico) {
+	public Proposta(Double preco, String comentario, Endereco endereco, DataRealizacaoServico dataRealizacaoServico) {
 		super();
 		this.preco = preco;
 		this.comentario = comentario;
@@ -59,11 +59,11 @@ public class Proposta implements Serializable{
 		return id;
 	}
 
-	public double getPreco() {
+	public Double getPreco() {
 		return preco;
 	}
 
-	public void setPreco(double preco) {
+	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
 
@@ -106,10 +106,8 @@ public class Proposta implements Serializable{
 		result = prime * result + ((comentario == null) ? 0 : comentario.hashCode());
 		result = prime * result + ((dataRealizacaoServico == null) ? 0 : dataRealizacaoServico.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
-		long temp;
-		temp = Double.doubleToLongBits(preco);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((preco == null) ? 0 : preco.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
@@ -138,9 +136,15 @@ public class Proposta implements Serializable{
 				return false;
 		} else if (!endereco.equals(other.endereco))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
-		if (Double.doubleToLongBits(preco) != Double.doubleToLongBits(other.preco))
+		if (preco == null) {
+			if (other.preco != null)
+				return false;
+		} else if (!preco.equals(other.preco))
 			return false;
 		if (status != other.status)
 			return false;
@@ -152,5 +156,6 @@ public class Proposta implements Serializable{
 		return "Proposta [id=" + id + ", preco=" + preco + ", comentario=" + comentario + ", status=" + status
 				+ ", endereco=" + endereco + ", dataRealizacaoServico=" + dataRealizacaoServico + "]";
 	}
+	
 	
 }

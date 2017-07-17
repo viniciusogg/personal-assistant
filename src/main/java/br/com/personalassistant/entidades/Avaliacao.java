@@ -3,7 +3,7 @@ package br.com.personalassistant.entidades;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity(name = "Avaliacao")
 @Table(name = "TB_AVALIACAO")
@@ -28,32 +30,35 @@ public class Avaliacao implements Serializable{
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 	
-	@Basic(optional = false)
-	private int cordialidade;
+	@Column(nullable = false)
+	private Integer cordialidade;
 	
-	@Basic(optional = false)
-	private int pontualidade;
+	@Column(nullable = false)
+	private Integer pontualidade;
 	
+	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date data;
-	private String comentario;
 	
+	private String comentario;
+
 	public Long getId() {
 		return id;
 	}
 
-	public int getCordialidade() {
+	public Integer getCordialidade() {
 		return cordialidade;
 	}
 
-	public void setCordialidade(int cordialidade) {
+	public void setCordialidade(Integer cordialidade) {
 		this.cordialidade = cordialidade;
 	}
 
-	public int getPontualidade() {
+	public Integer getPontualidade() {
 		return pontualidade;
 	}
 
-	public void setPontualidade(int pontualidade) {
+	public void setPontualidade(Integer pontualidade) {
 		this.pontualidade = pontualidade;
 	}
 
@@ -78,10 +83,10 @@ public class Avaliacao implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((comentario == null) ? 0 : comentario.hashCode());
-		result = prime * result + cordialidade;
+		result = prime * result + ((cordialidade == null) ? 0 : cordialidade.hashCode());
 		result = prime * result + ((data == null) ? 0 : data.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + pontualidade;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((pontualidade == null) ? 0 : pontualidade.hashCode());
 		return result;
 	}
 
@@ -99,16 +104,25 @@ public class Avaliacao implements Serializable{
 				return false;
 		} else if (!comentario.equals(other.comentario))
 			return false;
-		if (cordialidade != other.cordialidade)
+		if (cordialidade == null) {
+			if (other.cordialidade != null)
+				return false;
+		} else if (!cordialidade.equals(other.cordialidade))
 			return false;
 		if (data == null) {
 			if (other.data != null)
 				return false;
 		} else if (!data.equals(other.data))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
-		if (pontualidade != other.pontualidade)
+		if (pontualidade == null) {
+			if (other.pontualidade != null)
+				return false;
+		} else if (!pontualidade.equals(other.pontualidade))
 			return false;
 		return true;
 	}
