@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<ui:composition>
+		
+		<div class="ui-g-6">
+			<div class="ui-g-12">
+				<p:outputLabel value="RUA*"/>
+			</div>
+			<div class="ui-g-12">
+				<p:inputText placeholder="NOME DA SUA RUA"
+						value="#{rua}"
+						styleClass="campo-formulario"/>
+			</div>
+		</div>
+		
+		<div class="ui-g-2">
+			<div class="ui-g-12">
+				<p:outputLabel value="NÚMERO*"/>
+			</div>
+			<div class="ui-g-12">
+				<p:inputMask mask="9?9999" placeholder="NÚMERO DA SUA CASA"
+						value="#{numero}"
+						styleClass="campo-formulario"/>								
+			</div>
+		</div>
+		
+		<div class="ui-g-4">
+			<div class="ui-g-12">
+				<p:outputLabel value="CEP*"/>
+			</div>
+			<div class="ui-g-12">
+				<p:inputMask mask="99999-999" placeholder="CEP DA SUA RUA OU CIDADE"
+						value="#{cep}"
+						styleClass="campo-formulario"/>
+			</div>
+		</div>
+		
+		<div class="ui-g-6">
+			<div class="ui-g-12">
+				<p:outputLabel value="BAIRRO*"/>
+			</div>
+			<div class="ui-g-12">
+				<p:inputText placeholder="BAIRRO ONDE MORA"
+						value="#{bairro}"
+						styleClass="campo-formulario"/>
+			</div>
+		</div>
+		
+		<div class="ui-g-6">
+			<div class="ui-g-12">
+				<p:outputLabel value="REFERÊNCIA"/>
+			</div>
+			<div class="ui-g-12">
+				<p:inputText placeholder="PONTO DE REFERÊNCIA"
+						value="#{referencia}"
+						styleClass="campo-formulario"/>
+			</div>
+		</div>
+		
+		<div class="ui-g-6">
+			<div class="ui-g-12">
+				<p:outputLabel value="ESTADO*"/>
+			</div>
+			<div class="ui-g-12">
+				<p:inputText placeholder="NOME DO SEU ESTADO"
+						value="#{estado}"
+						styleClass="campo-formulario"/>
+			</div>
+		</div>
+		
+		<div class="ui-g-6">
+			<div class="ui-g-12">
+				<p:outputLabel value="CIDADE*"/>
+			</div>
+			<div class="ui-g-12">
+				<p:inputText placeholder="NOME DA SUA CIDADE OU MUNICÍPIO"
+						value="#{cidade}"
+						styleClass="campo-formulario"/>
+			</div>
+		</div>
+		
+	</ui:composition>
+</html>

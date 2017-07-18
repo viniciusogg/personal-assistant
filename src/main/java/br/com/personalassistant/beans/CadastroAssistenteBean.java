@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -14,6 +13,7 @@ import javax.inject.Named;
 import br.com.personalassistant.entidades.Assistente;
 import br.com.personalassistant.entidades.Capacidade;
 import br.com.personalassistant.entidades.CategoriaServico;
+import br.com.personalassistant.entidades.Endereco;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.services.AssistenteService;
 import br.com.personalassistant.services.CategoriaServicoService;
@@ -26,6 +26,7 @@ public class CadastroAssistenteBean implements Serializable {
 	@Inject private CategoriaServicoService categoriaServicoService;
 	private static final long serialVersionUID = 1L;
 	private Assistente assistente;
+	private Endereco endereco;
 	private String nomeCategoriaServico;
 	private List<String> nomesCapacidades;
 	private List<String> nomesCategoriasServicos;
@@ -34,18 +35,21 @@ public class CadastroAssistenteBean implements Serializable {
 	public void preRenderView(){
 		
 		if(this.assistente == null){
-			this.assistente = new Assistente();
+			this.assistente = new Assistente();			
 		}
 		
-		nomesCapacidades = new ArrayList<String>();
-		nomesCategoriasServicos = new ArrayList<String>();
+		if(this.endereco == null){
+			this.endereco = new Endereco();
+		}
 		
+		this.nomesCapacidades = new ArrayList<String>();
+		this.nomesCategoriasServicos = new ArrayList<String>();
 		
 		try {
-			categoriasServicos = categoriaServicoService.getAll();
+			this.categoriasServicos = this.categoriaServicoService.getAll();
 
-			for(CategoriaServico categoriaServico: categoriasServicos){
-				nomesCategoriasServicos.add(categoriaServico.getNome());
+			for(CategoriaServico categoriaServico: this.categoriasServicos){
+				this.nomesCategoriasServicos.add(categoriaServico.getNome());
 			}
 		} 
 		catch (ServiceException e) {
@@ -59,14 +63,16 @@ public class CadastroAssistenteBean implements Serializable {
 		context.getExternalContext().getFlash().setKeepMessages(true);
 		
 		try {
+			
 			List<Capacidade> capacidades = new ArrayList<Capacidade>();
-			CategoriaServico categoriaServico = null;
 						
-			for(String nomeCapacidade: nomesCapacidades){	
+			for(String nomeCapacidade: this.nomesCapacidades){	
 				Capacidade capacidade = new Capacidade();
 				capacidade.setNome(nomeCapacidade);
 				capacidades.add(capacidade);
 			}
+			
+			CategoriaServico categoriaServico = null;
 			
 			for(CategoriaServico cs: categoriasServicos){
 				if(cs.getNome().equals(this.nomeCategoriaServico)){
@@ -74,11 +80,11 @@ public class CadastroAssistenteBean implements Serializable {
 				}
 			}
 			
-			this.assistente.setCapacidades(capacidades);
-						
+			this.assistente.setCapacidades(capacidades);						
 			this.assistente.setCategoriaServico(categoriaServico);
+			this.assistente.setEndereco(this.endereco);
 			
-			assistenteService.save(this.assistente);
+			this.assistenteService.save(this.assistente);
 			
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso", ""));
 		} 
@@ -95,7 +101,15 @@ public class CadastroAssistenteBean implements Serializable {
 	public void setAssistente(Assistente assistente) {
 		this.assistente = assistente;
 	}
-	
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
 	public String getNomeCategoriaServico() {
 		return nomeCategoriaServico;
 	}

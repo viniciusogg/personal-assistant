@@ -31,9 +31,10 @@ public class Assistente extends Usuario{
 	private Endereco endereco; // unidirecional
 
 	@OneToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
-	@JoinColumn(name = "assistente_FK", nullable = false)
+	@JoinColumn(name = "categoriaServico_FK", nullable = false)
 	private CategoriaServico categoriaServico; // unidirecional
 
+	@Column(name="assistente_FK")
 	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "assistente")
 	private List<Lance> lances; // bidirecional
 	

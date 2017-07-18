@@ -28,17 +28,19 @@ public class Lance implements Serializable{
 	private Long id;
 	
 	@Column(nullable = false)
-	private Double valor;
+	private Double precoFixo;
+
+	private Double precoHoraTrabalhada;
 	
 	@Enumerated(EnumType.STRING)
 	private ESTADO_LANCE status;
 	
 	@ManyToOne
-	@JoinColumn(name = "assistente_FK", nullable = false)
+	@JoinColumn(nullable = false)
 	private Assistente assistente; // bidirecional
 	
 	@ManyToOne
-	@JoinColumn(name = "oferta_servico_FK", nullable = false)
+	@JoinColumn(nullable = false)
 	private OfertaServico oferstaServico; // bidirecional
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
@@ -49,10 +51,11 @@ public class Lance implements Serializable{
 		super();
 	}
 
-	public Lance(Double valor, Assistente assistente, OfertaServico oferstaServico,
+	public Lance(Double precoFixo, Double precoHoraTrabalhada, Assistente assistente, OfertaServico oferstaServico,
 			DataRealizacaoServico dataRealizacaoServico) {
 		super();
-		this.valor = valor;
+		this.precoFixo = precoFixo;
+		this.precoHoraTrabalhada = precoHoraTrabalhada;
 		this.assistente = assistente;
 		this.oferstaServico = oferstaServico;
 		this.dataRealizacaoServico = dataRealizacaoServico;
@@ -62,12 +65,20 @@ public class Lance implements Serializable{
 		return id;
 	}
 
-	public Double getValor() {
-		return valor;
+	public Double getPrecoFixo() {
+		return precoFixo;
 	}
 
-	public void setValor(Double valor) {
-		this.valor = valor;
+	public void setPrecoFixo(Double precoFixo) {
+		this.precoFixo = precoFixo;
+	}
+
+	public Double getPrecoHoraTrabalhada() {
+		return precoHoraTrabalhada;
+	}
+
+	public void setPrecoHoraTrabalhada(Double precoHoraTrabalhada) {
+		this.precoHoraTrabalhada = precoHoraTrabalhada;
 	}
 
 	public ESTADO_LANCE getStatus() {
@@ -110,8 +121,9 @@ public class Lance implements Serializable{
 		result = prime * result + ((dataRealizacaoServico == null) ? 0 : dataRealizacaoServico.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((oferstaServico == null) ? 0 : oferstaServico.hashCode());
+		result = prime * result + ((precoFixo == null) ? 0 : precoFixo.hashCode());
+		result = prime * result + ((precoHoraTrabalhada == null) ? 0 : precoHoraTrabalhada.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
 		return result;
 	}
 
@@ -144,20 +156,26 @@ public class Lance implements Serializable{
 				return false;
 		} else if (!oferstaServico.equals(other.oferstaServico))
 			return false;
-		if (status != other.status)
-			return false;
-		if (valor == null) {
-			if (other.valor != null)
+		if (precoFixo == null) {
+			if (other.precoFixo != null)
 				return false;
-		} else if (!valor.equals(other.valor))
+		} else if (!precoFixo.equals(other.precoFixo))
+			return false;
+		if (precoHoraTrabalhada == null) {
+			if (other.precoHoraTrabalhada != null)
+				return false;
+		} else if (!precoHoraTrabalhada.equals(other.precoHoraTrabalhada))
+			return false;
+		if (status != other.status)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Lance [id=" + id + ", valor=" + valor + ", status=" + status + ", assistente=" + assistente
-				+ ", oferstaServico=" + oferstaServico + ", dataRealizacaoServico=" + dataRealizacaoServico + "]";
+		return "Lance [id=" + id + ", precoFixo=" + precoFixo + ", precoHoraTrabalhada=" + precoHoraTrabalhada
+				+ ", status=" + status + ", assistente=" + assistente + ", oferstaServico=" + oferstaServico
+				+ ", dataRealizacaoServico=" + dataRealizacaoServico + "]";
 	}
 
 }

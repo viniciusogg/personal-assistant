@@ -38,18 +38,19 @@ public class OfertaServico implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private ESTADO_OFERTA status;
 	
-	@OneToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Endereco endereco; // unidirecional
 	
 	@ManyToOne
-	@JoinColumn(name = "categoria_servico_FK", nullable = false)
+	@JoinColumn(nullable = false)
 	private CategoriaServico categoriaServico; // unidirecional
 	
 	@ManyToOne
-	@JoinColumn(name = "contratante_FK", nullable=false)
+	@JoinColumn(nullable=false)
 	private Contratante contratante; // bidirecional
 	
 	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "oferstaServico")
+	@Column(name="ofertaServico_FK")
 	private List<Lance> lances; // bidirecional
 	
 	@OneToOne(cascade = {CascadeType.PERSIST})

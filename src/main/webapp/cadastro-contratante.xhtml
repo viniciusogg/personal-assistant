@@ -33,67 +33,24 @@
 				
 				<h:form>
 					<p:fieldset legend="INFORMAÇÕES PESSOAIS" styleClass="fieldset-cadastro">
-						<div class="ui-g-7">
-							<div class="ui-g-12">
-								<p:outputLabel value="NOME*"/>
-							</div>
-							<div class="ui-g-12">
-								<p:inputText required="true" 
-										placeholder="DIGITE SEU NOME" styleClass="campo-formulario"
-										requiredMessage="Você esqueceu de preencher o campo: 'NOME'"
-										value="#{cadastroContratanteBean.contratante.nome}"/>
-							</div>
-						</div>
-						
-						<div class="ui-g-5">
-							<div class="ui-g-12">
-								<p:outputLabel value="E-MAIL*"/>
-							</div>
-							<div class="ui-g-12">
-								<p:inputText required="true" 
-										placeholder="DIGITE SEU E-MAIL" styleClass="campo-formulario"
-										requiredMessage="Você esqueceu de preencher o campo: 'E-MAIL'"
-										value="#{cadastroContratanteBean.contratante.email}"/>
-							</div>
-						</div>
-						
-						<div class="ui-g-4">
-							<div class="ui-g-12">
-								<p:outputLabel value="SENHA*"/>
-							</div>
-							<div class="ui-g-12">
-								<p:password required="true" id="campo-senha-cadastro" 
-										match="campo-senha-cadastro-confirmacao" styleClass="campo-formulario" 
-										placeholder="CRIE UMA SENHA"
-										requiredMessage="Você esqueceu de preencher o campo: 'SENHA'"
-										value="#{cadastroContratanteBean.contratante.senha}"
-										validatorMessage="AS SENHAS ESTÃO DIFERENTES: As duas senhas devem ser iguais !"/>
-							</div>
-						</div>
-						
-						<div class="ui-g-4">
-							<div class="ui-g-12">
-								<p:outputLabel value="CONFIRMAÇÃO DE SENHA*"/>
-							</div>
-							<div class="ui-g-12">
-								<p:password required="true" id="campo-senha-cadastro-confirmacao" styleClass="campo-formulario" 
-										placeholder="DIGITE A SENHA NOVAMENTE"
-										requiredMessage="Você esqueceu de preencher o campo: 'CONFIRMAÇÃO DE SENHA'"
-										update="msg"/>
-							</div>
-						</div>
-						
-						<div class="ui-g-4">
-							<div class="ui-g-12">
-								<p:outputLabel value="TELEFONE PARA CONTATO*"/>
-							</div>
-							<div class="ui-g-12">
-								<p:inputMask required="true" mask="(99) 99999-9999" styleClass="campo-formulario" 
-										placeholder="NÚMERO TELEFONICO"
-										requiredMessage="Você esqueceu de preencher o campo: 'TELEFONE PARA CONTATO'"
-										value="#{cadastroContratanteBean.contratante.numTelefonico}"/>
-							</div>
-						</div>
+						<ui:include src="/WEB-INF/templates/_formUsuario.xhtml">
+							<ui:param name="nome" value="#{cadastroContratanteBean.contratante.nome}"/>
+							<ui:param name="email" value="#{cadastroContratanteBean.contratante.email}" />
+							<ui:param name="senha" value="#{cadastroContratanteBean.contratante.senha}" />
+							<ui:param name="numTelefonico" value="#{cadastroContratanteBean.contratante.numTelefonico}" />
+						</ui:include>
+					</p:fieldset>
+					
+					<p:fieldset legend="INFORMAÇÕES DE ENDEREÇO" styleClass="fieldset-cadastro">
+						<ui:include src="/WEB-INF/templates/_formEndereco.xhtml">
+							<ui:param name="rua" value="#{cadastroContratanteBean.endereco.rua}"/>
+							<ui:param name="numero" value="#{cadastroContratanteBean.endereco.numero}" />
+							<ui:param name="cep" value="#{cadastroContratanteBean.endereco.cep}" />
+							<ui:param name="bairro" value="#{cadastroContratanteBean.endereco.bairro}" />
+							<ui:param name="referencia" value="#{cadastroContratanteBean.endereco.referencia}" />
+							<ui:param name="cidade" value="#{cadastroContratanteBean.endereco.cidade}" />
+							<ui:param name="estado" value="#{cadastroContratanteBean.endereco.estado}" />
+						</ui:include>
 					</p:fieldset>
 					
 					<div class="ui-g-12">

@@ -3,6 +3,7 @@ package br.com.personalassistant.entidades;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -21,7 +22,7 @@ public class Contratante extends Usuario{
 	@JoinColumn(name = "favorito_do_contratante_FK")
 	private List<Assistente> assistentesFavoritos; // unidirecional
 	
-	@JoinColumn(name = "contratante_FK", nullable = false)
+	@JoinColumn(name = "endereco_FK", nullable = false)
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Endereco endereco; // unidirecional
 	
@@ -30,6 +31,7 @@ public class Contratante extends Usuario{
 	private List<Proposta> propostas; // unidirecional
 	
 	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "contratante")
+	@Column(name = "contratante_FK")
 	private List<OfertaServico> ofertasServicos; // bidirecional
 	
 	@OneToMany
@@ -62,11 +64,11 @@ public class Contratante extends Usuario{
 		this.assistentesFavoritos = assistentesFavoritos;
 	}
 
-	public Endereco getEnderecos() {
+	public Endereco getEndereco() {
 		return endereco;
 	}
 
-	public void setEnderecos(Endereco endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
 
