@@ -32,10 +32,15 @@ public class OfertaServico implements Serializable{
 	@Column(nullable = false)
 	private Integer duracaoOferta;
 	
+	private Double precoHora;
+	
+	private Double precoFixo;
+	
 	@Column(nullable = false)
-	private Double precoInicial;
+	private String titulo;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private ESTADO_OFERTA status;
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
@@ -46,26 +51,30 @@ public class OfertaServico implements Serializable{
 	private CategoriaServico categoriaServico; // unidirecional
 	
 	@ManyToOne
-	@JoinColumn(nullable=false)
+	@JoinColumn(nullable = false)
 	private Contratante contratante; // bidirecional
 	
 	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "oferstaServico")
 	@Column(name="ofertaServico_FK")
 	private List<Lance> lances; // bidirecional
 	
-	@OneToOne(cascade = {CascadeType.PERSIST})
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "data_realizacao_servico_FK", nullable = false)
 	private DataRealizacaoServico dataRealizacaoServico; // unidirecional
 	
 	public OfertaServico() {
 		super();
 	}
-	
-	public OfertaServico(Integer duracaoOferta, Double precoInicial, Endereco endereco, CategoriaServico categoriaServico,
-			Contratante contratante, DataRealizacaoServico dataRealizacaoServico) {
+
+	public OfertaServico(Integer duracaoOferta, Double precoHora, Double precoFixo, String titulo, ESTADO_OFERTA status,
+			Endereco endereco, CategoriaServico categoriaServico, Contratante contratante,
+			DataRealizacaoServico dataRealizacaoServico) {
 		super();
 		this.duracaoOferta = duracaoOferta;
-		this.precoInicial = precoInicial;
+		this.precoHora = precoHora;
+		this.precoFixo = precoFixo;
+		this.titulo = titulo;
+		this.status = status;
 		this.endereco = endereco;
 		this.categoriaServico = categoriaServico;
 		this.contratante = contratante;
@@ -84,12 +93,28 @@ public class OfertaServico implements Serializable{
 		this.duracaoOferta = duracaoOferta;
 	}
 
-	public Double getPrecoInicial() {
-		return precoInicial;
+	public Double getPrecoHora() {
+		return precoHora;
 	}
 
-	public void setPrecoInicial(Double precoInicial) {
-		this.precoInicial = precoInicial;
+	public void setPrecoHora(Double precoHora) {
+		this.precoHora = precoHora;
+	}
+	
+	public Double getPrecoFixo() {
+		return precoFixo;
+	}
+
+	public void setPrecoFixo(Double precoFixo) {
+		this.precoFixo = precoFixo;
+	}
+	
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	public ESTADO_OFERTA getStatus() {
@@ -151,8 +176,10 @@ public class OfertaServico implements Serializable{
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lances == null) ? 0 : lances.hashCode());
-		result = prime * result + ((precoInicial == null) ? 0 : precoInicial.hashCode());
+		result = prime * result + ((precoFixo == null) ? 0 : precoFixo.hashCode());
+		result = prime * result + ((precoHora == null) ? 0 : precoHora.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
 	}
 
@@ -200,22 +227,32 @@ public class OfertaServico implements Serializable{
 				return false;
 		} else if (!lances.equals(other.lances))
 			return false;
-		if (precoInicial == null) {
-			if (other.precoInicial != null)
+		if (precoFixo == null) {
+			if (other.precoFixo != null)
 				return false;
-		} else if (!precoInicial.equals(other.precoInicial))
+		} else if (!precoFixo.equals(other.precoFixo))
+			return false;
+		if (precoHora == null) {
+			if (other.precoHora != null)
+				return false;
+		} else if (!precoHora.equals(other.precoHora))
 			return false;
 		if (status != other.status)
+			return false;
+		if (titulo == null) {
+			if (other.titulo != null)
+				return false;
+		} else if (!titulo.equals(other.titulo))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "OfertaServico [id=" + id + ", duracaoOferta=" + duracaoOferta + ", precoInicial=" + precoInicial
-				+ ", status=" + status + ", endereco=" + endereco + ", categoriaServico=" + categoriaServico
-				+ ", contratante=" + contratante + ", lances=" + lances + ", dataRealizacaoServico="
-				+ dataRealizacaoServico + "]";
+		return "OfertaServico [id=" + id + ", duracaoOferta=" + duracaoOferta + ", precoHora=" + precoHora
+				+ ", precoFixo=" + precoFixo + ", titulo=" + titulo + ", status=" + status + ", endereco=" + endereco
+				+ ", categoriaServico=" + categoriaServico + ", contratante=" + contratante + ", lances=" + lances
+				+ ", dataRealizacaoServico=" + dataRealizacaoServico + "]";
 	}
 
 }

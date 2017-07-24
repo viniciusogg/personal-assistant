@@ -177,7 +177,12 @@ a{
 	padding-top: 0px;
 }
 
-#campo-email{
+#j_username{
+	width: 94%; 
+	padding:10px;
+}
+
+#username{
 	width: 94%; 
 	padding:10px;
 }
@@ -195,7 +200,11 @@ a{
 	margin-top: 1px; padding-top: 0px;
 }
 
-#campo-senha{
+#j_password{
+	width: 94%; padding:10px;
+}
+
+#password{
 	width: 94%; padding:10px;
 }
 
@@ -233,6 +242,10 @@ a{
 
 #p-layout-central{
 	height:100%;
+}
+
+.div-info-reputacao{
+	padding: 1px;
 }
 
 .mega-menu-visivel{	
@@ -276,4 +289,8 @@ a{
 
 .componente-acao-cadastro-usuario{
 	float:right;
+}
+
+.background-login{
+	background: url('../images/background-login.png') repeat !important;
 }

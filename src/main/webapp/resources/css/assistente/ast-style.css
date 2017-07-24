@@ -49,10 +49,46 @@
 	text-align: left;
 }
 
-#div-info-reputacao{
-	padding: 1px;
-}
-
 #div-tabela{
 	padding:7px !important;
+}
+
+.label-capacidade{
+	border-radius: 2px;
+	background: #1976D2;
+	color: white;
+	padding: 4px;
+	margin: 3px !important;
+}
+
+#botao-editar-categoria-servico{
+	float: right;
+}
+
+#botao-concluir-edicao-categoria-servico{
+	float: right;
+}
+
+.sub-div-info-oferta{
+	padding: 0px;
+	padding-bottom: 15px;
+	padding-top: 10px;
+}
+
+.titulo-oferta{
+	font-size: 18px !important;
+}
+
+.painel-oferta-label{
+	font-size: 20px !important;
+	padding-bottom: 0px !important;
+	padding-top: 0px !important;
+	text-align: center !important;
+}
+
+.painel-oferta-label-descritiva{
+	font-size: 15px !important;
+	padding-bottom: 0px !important;
+	padding-top: 0px !important;
+	text-align: center !important;
 }

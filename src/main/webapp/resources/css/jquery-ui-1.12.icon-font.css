@@ -664,7 +664,10 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670'; }
 .ui-icon-persons:after,
 .ui-icon-users:after,
 .ui-icon-group:after { content: '\e6cf'; }
-.ui-icon-phone:after { content: '\e704'; }
+.ui-icon-phone:after { content: '\e704'; 
+	left: 9px !important;
+	top: 11px !important;
+}
 .ui-icon-pilcrow:after { content: '\e727'; }
 .ui-icon-pin-s:after { content: '\e70f'; }
 .ui-icon-pin-w:after { content: '\e710'; }

@@ -15,14 +15,14 @@ import br.com.personalassistant.entidades.Capacidade;
 import br.com.personalassistant.entidades.CategoriaServico;
 import br.com.personalassistant.entidades.Endereco;
 import br.com.personalassistant.excecoes.ServiceException;
-import br.com.personalassistant.services.AssistenteService;
 import br.com.personalassistant.services.CategoriaServicoService;
+import br.com.personalassistant.services.UsuarioService;
 
 @Named
 @ViewScoped
-public class CadastroAssistenteBean implements Serializable {
+public class CadastroAssistenteBean extends AbstractBean implements Serializable {
 
-	@Inject private AssistenteService assistenteService;
+	@Inject private UsuarioService usuarioService;
 	@Inject private CategoriaServicoService categoriaServicoService;
 	private static final long serialVersionUID = 1L;
 	private Assistente assistente;
@@ -73,7 +73,7 @@ public class CadastroAssistenteBean implements Serializable {
 			}
 			
 			CategoriaServico categoriaServico = null;
-			
+						
 			for(CategoriaServico cs: categoriasServicos){
 				if(cs.getNome().equals(this.nomeCategoriaServico)){
 					categoriaServico = cs;
@@ -84,7 +84,9 @@ public class CadastroAssistenteBean implements Serializable {
 			this.assistente.setCategoriaServico(categoriaServico);
 			this.assistente.setEndereco(this.endereco);
 			
-			this.assistenteService.save(this.assistente);
+			this.usuarioService.criptografarSenha(assistente);
+			
+			this.usuarioService.save(this.assistente);
 			
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso", ""));
 		} 

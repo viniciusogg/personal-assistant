@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
 	<h:head>
 		<title><ui:insert name="title"> PERSONAL ASSISTANT </ui:insert></title>
 		
-		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/person-style.css?v=13.0" />
+		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/person-style.css?v=13.6" />
 		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/prime-faces-style-edited.css?v=10.5" />
-	    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/jquery-ui-1.12.icon-font.css?v=11.0" /> 
+	    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/jquery-ui-1.12.icon-font.css?v=11.1" /> 
 		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/administrador/adm-style.css?v=1.8" />
-		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/assistente/ast-style.css?v=3.1" />
+		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/assistente/ast-style.css?v=4.1" />
 
 	</h:head>
 	
-	<h:body>
-		<p:layout fullPage="true" >
+	<h:body >
+		<p:layout fullPage="true">
 			<p:layoutUnit position="north">
-				<h:form id="form" class="painel">
+				<h:form id="form" class="painel" >
 				
 					<p:toolbar styleClass="barra-superior">
 						<f:facet name="left">
@@ -54,7 +54,7 @@
 						</ui:insert>
 						
 						<p:layoutUnit position="center" styleClass="painel">
-							<ui:insert name="conteudo"/>
+							<ui:insert id="ui-insert" name="conteudo"/>
 						</p:layoutUnit>
 					</p:layout>
 				</h:panelGroup>

@@ -7,16 +7,18 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import br.com.personalassistant.beans.AbstractBean;
+
 
 @ViewScoped
 @Named
-public class PainelControleAdmBean implements Serializable{
+public class IndexAdministradorBean extends AbstractBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private String opcaoFiltro;
 	private List<String> opcoesFiltro;
 	
-	public PainelControleAdmBean(){
+	public IndexAdministradorBean(){
 		opcoesFiltro = new ArrayList<String>();
 		opcoesFiltro.add("Hoje");
 		opcoesFiltro.add("Semana");

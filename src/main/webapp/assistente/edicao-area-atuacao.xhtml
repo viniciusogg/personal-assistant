@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+		template="index.xhtml">
+		
+	<ui:define name="titulo">
+		<p:outputLabel class="titulo" value="EDIÇÃO DA ÁREA DE ATUAÇÃO"/>
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		
+		<div class="ui-g">
+		
+			<div class="ui-g-12">
+				<div class="ui-g-12">
+					<p:fieldset legend="INFORMAÇÕES PROFISSIONAIS" styleClass="fieldset-cadastro">
+						<ui:include src="/WEB-INF/templates/_formAreaAtuacao.xhtml">
+							<ui:param name="nomeCategoriaServico" value="#{areaAtuacaoBean.nomeCategoriaServico}"/>
+							<ui:param name="listaNomesCategoriasServicos" value="#{areaAtuacaoBean.categoriasServicos}" />
+							<ui:param name="precoHora" value="33" />
+							<ui:param name="precoFixo" value="2000" />
+							<ui:param name="capacidades" value="#{areaAtuacaoBean.capacidades}" />
+						</ui:include>
+					</p:fieldset>
+				</div>
+				<div class="ui-g-12">
+					<p:commandButton id="botao-concluir-edicao-categoria-servico" 
+							value="CONCLUIR EDIÇÃO"/>
+				</div>
+			</div>
+		</div>
+	</ui:define>			
+</ui:composition>

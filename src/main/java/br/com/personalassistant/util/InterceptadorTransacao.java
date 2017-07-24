@@ -27,7 +27,7 @@ public class InterceptadorTransacao implements Serializable {
 	@AroundInvoke
 	public Object invoke(InvocationContext context) throws Exception {
 		
-		/*EntityTransaction entityTransaction = entityManager.getTransaction();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
 		boolean criador = false;
 
 		try {
@@ -54,8 +54,9 @@ public class InterceptadorTransacao implements Serializable {
 			if (entityTransaction != null && entityTransaction.isActive() && criador) {
 				entityTransaction.commit();
 			}
-		}*/
-		Object object = null;
+		}
+		
+		/*Object object = null;
 
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
@@ -69,7 +70,7 @@ public class InterceptadorTransacao implements Serializable {
 			throw ex;
 		}
 
-		return object;
+		return object;*/
 		
 	}
 }

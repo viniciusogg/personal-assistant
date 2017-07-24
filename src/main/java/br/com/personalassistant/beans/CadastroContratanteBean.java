@@ -12,14 +12,16 @@ import br.com.personalassistant.entidades.Contratante;
 import br.com.personalassistant.entidades.Endereco;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.services.ContratanteService;
+import br.com.personalassistant.services.UsuarioService;
 
 @ViewScoped
 @Named
-public class CadastroContratanteBean implements Serializable{
+public class CadastroContratanteBean extends AbstractBean{
 
-	@Inject private ContratanteService contratanteService;
+	//@Inject private ContratanteService contratanteService;
 	private static final long serialVersionUID = 1L;
 	private Contratante contratante;
+	@Inject private UsuarioService usuarioService;
 	private Endereco endereco;
 	
 	public void preRenderView(){
@@ -40,7 +42,9 @@ public class CadastroContratanteBean implements Serializable{
 		
 		try {
 			this.contratante.setEndereco(this.endereco);
-			this.contratanteService.save(this.contratante);
+			
+			this.usuarioService.criptografarSenha(this.contratante);
+			this.usuarioService.save(this.contratante);
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso", ""));
 		} 
 		catch (ServiceException e) {

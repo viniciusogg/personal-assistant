@@ -3,16 +3,23 @@ package br.com.personalassistant.beans.assistente;
 import java.io.Serializable;
 
 import javax.faces.view.ViewScoped;
+//import javax.inject.Inject;
 import javax.inject.Named;
+
+import br.com.personalassistant.beans.AbstractBean;
+
+//import br.com.personalassistant.services.AssistenteService;
 
 @Named
 @ViewScoped
-public class PainelControleAstBean implements Serializable{
+public class IndexAssistenteBean extends AbstractBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private long quantAssistencias = 120;
-	private long totalAvaliacoes = 800;
-	private int quantEstrelas = 4;
+	//@Inject private AssistenteService assistenteService;
+	private Long quantAssistencias = new Long(120);
+	private Long totalAvaliacoes = new Long(800);
+	private Integer quantEstrelas = 4;
+
 	
 	public String getNivelExperiencia(){
 		

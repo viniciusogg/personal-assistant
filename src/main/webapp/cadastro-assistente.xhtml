@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	template="index.xhtml">
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		template="login.xhtml">
 
 	<f:metadata>
 		<f:event listener="#{cadastroAssistenteBean.preRenderView()}" type="preRenderView" />
@@ -42,44 +42,13 @@
 					</p:fieldset>
 					
 					<p:fieldset legend="INFORMAÇÕES PROFISSIONAIS" styleClass="fieldset-cadastro">
-						<div class="ui-g-8">
-							<div class="ui-g-12">
-								<p:outputLabel value="CATEGORIAS DE SERVIÇOS"/>
-							</div>
-							<div class="ui-g-12">
-								<p:selectOneMenu value="#{cadastroAssistenteBean.nomeCategoriaServico}">
-									<f:selectItems value="#{cadastroAssistenteBean.nomesCategoriasServicos}" var="categoria"
-											itemLabel="#{categoria}" itemValue="#{categoria}" />
-								</p:selectOneMenu>
-							</div>
-						</div>
-						
-						<div class="ui-g-6">
-							<div class="ui-g-12">
-								<p:outputLabel value="PREÇO COBRADO POR HORA TRABALHADA"/>
-							</div>
-							<div class="ui-g-12">
-								<p:inputNumber value="#{cadastroAssistenteBean.assistente.precoHora}"/>
-							</div>
-						</div>
-						
-						<div class="ui-g-6">
-							<div class="ui-g-12">
-								<p:outputLabel value="PREÇO FIXO COBRADO POR TRABALHO REALIZADO"/>
-							</div>
-							<div class="ui-g-12">
-								<p:inputNumber value="#{cadastroAssistenteBean.assistente.precoFixo}"/>
-							</div>
-						</div>
-						
-						<div class="ui-g-8">
-							<div class="ui-g-12">
-								<p:outputLabel value="SUAS QUALIDADES"/>
-							</div>
-							<div class="ui-g-12">
-								<p:chips value="#{cadastroAssistenteBean.nomesCapacidades}"/>
-							</div>
-						</div>
+						<ui:include src="/WEB-INF/templates/_formAreaAtuacao.xhtml">
+							<ui:param name="nomeCategoriaServico" value="#{cadastroAssistenteBean.nomeCategoriaServico}"/>
+							<ui:param name="listaNomesCategoriasServicos" value="#{cadastroAssistenteBean.nomesCategoriasServicos}"/>
+							<ui:param name="precoHora" value="#{cadastroAssistenteBean.assistente.precoHora}" />
+							<ui:param name="precoFixo" value="#{cadastroAssistenteBean.assistente.precoFixo}" />
+							<ui:param name="capacidades" value="#{cadastroAssistenteBean.nomesCapacidades}" />
+						</ui:include>
 					</p:fieldset>
 					
 					<p:fieldset legend="INFORMAÇÕES DE ENDEREÇO" styleClass="fieldset-cadastro">
@@ -97,14 +66,14 @@
 					<div class="ui-g-12">
 						<div class="ui-g-12">
 							<p:commandButton actionListener="#{cadastroAssistenteBean.salvarAssistente}" value="CADASTRAR" styleClass="componente-acao-cadastro-usuario"
-									action="index?faces-redirect=true"
+									action="login?faces-redirect=true"
 									update="msg"/>
 						</div>
 					</div>
 				</h:form>
 				
 				<div class="ui-g-12">
-					<p:commandLink action="index?faces-redirect=true" styleClass="componente-acao-cadastro-usuario link" value="FAÇA LOGIN" />
+					<p:commandLink action="login?faces-redirect=true" styleClass="componente-acao-cadastro-usuario link" value="FAÇA LOGIN" />
 					<p:outputLabel styleClass="componente-acao-cadastro-usuario" value="Já tem uma conta ?"/>
 				</div>
 			</div>

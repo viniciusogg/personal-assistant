@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		template="index.xhtml">
+		
+	<ui:define name="titulo">
+		<p:outputLabel class="titulo" value="ÁREA DE ATUAÇÃO"/>
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		
+		<div class="ui-g">
+			
+			<div class="ui-g-12">
+				<div class="ui-g-12">
+					<div class="ui-g-3">
+						<p:outputLabel value="Preço cobrado por hora trabalhada:"/>
+					</div>
+					<div class="ui-g-4">
+						<p:outputLabel value="#{areaAtuacaoBean.valorHora}"/>
+					</div>
+				</div>
+				
+				<div class="ui-g-12">
+					<div class="ui-g-2">
+						<p:outputLabel value="Preço fixo:"/>
+					</div>
+					<div class="ui-g-4">
+						<p:outputLabel value="#{areaAtuacaoBean.valorFixo}"/>
+					</div>
+				</div>
+		
+				<div class="ui-g-12">
+					<p:panel header="#{areaAtuacaoBean.nomeCategoriaServico}">
+						<ui:repeat var="capacidade" value="#{areaAtuacaoBean.capacidades}">
+							<p:outputLabel styleClass="label-capacidade" value="#{capacidade}"/>
+						</ui:repeat>
+					</p:panel>
+				</div>
+	
+				<div class="ui-g-12">
+					<p:commandButton id="botao-editar-categoria-servico" action="edicao-area-atuacao?faces-redirect=true" value="EDITAR"/> <!-- ?faces-redirect=true -->
+				</div>
+			</div>
+		</div>
+	</ui:define>			
+</ui:composition>

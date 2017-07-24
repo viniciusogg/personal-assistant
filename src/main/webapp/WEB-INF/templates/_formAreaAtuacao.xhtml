@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<div class="ui-g-8">
+		<div class="ui-g-12">
+			<p:outputLabel value="CATEGORIAS DE SERVIÇOS"/>
+		</div>
+		<div class="ui-g-12">
+			<p:selectOneMenu value="#{nomeCategoriaServico}">
+				<f:selectItems value="#{listaNomesCategoriasServicos}" var="categoria"
+						itemLabel="#{categoria}" itemValue="#{categoria}" />
+			</p:selectOneMenu>
+		</div>
+	</div>
+	
+	<div class="ui-g-6">
+		<div class="ui-g-12">
+			<p:outputLabel value="PREÇO COBRADO POR HORA TRABALHADA"/>
+		</div>
+		<div class="ui-g-12">
+			<p:inputNumber value="#{precoHora}"/>
+		</div>
+	</div>
+	
+	<div class="ui-g-6">
+		<div class="ui-g-12">
+			<p:outputLabel value="PREÇO FIXO COBRADO POR TRABALHO REALIZADO"/>
+		</div>
+		<div class="ui-g-12">
+			<p:inputNumber value="#{precoFixo}"/>
+		</div>
+	</div>
+	
+	<div class="ui-g-8">
+		<div class="ui-g-12">
+			<p:outputLabel value="SUAS QUALIDADES"/>
+		</div>
+		<div class="ui-g-12">
+			<p:chips value="#{capacidades}"/>
+		</div>
+	</div>
+	
+</ui:composition>

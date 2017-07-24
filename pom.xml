@@ -56,14 +56,18 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency> 
-
 		<!-- Pool de conexões com o banco de dados - Hibernate <-> c3p0 -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency> 
-
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>6.0.6</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	
 	<build>

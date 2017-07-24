@@ -39,7 +39,7 @@ public class Proposta implements Serializable{
 	@JoinColumn(name = "endereco_FK")
 	private Endereco endereco; // unidirecional
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "data_realizacao_servico_FK", nullable = false)
 	private DataRealizacaoServico dataRealizacaoServico; // unidirecional
 	

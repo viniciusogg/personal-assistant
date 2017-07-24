@@ -43,7 +43,7 @@ public class Lance implements Serializable{
 	@JoinColumn(nullable = false)
 	private OfertaServico oferstaServico; // bidirecional
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "data_realizacao_servico_FK", nullable = false)
 	private DataRealizacaoServico dataRealizacaoServico; // unidirecional
 	

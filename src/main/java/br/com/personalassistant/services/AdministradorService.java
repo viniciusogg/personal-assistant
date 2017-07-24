@@ -1,6 +1,10 @@
 package br.com.personalassistant.services;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -63,6 +67,43 @@ public class AdministradorService implements Serializable {
 		}
 		catch(PersistenciaException ex){
 			throw new ServiceException(ex.getMessage());
+		}
+	}
+	
+	public void criptografarSenha(Administrador administrador) throws ServiceException {
+		administrador.setSenha(criptografarSenha(administrador.getSenha()));
+	}
+
+	/**
+	 * Método que criptografa uma dada senha usando o método hash SHA-256.
+	 * 
+	 * @param password
+	 *            senha a ser criptografada
+	 * @return senha criptografada
+	 * @throws ServiceDacaException
+	 *             lançada caso ocorra algum erro durante o processo
+	 */
+	private static String criptografarSenha(String senha) throws ServiceException {
+		
+		MessageDigest messageDigest;
+		
+		try {
+			messageDigest = MessageDigest.getInstance("SHA-256");
+			messageDigest.update(senha.getBytes("UTF-8"));
+			
+			byte[] digest = messageDigest.digest();
+			
+			BigInteger bigInt = new BigInteger(1, digest);
+			
+			String output = bigInt.toString(16);
+			
+			return output;
+		}
+		catch (NoSuchAlgorithmException e) {
+			throw new ServiceException("Não foi possível criptografar a senha!");
+		} 
+		catch (UnsupportedEncodingException e) {
+			throw new ServiceException("Não foi possível criptografar a senha!");
 		}
 	}
 

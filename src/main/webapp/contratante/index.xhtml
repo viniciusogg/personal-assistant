@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		template="/WEB-INF/templates/__pageLayout.xhtml">
+		
+	<ui:define name="titulo">
+		<p:outputLabel class="titulo" value="PAINEL DE CONTROLE"/>
+	</ui:define>
+	
+	<ui:define name="opcoes-menu">
+		<p:menuitem value="INÍCIO" outcome="index.xhtml" icon="ui-icon-home"/>							
+		<p:menuitem value="PERFIL" icon="ui-icon-person"/>				
+		<p:menuitem value="NEGOCIAÇÕES" icon="ui-icon-transferthick-e-w"/>
+		<p:menuitem value="SUAS OFERTAS" icon=""/>
+		<p:menuitem value="NOVA CONTRATAÇÃO" icon=""/>
+		<p:menuitem value="AVALIAÇÕES" icon="ui-icon-star"/>
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		
+		<div class="ui-g">
+		
+			<div class="ui-g-12 div-info-panel">
+				<ui:include src="/WEB-INF/templates/_painelReputacaoUsuario.xhtml"> 
+					<ui:param name="reputacao" value="#{indexContratanteBean.reputacao}"/>
+					<ui:param name="quantEstrelas" value="#{indexContratanteBean.quantAssistencias}" />
+					<ui:param name="totalAvaliacoes" value="#{indexContratanteBean.totalAvaliacoes}" />
+				</ui:include>
+			</div>
+		
+			<div id="div-tabela" class="ui-g-12">
+				<p:dataTable id="tabelaAssistencias" var="#" value="#" rows="5"
+                         paginator="true"
+                         paginatorTemplate="{PageLinks}">
+                    
+                    <f:facet name="header"> ASSISTENTES FAVORITOS </f:facet>
+                     
+					<p:column headerText="NOME">
+						<p:outputLabel value="#"/>							
+					</p:column>
+					<p:column headerText="ÁREA DE ATUAÇÃO">
+						<p:outputLabel value="#"/>							
+					</p:column>
+					<p:column headerText="">						
+						<h:form>
+							<p:commandButton icon="ui-icon-trash" title="Remove assistente"/>
+							<p:commandButton icon="ui-icon-phone" title="Contratar"/>
+						</h:form>
+					</p:column>
+				</p:dataTable>
+			</div>
+		</div>
+	</ui:define>			
+</ui:composition>

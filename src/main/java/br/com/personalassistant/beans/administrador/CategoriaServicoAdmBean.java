@@ -9,13 +9,14 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.personalassistant.beans.AbstractBean;
 import br.com.personalassistant.entidades.CategoriaServico;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.services.CategoriaServicoService;
 
 @ViewScoped
 @Named
-public class CategoriaServicoAdmBean implements Serializable{
+public class CategoriaServicoAdmBean extends AbstractBean implements Serializable{
 
 	@Inject
 	private CategoriaServicoService categoriaServicoService;
@@ -32,7 +33,8 @@ public class CategoriaServicoAdmBean implements Serializable{
 
 		try {
 			this.lista = categoriaServicoService.getAll();
-		} catch (ServiceException e) {
+		} 
+		catch (ServiceException e) {
 			e.printStackTrace();
 		}
 	}
