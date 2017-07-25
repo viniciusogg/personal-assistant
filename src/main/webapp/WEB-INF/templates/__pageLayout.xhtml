@@ -9,7 +9,7 @@
 	<h:head>
 		<title><ui:insert name="title"> PERSONAL ASSISTANT </ui:insert></title>
 		
-		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/person-style.css?v=13.6" />
+		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/person-style.css?v=14.3" />
 		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/prime-faces-style-edited.css?v=10.5" />
 	    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/jquery-ui-1.12.icon-font.css?v=11.1" /> 
 		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/administrador/adm-style.css?v=1.8" />
@@ -28,13 +28,18 @@
 								<p:commandButton update=":conteudo" 
 									actionListener="#{templateBean.acionarMenuLateral}" 
 									icon="ui-icon-bars"
-									styleClass="botao-menu-lateral" />
+									styleClass="botao-menu-superior" />
 							</ui:insert>
 							<ui:insert name="titulo"/>
 						</f:facet>
 						<f:facet name="right">
-							<ui:insert name="conteudo-menu-superior"/>
-						</f:facet>		
+							<ui:insert name="conteudo-menu-superior">
+								<p:commandButton actionListener="#{autenticacaoBean.efetuarLogout}" 
+									icon="ui-icon-logout"
+									styleClass="botao-menu-superior botao-logout" 
+									title="Sair"/>
+							</ui:insert>
+						</f:facet>
 					</p:toolbar>
 				</h:form>
 			</p:layoutUnit>		
@@ -61,7 +66,7 @@
 			</p:layoutUnit>
 
 			<p:layoutUnit position="south" id="layout-unit-rodape">
-				<p:outputLabel style="color:gray" value="RODAPÉ"/>
+				<p:outputLabel style="color:gray" value="DAC - DESENVOLVIMENTO DE APLICAÇÕES COORPORATIVAS"/>
 			</p:layoutUnit>
 
 		</p:layout>

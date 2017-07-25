@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import br.com.personalassistant.dao.UsuarioDAO;
 import br.com.personalassistant.entidades.Usuario;
+import br.com.personalassistant.enums.TIPO_USUARIO;
 import br.com.personalassistant.excecoes.PersistenciaException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.util.Transacional;
@@ -69,11 +70,9 @@ public class UsuarioService implements Serializable {
 		}
 	}
 
-	public Usuario getByEmail(String email) throws ServiceException{
+	public TIPO_USUARIO getTipoUsuarioByEmail(String email) throws ServiceException{
 		try{
-			//System.out.println(email);
-			Usuario usuario = usuarioDAO.getByEmail(email);
-			return usuario;
+			return this.usuarioDAO.getTipoUsuarioByEmail(email);
 		}
 		catch(PersistenciaException ex){
 			throw new ServiceException(ex.getMessage());

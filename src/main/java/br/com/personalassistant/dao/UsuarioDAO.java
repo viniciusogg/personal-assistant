@@ -7,6 +7,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.Usuario;
+import br.com.personalassistant.enums.TIPO_USUARIO;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class UsuarioDAO extends DAO {
@@ -105,33 +106,30 @@ public class UsuarioDAO extends DAO {
 		return usuario;
 	}
 	
-	public Usuario getByEmail(String email) throws PersistenciaException{
-		
-		System.out.println("Entrou no usuarioDAO, método getByEmail");
-		
+	public TIPO_USUARIO getTipoUsuarioByEmail(String email) throws PersistenciaException{
+				
 		EntityManager entityManager = getEntityManager();
-		Usuario usuario = null;
+		TIPO_USUARIO tipoUsuario = null;
 	
 		if (email == null) {
 			email = "";
 		}
-		System.out.println("email: " + email);
+
 		try{
-			TypedQuery<Usuario> typedQuery = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", 
-					Usuario.class);
+			TypedQuery<TIPO_USUARIO> typedQuery = entityManager.createQuery("SELECT u.tipoUsuario FROM Usuario u WHERE u.email = :email", 
+					TIPO_USUARIO.class);
 			typedQuery.setParameter("email", email);			
-			usuario = typedQuery.getSingleResult();
-			System.out.println(usuario.toString());
+			tipoUsuario = typedQuery.getSingleResult();
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
-			throw new PersistenciaException("Erro ao recuperar usuario");
+			throw new PersistenciaException("Erro ao recuperar tipo usuario");
 		}
 		finally{
 			entityManager.close();
 		}
 		
-		return usuario;
+		return tipoUsuario;
 	}
 	
 }

@@ -11,9 +11,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.com.personalassistant.enums.TIPO_USUARIO;
+
 @Table(name = "TB_ASSISTENTE")
 @Entity(name = "Assistente")
-@DiscriminatorValue("Assistente")
+@DiscriminatorValue("assist")
 public class Assistente extends Usuario{
 
 	private static final long serialVersionUID = 1L;
@@ -72,6 +74,7 @@ public class Assistente extends Usuario{
 		this.endereco = endereco;
 		this.categoriaServico = categoriaServico;
 		this.capacidades = capacidades;
+		this.setTipoUsuario(TIPO_USUARIO.ASSISTENTE);
 	}
 
 	public Double getPrecoFixo() {

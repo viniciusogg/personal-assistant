@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	version="3.1">
+		xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+		version="3.1">
 	<display-name>personal-assistant</display-name>
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
@@ -18,10 +18,7 @@
 		<param-value>tema</param-value>
 	</context-param>
 	<welcome-file-list>
-  <!--  <welcome-file>assistente/index.xhtml</welcome-file>
-		<welcome-file>administrador/index.xhtml</welcome-file>
-		<welcome-file>contratante/index.xhtml</welcome-file> -->
-		<welcome-file>login.xhtml</welcome-file>
+ 		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
 	<context-param>
 		<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
@@ -31,7 +28,7 @@
 		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
 		<param-value>true</param-value>
 	</context-param>
-	<!-- <error-page>
+	<error-page>
 		<error-code>403</error-code>
 		<location>/403.xhtml</location>
 	</error-page>
@@ -40,7 +37,7 @@
 		<realm-name>personalAssistantJdbcRealm</realm-name>
 		<form-login-config>
 			<form-login-page>/login.xhtml</form-login-page>
-			<form-error-page>/login_error.xhtml</form-error-page>
+			<form-error-page>/login.xhtml?error=true</form-error-page>
 		</form-login-config>
 	</login-config>
 	<security-constraint>
@@ -109,6 +106,48 @@
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
+	<security-constraint>
+		<display-name>Acesso permitido a todos</display-name>
+		<web-resource-collection>
+			<web-resource-name>Área não protegida</web-resource-name>
+			<description />
+			<url-pattern>/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>PUT</http-method>
+			<http-method>OPTIONS</http-method>
+			<http-method>TRACE</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description />
+			<role-name>ADMINISTRADOR</role-name>
+			<role-name>ASSISTENTE</role-name>
+			<role-name>CONTRATANTE</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	<security-constraint>
+		<display-name>Acesso via HTTPS em todo sistema</display-name>
+		<web-resource-collection>
+			<web-resource-name>Área de acesso via HTTPS</web-resource-name>
+			<description />
+			<url-pattern>/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>PUT</http-method>
+			<http-method>OPTIONS</http-method>
+			<http-method>TRACE</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
 	<security-role>
 		<role-name>ADMINISTRADOR</role-name>
 	</security-role>
@@ -117,5 +156,5 @@
 	</security-role>
 	<security-role>
 		<role-name>CONTRATANTE</role-name>
-	</security-role>-->
+	</security-role>
 </web-app>

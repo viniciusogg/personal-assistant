@@ -14,6 +14,7 @@ import br.com.personalassistant.entidades.Assistente;
 import br.com.personalassistant.entidades.Capacidade;
 import br.com.personalassistant.entidades.CategoriaServico;
 import br.com.personalassistant.entidades.Endereco;
+import br.com.personalassistant.enums.TIPO_USUARIO;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.services.CategoriaServicoService;
 import br.com.personalassistant.services.UsuarioService;
@@ -83,15 +84,16 @@ public class CadastroAssistenteBean extends AbstractBean implements Serializable
 			this.assistente.setCapacidades(capacidades);						
 			this.assistente.setCategoriaServico(categoriaServico);
 			this.assistente.setEndereco(this.endereco);
+			this.assistente.setTipoUsuario(TIPO_USUARIO.ASSISTENTE);
 			
 			this.usuarioService.criptografarSenha(assistente);
 			
 			this.usuarioService.save(this.assistente);
 			
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso", ""));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso, faça login na sua conta", ""));
 		} 
 		catch (ServiceException e) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro", ""));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro, tente novamente", ""));
 			e.printStackTrace();
 		}
 	}

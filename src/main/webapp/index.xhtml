@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		template="/login.xhtml">
+			
+	<f:metadata>
+  		<f:viewAction action="#{autenticacaoBean.redirecionarUsuario}" />
+	</f:metadata>
+	
+	<ui:define name="conteudo-menu-superior" />
+	
+	<ui:define name="menu-lateral"/>
+	
+	<ui:define name="conteudo">
+		
+		<div id="div1" class="ui-g">
+						
+			<div class="ui-g-12" >
+
+			</div>
+		</div>
+	</ui:define>	
+			
+</ui:composition>

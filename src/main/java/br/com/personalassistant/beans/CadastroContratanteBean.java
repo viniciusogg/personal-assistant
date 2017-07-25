@@ -1,7 +1,5 @@
 package br.com.personalassistant.beans;
 
-import java.io.Serializable;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -10,18 +8,17 @@ import javax.inject.Named;
 
 import br.com.personalassistant.entidades.Contratante;
 import br.com.personalassistant.entidades.Endereco;
+import br.com.personalassistant.enums.TIPO_USUARIO;
 import br.com.personalassistant.excecoes.ServiceException;
-import br.com.personalassistant.services.ContratanteService;
 import br.com.personalassistant.services.UsuarioService;
 
 @ViewScoped
 @Named
 public class CadastroContratanteBean extends AbstractBean{
 
-	//@Inject private ContratanteService contratanteService;
+	@Inject private UsuarioService usuarioService;
 	private static final long serialVersionUID = 1L;
 	private Contratante contratante;
-	@Inject private UsuarioService usuarioService;
 	private Endereco endereco;
 	
 	public void preRenderView(){
@@ -42,13 +39,14 @@ public class CadastroContratanteBean extends AbstractBean{
 		
 		try {
 			this.contratante.setEndereco(this.endereco);
+			this.contratante.setTipoUsuario(TIPO_USUARIO.CONTRATANTE);
 			
 			this.usuarioService.criptografarSenha(this.contratante);
 			this.usuarioService.save(this.contratante);
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso", ""));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso, faça login na sua conta", ""));
 		} 
 		catch (ServiceException e) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro", ""));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro, tente novamente", ""));
 			e.printStackTrace();
 		}
 	}

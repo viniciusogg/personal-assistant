@@ -6,9 +6,13 @@
 		xmlns:p="http://primefaces.org/ui"
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 		template="/WEB-INF/templates/__pageLayout.xhtml">
-		
-	<!--ERRO org.jboss.weld.exceptions.DeploymentException: WELD-000123: Error loading com.project.util.TransactionInterceptor defined in <class>com.project.util.TransactionInterceptor</class> -->
-		
+			
+	<f:metadata>
+		<f:event id="postConstructorEvent"
+			type="javax.faces.event.PreRenderComponentEvent"
+			listener="#{erroAutenticacaoBean.reportarMensagemErro(param['error'])}" />
+	</f:metadata>		
+				
 	<ui:define name="botao-menu">
 		<div class="ui-g-12" id="div-pagina-superior"></div>
 	</ui:define>
@@ -40,26 +44,28 @@
 			
 			<p:panel header="LOGIN" id="painel-login" styleClass="ui-g-12">
 	
-				<h:form id="formLogin" > <!-- prependId="false" onsubmit="action='j_security_check';" -->
+				<h:form id="formLogin" prependId="false" onsubmit="action='j_security_check';">
 					<div class="ui-g-12" id="div-label-email">
 						<p:outputLabel id="label-email" value="E-MAIL"/>
 					</div>
 					<div class="ui-g-12" id="div-campo-email">
-						<p:inputText required="true" placeholder="DIGITE SEU E-MAIL" id="username" 
-								/> <!-- id="j_username" value="#{loginBean.email}" -->
+						<p:inputText required="true" placeholder="DIGITE SEU E-MAIL"
+								id="j_username" 
+								requiredMessage="Você esqueceu de digitar seu e-mail" /> <!--  -->
 					</div>
 					
 					<div class="ui-g-12" id="div-label-senha">
 						<p:outputLabel value="SENHA" id="label-senha"/>
 					</div>
 					<div class="ui-g-12" id="div-campo-senha">
-						<p:password required="true" placeholder="DIGITE SUA SENHA" id="password" 
-								/> <!-- id="j_password" value="#{loginBean.senha}"-->
+						<p:password required="true" placeholder="DIGITE SUA SENHA"
+								id="j_password" 
+								requiredMessage="Você esqueceu de digitar sua senha" /> <!--  -->
 					</div>
 					
 					<div class="ui-g-12">
 						<p:commandButton value="ENTRAR" id="botao-entrar"
-								update="msg" /> <!-- ajax="false" action="#{loginBean.entrar}" -->
+								update="msg" ajax="false" />
 					</div>
 				</h:form>
 			</p:panel>

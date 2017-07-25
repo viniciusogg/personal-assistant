@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 import br.com.personalassistant.enums.TIPO_USUARIO;
 
-@DiscriminatorValue("Admin")
+@DiscriminatorValue("admin")
 @Table(name = "TB_ADMINISTRADOR")
 @Entity(name = "Administrador")
 public class Administrador extends Usuario{

@@ -1,6 +1,5 @@
 package br.com.personalassistant.beans.administrador;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +8,9 @@ import javax.inject.Named;
 
 import br.com.personalassistant.beans.AbstractBean;
 
-
 @ViewScoped
 @Named
-public class IndexAdministradorBean extends AbstractBean implements Serializable{
+public class IndexAdministradorBean extends AbstractBean{
 
 	private static final long serialVersionUID = 1L;
 	private String opcaoFiltro;

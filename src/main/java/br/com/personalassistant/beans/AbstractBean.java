@@ -6,7 +6,6 @@ import java.security.Principal;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-
 public abstract class AbstractBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -19,7 +18,7 @@ public abstract class AbstractBean implements Serializable{
 		return externalContext.isUserInRole(role);
 	}
 	
-	public String getUserLogin() {
+	public String getEmailUsuarioLogado() {
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
@@ -28,7 +27,7 @@ public abstract class AbstractBean implements Serializable{
 		if (userPrincipal == null) {
 			return "";
 		}
-		
+
 		return userPrincipal.getName();
 	}
 	

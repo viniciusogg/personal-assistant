@@ -5,27 +5,25 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import br.com.personalassistant.enums.TIPO_USUARIO;
 
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "TIPO", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue("Usuario")
+@DiscriminatorColumn(name = "Discriminador", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "TB_USUARIO", uniqueConstraints = {
 		@UniqueConstraint(name = "UC_USUARIO", columnNames = {"email"})})
 @Entity(name = "Usuario")
-public class Usuario implements Serializable{
+public abstract class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -45,7 +43,8 @@ public class Usuario implements Serializable{
 	@Column(nullable = false)
 	private String numTelefonico;
 	
-	@Transient
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
 	private TIPO_USUARIO tipoUsuario;
 	
 	public Long getId() {

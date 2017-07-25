@@ -6,7 +6,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,9 +19,8 @@ import javax.persistence.TemporalType;
 @Entity(name = "Avaliacao")
 @Table(name = "TB_AVALIACAO")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "TIPO", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue("Avaliacao")
-public class Avaliacao implements Serializable{
+@DiscriminatorColumn(name = "Discriminador", discriminatorType = DiscriminatorType.STRING)
+public abstract class Avaliacao implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
