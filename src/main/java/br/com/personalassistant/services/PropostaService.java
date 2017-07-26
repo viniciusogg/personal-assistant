@@ -13,8 +13,8 @@ import br.com.personalassistant.util.Transacional;
 
 public class PropostaService implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 6845558854773354022L;
+
 	@Inject
 	private PropostaDAO propostaDAO;
 	

@@ -1,6 +1,5 @@
 package br.com.personalassistant.beans.assistente;
 
-import java.io.Serializable;
 
 import javax.faces.view.ViewScoped;
 //import javax.inject.Inject;
@@ -12,9 +11,10 @@ import br.com.personalassistant.beans.AbstractBean;
 
 @Named
 @ViewScoped
-public class IndexAssistenteBean extends AbstractBean implements Serializable{
+public class IndexAssistenteBean extends AbstractBean{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1328929115686436730L;
+	
 	//@Inject private AssistenteService assistenteService;
 	private Long quantAssistencias = new Long(120);
 	private Long totalAvaliacoes = new Long(800);

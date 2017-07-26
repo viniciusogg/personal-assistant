@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @DiscriminatorValue("AvaliacaoContratante")
 public class AvaliacaoContratante extends Avaliacao{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3470897374170137529L;
 
 	@Column(nullable = false)
 	private Integer facilidadePagamento;

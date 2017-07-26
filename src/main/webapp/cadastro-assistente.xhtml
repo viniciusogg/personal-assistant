@@ -32,7 +32,7 @@
 				<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
 				
 				<h:form>
-					<p:fieldset legend="INFORMAÇÕES PESSOAIS" styleClass="fieldset-cadastro">
+					<p:fieldset legend="INFORMAÇÕES PESSOAIS" styleClass="fieldset">
 						<ui:include src="/WEB-INF/templates/_formUsuario.xhtml">
 							<ui:param name="nome" value="#{cadastroAssistenteBean.assistente.nome}"/>
 							<ui:param name="email" value="#{cadastroAssistenteBean.assistente.email}" />
@@ -41,7 +41,7 @@
 						</ui:include>
 					</p:fieldset>
 					
-					<p:fieldset legend="INFORMAÇÕES PROFISSIONAIS" styleClass="fieldset-cadastro">
+					<p:fieldset legend="INFORMAÇÕES PROFISSIONAIS" styleClass="fieldset">
 						<ui:include src="/WEB-INF/templates/_formAreaAtuacao.xhtml">
 							<ui:param name="nomeCategoriaServico" value="#{cadastroAssistenteBean.nomeCategoriaServico}"/>
 							<ui:param name="listaNomesCategoriasServicos" value="#{cadastroAssistenteBean.nomesCategoriasServicos}"/>
@@ -51,7 +51,7 @@
 						</ui:include>
 					</p:fieldset>
 					
-					<p:fieldset legend="INFORMAÇÕES DE ENDEREÇO" styleClass="fieldset-cadastro">
+					<p:fieldset legend="INFORMAÇÕES DE ENDEREÇO" styleClass="fieldset">
 						<ui:include src="/WEB-INF/templates/_formEndereco.xhtml">
 							<ui:param name="rua" value="#{cadastroAssistenteBean.endereco.rua}"/>
 							<ui:param name="numero" value="#{cadastroAssistenteBean.endereco.numero}" />
@@ -64,11 +64,9 @@
 					</p:fieldset>
 					
 					<div class="ui-g-12">
-						<div class="ui-g-12">
-							<p:commandButton actionListener="#{cadastroAssistenteBean.salvarAssistente}" value="CADASTRAR" styleClass="componente-acao-cadastro-usuario"
-									action="login?faces-redirect=true"
-									update="msg"/>
-						</div>
+						<p:commandButton actionListener="#{cadastroAssistenteBean.salvarAssistente}" value="CADASTRAR" styleClass="componente-acao-cadastro-usuario"
+								action="login?faces-redirect=true"
+								update="msg"/>
 					</div>
 				</h:form>
 				

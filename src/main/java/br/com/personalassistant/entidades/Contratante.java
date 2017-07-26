@@ -18,8 +18,8 @@ import br.com.personalassistant.enums.TIPO_USUARIO;
 @DiscriminatorValue("contr")
 public class Contratante extends Usuario{
 
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -1566617799006322877L;
+
 	@OneToMany
 	@JoinColumn(name = "favorito_do_contratante_FK")
 	private List<Assistente> assistentesFavoritos; // unidirecional

@@ -11,7 +11,7 @@ import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class LanceDAO extends DAO {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8408307571553851621L;
 
 	public void save(Lance lance) throws PersistenciaException{
 		

@@ -10,8 +10,8 @@ import javax.persistence.Table;
 @DiscriminatorValue("AvaliacaoAssistente")
 public class AvaliacaoAssistente extends Avaliacao{
 
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -783102891981677295L;
+
 	@Column(nullable = false)
 	private Integer qualidadeServico;
 	

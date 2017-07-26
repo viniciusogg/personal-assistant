@@ -15,7 +15,7 @@ import javax.persistence.UniqueConstraint;
 @Entity(name = "CategoriaServico")
 public class CategoriaServico implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 5931600135186301826L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)

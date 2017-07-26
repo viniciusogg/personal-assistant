@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 @DiscriminatorColumn(name = "Discriminador", discriminatorType = DiscriminatorType.STRING)
 public abstract class Avaliacao implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6670414494505025157L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -38,6 +38,7 @@ public abstract class Avaliacao implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date data;
 	
+	@Column(nullable = false)
 	private String comentario;
 
 	public Long getId() {

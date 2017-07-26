@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "TB_CAPACIDADE") //, uniqueConstraints = {@UniqueConstraint(name = "UC_CAPACIDADE", columnNames = {"nome"})}
 public class Capacidade implements Serializable{	   // restrição de unicidade Para evitar duplicação no banco..
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8996005601094291022L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)

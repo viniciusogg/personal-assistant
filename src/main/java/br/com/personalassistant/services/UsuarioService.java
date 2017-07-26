@@ -18,8 +18,8 @@ import br.com.personalassistant.util.Transacional;
 
 public class UsuarioService implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 6862815512457634483L;
+
 	@Inject private UsuarioDAO usuarioDAO;
 	
 	@Transacional

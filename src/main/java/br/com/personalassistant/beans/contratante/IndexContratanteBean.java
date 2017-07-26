@@ -1,12 +1,11 @@
 package br.com.personalassistant.beans.contratante;
 
-import java.io.Serializable;
-
 import br.com.personalassistant.beans.AbstractBean;
 
-public class IndexContratanteBean extends AbstractBean implements Serializable{
+public class IndexContratanteBean extends AbstractBean{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7936163110122575442L;
+
 	private Long totalAvaliacoes = new Long(800);
 	private Integer quantEstrelas = 4;
 	

@@ -13,8 +13,8 @@ import br.com.personalassistant.util.Transacional;
 
 public class CapacidadeService implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 9020394751069262216L;
+
 	@Inject
 	private CapacidadeDAO capacidadeDAO;
 	

@@ -24,6 +24,8 @@
 		
 		<div class="ui-g">
 		
+			<p:growl id="msg" life="3500" showDetail="false" escape="false"/>	
+		
 			<div class="ui-g-12 div-info-panel">
 				<ui:include src="/WEB-INF/templates/_painelReputacaoUsuario.xhtml"> 
 					<ui:param name="reputacao" value="#{indexContratanteBean.reputacao}"/>
@@ -33,7 +35,7 @@
 			</div>
 		
 			<div id="div-tabela" class="ui-g-12">
-				<p:dataTable id="tabelaAssistencias" var="#" value="#" rows="5"
+				<p:dataTable id="tabelaAssistencias" var="#" value="#" rows="20"
                          paginator="true"
                          paginatorTemplate="{PageLinks}">
                     

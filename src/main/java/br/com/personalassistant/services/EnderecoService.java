@@ -13,8 +13,8 @@ import br.com.personalassistant.util.Transacional;
 
 public class EnderecoService implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -9005147697634584210L;
+
 	@Inject
 	private EnderecoDAO enderecoDAO;
 	

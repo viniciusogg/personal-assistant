@@ -18,8 +18,8 @@ import br.com.personalassistant.enums.TIPO_USUARIO;
 @DiscriminatorValue("assist")
 public class Assistente extends Usuario{
 
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 5159659883981518233L;
+
 	private Integer experiencia; // quantidade de assistencias prestadas
 
 	@Column(nullable = false)

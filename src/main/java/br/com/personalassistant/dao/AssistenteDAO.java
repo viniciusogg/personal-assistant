@@ -11,7 +11,7 @@ import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class AssistenteDAO extends DAO {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3088908627019097676L;
 
 	public void save(Assistente assistente) throws PersistenciaException{
 		

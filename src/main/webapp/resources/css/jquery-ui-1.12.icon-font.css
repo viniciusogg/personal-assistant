@@ -673,7 +673,10 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670'; }
 .ui-icon-pin-w:after { content: '\e710'; }
 .ui-icon-play:after { content: '\e6ac'; }
 .ui-icon-plugin:after { content: '\e6cb'; }
-.ui-icon-plus:after { content: '\e682'; }
+.ui-icon-plus:after { content: '\e682'; 
+	left: 10px !important;
+	top: 11px !important;
+}
 .ui-icon-plusthick:after { content: '\e685'; }
 .ui-icon-power:after,
 .ui-icon-switch:after { content: '\e6cd'; }
@@ -716,7 +719,9 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670'; }
 .ui-icon-login:after { content: '\e6ee'; }
 .ui-icon-sign-out:after,
 .ui-icon-logout:after,
-.ui-icon-logoff:after { content: '\e6ef'; }
+.ui-icon-logoff:after { content: '\e6ef'; 
+	font-size: 22px;
+}
 .ui-icon-signal:after { content: '\e725'; }
 .ui-icon-signal-diag:after,
 .ui-icon-rss:after,

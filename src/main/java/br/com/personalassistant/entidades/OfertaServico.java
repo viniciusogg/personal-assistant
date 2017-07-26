@@ -23,7 +23,7 @@ import br.com.personalassistant.enums.ESTADO_OFERTA;
 @Table(name = "TB_OFERTA_SERVICO")
 public class OfertaServico implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3150730779099906180L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)

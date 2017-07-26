@@ -13,7 +13,7 @@
 	
 	<ui:define name="opcoes-menu">
 		<p:menuitem value="INÍCIO" outcome="index.xhtml" icon="ui-icon-home"/>							
-		<p:menuitem value="PERFIL" icon="ui-icon-person"/>				
+		<p:menuitem value="PERFIL" outcome="perfil.xhtml" icon="ui-icon-person"/>				
 		<p:menuitem value="NEGOCIAÇÕES" outcome="negociacoes.xhtml" icon="ui-icon-transferthick-e-w"/>
 		<p:menuitem value="BUSCAR OFERTAS" outcome="ofertas-de-servicos.xhtml" icon="ui-icon-zoom"/>
 		<p:menuitem value="LANCES" outcome="lances.xhtml" icon="ui-icon-list"/>
@@ -25,8 +25,10 @@
 		
 		<div class="ui-g">
 		
+			<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
+		
 			<div class="ui-g-12 div-info-panel">
-				<p:outputPanel styleClass="ui-g info-panel div-info">
+				<p:outputPanel id="painel-experiencia" styleClass="ui-g info-panel">
 					
 					<div class="ui-g-6 div-label">
 						<p:outputLabel value="SUA EXPERIÊNCIA" styleClass="label-titulo-infopanel"/>				
@@ -54,7 +56,7 @@
 			</div>
 		
 			<div id="div-tabela" class="ui-g-12">
-				<p:dataTable id="tabelaAssistencias" var="#" value="#" rows="5"
+				<p:dataTable id="tabelaAssistencias" var="#" value="#" rows="20"
                          paginator="true"
                          paginatorTemplate="{PageLinks}">
                     

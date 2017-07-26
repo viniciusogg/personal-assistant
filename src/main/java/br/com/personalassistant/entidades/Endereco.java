@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "TB_ENDERECO")
 public class Endereco implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4023551797287042535L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)

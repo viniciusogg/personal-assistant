@@ -3,12 +3,18 @@
 }
 
 .div-info{
-	padding:2px;
+	padding:2px !important;
+	font-weight: normal !important; 
+	font-size: unset !important;
 }
 
 .div-label{
 	padding:2px; 
 	text-align:center;
+}
+
+#painel-experiencia{
+	padding: 1px;
 }
 
 .label-titulo-infopanel{
@@ -79,16 +85,52 @@
 	font-size: 18px !important;
 }
 
-.painel-oferta-label{
+.sub-div-info-oferta-label{
 	font-size: 20px !important;
 	padding-bottom: 0px !important;
 	padding-top: 0px !important;
 	text-align: center !important;
 }
 
-.painel-oferta-label-descritiva{
+.sub-div-info-oferta-label-descritiva{
 	font-size: 15px !important;
 	padding-bottom: 0px !important;
 	padding-top: 0px !important;
 	text-align: center !important;
+}
+
+.div-superior-oferta{
+	padding: 0px !important;
+}
+
+.div-inferior-oferta{
+	padding: 0px !important;
+}
+
+.botao-novo-lance{
+	float: right;
+	border-radius: 50px;
+	height: 40px !important;
+	box-shadow: 2.5px 2.5px 5px 0px rgba(0,0,0,.26) !important;
+}
+
+.label-info-contratante-oferta{
+	float:right;
+}
+
+#dialog-lance{
+	margin-left: 25%;
+	margin-right: 25%;
+	width: unset !important;
+	left: unset !important;
+}
+
+.botao-acao-lance{
+	margin: 2px;
+	float: right;
+}
+
+.botao-acao-perfil{
+	margin: 2px;
+	float: right;
 }

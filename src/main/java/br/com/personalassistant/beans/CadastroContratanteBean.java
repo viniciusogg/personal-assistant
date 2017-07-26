@@ -16,8 +16,9 @@ import br.com.personalassistant.services.UsuarioService;
 @Named
 public class CadastroContratanteBean extends AbstractBean{
 
+	private static final long serialVersionUID = 6467407687238883757L;
+
 	@Inject private UsuarioService usuarioService;
-	private static final long serialVersionUID = 1L;
 	private Contratante contratante;
 	private Endereco endereco;
 	

@@ -21,7 +21,7 @@ import br.com.personalassistant.enums.ESTADO_LANCE;
 @Entity(name = "Lance")
 public class Lance implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1668806308541842964L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)

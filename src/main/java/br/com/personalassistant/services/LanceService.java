@@ -13,8 +13,8 @@ import br.com.personalassistant.util.Transacional;
 
 public class LanceService implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 6351746765697049849L;
+
 	@Inject
 	private LanceDAO lanceDAO;
 	

@@ -11,7 +11,7 @@ import br.com.personalassistant.enums.TIPO_USUARIO;
 @Entity(name = "Administrador")
 public class Administrador extends Usuario{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7799842984118080272L;
 
 	public Administrador(){
 		super();

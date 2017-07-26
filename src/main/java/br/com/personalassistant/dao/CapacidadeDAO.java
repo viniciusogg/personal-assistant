@@ -11,7 +11,7 @@ import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class CapacidadeDAO extends DAO {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1411798947932553129L;
 
 	public void save(Capacidade capacidade) throws PersistenciaException{
 		

@@ -25,7 +25,7 @@ import br.com.personalassistant.enums.TIPO_USUARIO;
 @Entity(name = "Usuario")
 public abstract class Usuario implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1694937550826272267L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)

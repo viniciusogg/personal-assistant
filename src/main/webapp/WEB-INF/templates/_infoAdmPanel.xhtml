@@ -20,7 +20,7 @@
 				value="#{descricao != null ? descricao : 'DESCRICAO'}">
 			</p:outputLabel>
 			
-			<p:selectOneMenu value="#{indexAdministradorBean.opcaoFiltro}" styleClass="combobox-infopanel" >
+			<p:selectOneMenu value="#{indexAdministradorBean.opcaoFiltro}" styleClass="combobox combobox-infopanel" >
 				<f:selectItems value="#{indexAdministradorBean.opcoesFiltro}" var="opcao"
 					itemLabel="#{opcao}" itemValue="#{opcao}" />	
 			</p:selectOneMenu>

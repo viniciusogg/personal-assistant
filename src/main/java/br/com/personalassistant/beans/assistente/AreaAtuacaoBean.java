@@ -12,7 +12,8 @@ import br.com.personalassistant.beans.AbstractBean;
 @ViewScoped
 public class AreaAtuacaoBean extends AbstractBean {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -79280093168767924L;
+
 	private Double valorHora = 54.9;
 	private Double valorFixo = 2000.9;
 	private String nomeCategoriaServico = "Nome da categoria de servico";

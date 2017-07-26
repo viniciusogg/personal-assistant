@@ -47,6 +47,11 @@ div{
 	overflow-x: hidden !important;	
 }
 
+.combobox{	
+	font-weight:normal !important; 
+	font-size: 18px !important
+}
+
 form{
 	overflow: hidden !important;
 }
@@ -269,7 +274,7 @@ a{
 	margin-right: 20% !important;
 }
 
-.fieldset-cadastro{
+.fieldset{
 	margin-bottom: 20px;
 }
 
@@ -289,4 +294,10 @@ a{
 .botao-logout{
 	bottom: 5px;
 	right: 5px;
+}
+
+.label-descricao-qualidades{
+	font-size: 15px;
+	color: gray;
+	margin: unset !important;
 }

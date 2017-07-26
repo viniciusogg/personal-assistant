@@ -1,6 +1,5 @@
 package br.com.personalassistant.beans.administrador;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -16,12 +15,11 @@ import br.com.personalassistant.services.CategoriaServicoService;
 
 @ViewScoped
 @Named
-public class CategoriaServicoAdmBean extends AbstractBean implements Serializable{
+public class CategoriaServicoAdmBean extends AbstractBean{
 
-	@Inject
-	private CategoriaServicoService categoriaServicoService;
-	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7752224083271420472L;
+
+	@Inject private CategoriaServicoService categoriaServicoService;
 	private CategoriaServico categoriaServico;
 	private List<CategoriaServico> lista;
 	

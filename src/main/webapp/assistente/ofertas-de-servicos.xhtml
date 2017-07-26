@@ -14,37 +14,131 @@
 	<ui:define name="conteudo">
 		
 		<div class="ui-g">
+		
+			<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
+		
 			<div class="ui-g-12">
 				<p:outputPanel styleClass="ui-g info-panel div-info">
 					
-					<p:outputLabel value="TÍTULO" styleClass="titulo-oferta ui-g-12"/>				
+					<div class="ui-g-12">
+						<div class="ui-g-6 div-superior-oferta">
+							<p:outputLabel value="TÍTULO" styleClass="titulo-oferta"/>
+						</div>
+						<div class="ui-g-6 div-superior-oferta">
+							<p:commandButton title="Fazer um lance" styleClass="botao-novo-lance" icon="ui-icon-plus" update="msg"
+									onclick="PF('dialog').show()">
+								<!-- <f:setPropertyActionListener /> -->  
+							</p:commandButton><!-- target="#{categoriaServicoAdmBean.categoriaServico}" 
+										value="#{categoriaServico}"  -->
+									
+							<p:dialog id="dialog-lance" appendTo="@(body)" resizable="false" 
+									responsive="true" widgetVar="dialog" modal="true" draggable="false" header="NOVO LANCE" >
+								<h:form >
+									<div class="ui-g-12">
+										<div class="ui-g-12">
+											<div class="ui-g-6">
+												<p:outputLabel value="Escolha o tipo de pagamento*"/>
+											</div>
+											<div class="ui-g-6">
+												<p:selectOneMenu value="#{ofertasAssistenteBean.tipoPagamento}" styleClass="combobox">
+													<f:selectItems value="#{ofertasAssistenteBean.opcoesPagamento}" var="opcao"
+														itemLabel="#{opcao}" itemValue="#{opcao}" />	
+												</p:selectOneMenu>
+											</div>
+										</div>
+										<div class="ui-g-12">
+											<div class="ui-g-6">
+												<p:outputLabel value="Valor do lance*"/>
+											</div>
+											<div class="ui-g-6">
+												<p:inputNumber required="true" 
+														requiredMessage="Você esqueceu de informar o valor do seu lance"/>
+											</div>
+										</div>
+										<div class="ui-g-12">
+											<div class="ui-g-6">
+												<p:outputLabel value="Data de início do serviço*"/>
+											</div>
+											<div class="ui-g-6">
+												<p:calendar showButtonPanel="false"
+														navigator="true"
+														pattern="dd/MM/yyyy" 
+														required="true" 
+														requiredMessage="Você esqueceu de informar a data que você começará à trabalhar no serviço">
+													<f:convertDateTime pattern="dd/MM/yyyy" />
+												</p:calendar>
+											</div>
+										</div>
+										<div class="ui-g-12">
+											<div class="ui-g-6">
+												<p:outputLabel value="Data limite para realização do serviço*"/>
+											</div>
+											<div class="ui-g-6">
+												<p:calendar showButtonPanel="false"
+														navigator="true"
+														pattern="dd/MM/yyyy"
+														required="true" 
+														requiredMessage="Você esqueceu de informar a data limite para a conclusão do serviço">
+													<f:convertDateTime pattern="dd/MM/yyyy" />
+												</p:calendar>
+											</div>
+											
+										</div>
+										<div class="ui-g-12">
+											<p:commandButton value="ENVIAR" styleClass="botao-acao-lance"/> 
+											<!-- actionListener="#{categoriaServicoAdmBean.deletarCategoriaServico}"
+													action="categorias-servicos?faces-redirect=true" -->
+											<p:commandButton value="CANCELAR" 
+													onclick="PF('dialog').hide()" styleClass="botao-acao-lance"/>
+										</div>
+									</div>
+								</h:form>
+							</p:dialog>
+						</div>
+					</div>
 					
 					<div class="ui-g-2 sub-div-info-oferta">
-						<p:outputLabel value="R$ 120,00" styleClass="painel-oferta-label ui-g-12" />										
-						<p:outputLabel value="preço fixo" styleClass="painel-oferta-label-descritiva ui-g-12" />										
+						<p:outputLabel value="R$ 120,00" styleClass="sub-div-info-oferta-label ui-g-12" />										
+						<p:outputLabel value="preço fixo" styleClass="sub-div-info-oferta-label-descritiva ui-g-12" />										
 					</div>
 		
 					<div class="ui-g-2 sub-div-info-oferta">
-						<p:outputLabel styleClass="painel-oferta-label ui-g-12" value="R$ 10,00"/>										
-						<p:outputLabel styleClass="painel-oferta-label-descritiva ui-g-12" value="por hora trabalhada"/>										
+						<p:outputLabel styleClass="sub-div-info-oferta-label ui-g-12" value="R$ 10,00"/>										
+						<p:outputLabel styleClass="sub-div-info-oferta-label-descritiva ui-g-12" value="por hora trabalhada"/>										
 					</div>
 		
 					<div class="ui-g-2 sub-div-info-oferta">
-						<p:outputLabel value="Categoria de serviço" styleClass="painel-oferta-label ui-g-12"/>		
+						<p:outputLabel value="Categoria de serviço" styleClass="sub-div-info-oferta-label ui-g-12"/>		
 					</div>					
 					
 					<div class="ui-g-2 sub-div-info-oferta">
-						<p:outputLabel value="Local" styleClass="painel-oferta-label ui-g-12" />										
+						<p:outputLabel value="Local" styleClass="sub-div-info-oferta-label ui-g-12" />										
 					</div>
 		
 					<div class="ui-g-2 sub-div-info-oferta">
-						<p:outputLabel value="Oferta expira em 3 dias" styleClass="painel-oferta-label ui-g-12"/>		
+						<p:outputLabel value="Oferta expira em 3 dias" styleClass="sub-div-info-oferta-label ui-g-12"/>		
 					</div>
 					
 					<div class="ui-g-2 sub-div-info-oferta">
-						<p:outputLabel value="Entre 22/08/2017 e 10/09/2017" styleClass="painel-oferta-label ui-g-12"/>					
-						<p:outputLabel value="Prazo para realização" styleClass="painel-oferta-label-descritiva ui-g-12"/>					
+						<p:outputLabel value="Entre 22/08/2017 e 10/09/2017" styleClass="sub-div-info-oferta-label ui-g-12"/>					
+						<p:outputLabel value="Prazo para realização" styleClass="sub-div-info-oferta-label-descritiva ui-g-12"/>					
 					</div>
+					
+					<div class="ui-g-12">
+						<div class="ui-g-2 div-inferior-oferta">
+							<p:outputLabel value="Contratante: " styleClass="label-info-contratante-oferta"/>
+						</div>
+						<div class="ui-g-3 div-inferior-oferta">
+							<p:outputLabel value="Marcos da Silva" />
+						</div>
+						<div class="ui-g-2 div-inferior-oferta">
+							<p:outputLabel value="Reputação: " styleClass="label-info-contratante-oferta"/>							
+						</div>
+						<div class="ui-g-3 div-inferior-oferta">
+							<p:rating value="3" readonly="true"/>
+						</div>
+					</div>
+					
 				</p:outputPanel>
 			</div>
 		</div>

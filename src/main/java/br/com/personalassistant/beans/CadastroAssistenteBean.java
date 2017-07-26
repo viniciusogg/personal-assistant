@@ -1,6 +1,5 @@
 package br.com.personalassistant.beans;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +20,12 @@ import br.com.personalassistant.services.UsuarioService;
 
 @Named
 @ViewScoped
-public class CadastroAssistenteBean extends AbstractBean implements Serializable {
+public class CadastroAssistenteBean extends AbstractBean {
+
+	private static final long serialVersionUID = -6649800179400957138L;
 
 	@Inject private UsuarioService usuarioService;
 	@Inject private CategoriaServicoService categoriaServicoService;
-	private static final long serialVersionUID = 1L;
 	private Assistente assistente;
 	private Endereco endereco;
 	private String nomeCategoriaServico;

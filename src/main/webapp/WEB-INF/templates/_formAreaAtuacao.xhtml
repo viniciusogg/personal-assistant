@@ -11,7 +11,7 @@
 			<p:outputLabel value="CATEGORIAS DE SERVIÇOS"/>
 		</div>
 		<div class="ui-g-12">
-			<p:selectOneMenu value="#{nomeCategoriaServico}">
+			<p:selectOneMenu value="#{nomeCategoriaServico}" styleClass="combobox">
 				<f:selectItems value="#{listaNomesCategoriasServicos}" var="categoria"
 						itemLabel="#{categoria}" itemValue="#{categoria}" />
 			</p:selectOneMenu>
@@ -36,9 +36,10 @@
 		</div>
 	</div>
 	
-	<div class="ui-g-8">
+	<div class="ui-g-12">
 		<div class="ui-g-12">
 			<p:outputLabel value="SUAS QUALIDADES"/>
+			<p:outputLabel value="(o que você sabe fazer ? Escreva algo e aperte 'enter'. Ex: formatação de computador)" styleClass="label-descricao-qualidades"/>
 		</div>
 		<div class="ui-g-12">
 			<p:chips value="#{capacidades}"/>

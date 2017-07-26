@@ -21,7 +21,7 @@ import br.com.personalassistant.enums.ESTADO_NEGOCIACAO;
 @Entity(name = "Proposta")
 public class Proposta implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8100904415164980186L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)

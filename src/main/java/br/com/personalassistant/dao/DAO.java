@@ -7,8 +7,8 @@ import javax.persistence.EntityManager;
 
 public abstract class DAO implements Serializable{
 
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -5275558894052492460L;
+
 	@Inject
 	private EntityManager entityManager;
 	

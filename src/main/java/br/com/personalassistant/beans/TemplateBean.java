@@ -1,15 +1,13 @@
 package br.com.personalassistant.beans;
 
-import java.io.Serializable;
-
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 @ViewScoped
 @Named
-public class TemplateBean extends AbstractBean implements Serializable{
+public class TemplateBean extends AbstractBean{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 5259997198482943315L;
 
 	private boolean menuVisivel=true; 
 	private String modo;

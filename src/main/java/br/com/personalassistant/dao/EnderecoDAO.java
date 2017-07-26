@@ -11,7 +11,7 @@ import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class EnderecoDAO extends DAO {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1426464964947275048L;
 
 	public void save(Endereco endereco) throws PersistenciaException{
 		

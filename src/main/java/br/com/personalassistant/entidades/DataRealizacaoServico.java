@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 @Table(name = "TB_DATA_REALIZACAO_SERVICO")
 public class DataRealizacaoServico implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2635410905509549734L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)

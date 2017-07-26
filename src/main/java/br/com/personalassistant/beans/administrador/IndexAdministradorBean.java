@@ -12,7 +12,8 @@ import br.com.personalassistant.beans.AbstractBean;
 @Named
 public class IndexAdministradorBean extends AbstractBean{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4598336600455598697L;
+
 	private String opcaoFiltro;
 	private List<String> opcoesFiltro;
 	
