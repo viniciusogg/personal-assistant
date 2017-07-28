@@ -132,4 +132,31 @@ public class UsuarioDAO extends DAO {
 		return tipoUsuario;
 	}
 	
+	public Usuario getUsuarioByEmail(String email) throws PersistenciaException{
+		
+		EntityManager entityManager = getEntityManager();
+		Usuario usuario = null;
+	
+		if (email == null) {
+			email = "";
+		}
+
+		try{
+			TypedQuery<Usuario> typedQuery = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", 
+					Usuario.class);
+			typedQuery.setParameter("email", email);			
+			usuario = typedQuery.getSingleResult();
+		}
+		catch(PersistenceException ex){
+			ex.printStackTrace();
+			throw new PersistenciaException("Erro ao recuperar tipo usuario");
+		}
+		finally{
+			entityManager.close();
+		}
+		
+		return usuario;
+	}
+
+	
 }

@@ -9,7 +9,7 @@ import javax.faces.context.FacesContext;
 public abstract class AbstractBean implements Serializable{
 
 	private static final long serialVersionUID = -848328677600111218L;
-
+	
 	public boolean isUserInRole(String role) {
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -30,5 +30,6 @@ public abstract class AbstractBean implements Serializable{
 
 		return userPrincipal.getName();
 	}
+
 	
 }

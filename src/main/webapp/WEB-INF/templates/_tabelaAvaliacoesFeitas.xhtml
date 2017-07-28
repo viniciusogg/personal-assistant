@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+		
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<p:dataTable id="tabelaAvalicoesFeitas" var="servico" 
+						value="#{listaServicos != null ? listaServicos : ''}" rows="20"
+                        paginator="true"
+                        paginatorTemplate="{PageLinks}">
+                    
+                    <f:facet name="header">
+						AVALIAÇÕES QUE VOCÊ FEZ
+      				</f:facet>
+                     
+					<p:column headerText="DATA ASSISTÊNCIA">
+						<p:outputLabel value="#{valorDataAssistencia != null ? valorDataAssistencia : '#'}"/>							
+					</p:column>
+					<p:column headerText="#{tipoUsuario != null ? tipoUsuario : ''}">
+						<p:outputLabel value="#{valorTipoUsuario != null ? valorTipoUsuario : '#'}"/>							
+					</p:column>
+					<p:column headerText="AVALIAÇÃO">
+						<p:rating readOnly="true" rendered="#{renderedRating != null ? renderedRating : false}" value="#{valorAvaliacao != null ? valorAvaliacao : ''}"/>							
+						<p:commandButton rendered="#{renderedButtonAvaliacao != null ? renderedButtonAvaliacao : false}" 
+							icon="ui-icon-star-h" onclick="PF('dialog').show()">
+							<!-- <f:setPropertyActionListener target="#{categoriaServicoAdmBean.categoriaServico}" 
+									value="#{categoriaServico}" /> --> 
+						</p:commandButton>
+								
+						<p:dialog appendTo="@(body)" responsive="true" widgetVar="dialog" modal="true" header="FAÇA SUA AVALIAÇÃO" 
+								draggable="false" resizable="false" styleClass="dialog">
+							<h:form>
+								<div class="ui-g-12">
+									<div class="ui-g-12">
+										<div class="ui-g-6">
+											<p:outputLabel value="PONTUALIDADE:"/>
+										</div>
+										<div class="ui-g-6">
+											<p:rating value="#{pontualidade}" cancel="false" required="true" requiredMessage="AVALIE A PONTUALIDADE"/>
+										</div>
+									</div>
+									<div class="ui-g-12">
+										<div class="ui-g-6">
+											<p:outputLabel value="CORDIALIDADE:"/>
+										</div>
+										<div class="ui-g-6">
+											<p:rating value="#{cordialidade}" cancel="false" required="true" requiredMessage="AVALIE A CORDIALIDADE"/>
+										</div>
+									</div>
+									<div class="ui-g-12">
+										<div class="ui-g-6">
+											<p:outputLabel value="#{labelAvaliacao != null ? labelAvaliacao : ''}"/>
+										</div>
+										<div class="ui-g-6">
+											<p:rating value="#{terceiraAvaliacao}" cancel="false" required="true" 
+													requiredMessage="#{requiredMessageTerceiraAvaliacao != null ? requiredMessageTerceiraAvaliacao : ''}"/>
+										</div>
+									</div>
+									<div class="ui-g-12">
+										<div class="ui-g-12">
+											<p:outputLabel value="FAÇA UM COMENTÁRIO*"/>
+										</div>
+										<div class="ui-g-12">
+											<p:inputTextarea required="true" 
+													requiredMessage="ESCREVA UM COMENTÁRIO JUSTIFICANDO SUAS AVALIAÇÕES"
+													value="#{valueTextArea}" maxlength="240" styleClass="ui-g-12"
+													autoResize="false"
+													size="103"/>
+										</div>
+									</div>
+									<div class="ui-g-12">
+										<p:commandButton value="CONCLUIR"
+												actionListener="#{nomeManagedBeanListenerBotaoConcluirAvaliacao[acaoListenerBotaoConcluirAvaliacao]}"
+												action="#{nomeManagedBeanActionBotaoConcluirAvaliacao[acaoActionBotaoConcluirAvaliacao]}"/>
+										<p:commandButton value="CANCELAR" 
+												onclick="PF('dialog').hide()"/>
+									</div>
+								</div>
+							</h:form>
+						</p:dialog>
+					</p:column>
+					<p:column headerText="">
+						<h:form>
+							<p:commandButton icon="ui-icon-search" title="Detalhes do serviço" />
+							<p:commandButton icon="ui-icon-heart" rendered="#{!avaliacoesContratanteBean.isUserInRole('ASSISTENTE')}" 
+									title="Adicionar aos favoritos" action="#{nomeManagedBeanFavoritar[acaoBotaoFavoritar]}"/>
+						</h:form>
+					</p:column>
+				</p:dataTable>
+			</div>
+		</div>
+</ui:composition>

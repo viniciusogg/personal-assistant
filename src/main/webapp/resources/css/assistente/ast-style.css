@@ -46,7 +46,6 @@
 }
 
 #avaliacao{
-	width:100px !important; 
 	float: right;
 }
 
@@ -116,13 +115,6 @@
 
 .label-info-contratante-oferta{
 	float:right;
-}
-
-#dialog-lance{
-	margin-left: 25%;
-	margin-right: 25%;
-	width: unset !important;
-	left: unset !important;
 }
 
 .botao-acao-lance{

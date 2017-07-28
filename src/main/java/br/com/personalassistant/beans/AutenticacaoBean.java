@@ -36,6 +36,7 @@ public class AutenticacaoBean extends AbstractBean {
 			
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 
+
 			if(this.tipoUsuario != null){
 				
 				String endereco = null;

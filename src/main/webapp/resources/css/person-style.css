@@ -69,6 +69,21 @@ input[type=text]:focus{
 	border-color:#1e88e5 !important;
 }
 
+textarea{
+	margin: 0px !important;
+	box-shadow: none ;
+	background: white !important;
+    color: #3f3f3f !important;
+    border: 1px solid gray !important;
+    border-radius: 2px;
+    height: 100px;
+    resize: unset;
+}
+
+textarea:focus{
+	border-color:#1e88e5 !important;
+}
+
 input[type="password"]{
     margin: 0px !important;
 	box-shadow: none ;
@@ -300,4 +315,15 @@ a{
 	font-size: 15px;
 	color: gray;
 	margin: unset !important;
+}
+
+.dialog{
+	margin-left: 25%;
+	margin-right: 25%;
+	width: unset !important;
+	left: unset !important;
+}
+
+.ui-rating-star{
+	width: 30px !important;
 }

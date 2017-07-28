@@ -79,6 +79,16 @@ public class UsuarioService implements Serializable {
 		}
 	}
 	
+	public Usuario getUsuarioByEmail(String email) throws ServiceException{
+		try{
+			return this.usuarioDAO.getUsuarioByEmail(email);
+		}
+		catch(PersistenciaException ex){
+			throw new ServiceException(ex.getMessage());
+		}
+	}
+
+	
 	public void criptografarSenha(Usuario usuario) throws ServiceException {
 		usuario.setSenha(criptografarSenha(usuario.getSenha()));
 	}

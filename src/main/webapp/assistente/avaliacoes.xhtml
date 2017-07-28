@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		template="index.xhtml">
+		
+	<ui:define name="titulo">
+		<p:outputLabel class="titulo" value="AVALIAÇÕES"/>
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		
+		<div class="ui-g">
+			
+			<div class="ui-g-12">
+				<div class="ui-g-12">
+					<ui:include src="/WEB-INF/templates/_tabelaAvaliacoesFeitas.xhtml">
+						<ui:param name="listaServicos" value="#{avaliacoesAssistenteBean.listaServicos}" />
+						<ui:param name="valorDataAssistencia" value="#" />
+						<ui:param name="tipoUsuario" value="CONTRATANTE" />
+						<ui:param name="renderedButtonAvaliacao" value="true" />
+						<ui:param name="renderedRating" value="false" />
+						<ui:param name="pontualidade" value="5" />
+						<ui:param name="cordialidade" value="5" />
+						<ui:param name="labelAvaliacao" value="FACILIDADE PAGAMENTO" />
+						<ui:param name="terceiraAvaliacao" value="5" />
+						<ui:param name="requiredMessageTerceiraAvaliacao" value="AVALIE A FACILIDADE DO PAGAMENTO"/>
+						<ui:param name="valueTextArea" value="#" />
+						<ui:param name="nomeManagedBeanListenerBotaoConcluirAvaliacao" value="#{avaliacoesAssistenteBean}" />
+						<ui:param name="acaoListenerBotaoConcluirAvaliacao" value="salvarAvaliacao" />
+						<ui:param name="nomeManagedBeanActionBotaoConcluirAvaliacao" value="#{avaliacoesAssistenteBean}" />
+						<ui:param name="acaoActionBotaoConcluirAvaliacao" value="salvarAvaliacao" />
+						<ui:param name="nomeManagedBeanFavoritar" value="#{avaliacoesAssistenteBean}" />
+						<ui:param name="acaoBotaoFavoritar" value="addFavorito" />
+					</ui:include>
+				</div>
+				<div class="ui-g-12">
+					<p:separator/>
+				</div>
+				<div class="ui-g-12">
+					<!-- <ui:include src="/WEB-INF/templates/_tabelaAvaliacoesRecebidas.xhtml">
+					
+					</ui:include> -->
+				</div>
+			</div>
+		</div>
+	</ui:define>			
+</ui:composition>

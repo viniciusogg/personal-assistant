@@ -598,7 +598,10 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670'; }
 .ui-icon-grip-solid-horizontal:after { content: '\e66c'; }
 .ui-icon-grip-solid-vertical:after { content: '\e66d'; }
 .ui-icon-gripsmall-diagonal-se:after { content: '\e66b'; }
-.ui-icon-heart:after { content: '\e6d1'; }
+.ui-icon-heart:after { content: '\e6d1'; 
+	left: 10px !important;
+	top: 12px !important;
+}
 .ui-icon-heart-b:after { content: '\e6d2'; }
 .ui-icon-heart-beat:after { content: '\e6d3'; }
 .ui-icon-help-plain:after { content: '\e661'; }
@@ -735,7 +738,10 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670'; }
 .ui-icon-squaresmall-plus:after { content: '\e686'; }
 .ui-icon-star:after { content: '\e6c7'; }
 .ui-icon-star-b:after { content: '\e6c9'; }
-.ui-icon-star-h:after { content: '\e6c8'; }
+.ui-icon-star-h:after { content: '\e6c8'; 
+	left: 10px !important;
+	top: 10px !important;
+}
 .ui-icon-stop:after { content: '\e6ae'; }
 .ui-icon-structure:after { content: '\e737'; }
 .ui-icon-suitcase:after { content: '\e6f7'; }

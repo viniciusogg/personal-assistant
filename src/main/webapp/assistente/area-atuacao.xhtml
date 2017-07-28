@@ -16,8 +16,9 @@
 		<div class="ui-g">
 			
 			<div class="ui-g-12">
+				
 				<div class="ui-g-12">
-					<p:fieldset legend="VALORES COBRADOS POR SERVIÇO REALIZADO" styleClass="fieldset">
+					<p:fieldset legend="VALORES COBRADOS POR SERVIÇOS REALIZADOS">
 						<div class="ui-g-12">
 							<div class="ui-g-3">
 								<p:outputLabel value="Preço cobrado por hora trabalhada:"/>
@@ -37,17 +38,17 @@
 						</div>
 					</p:fieldset>
 				</div>
-		
+				
 				<div class="ui-g-12">
 					<p:panel header="#{areaAtuacaoBean.nomeCategoriaServico}">
 						<ui:repeat var="capacidade" value="#{areaAtuacaoBean.capacidades}">
-							<p:outputLabel styleClass="label-capacidade" value="#{capacidade}"/>
+							<p:outputLabel value="#{capacidade}" styleClass="label-capacidade"/>
 						</ui:repeat>
 					</p:panel>
 				</div>
-	
+				
 				<div class="ui-g-12">
-					<p:commandButton id="botao-editar-categoria-servico" action="edicao-area-atuacao?faces-redirect=true" value="EDITAR"/> <!-- ?faces-redirect=true -->
+					<p:commandButton id="botao-editar-categoria-servico" action="edicao-area-atuacao?faces-redirect=true" value="EDITAR"/>
 				</div>
 			</div>
 		</div>
