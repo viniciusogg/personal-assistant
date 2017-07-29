@@ -479,7 +479,10 @@ html .ui-checkboxradio-radio-label.ui-checkboxradio-checked:hover .ui-icon:after
 .ui-icon-check:after,
 html .ui-btn.ui-checkbox-on.ui-checkbox-on:after,
 html .ui-alt-icon.ui-btn.ui-checkbox-on:after,
-html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670'; }
+html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670'; 
+	left: 10px !important;
+	top: 11px !important;
+}
 .ui-icon-check-off:after,
 .ui-icon-checkbox:after,
 .ui-icon-checkbox-off:after,

@@ -1,20 +1,26 @@
 package br.com.personalassistant.conversores;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-import br.com.personalassistant.dao.AvaliacaoAssistenteDAO;
+import br.com.personalassistant.services.AvaliacaoAssistenteService;
 import br.com.personalassistant.entidades.AvaliacaoAssistente;
-import br.com.personalassistant.excecoes.PersistenciaException;
+import br.com.personalassistant.excecoes.ServiceException;
 
+@Named
+@RequestScoped
 @FacesConverter(forClass = AvaliacaoAssistente.class)
 public class AvaliacaoAssistenteConverter implements Converter {
 
-	private AvaliacaoAssistenteDAO avaliacaoAssistenteDAO = new AvaliacaoAssistenteDAO();
+	@Inject
+	private AvaliacaoAssistenteService avaliacaoAssistenteService;
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -24,10 +30,10 @@ public class AvaliacaoAssistenteConverter implements Converter {
 		}
 
 		try {
-			AvaliacaoAssistente avaliacaoAssistente = avaliacaoAssistenteDAO.getById(Long.valueOf(value));
+			AvaliacaoAssistente avaliacaoAssistente = avaliacaoAssistenteService.getById(Long.valueOf(value));
 			return avaliacaoAssistente;
 		} 
-		catch (NumberFormatException | PersistenciaException ex) {
+		catch (NumberFormatException | ServiceException ex) {
 			String msgErroStr = String.format("Erro de conversão! Não foi possível " 
 					+ "realizar a conversão da string '%s' para o tipo esperado.", value);
 			FacesMessage msgErro = new FacesMessage(FacesMessage.SEVERITY_ERROR, msgErroStr, msgErroStr);

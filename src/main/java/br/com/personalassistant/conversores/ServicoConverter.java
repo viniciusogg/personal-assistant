@@ -10,17 +10,16 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.personalassistant.services.ContratanteService;
-import br.com.personalassistant.entidades.Contratante;
+import br.com.personalassistant.services.ServicoService;
+import br.com.personalassistant.entidades.Servico;
 import br.com.personalassistant.excecoes.ServiceException;
 
 @Named
 @RequestScoped
-@FacesConverter(forClass = Contratante.class)
-public class ContratanteConverter implements Converter {
+@FacesConverter(forClass = Servico.class)
+public class ServicoConverter implements Converter{
 
-	@Inject
-	private ContratanteService contratanteService;
+	@Inject private ServicoService servicoService;
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -30,8 +29,8 @@ public class ContratanteConverter implements Converter {
 		}
 
 		try {
-			Contratante contratante = contratanteService.getById(Long.valueOf(value));
-			return contratante;
+			Servico servico = servicoService.getById(Long.valueOf(value));
+			return servico;
 		} 
 		catch (NumberFormatException | ServiceException ex) {
 			String msgErroStr = String.format("Erro de conversão! Não foi possível " 
@@ -44,12 +43,12 @@ public class ContratanteConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		
-		if (!(value instanceof Contratante)) {
+		if (!(value instanceof Servico)) {
 			return null;
 		}
 
-		Contratante contratante = (Contratante) value;
-		return String.valueOf(contratante.getId());
+		Servico servico = (Servico) value;
+		return String.valueOf(servico.getId());
 	}
-
+	
 }

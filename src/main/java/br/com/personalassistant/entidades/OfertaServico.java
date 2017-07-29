@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.personalassistant.enums.ESTADO_OFERTA;
@@ -58,8 +58,8 @@ public class OfertaServico implements Serializable{
 	@Column(name="ofertaServico_FK")
 	private List<Lance> lances; // bidirecional
 	
-	@OneToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name = "data_realizacao_servico_FK", nullable = false)
+	@Embedded
+	@Column(nullable = false)
 	private DataRealizacaoServico dataRealizacaoServico; // unidirecional
 	
 	public OfertaServico() {

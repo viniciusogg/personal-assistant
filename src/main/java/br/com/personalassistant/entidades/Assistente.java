@@ -40,13 +40,13 @@ public class Assistente extends Usuario{
 	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "assistente")
 	private List<Lance> lances; // bidirecional
 	
-	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+	/*@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
 	@JoinColumn(name = "assistente_avaliado_FK")
-	private List<AvaliacaoAssistente> avaliacoesRecebidas; // unidirecional
+	private List<AvaliacaoAssistente> avaliacoesRecebidas; // unidirecional*/
 	
-	@OneToMany(cascade = {CascadeType.MERGE})
+	/*@OneToMany(cascade = {CascadeType.MERGE})
 	@JoinColumn(name = "assistente_avaliador_FK")
-	private List<AvaliacaoContratante> avaliacoesFeitas; // unidirecional
+	private List<AvaliacaoContratante> avaliacoesFeitas; // unidirecional*/
 	
 	@OneToMany(cascade = {CascadeType.MERGE})
 	@JoinColumn(name = "assistente_FK")
@@ -125,7 +125,7 @@ public class Assistente extends Usuario{
 		this.endereco = endereco;
 	}
 
-	public List<AvaliacaoAssistente> getAvaliacoesRecebidas() {
+	/*public List<AvaliacaoAssistente> getAvaliacoesRecebidas() {
 		return avaliacoesRecebidas;
 	}
 
@@ -139,7 +139,7 @@ public class Assistente extends Usuario{
 
 	public void setAvaliacoesFeitas(List<AvaliacaoContratante> avaliacoesFeitas) {
 		this.avaliacoesFeitas = avaliacoesFeitas;
-	}
+	}*/
 
 	public List<Proposta> getPropostas() {
 		return propostas;
@@ -161,8 +161,8 @@ public class Assistente extends Usuario{
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((avaliacoesFeitas == null) ? 0 : avaliacoesFeitas.hashCode());
-		result = prime * result + ((avaliacoesRecebidas == null) ? 0 : avaliacoesRecebidas.hashCode());
+		/*result = prime * result + ((avaliacoesFeitas == null) ? 0 : avaliacoesFeitas.hashCode());
+		result = prime * result + ((avaliacoesRecebidas == null) ? 0 : avaliacoesRecebidas.hashCode());*/
 		result = prime * result + ((capacidades == null) ? 0 : capacidades.hashCode());
 		result = prime * result + ((categoriaServico == null) ? 0 : categoriaServico.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
@@ -183,7 +183,7 @@ public class Assistente extends Usuario{
 		if (getClass() != obj.getClass())
 			return false;
 		Assistente other = (Assistente) obj;
-		if (avaliacoesFeitas == null) {
+		/*if (avaliacoesFeitas == null) {
 			if (other.avaliacoesFeitas != null)
 				return false;
 		} else if (!avaliacoesFeitas.equals(other.avaliacoesFeitas))
@@ -192,7 +192,7 @@ public class Assistente extends Usuario{
 			if (other.avaliacoesRecebidas != null)
 				return false;
 		} else if (!avaliacoesRecebidas.equals(other.avaliacoesRecebidas))
-			return false;
+			return false;*/
 		if (capacidades == null) {
 			if (other.capacidades != null)
 				return false;
@@ -240,7 +240,7 @@ public class Assistente extends Usuario{
 	public String toString() {
 		return "Assistente [experiencia=" + experiencia + ", precoFixo=" + precoFixo + ", precoHora=" + precoHora
 				+ ", endereco=" + endereco + ", categoriaServico=" + categoriaServico + ", lances=" + lances
-				+ ", avaliacoesRecebidas=" + avaliacoesRecebidas + ", avaliacoesFeitas=" + avaliacoesFeitas
+				/*+ ", avaliacoesRecebidas=" + avaliacoesRecebidas + ", avaliacoesFeitas=" + avaliacoesFeitas*/
 				+ ", propostas=" + propostas + ", capacidades=" + capacidades + ", getId()=" + getId() + ", getNome()="
 				+ getNome() + ", getEmail()=" + getEmail() + ", getSenha()=" + getSenha() + ", getNumTelefonico()="
 				+ getNumTelefonico() + ", getTipoUsuario()=" + getTipoUsuario() + "]";

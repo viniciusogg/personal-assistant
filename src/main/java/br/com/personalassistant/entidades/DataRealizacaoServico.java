@@ -4,23 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity(name = "DataRealizacaoServico")
-@Table(name = "TB_DATA_REALIZACAO_SERVICO")
+@Embeddable
 public class DataRealizacaoServico implements Serializable{
 
 	private static final long serialVersionUID = 2635410905509549734L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	private Long id;
 	
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
@@ -30,7 +21,6 @@ public class DataRealizacaoServico implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date dataRealizacaoLimite;
 	
-	@Column(nullable = false)
 	@Temporal(TemporalType.TIME)
 	private Date horaRealizacaoServico;
 	
@@ -68,10 +58,6 @@ public class DataRealizacaoServico implements Serializable{
 	public void setHoraRealizacaoServico(Date horaRealizacaoServico) {
 		this.horaRealizacaoServico = horaRealizacaoServico;
 	}
-	
-	public Long getId() {
-		return id;
-	}
 
 	@Override
 	public int hashCode() {
@@ -80,7 +66,6 @@ public class DataRealizacaoServico implements Serializable{
 		result = prime * result + ((dataRealizacaoInicial == null) ? 0 : dataRealizacaoInicial.hashCode());
 		result = prime * result + ((dataRealizacaoLimite == null) ? 0 : dataRealizacaoLimite.hashCode());
 		result = prime * result + ((horaRealizacaoServico == null) ? 0 : horaRealizacaoServico.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 
@@ -108,14 +93,12 @@ public class DataRealizacaoServico implements Serializable{
 				return false;
 		} else if (!horaRealizacaoServico.equals(other.horaRealizacaoServico))
 			return false;
-		if (id != other.id)
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "DataRealizacaoServico [id=" + id + ", dataRealizacaoInicial=" + dataRealizacaoInicial
+		return "DataRealizacaoServico [dataRealizacaoInicial=" + dataRealizacaoInicial
 				+ ", dataRealizacaoLimite=" + dataRealizacaoLimite + ", horaRealizacaoServico=" + horaRealizacaoServico
 				+ "]";
 	}

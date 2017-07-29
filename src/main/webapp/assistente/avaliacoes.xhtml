@@ -25,7 +25,7 @@
 						<ui:param name="renderedRating" value="false" />
 						<ui:param name="pontualidade" value="5" />
 						<ui:param name="cordialidade" value="5" />
-						<ui:param name="labelAvaliacao" value="FACILIDADE PAGAMENTO" />
+						<ui:param name="labelAvaliacao" value="FACILIDADE PAGAMENTO:" />
 						<ui:param name="terceiraAvaliacao" value="5" />
 						<ui:param name="requiredMessageTerceiraAvaliacao" value="AVALIE A FACILIDADE DO PAGAMENTO"/>
 						<ui:param name="valueTextArea" value="#" />
@@ -41,9 +41,13 @@
 					<p:separator/>
 				</div>
 				<div class="ui-g-12">
-					<!-- <ui:include src="/WEB-INF/templates/_tabelaAvaliacoesRecebidas.xhtml">
-					
-					</ui:include> -->
+					<ui:include src="/WEB-INF/templates/_tabelaAvaliacoesRecebidas.xhtml">
+						<ui:param name="listaServicos" value="#{avaliacoesAssisteneBean.listaServicos}" />
+						<ui:param name="valorDataAssistencia" value="22/04/2017" />
+						<ui:param name="tipoUsuario" value="CONTRATANTE"/>
+						<ui:param name="valorTipoUsuario" value="#"/>
+						<ui:param name="valorAvaliacao" value="3"/>
+					</ui:include>
 				</div>
 			</div>
 		</div>

@@ -20,8 +20,10 @@
 		<class>br.com.personalassistant.entidades.OfertaServico</class>
 		<class>br.com.personalassistant.entidades.Capacidade</class>
 		<class>br.com.personalassistant.entidades.Proposta</class>
+		<class>br.com.personalassistant.entidades.Servico</class>
 		<class>br.com.personalassistant.entidades.Usuario</class>
 		<class>br.com.personalassistant.entidades.DataRealizacaoServico</class>
+		
 		
 		<properties>
 

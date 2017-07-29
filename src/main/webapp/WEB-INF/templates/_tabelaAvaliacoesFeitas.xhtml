@@ -24,7 +24,7 @@
 						<p:outputLabel value="#{valorTipoUsuario != null ? valorTipoUsuario : '#'}"/>							
 					</p:column>
 					<p:column headerText="AVALIAÇÃO">
-						<p:rating readOnly="true" rendered="#{renderedRating != null ? renderedRating : false}" value="#{valorAvaliacao != null ? valorAvaliacao : ''}"/>							
+						<p:rating readonly="true" rendered="#{renderedRating != null ? renderedRating : false}" value="#{valorAvaliacao != null ? valorAvaliacao : ''}"/>							
 						<p:commandButton rendered="#{renderedButtonAvaliacao != null ? renderedButtonAvaliacao : false}" 
 							icon="ui-icon-star-h" onclick="PF('dialog').show()">
 							<!-- <f:setPropertyActionListener target="#{categoriaServicoAdmBean.categoriaServico}" 
@@ -67,16 +67,16 @@
 										<div class="ui-g-12">
 											<p:inputTextarea required="true" 
 													requiredMessage="ESCREVA UM COMENTÁRIO JUSTIFICANDO SUAS AVALIAÇÕES"
-													value="#{valueTextArea}" maxlength="240" styleClass="ui-g-12"
+													value="#{valueTextArea}" maxlength="350" styleClass="ui-g-12"
 													autoResize="false"
 													size="103"/>
 										</div>
 									</div>
 									<div class="ui-g-12">
-										<p:commandButton value="CONCLUIR"
+										<p:commandButton value="CONCLUIR" styleClass="botao-dialog"
 												actionListener="#{nomeManagedBeanListenerBotaoConcluirAvaliacao[acaoListenerBotaoConcluirAvaliacao]}"
 												action="#{nomeManagedBeanActionBotaoConcluirAvaliacao[acaoActionBotaoConcluirAvaliacao]}"/>
-										<p:commandButton value="CANCELAR" 
+										<p:commandButton value="CANCELAR" styleClass="botao-dialog"
 												onclick="PF('dialog').hide()"/>
 									</div>
 								</div>

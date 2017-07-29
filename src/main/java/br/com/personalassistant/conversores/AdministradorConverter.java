@@ -1,20 +1,26 @@
 package br.com.personalassistant.conversores;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-import br.com.personalassistant.dao.AdministradorDAO;
+import br.com.personalassistant.services.AdministradorService;
 import br.com.personalassistant.entidades.Administrador;
-import br.com.personalassistant.excecoes.PersistenciaException;
+import br.com.personalassistant.excecoes.ServiceException;
 
+@Named
+@RequestScoped
 @FacesConverter(forClass = Administrador.class)
 public class AdministradorConverter implements Converter {
 
-	private AdministradorDAO adminDAO = new AdministradorDAO();
+	@Inject
+	private AdministradorService adminService;
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -24,10 +30,10 @@ public class AdministradorConverter implements Converter {
 		}
 
 		try {
-			Administrador admin = adminDAO.getById(Long.valueOf(value));
+			Administrador admin = adminService.getById(Long.valueOf(value));
 			return admin;
 		} 
-		catch (NumberFormatException | PersistenciaException ex) {
+		catch (NumberFormatException | ServiceException ex) {
 			String msgErroStr = String.format("Erro de conversão! Não foi possível " 
 					+ "realizar a conversão da string '%s' para o tipo esperado.", value);
 			FacesMessage msgErro = new FacesMessage(FacesMessage.SEVERITY_ERROR, msgErroStr, msgErroStr);

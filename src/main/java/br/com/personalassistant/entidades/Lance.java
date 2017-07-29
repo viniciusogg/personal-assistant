@@ -2,8 +2,8 @@ package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.personalassistant.enums.ESTADO_LANCE;
@@ -43,8 +42,8 @@ public class Lance implements Serializable{
 	@JoinColumn(nullable = false)
 	private OfertaServico oferstaServico; // bidirecional
 	
-	@OneToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name = "data_realizacao_servico_FK", nullable = false)
+	@Embedded
+	@Column(nullable = false)
 	private DataRealizacaoServico dataRealizacaoServico; // unidirecional
 	
 	public Lance() {

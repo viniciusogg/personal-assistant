@@ -3,6 +3,7 @@ package br.com.personalassistant.beans;
 import java.io.IOException;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -16,13 +17,14 @@ import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.services.UsuarioService;
 
 @Named
-@RequestScoped
+@SessionScoped
 public class AutenticacaoBean extends AbstractBean {
 
 	private static final long serialVersionUID = 7809292460597830107L;
 
 	@Inject private UsuarioService usuarioService;
 	private TIPO_USUARIO tipoUsuario;
+	private boolean isMesmaSessao = false;
 	
 	public void redirecionarUsuario() {
 		
@@ -53,10 +55,14 @@ public class AutenticacaoBean extends AbstractBean {
 					endereco =  facesContext.getExternalContext().getApplicationContextPath() + 
 							"/contratante/index.xhtml?faces-redirect=true";			
 				}
-								
-				this.reportarMensagemSucesso();
+				
+				if(!isMesmaSessao){					
+					this.reportarMensagemSucesso();
+					isMesmaSessao = true;
+				}
 				
 				facesContext.getExternalContext().redirect(endereco);
+				
 			}
 			else{
 				facesContext.getExternalContext().redirect(facesContext.getExternalContext().

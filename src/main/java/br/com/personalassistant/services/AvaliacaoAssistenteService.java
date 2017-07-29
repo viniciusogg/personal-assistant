@@ -11,7 +11,7 @@ import br.com.personalassistant.excecoes.PersistenciaException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.util.Transacional;
 
-public class AvaliacaoAssisteneService implements Serializable {
+public class AvaliacaoAssistenteService implements Serializable {
 
 	private static final long serialVersionUID = -7337585144022967065L;
 

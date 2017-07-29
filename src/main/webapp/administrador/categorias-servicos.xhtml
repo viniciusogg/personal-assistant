@@ -70,11 +70,11 @@
 						<p:confirmDialog appendTo="@(body)" widgetVar="dialog" header="CONFIRMAÇÃO" 
 								message="Tem certeza que deseja remover a categoria de serviço selecionada ?">
 							<h:form>
-								<p:commandButton value="REMOVER"
+								<p:commandButton value="REMOVER" styleClass="botao-dialog" 
 										actionListener="#{categoriaServicoAdmBean.deletarCategoriaServico}"
 										action="categorias-servicos?faces-redirect=true"/>
 								<p:commandButton value="CANCELAR" 
-										onclick="PF('dialog').hide()"/>
+										onclick="PF('dialog').hide()" styleClass="botao-dialog"/>
 							</h:form>
 						</p:confirmDialog>
 							

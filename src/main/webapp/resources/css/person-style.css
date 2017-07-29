@@ -324,6 +324,17 @@ a{
 	left: unset !important;
 }
 
-.ui-rating-star{
-	width: 30px !important;
+.botao-dialog{
+	margin: 2px;
+	float: right;
 }
+
+.botao-proposta{
+	float:right;
+	margin: 2px;	
+}
+
+div[id^="j_idt"] > div[class="ui-rating-star ui-rating-star-on"] > a {
+    background-position: 0 -65px !important;
+}
+

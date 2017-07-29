@@ -60,18 +60,30 @@
                          paginator="true"
                          paginatorTemplate="{PageLinks}">
                     
-                    <f:facet name="header"> ASSISTENCIAS PRESTADAS </f:facet>
+                    <f:facet name="header"> SERVIÇOS EM ANDAMENTO </f:facet>
                      
-					<p:column headerText="DATA">
-						<p:outputLabel value="01/04/2017 11:40"/>							
+					<p:column headerText="DATA DE ÍNICIO">
+						<p:outputLabel value="01/04/2017"/>							
 					</p:column>
-					<p:column headerText="AVALIAÇÃO RECEBIDA">
-						<p:rating value="#{indexAssistenteBean.quantEstrelas}" readonly="true"/>
+					<p:column headerText="DATA LIMITE">
+						<p:outputLabel value="03/04/2017"/>							
+					</p:column>
+					<p:column headerText="CONTRATANTE">
+						<p:outputLabel value="Vitor"/>
+					</p:column>
+					<p:column headerText="ENDEREÇO" rendered="true">
+						<p:outputLabel value="Remoto"/>
+					</p:column>
+					<p:column headerText="TIPO PAGAMENTO">
+						<p:outputLabel value="Hora trabalhada"/>
+					</p:column>
+					<p:column headerText="PREÇO (R$)">
+						<p:outputLabel value="20,00"/>
 					</p:column>
 					<p:column headerText="">						
 						<h:form>
-							<p:commandButton icon="ui-icon-recycle" title="Remove assistencia"/>
-							<p:commandButton icon="ui-icon-search" title="Mais informações"/>
+							<p:commandButton icon="ui-icon-close" title="Desistir do serviço"/>
+							<p:commandButton icon="ui-icon-check" title="Serviço concluído"/>
 						</h:form>
 					</p:column>
 				</p:dataTable>

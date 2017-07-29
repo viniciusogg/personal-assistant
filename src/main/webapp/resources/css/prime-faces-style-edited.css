@@ -208,3 +208,53 @@
 .ui-chips-container{
 	width:100%;	
 }
+
+.ui-rating-star{
+	width: 30px !important;
+}
+
+/*.rating .ui-rating-star-on a{
+	background-image: url("#{resource['images:rating.png']}") !important;
+	background-position: 0 -50px;
+	width: 15px;
+	height: 15px; 
+}*/
+
+/*.ui-rating-star, .ui-rating-cancel{
+	display:inline-block !important;
+	overflow:hidden !important;
+	text-indent:-999em !important;
+	cursor:pointer !important;
+}*/
+.ui-rating-star a, .ui-rating-cancel a{
+	width:16px !important;
+	height:15px !important;
+	display:block !important;
+	background:url("../images/rating.png") no-repeat 0 0 !important;
+}
+.ui-rating-star a{
+	background-position: 0 -34px !important;
+}
+.ui-rating-star-on a{
+	background-position: 0 -50px !important; 
+}
+
+/****/
+div#avaliacao.ui-rating div.ui-rating-star.ui-rating-star-on a{
+	background-position: 0 -65px !important;
+}
+
+div.ui-g-12 div.ui-g-3.div-inferior-oferta{
+	background-position: 0 -65px !important;	
+}
+/****/
+
+.ui-rating-star-hover a{
+	background-position: 0 -65px !important;/*branco*/ 
+}
+.ui-rating-cancel-hover a{
+	background-position: 0 -18px !important; 
+}
+/*.ui-rating.ui-state-disabled .ui-rating-star,.ui-rating.ui-state-disabled .ui-rating-cancel{
+	cursor:default !important;
+}*/
