@@ -334,7 +334,7 @@ a{
 	margin: 2px;	
 }
 
-div[id^="j_idt"] > div[class="ui-rating-star ui-rating-star-on"] > a {
+div[class="ui-g-3 div-inferior-oferta"] > div[class="ui-rating"] > div[class="ui-rating-star ui-rating-star-on"] > a {
     background-position: 0 -65px !important;
 }
 
