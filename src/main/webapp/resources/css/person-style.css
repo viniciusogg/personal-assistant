@@ -338,3 +338,44 @@ div[class="ui-g-3 div-inferior-oferta"] > div[class="ui-rating"] > div[class="ui
     background-position: 0 -65px !important;
 }
 
+div[class="ui-g-2 sub-div-info-oferta"] > div[class="ui-rating"] > div[class="ui-rating-star ui-rating-star-on"] > a {
+    background-position: 0 -65px !important;
+}
+
+.label-capacidade{
+	border-radius: 10px;
+	background: #1976D2;
+	color: white;
+	padding: 6px;
+	margin: unset !important;
+}
+
+.ul-capacidades{
+	padding: unset;
+	margin: unset;
+}
+
+.ui-separator{
+	border: unset !important;
+	border-top: 1px solid lightgray !important;
+}
+
+a.ui-datepicker-prev.ui-corner-all:hover{
+	background: unset;
+    border: unset;
+    top: 2px;
+    left: 2px;
+    cursor: pointer;
+}
+
+a.ui-datepicker-next.ui-corner-all:hover{
+	background: unset;
+    border: unset;
+    top: 2px;
+    right: 2px;
+    cursor: pointer;
+}
+
+.ui-chkbox-box:hover{
+	cursor: pointer !important;
+}

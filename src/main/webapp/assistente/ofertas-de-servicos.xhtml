@@ -20,11 +20,11 @@
 			<div class="ui-g-12">
 				<p:outputPanel styleClass="ui-g info-panel div-info">
 					
-					<div class="ui-g-12">
-						<div class="ui-g-6 div-superior-oferta">
+					<div class="ui-g-12 div-titulo-oferta">
+						<div class="ui-g-10 div-superior-oferta">
 							<p:outputLabel value="TÍTULO" styleClass="titulo-oferta"/>
 						</div>
-						<div class="ui-g-6 div-superior-oferta">
+						<div class="ui-g-2 div-superior-oferta">
 							<p:commandButton title="Fazer um lance" styleClass="botao-novo-lance" icon="ui-icon-plus" update="msg"
 									onclick="PF('dialog').show()">
 								<!-- <f:setPropertyActionListener /> -->  
@@ -97,6 +97,24 @@
 						</div>
 					</div>
 					
+					<div class="ui-g-12 div-contratante-oferta">
+						<div class="ui-g-4 div-inferior-oferta">
+							<p:outputLabel value="Marcos da Silva" />
+						</div>
+						<div class="ui-g-1 div-inferior-oferta">
+							<p:outputLabel value="Reputação: " styleClass="label-info-contratante-oferta"/>							
+						</div>
+						<div class="ui-g-3 div-inferior-oferta">
+							<p:rating value="3" readonly="true"/>
+						</div>
+						<div class="ui-g-1 div-inferior-oferta">
+							<p:outputLabel value="Contato:" styleClass="label-info-contratante-oferta"/>
+						</div>
+						<div class="ui-g-2 div-inferior-oferta">
+							<p:outputLabel value="(87) 99158-7626"/>
+						</div>
+					</div>
+					
 					<div class="ui-g-2 sub-div-info-oferta">
 						<p:outputLabel value="R$ 120,00" styleClass="sub-div-info-oferta-label ui-g-12" />										
 						<p:outputLabel value="preço fixo" styleClass="sub-div-info-oferta-label-descritiva ui-g-12" />										
@@ -124,18 +142,22 @@
 						<p:outputLabel value="Prazo para realização" styleClass="sub-div-info-oferta-label-descritiva ui-g-12"/>					
 					</div>
 					
-					<div class="ui-g-12">
-						<div class="ui-g-2 div-inferior-oferta">
-							<p:outputLabel value="Contratante: " styleClass="label-info-contratante-oferta"/>
+					<div class="ui-g-12 div-capacidades-necessarias-oferta">
+						<div class="ui-g-1 div-label-capacidades-necessarias-oferta">
+							<p:outputLabel value="Requisitos:" styleClass="label-capacidades-necessarias-oferta"/>
 						</div>
-						<div class="ui-g-3 div-inferior-oferta">
-							<p:outputLabel value="Marcos da Silva" />
-						</div>
-						<div class="ui-g-2 div-inferior-oferta">
-							<p:outputLabel value="Reputação: " styleClass="label-info-contratante-oferta"/>							
-						</div>
-						<div class="ui-g-3 div-inferior-oferta">
-							<p:rating value="3" readonly="true"/>
+						<div class="ui-g-10 div-capacidades-oferta">
+							<ul class="ul-capacidades">
+								<li class="ui-chips-token">
+									<p:outputLabel value="capacidade 1" styleClass="label-capacidade"/>
+								</li>
+								<li class="ui-chips-token">
+									<p:outputLabel value="capacidade 2" styleClass="label-capacidade"/>
+								</li>	
+								<li class="ui-chips-token">							
+									<p:outputLabel value="capacidade 3" styleClass="label-capacidade"/>							
+								</li>
+							</ul>
 						</div>
 					</div>
 					

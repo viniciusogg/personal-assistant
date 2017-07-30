@@ -58,14 +58,6 @@
 	padding:7px !important;
 }
 
-.label-capacidade{
-	border-radius: 2px;
-	background: #1976D2;
-	color: white;
-	padding: 4px;
-	margin: 3px !important;
-}
-
 #botao-editar-categoria-servico{
 	float: right;
 }
@@ -75,9 +67,9 @@
 }
 
 .sub-div-info-oferta{
-	padding: 0px;
-	padding-bottom: 15px;
+	padding-bottom: 5px;
 	padding-top: 10px;
+	text-align: center;
 }
 
 .titulo-oferta{
@@ -120,4 +112,29 @@
 .botao-acao-perfil{
 	margin: 2px;
 	float: right;
+}
+
+.div-titulo-oferta{
+	padding-bottom: 0px;
+}
+
+.div-capacidades-necessarias-oferta{
+	padding-top: 5px;
+	padding-bottom: 10px;
+}
+
+.div-label-capacidades-necessarias-oferta{
+	padding: 0px;
+}
+
+.label-capacidades-necessarias-oferta{
+	padding-top: 0px;	
+}
+
+.div-capacidades-oferta{
+	padding: 0px;
+}
+
+.div-contratante-oferta{
+	padding-top: 0px;
 }

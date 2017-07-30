@@ -480,8 +480,8 @@ html .ui-checkboxradio-radio-label.ui-checkboxradio-checked:hover .ui-icon:after
 html .ui-btn.ui-checkbox-on.ui-checkbox-on:after,
 html .ui-alt-icon.ui-btn.ui-checkbox-on:after,
 html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670'; 
-	left: 10px !important;
-	top: 11px !important;
+	left: 8px !important;
+	top: 8px !important;
 }
 .ui-icon-check-off:after,
 .ui-icon-checkbox:after,
@@ -514,7 +514,10 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670';
 .ui-icon-circle-b-triangle-n:after { content: '\e659'; }
 .ui-icon-circle-b-triangle-s:after { content: '\e65b'; }
 .ui-icon-circle-b-triangle-w:after { content: '\e65c'; }
-.ui-icon-circle-check:after { content: '\e671'; }
+.ui-icon-circle-check:after { content: '\e671'; 
+	top: 11px !important;
+    left: 10px !important;	
+}
 .ui-icon-circle-close:after { content: '\e677'; }
 .ui-icon-circle-help:after,
 .ui-icon-help:after { content: '\e662'; }
@@ -525,10 +528,15 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670';
 .ui-icon-notice:after { content: '\e668'; }
 .ui-icon-circle-phone:after { content: '\e705'; }
 .ui-icon-circle-plus:after { content: '\e683'; }
-.ui-icon-circle-triangle-e:after { content: '\e656'; }
+.ui-icon-circle-triangle-e:after { content: '\e656'; 
+	top: 11px !important;
+    left: 9px !important;
+}
 .ui-icon-circle-triangle-n:after { content: '\e655'; }
 .ui-icon-circle-triangle-s:after { content: '\e657'; }
-.ui-icon-circle-triangle-w:after { content: '\e658'; }
+.ui-icon-circle-triangle-w:after { content: '\e658'; 
+	top: 11px !important;
+}
 .ui-icon-circle-zoom:after { content: '\e712'; }
 .ui-icon-circle-zoomin:after { content: '\e714'; }
 .ui-icon-circle-zoomout:after { content: '\e716'; }

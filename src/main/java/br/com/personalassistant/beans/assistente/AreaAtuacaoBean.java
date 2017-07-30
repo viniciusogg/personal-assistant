@@ -21,11 +21,11 @@ public class AreaAtuacaoBean extends AbstractBean {
 	private List<String> categoriasServicos = new ArrayList<String>();
 	
 	public AreaAtuacaoBean(){
-		capacidades.add("capacidade 1");
-		capacidades.add("capacidade 2");
-		capacidades.add("capacidade 3");
-		capacidades.add("capacidade 4");
-		capacidades.add("capacidade 5");
+		capacidades.add("ca55 145432f");
+		capacidades.add("capacidrteade 2");
+		capacidades.add("capacidade 35345");
+		capacidades.add("cap 4");
+		capacidades.add("capacie 53");
 		
 		categoriasServicos.add("Categoria servico 1");
 		categoriasServicos.add("Categoria servico 2");

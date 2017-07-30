@@ -40,10 +40,20 @@
 				</div>
 				
 				<div class="ui-g-12">
-					<p:panel header="#{areaAtuacaoBean.nomeCategoriaServico}">
-						<ui:repeat var="capacidade" value="#{areaAtuacaoBean.capacidades}">
-							<p:outputLabel value="#{capacidade}" styleClass="label-capacidade"/>
-						</ui:repeat>
+					<p:panel header="#{areaAtuacaoBean.nomeCategoriaServico}" styleClass="ui-g-12">
+						<ul class="ul-capacidades">
+							<ui:repeat var="capacidade" value="#{areaAtuacaoBean.capacidades}">
+								<li class="ui-chips-token">
+									<p:outputLabel value="#{capacidade}" styleClass="label-capacidade"/> 
+								</li>
+								<li class="ui-chips-token"> 
+									<p:outputLabel value="#{capacidade}" styleClass="label-capacidade"/> 
+								</li>
+								<li class="ui-chips-token"> 
+									<p:outputLabel value="#{capacidade}" styleClass="label-capacidade"/>
+								</li>
+							</ui:repeat>
+						</ul>
 					</p:panel>
 				</div>
 				

@@ -1,0 +1,17 @@
+.div-label-filtro-assistentes{
+	margin-top: 7px;
+}
+
+#div-separador-assistentes{
+	padding: unset;
+}
+
+.div-label-habilidades-assistentes{
+	margin-right: 10px;
+	margin-top: 2px;
+}
+
+#campo-busca-assistentes{
+	width: 97%;
+    height: 22px;
+}
