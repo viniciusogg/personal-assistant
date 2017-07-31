@@ -20,133 +20,130 @@
 			<div class="ui-g-12">
 				<p:outputPanel styleClass="ui-g info-panel div-info">
 					
-					<div class="ui-g-12 div-titulo-oferta">
-						<div class="ui-g-10 div-superior-oferta">
+					<div class="ui-g-10 div-superior-servico">
+						<div class="ui-g-12 sub-div-superior-servico">
 							<p:outputLabel value="TÍTULO" styleClass="titulo-oferta"/>
 						</div>
-						<div class="ui-g-2 div-superior-oferta">
-							<p:commandButton title="Fazer um lance" styleClass="botao-novo-lance" icon="ui-icon-plus" update="msg"
-									onclick="PF('dialog').show()">
-								<!-- <f:setPropertyActionListener /> -->  
-							</p:commandButton><!-- target="#{categoriaServicoAdmBean.categoriaServico}" 
-										value="#{categoriaServico}"  -->
-									
-							<p:dialog styleClass="dialog" appendTo="@(body)" resizable="false" 
-									responsive="true" widgetVar="dialog" modal="true" draggable="false" header="NOVO LANCE" >
-								<h:form >
+					</div>
+					
+					<div class="ui-g-2 div-superior-servico">
+						<p:commandButton title="Fazer um lance" styleClass="botao-iniciar-negociacao" icon="ui-icon-plus" update="msg"
+								onclick="PF('dialog').show()">
+							<!-- <f:setPropertyActionListener /> -->  
+						</p:commandButton><!-- target="#{categoriaServicoAdmBean.categoriaServico}" 
+									value="#{categoriaServico}"  -->
+								
+						<p:dialog styleClass="dialog" appendTo="@(body)" resizable="false" 
+								responsive="true" widgetVar="dialog" modal="true" draggable="false" header="NOVO LANCE" >
+							<h:form >
+								<div class="ui-g-12">
 									<div class="ui-g-12">
-										<div class="ui-g-12">
-											<div class="ui-g-6">
-												<p:outputLabel value="Escolha o tipo de pagamento*"/>
-											</div>
-											<div class="ui-g-6">
-												<p:selectOneMenu value="#{ofertasAssistenteBean.tipoPagamento}" styleClass="combobox">
-													<f:selectItems value="#{ofertasAssistenteBean.opcoesPagamento}" var="opcao"
-														itemLabel="#{opcao}" itemValue="#{opcao}" />	
-												</p:selectOneMenu>
-											</div>
+										<div class="ui-g-6">
+											<p:outputLabel value="Escolha o tipo de pagamento*"/>
 										</div>
-										<div class="ui-g-12">
-											<div class="ui-g-6">
-												<p:outputLabel value="Valor do lance*"/>
-											</div>
-											<div class="ui-g-6">
-												<p:inputNumber required="true" 
-														requiredMessage="Você esqueceu de informar o valor do seu lance"/>
-											</div>
-										</div>
-										<div class="ui-g-12">
-											<div class="ui-g-6">
-												<p:outputLabel value="Data de início do serviço*"/>
-											</div>
-											<div class="ui-g-6">
-												<p:calendar showButtonPanel="false"
-														navigator="true"
-														pattern="dd/MM/yyyy" 
-														required="true" 
-														requiredMessage="Você esqueceu de informar a data que você começará à trabalhar no serviço">
-													<f:convertDateTime pattern="dd/MM/yyyy" />
-												</p:calendar>
-											</div>
-										</div>
-										<div class="ui-g-12">
-											<div class="ui-g-6">
-												<p:outputLabel value="Data limite para realização do serviço*"/>
-											</div>
-											<div class="ui-g-6">
-												<p:calendar showButtonPanel="false"
-														navigator="true"
-														pattern="dd/MM/yyyy"
-														required="true" 
-														requiredMessage="Você esqueceu de informar a data limite para a conclusão do serviço">
-													<f:convertDateTime pattern="dd/MM/yyyy" />
-												</p:calendar>
-											</div>
-											
-										</div>
-										<div class="ui-g-12">
-											<p:commandButton value="ENVIAR" styleClass="botao-dialog"/> 
-											<!-- actionListener="#{categoriaServicoAdmBean.deletarCategoriaServico}"
-													action="categorias-servicos?faces-redirect=true" -->
-											<p:commandButton value="CANCELAR" 
-													onclick="PF('dialog').hide()" styleClass="botao-dialog"/>
+										<div class="ui-g-6">
+											<p:selectOneMenu value="#{ofertasAssistenteBean.tipoPagamento}" styleClass="combobox">
+												<f:selectItems value="#{ofertasAssistenteBean.opcoesPagamento}" var="opcao"
+													itemLabel="#{opcao}" itemValue="#{opcao}" />	
+											</p:selectOneMenu>
 										</div>
 									</div>
-								</h:form>
-							</p:dialog>
-						</div>
+									<div class="ui-g-12">
+										<div class="ui-g-6">
+											<p:outputLabel value="Valor do lance*"/>
+										</div>
+										<div class="ui-g-6">
+											<p:inputNumber required="true" 
+													requiredMessage="Você esqueceu de informar o valor do seu lance"/>
+										</div>
+									</div>
+									<div class="ui-g-12">
+										<div class="ui-g-6">
+											<p:outputLabel value="Data de início do serviço*"/>
+										</div>
+										<div class="ui-g-6">
+											<p:calendar showButtonPanel="false"
+													navigator="true"
+													pattern="dd/MM/yyyy" 
+													required="true" 
+													requiredMessage="Você esqueceu de informar a data que você começará à trabalhar no serviço">
+												<f:convertDateTime pattern="dd/MM/yyyy" />
+											</p:calendar>
+										</div>
+									</div>
+									<div class="ui-g-12">
+										<div class="ui-g-6">
+											<p:outputLabel value="Data limite para realização do serviço*"/>
+										</div>
+										<div class="ui-g-6">
+											<p:calendar showButtonPanel="false"
+													navigator="true"
+													pattern="dd/MM/yyyy"
+													required="true" 
+													requiredMessage="Você esqueceu de informar a data limite para a conclusão do serviço">
+												<f:convertDateTime pattern="dd/MM/yyyy" />
+											</p:calendar>
+										</div>
+										
+									</div>
+									<div class="ui-g-12">
+										<p:commandButton value="ENVIAR" styleClass="botao-dialog"/> 
+										<!-- actionListener="#{categoriaServicoAdmBean.deletarCategoriaServico}"
+												action="categorias-servicos?faces-redirect=true" -->
+										<p:commandButton value="CANCELAR" 
+												onclick="PF('dialog').hide()" styleClass="botao-dialog"/>
+									</div>
+								</div>
+							</h:form>
+						</p:dialog>
 					</div>
 					
 					<div class="ui-g-12 div-contratante-oferta">
-						<div class="ui-g-4 div-inferior-oferta">
+						<div class="ui-g-6 div-info-usuario-servico">
 							<p:outputLabel value="Marcos da Silva" />
 						</div>
-						<div class="ui-g-1 div-inferior-oferta">
-							<p:outputLabel value="Reputação: " styleClass="label-info-contratante-oferta"/>							
-						</div>
-						<div class="ui-g-3 div-inferior-oferta">
-							<p:rating value="3" readonly="true"/>
-						</div>
-						<div class="ui-g-1 div-inferior-oferta">
-							<p:outputLabel value="Contato:" styleClass="label-info-contratante-oferta"/>
-						</div>
-						<div class="ui-g-2 div-inferior-oferta">
-							<p:outputLabel value="(87) 99158-7626"/>
+						<div class="ui-g-6 div-info-usuario-servico">
+							<p:outputLabel value="Contato: (87) 99158-7626"/>
 						</div>
 					</div>
 					
-					<div class="ui-g-2 sub-div-info-oferta">
-						<p:outputLabel value="R$ 120,00" styleClass="sub-div-info-oferta-label ui-g-12" />										
-						<p:outputLabel value="preço fixo" styleClass="sub-div-info-oferta-label-descritiva ui-g-12" />										
+					<div class="ui-g-12 div-endereco-servico">
+						<p:outputLabel rendered="false" value="Endereço: Rua Mizael Henrique Vasconcelos, 20, 56600-000, Atrás da igreja Assembléia de Deus, Centro, Sertânia, PE" />
+					</div>
+										
+					<div class="ui-g-2 sub-div-info-servico">
+						<p:outputLabel value="R$ 120,00" styleClass="sub-div-info-servico-label ui-g-12" />										
+						<p:outputLabel value="preço fixo" styleClass="sub-div-info-servico-label-descritiva ui-g-12" />										
 					</div>
 		
-					<div class="ui-g-2 sub-div-info-oferta">
-						<p:outputLabel styleClass="sub-div-info-oferta-label ui-g-12" value="R$ 10,00"/>										
-						<p:outputLabel styleClass="sub-div-info-oferta-label-descritiva ui-g-12" value="por hora trabalhada"/>										
+					<div class="ui-g-2 sub-div-info-servico">
+						<p:outputLabel styleClass="sub-div-info-servico-label ui-g-12" value="R$ 10,00"/>										
+						<p:outputLabel styleClass="sub-div-info-servico-label-descritiva ui-g-12" value="por hora trabalhada"/>										
 					</div>
 		
-					<div class="ui-g-2 sub-div-info-oferta">
-						<p:outputLabel value="Categoria de serviço" styleClass="sub-div-info-oferta-label ui-g-12"/>		
+					<div class="ui-g-2 sub-div-info-servico">
+						<p:outputLabel value="Categoria de serviço" styleClass="sub-div-info-servico-label ui-g-12"/>		
 					</div>					
 					
-					<div class="ui-g-2 sub-div-info-oferta">
-						<p:outputLabel value="Local" styleClass="sub-div-info-oferta-label ui-g-12" />										
-					</div>
-		
-					<div class="ui-g-2 sub-div-info-oferta">
-						<p:outputLabel value="Oferta expira em 3 dias" styleClass="sub-div-info-oferta-label ui-g-12"/>		
+					<div class="ui-g-2 sub-div-info-servico">
+						<p:rating value="3" readonly="true"/>
+						<p:outputLabel value="Reputação" styleClass="sub-div-info-servico-label-descritiva ui-g-12"/>					
 					</div>
 					
-					<div class="ui-g-2 sub-div-info-oferta">
-						<p:outputLabel value="Entre 22/08/2017 e 10/09/2017" styleClass="sub-div-info-oferta-label ui-g-12"/>					
-						<p:outputLabel value="Prazo para realização" styleClass="sub-div-info-oferta-label-descritiva ui-g-12"/>					
+					<div class="ui-g-2 sub-div-info-servico">
+						<p:outputLabel value="Oferta expira em 3 dias" styleClass="sub-div-info-servico-label ui-g-12"/>		
 					</div>
 					
-					<div class="ui-g-12 div-capacidades-necessarias-oferta">
-						<div class="ui-g-1 div-label-capacidades-necessarias-oferta">
+					<div class="ui-g-2 sub-div-info-servico">
+						<p:outputLabel value="Entre 22/08/2017 e 10/09/2017" styleClass="sub-div-info-servico-label ui-g-12"/>					
+						<p:outputLabel value="Prazo para realização" styleClass="sub-div-info-servico-label-descritiva ui-g-12"/>					
+					</div>
+					
+					<div class="ui-g-12 div-capacidades-servico">
+						<div class="ui-g-1 div-label-capacidades-servico">
 							<p:outputLabel value="Requisitos:" styleClass="label-capacidades-necessarias-oferta"/>
 						</div>
-						<div class="ui-g-10 div-capacidades-oferta">
+						<div class="ui-g-10 div-capacidades-servico">
 							<ul class="ul-capacidades">
 								<li class="ui-chips-token">
 									<p:outputLabel value="capacidade 1" styleClass="label-capacidade"/>

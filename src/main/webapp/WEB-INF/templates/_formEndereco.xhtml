@@ -1,96 +1,94 @@
 <?xml version='1.0' encoding="UTF-8" ?>
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:h="http://xmlns.jcp.org/jsf/html"
 		xmlns:f="http://xmlns.jcp.org/jsf/core"
 		xmlns:p="http://primefaces.org/ui"
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-
-	<ui:composition>
-		
-		<div class="ui-g-6">
-			<div class="ui-g-12">
-				<p:outputLabel value="RUA*"/>
-			</div>
-			<div class="ui-g-12">
-				<p:inputText placeholder="NOME DA SUA RUA"
-						value="#{rua}"
-						styleClass="campo-formulario" required="true" 
-						requiredMessage="Você esqueceu de preencher o campo: 'RUA'"/>
-			</div>
+	
+	<div class="ui-g-6">
+		<div class="ui-g-12">
+			<p:outputLabel value="RUA*"/>
 		</div>
-		
-		<div class="ui-g-2">
-			<div class="ui-g-12">
-				<p:outputLabel value="NÚMERO*"/>
-			</div>
-			<div class="ui-g-12">
-				<p:inputMask mask="9?9999" placeholder="N° DA CASA"
-						value="#{numero}"
-						styleClass="campo-formulario" required="true" 
-						requiredMessage="Você esqueceu de preencher o campo: 'NÚMERO'"/>								
-			</div>
+		<div class="ui-g-12">
+			<p:inputText placeholder="NOME DA SUA RUA"
+					value="#{rua}"
+					styleClass="campo-formulario" required="true" 
+					requiredMessage="Você esqueceu de preencher o campo: 'RUA'"/>
 		</div>
-		
-		<div class="ui-g-4">
-			<div class="ui-g-12">
-				<p:outputLabel value="CEP*"/>
-			</div>
-			<div class="ui-g-12">
-				<p:inputMask mask="99999-999" placeholder="CEP DA SUA RUA OU CIDADE"
-						value="#{cep}"
-						styleClass="campo-formulario" required="true" 
-						requiredMessage="Você esqueceu de preencher o campo: 'CEP'"/>
-			</div>
+	</div>
+	
+	<div class="ui-g-3">
+		<div class="ui-g-12">
+			<p:outputLabel value="NÚMERO*"/>
 		</div>
-		
-		<div class="ui-g-6">
-			<div class="ui-g-12">
-				<p:outputLabel value="BAIRRO*"/>
-			</div>
-			<div class="ui-g-12">
-				<p:inputText placeholder="BAIRRO ONDE MORA"
-						value="#{bairro}"
-						styleClass="campo-formulario" required="true" 
-						requiredMessage="Você esqueceu de preencher o campo: 'BAIRRO'"/>
-			</div>
+		<div class="ui-g-12">
+			<p:spinner placeholder="N° DA CASA"
+					value="#{numero}"
+				 	required="true"
+				 	maxlength="9"
+				 	min="1"
+					requiredMessage="Você esqueceu de preencher o campo: 'NÚMERO'"/>							
 		</div>
-		
-		<div class="ui-g-6">
-			<div class="ui-g-12">
-				<p:outputLabel value="REFERÊNCIA"/>
-			</div>
-			<div class="ui-g-12">
-				<p:inputText placeholder="PONTO DE REFERÊNCIA"
-						value="#{referencia}"
-						styleClass="campo-formulario" />
-			</div>
+	</div>
+	
+	<div class="ui-g-3">
+		<div class="ui-g-12">
+			<p:outputLabel value="CEP*"/>
 		</div>
-		
-		<div class="ui-g-6">
-			<div class="ui-g-12">
-				<p:outputLabel value="ESTADO*"/>
-			</div>
-			<div class="ui-g-12">
-				<p:inputText placeholder="NOME DO SEU ESTADO"
-						value="#{estado}"
-						styleClass="campo-formulario" required="true" 
-						requiredMessage="Você esqueceu de preencher o campo: 'ESTADO'"/>
-			</div>
+		<div class="ui-g-12">
+			<p:inputMask mask="99999-999" placeholder="CEP DA SUA RUA"
+					value="#{cep}"
+					styleClass="campo-formulario" required="true" 
+					requiredMessage="Você esqueceu de preencher o campo: 'CEP'"/>
 		</div>
-		
-		<div class="ui-g-6">
-			<div class="ui-g-12">
-				<p:outputLabel value="CIDADE*"/>
-			</div>
-			<div class="ui-g-12">
-				<p:inputText placeholder="NOME DA SUA CIDADE OU MUNICÍPIO"
-						value="#{cidade}"
-						styleClass="campo-formulario" required="true" 
-						requiredMessage="Você esqueceu de preencher o campo: 'CIDADE'"/>
-			</div>
+	</div>
+	
+	<div class="ui-g-6">
+		<div class="ui-g-12">
+			<p:outputLabel value="BAIRRO*"/>
 		</div>
+		<div class="ui-g-12">
+			<p:inputText placeholder="BAIRRO ONDE MORA"
+					value="#{bairro}"
+					styleClass="campo-formulario" required="true" 
+					requiredMessage="Você esqueceu de preencher o campo: 'BAIRRO'"/>
+		</div>
+	</div>
+	
+	<div class="ui-g-6">
+		<div class="ui-g-12">
+			<p:outputLabel value="REFERÊNCIA"/>
+		</div>
+		<div class="ui-g-12">
+			<p:inputText placeholder="PONTO DE REFERÊNCIA"
+					value="#{referencia}"
+					styleClass="campo-formulario" />
+		</div>
+	</div>
+	
+	<div class="ui-g-6">
+		<div class="ui-g-12">
+			<p:outputLabel value="ESTADO*"/>
+		</div>
+		<div class="ui-g-12">
+			<p:inputText placeholder="NOME DO SEU ESTADO"
+					value="#{estado}"
+					styleClass="campo-formulario" required="true" 
+					requiredMessage="Você esqueceu de preencher o campo: 'ESTADO'"/>
+		</div>
+	</div>
+	
+	<div class="ui-g-6">
+		<div class="ui-g-12">
+			<p:outputLabel value="CIDADE*"/>
+		</div>
+		<div class="ui-g-12">
+			<p:inputText placeholder="NOME DA SUA CIDADE OU MUNICÍPIO"
+					value="#{cidade}"
+					styleClass="campo-formulario" required="true" 
+					requiredMessage="Você esqueceu de preencher o campo: 'CIDADE'"/>
+		</div>
+	</div>
 		
-	</ui:composition>
-</html>
+</ui:composition>

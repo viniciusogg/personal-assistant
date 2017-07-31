@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		template="index.xhtml">
+		
+	<ui:define name="titulo">
+		<p:outputLabel class="titulo" value="ASSISTENTES"/>
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		
+		<div class="ui-g">
+		
+			<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
+		
+			<div class="ui-g-12">
+				
+				<div id="div-nova-oferta" class="ui-g-12">
+					<p:commandButton icon="ui-icon-plusthick" value="NOVA OFERTA"/>
+				</div>
+				
+				<div class="ui-g-12" id="div-separador-assistentes">
+					<p:separator/>
+				</div>
+				
+				<div class="ui-g-12">
+					<p:dataTable id="tabelaAvalicoesRecebidas" var="servico" 
+							value="#{listaServicos != null ? listaServicos : ''}" rows="20"
+		            		paginator="true"
+		            		paginatorTemplate="{PageLinks}">
+				                 
+						<f:facet name="header"> SUAS OFERTAS </f:facet>
+				                  
+						<p:column headerText="STATUS">
+							<p:outputLabel value="#"/>							
+						</p:column>
+						<p:column headerText="TEMPO RESTANTE">
+							<p:outputLabel value="#"/>							
+						</p:column>
+						<p:column headerText="DATA REALIZAÇÃO">
+							<p:outputLabel value="#"/>							
+						</p:column>
+						<p:column headerText="CATEGORIA DE SERVIÇO">
+							<p:outputLabel value="#"/>							
+						</p:column>
+						<p:column headerText="LANCES">
+							<p:commandButton icon="ui-icon-search" title="VEJA OS LANCES" 
+									action="lances?faces-redirect=true"/>
+						</p:column>
+					</p:dataTable>
+				</div>
+			</div>
+		</div>
+	</ui:define>			
+</ui:composition>

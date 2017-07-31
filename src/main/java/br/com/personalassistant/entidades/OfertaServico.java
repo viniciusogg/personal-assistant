@@ -32,12 +32,14 @@ public class OfertaServico implements Serializable{
 	@Column(nullable = false)
 	private Integer duracaoOferta;
 	
+	@Column(nullable = false)
 	private Double precoHora;
-	
+
+	@Column(nullable = false)
 	private Double precoFixo;
 	
 	@Column(nullable = false)
-	private String titulo;
+	private String descricao;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
@@ -54,7 +56,7 @@ public class OfertaServico implements Serializable{
 	@JoinColumn(nullable = false)
 	private Contratante contratante; // bidirecional
 	
-	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "oferstaServico")
+	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "ofertaServico")
 	@Column(name="ofertaServico_FK")
 	private List<Lance> lances; // bidirecional
 	
@@ -66,16 +68,15 @@ public class OfertaServico implements Serializable{
 		super();
 	}
 
-	public OfertaServico(Integer duracaoOferta, Double precoHora, Double precoFixo, String titulo, ESTADO_OFERTA status,
-			Endereco endereco, CategoriaServico categoriaServico, Contratante contratante,
+	public OfertaServico(Integer duracaoOferta, Double precoHora, Double precoFixo, String descricao, ESTADO_OFERTA status,
+			CategoriaServico categoriaServico, Contratante contratante,
 			DataRealizacaoServico dataRealizacaoServico) {
 		super();
 		this.duracaoOferta = duracaoOferta;
 		this.precoHora = precoHora;
 		this.precoFixo = precoFixo;
-		this.titulo = titulo;
+		this.descricao = descricao;
 		this.status = status;
-		this.endereco = endereco;
 		this.categoriaServico = categoriaServico;
 		this.contratante = contratante;
 		this.dataRealizacaoServico = dataRealizacaoServico;
@@ -109,12 +110,12 @@ public class OfertaServico implements Serializable{
 		this.precoFixo = precoFixo;
 	}
 	
-	public String getTitulo() {
-		return titulo;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public ESTADO_OFERTA getStatus() {
@@ -179,7 +180,7 @@ public class OfertaServico implements Serializable{
 		result = prime * result + ((precoFixo == null) ? 0 : precoFixo.hashCode());
 		result = prime * result + ((precoHora == null) ? 0 : precoHora.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 
@@ -239,10 +240,10 @@ public class OfertaServico implements Serializable{
 			return false;
 		if (status != other.status)
 			return false;
-		if (titulo == null) {
-			if (other.titulo != null)
+		if (descricao == null) {
+			if (other.descricao != null)
 				return false;
-		} else if (!titulo.equals(other.titulo))
+		} else if (!descricao.equals(other.descricao))
 			return false;
 		return true;
 	}
@@ -250,7 +251,7 @@ public class OfertaServico implements Serializable{
 	@Override
 	public String toString() {
 		return "OfertaServico [id=" + id + ", duracaoOferta=" + duracaoOferta + ", precoHora=" + precoHora
-				+ ", precoFixo=" + precoFixo + ", titulo=" + titulo + ", status=" + status + ", endereco=" + endereco
+				+ ", precoFixo=" + precoFixo + ", descricao=" + descricao + ", status=" + status + ", endereco=" + endereco
 				+ ", categoriaServico=" + categoriaServico + ", contratante=" + contratante + ", lances=" + lances
 				+ ", dataRealizacaoServico=" + dataRealizacaoServico + "]";
 	}

@@ -60,8 +60,5 @@ public class AvaliacoesAssistenteBean extends AbstractBean {
 	public void salvarAvaliacao(){
 		
 	}
-	
-	public void addFavorito(){
-		
-	}
+
 }

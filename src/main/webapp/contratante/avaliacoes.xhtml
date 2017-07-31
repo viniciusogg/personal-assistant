@@ -20,21 +20,21 @@
 					<ui:include src="/WEB-INF/templates/_tabelaAvaliacoesFeitas.xhtml">
 						<ui:param name="listaServicos" value="#{avaliacoesAssistenteBean.listaServicos}" />
 						<ui:param name="valorDataAssistencia" value="#" />
-						<ui:param name="tipoUsuario" value="CONTRATANTE" />
+						<ui:param name="tipoUsuario" value="ASSISTENTE" />
 						<ui:param name="renderedButtonAvaliacao" value="true" />
 						<ui:param name="renderedRating" value="false" />
 						<ui:param name="pontualidade" value="5" />
 						<ui:param name="cordialidade" value="5" />
-						<ui:param name="labelAvaliacao" value="FACILIDADE PAGAMENTO:" />
+						<ui:param name="labelAvaliacao" value="QUALIDADE DO SERVIÇO:" />
 						<ui:param name="terceiraAvaliacao" value="5" />
-						<ui:param name="requiredMessageTerceiraAvaliacao" value="AVALIE A FACILIDADE DO PAGAMENTO"/>
+						<ui:param name="requiredMessageTerceiraAvaliacao" value="AVALIE A QUALIDADE DO SERVIÇO"/>
 						<ui:param name="valueTextArea" value="#" />
-						<ui:param name="nomeManagedBeanListenerBotaoConcluirAvaliacao" value="#{avaliacoesAssistenteBean}" />
+						<ui:param name="nomeManagedBeanListenerBotaoConcluirAvaliacao" value="#{avaliacoesContratanteBean}" />
 						<ui:param name="acaoListenerBotaoConcluirAvaliacao" value="salvarAvaliacao" />
-						<ui:param name="nomeManagedBeanActionBotaoConcluirAvaliacao" value="#{avaliacoesAssistenteBean}" />
+						<ui:param name="nomeManagedBeanActionBotaoConcluirAvaliacao" value="#{avaliacoesContratanteBean}" />
 						<ui:param name="acaoActionBotaoConcluirAvaliacao" value="salvarAvaliacao" />
-						<ui:param name="nomeManagedBeanFavoritar" value="null" />
-						<ui:param name="acaoBotaoFavoritar" value="null" />
+						<ui:param name="nomeManagedBeanFavoritar" value="#{avaliacoesContratanteBean}" />
+						<ui:param name="acaoBotaoFavoritar" value="addFavorito" />
 					</ui:include>
 				</div>
 				<div class="ui-g-12">
@@ -42,9 +42,9 @@
 				</div>
 				<div class="ui-g-12">
 					<ui:include src="/WEB-INF/templates/_tabelaAvaliacoesRecebidas.xhtml">
-						<ui:param name="listaServicos" value="#{avaliacoesAssistenteBean.listaServicos}" />
+						<ui:param name="listaServicos" value="#{avaliacoesContratanteBean.listaServicos}" />
 						<ui:param name="valorDataAssistencia" value="22/04/2017" />
-						<ui:param name="tipoUsuario" value="CONTRATANTE"/>
+						<ui:param name="tipoUsuario" value="ASSISTENTE"/>
 						<ui:param name="valorTipoUsuario" value="#"/>
 						<ui:param name="valorAvaliacao" value="3"/>
 					</ui:include>

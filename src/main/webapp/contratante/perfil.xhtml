@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		template="index.xhtml">
+		
+	<ui:define name="titulo">
+		<p:outputLabel class="titulo" value="PERFIL"/>
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		
+		<div class="ui-g">
+			<div class="ui-g-12">
+				
+				<p:fieldset styleClass="fieldset" legend="INFORMAÇÕES PESSOAIS">
+					<ui:include src="/WEB-INF/templates/_infoUsuario.xhtml">
+						<ui:param name="nome" value="Gomes"/>
+						<ui:param name="telefone" value="(87) 99158-7626"/>
+						<ui:param name="email" value="otavio@gmail.com" />
+					</ui:include>
+				</p:fieldset>
+				
+				<p:fieldset styleClass="fieldset" legend="INFORMAÇÕES DE ENDEREÇO">
+					<ui:include src="/WEB-INF/templates/_infoEndereco.xhtml">
+						<ui:param name="rua" value="Rua"/>
+						<ui:param name="numero" value="6"/>
+						<ui:param name="cep" value="55600-000" />
+						<ui:param name="bairro" value="centro"/>
+						<ui:param name="referencia" value="ref"/>
+						<ui:param name="estado" value="PE" />
+						<ui:param name="cidade" value="Sertania" />					
+					</ui:include>
+				</p:fieldset>
+			
+				<div class="ui-g-12">
+					<h:form>
+						<p:commandButton value="DESATIVAR CONTA" styleClass="botao-acao-perfil"/>
+						<p:commandButton value="EDITAR PERFIL" styleClass="botao-acao-perfil"/>
+						<p:commandButton value="ALTERAR SENHA" styleClass="botao-acao-perfil"/>
+					</h:form>
+				</div>
+					
+			</div>
+		</div>
+	</ui:define>			
+</ui:composition>

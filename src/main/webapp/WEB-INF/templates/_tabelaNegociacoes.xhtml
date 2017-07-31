@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+			
+	<p:dataTable id="tabelaNegociacoes" var="negociacao" 
+			value="#{valueTabela != null ? valueTabela : '#'}" rows="20"
+            paginator="true"
+            paginatorTemplate="{PageLinks}">
+                 
+        <f:facet name="header">
+  			SUAS NEGOCIAÇÕES
+		</f:facet>
+                  
+		<p:column headerText="DATA DE INÍCIO">
+			<p:outputLabel value="#{valueDataInicio != null ? valueDataInicio : '#'}"/>							
+		</p:column>
+		<p:column headerText="#{tipoUsuario != null ? tipoUsuario : '#'}">
+			<p:outputLabel value="#{valueTipoUsuario != null ? valueTipoUsuario : '#'}"/>							
+		</p:column>
+		<p:column headerText="STATUS">
+			<p:outputLabel value="#{valueStatus != null ? valueStatus : '#'}"/>							
+		</p:column>
+		<p:column headerText="">						
+			<h:form>
+				<p:commandButton icon="ui-icon-search" title="Detalhes da negociação" 
+						action="proposta?faces-redirect=true"/>
+			</h:form>
+		</p:column>
+	</p:dataTable>
+			
+</ui:composition>

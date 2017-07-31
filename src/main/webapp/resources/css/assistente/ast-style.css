@@ -66,47 +66,8 @@
 	float: right;
 }
 
-.sub-div-info-oferta{
-	padding-bottom: 5px;
-	padding-top: 10px;
-	text-align: center;
-}
-
 .titulo-oferta{
 	font-size: 18px !important;
-}
-
-.sub-div-info-oferta-label{
-	font-size: 20px !important;
-	padding-bottom: 0px !important;
-	padding-top: 0px !important;
-	text-align: center !important;
-}
-
-.sub-div-info-oferta-label-descritiva{
-	font-size: 15px !important;
-	padding-bottom: 0px !important;
-	padding-top: 0px !important;
-	text-align: center !important;
-}
-
-.div-superior-oferta{
-	padding: 0px !important;
-}
-
-.div-inferior-oferta{
-	padding: 0px !important;
-}
-
-.botao-novo-lance{
-	float: right;
-	border-radius: 50px;
-	height: 40px !important;
-	box-shadow: 2.5px 2.5px 5px 0px rgba(0,0,0,.26) !important;
-}
-
-.label-info-contratante-oferta{
-	float:right;
 }
 
 .botao-acao-perfil{
@@ -114,27 +75,11 @@
 	float: right;
 }
 
-.div-titulo-oferta{
-	padding-bottom: 0px;
-}
-
-.div-capacidades-necessarias-oferta{
-	padding-top: 5px;
-	padding-bottom: 10px;
-}
-
-.div-label-capacidades-necessarias-oferta{
-	padding: 0px;
-}
-
-.label-capacidades-necessarias-oferta{
-	padding-top: 0px;	
-}
-
-.div-capacidades-oferta{
-	padding: 0px;
-}
-
 .div-contratante-oferta{
 	padding-top: 0px;
+}
+
+button[id^="tabelaAssistencias"] > span[class="ui-button-icon-left ui-icon ui-c ui-icon-check"] {
+    top: 16px;
+    left: 21px;
 }

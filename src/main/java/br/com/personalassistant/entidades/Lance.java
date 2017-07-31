@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.personalassistant.enums.ESTADO_LANCE;
+import br.com.personalassistant.enums.TIPO_PAGAMENTO;
 
 @Table(name = "TB_LANCE")
 @Entity(name = "Lance")
@@ -27,10 +28,13 @@ public class Lance implements Serializable{
 	private Long id;
 	
 	@Column(nullable = false)
-	private Double precoFixo;
+	private Double valorLance;
 
-	private Double precoHoraTrabalhada;
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private TIPO_PAGAMENTO tipoPagamento;
 	
+	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private ESTADO_LANCE status;
 	
@@ -40,7 +44,7 @@ public class Lance implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(nullable = false)
-	private OfertaServico oferstaServico; // bidirecional
+	private OfertaServico ofertaServico; // bidirecional
 	
 	@Embedded
 	@Column(nullable = false)
@@ -50,34 +54,35 @@ public class Lance implements Serializable{
 		super();
 	}
 
-	public Lance(Double precoFixo, Double precoHoraTrabalhada, Assistente assistente, OfertaServico oferstaServico,
-			DataRealizacaoServico dataRealizacaoServico) {
+	public Lance(Double valorLance, TIPO_PAGAMENTO tipoPagamento, Assistente assistente, OfertaServico ofertaServico,
+			DataRealizacaoServico dataRealizacaoServico, ESTADO_LANCE status) {
 		super();
-		this.precoFixo = precoFixo;
-		this.precoHoraTrabalhada = precoHoraTrabalhada;
+		this.valorLance = valorLance;
+		this.tipoPagamento = tipoPagamento;
 		this.assistente = assistente;
-		this.oferstaServico = oferstaServico;
+		this.ofertaServico = ofertaServico;
 		this.dataRealizacaoServico = dataRealizacaoServico;
+		this.status = status;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public Double getPrecoFixo() {
-		return precoFixo;
+	public Double getValorLance() {
+		return valorLance;
 	}
 
-	public void setPrecoFixo(Double precoFixo) {
-		this.precoFixo = precoFixo;
+	public void setValorLance(Double valorLance) {
+		this.valorLance = valorLance;
 	}
 
-	public Double getPrecoHoraTrabalhada() {
-		return precoHoraTrabalhada;
+	public TIPO_PAGAMENTO getTipoPagamento() {
+		return tipoPagamento;
 	}
 
-	public void setPrecoHoraTrabalhada(Double precoHoraTrabalhada) {
-		this.precoHoraTrabalhada = precoHoraTrabalhada;
+	public void setTipoPagamento(TIPO_PAGAMENTO tipoPagamento) {
+		this.tipoPagamento = tipoPagamento;
 	}
 
 	public ESTADO_LANCE getStatus() {
@@ -96,12 +101,12 @@ public class Lance implements Serializable{
 		this.assistente = assistente;
 	}
 
-	public OfertaServico getOferstaServico() {
-		return oferstaServico;
+	public OfertaServico getOfertaServico() {
+		return ofertaServico;
 	}
 
-	public void setOferstaServico(OfertaServico oferstaServico) {
-		this.oferstaServico = oferstaServico;
+	public void setOfertaServico(OfertaServico ofertaServico) {
+		this.ofertaServico = ofertaServico;
 	}
 	
 	public DataRealizacaoServico getDataRealizacaoServico() {
@@ -119,9 +124,9 @@ public class Lance implements Serializable{
 		result = prime * result + ((assistente == null) ? 0 : assistente.hashCode());
 		result = prime * result + ((dataRealizacaoServico == null) ? 0 : dataRealizacaoServico.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((oferstaServico == null) ? 0 : oferstaServico.hashCode());
-		result = prime * result + ((precoFixo == null) ? 0 : precoFixo.hashCode());
-		result = prime * result + ((precoHoraTrabalhada == null) ? 0 : precoHoraTrabalhada.hashCode());
+		result = prime * result + ((ofertaServico == null) ? 0 : ofertaServico.hashCode());
+		result = prime * result + ((valorLance == null) ? 0 : valorLance.hashCode());
+		result = prime * result + ((tipoPagamento == null) ? 0 : tipoPagamento.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
@@ -150,20 +155,20 @@ public class Lance implements Serializable{
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (oferstaServico == null) {
-			if (other.oferstaServico != null)
+		if (ofertaServico == null) {
+			if (other.ofertaServico != null)
 				return false;
-		} else if (!oferstaServico.equals(other.oferstaServico))
+		} else if (!ofertaServico.equals(other.ofertaServico))
 			return false;
-		if (precoFixo == null) {
-			if (other.precoFixo != null)
+		if (valorLance == null) {
+			if (other.valorLance != null)
 				return false;
-		} else if (!precoFixo.equals(other.precoFixo))
+		} else if (!valorLance.equals(other.valorLance))
 			return false;
-		if (precoHoraTrabalhada == null) {
-			if (other.precoHoraTrabalhada != null)
+		if (tipoPagamento == null) {
+			if (other.tipoPagamento != null)
 				return false;
-		} else if (!precoHoraTrabalhada.equals(other.precoHoraTrabalhada))
+		} else if (!tipoPagamento.equals(other.tipoPagamento))
 			return false;
 		if (status != other.status)
 			return false;
@@ -172,8 +177,8 @@ public class Lance implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Lance [id=" + id + ", precoFixo=" + precoFixo + ", precoHoraTrabalhada=" + precoHoraTrabalhada
-				+ ", status=" + status + ", assistente=" + assistente + ", oferstaServico=" + oferstaServico
+		return "Lance [id=" + id + ", valorLance=" + valorLance + ", tipoPagamento=" + tipoPagamento
+				+ ", status=" + status + ", assistente=" + assistente + ", ofertaServico=" + ofertaServico
 				+ ", dataRealizacaoServico=" + dataRealizacaoServico + "]";
 	}
 

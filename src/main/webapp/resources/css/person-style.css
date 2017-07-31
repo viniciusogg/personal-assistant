@@ -334,11 +334,11 @@ a{
 	margin: 2px;	
 }
 
-div[class="ui-g-3 div-inferior-oferta"] > div[class="ui-rating"] > div[class="ui-rating-star ui-rating-star-on"] > a {
+div[class="ui-g-3 div-info-usuario-servico"] > div[class="ui-rating"] > div[class="ui-rating-star ui-rating-star-on"] > a {
     background-position: 0 -65px !important;
 }
 
-div[class="ui-g-2 sub-div-info-oferta"] > div[class="ui-rating"] > div[class="ui-rating-star ui-rating-star-on"] > a {
+div[class="ui-g-2 sub-div-info-servico"] > div[class="ui-rating"] > div[class="ui-rating-star ui-rating-star-on"] > a {
     background-position: 0 -65px !important;
 }
 
@@ -378,4 +378,110 @@ a.ui-datepicker-next.ui-corner-all:hover{
 
 .ui-chkbox-box:hover{
 	cursor: pointer !important;
+}
+
+a[class="ui-spinner-button ui-spinner-down ui-corner-br ui-button ui-widget ui-state-default ui-button-text-only"] > span[class="ui-button-text"] > span:after{
+	content: '\e63b';
+	top: 5px !important;
+	left: 8px !important;
+}
+
+a[class="ui-spinner-button ui-spinner-down ui-corner-br ui-button ui-widget ui-state-default ui-button-text-only ui-state-hover"] > span[class="ui-button-text"] > span:after{
+	content: '\e63b';
+	top: 5px !important;
+	left: 8px !important;
+}
+
+a[class="ui-spinner-button ui-spinner-down ui-corner-br ui-button ui-widget ui-state-default ui-button-text-only ui-state-active"] > span[class="ui-button-text"] > span:after{
+	content: '\e63b';
+	top: 5px !important;
+	left: 8px !important;
+}
+
+a[class="ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default ui-button-text-only"] > span[class="ui-button-text"] > span:after{
+	content: '\e637';
+	top: 5px !important;
+	left: 8px !important;
+}
+
+a[class="ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default ui-button-text-only ui-state-hover"] > span[class="ui-button-text"] > span:after{
+	content: '\e637';
+	top: 5px !important;
+	left: 8px !important;
+}
+
+a[class="ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default ui-button-text-only ui-state-active"] > span[class="ui-button-text"] > span:after{
+	content: '\e637';
+	top: 5px !important;
+	left: 8px !important;
+}
+
+html .ui-spinner .ui-spinner-input{
+	padding: 4px !important;
+}
+
+.ui-spinner-input {
+    vertical-align: middle;
+    text-align: center;
+    padding-right: unset;
+}
+
+/*************************/
+.sub-div-info-servico-label{
+	font-size: 20px !important;
+	padding-bottom: unset !important;
+	padding-top: unset !important;
+	text-align: center !important;
+}
+
+.sub-div-info-servico-label-descritiva{
+	font-size: 15px !important;
+	padding-bottom: unset !important;
+	padding-top: unset !important;
+	text-align: center !important;
+}
+
+.sub-div-superior-servico{
+	padding: unset !important;
+}
+
+.div-info-usuario-servico{
+	padding: unset !important;
+}
+
+.botao-iniciar-negociacao{
+	float: right;
+	border-radius: 50px;
+	height: 40px !important;
+	box-shadow: 2.5px 2.5px 5px 0px rgba(0,0,0,.26) !important;
+}
+
+.label-info-usuario-servico{
+	float:right;
+}
+
+.div-superior-servico{
+	padding-bottom: unset;
+}
+
+.div-capacidades-servico{
+	padding-top: unset;
+	padding-bottom: unset;
+}
+
+.div-endereco-servico{
+	padding-top: 4px;
+	padding-bottom: 3px;
+}
+
+.div-label-capacidades-servico{
+	margin-top: 2px;
+	margin-right: 45px;
+	padding: unset;
+}
+
+.sub-div-info-servico{
+	padding-bottom: 5px;
+	padding-top: 10px;
+	text-align: center;
 }

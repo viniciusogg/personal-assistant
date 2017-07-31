@@ -1,34 +1,32 @@
 <?xml version='1.0' encoding="UTF-8" ?>
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml"
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:h="http://xmlns.jcp.org/jsf/html"
 		xmlns:f="http://xmlns.jcp.org/jsf/core"
 		xmlns:p="http://primefaces.org/ui"
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-
-	<ui:composition>
-		<p:outputPanel styleClass="info-panel ui-g div-info-reputacao">
-					
-			<div class="ui-g-6 div-label">
-				<p:outputLabel value="SUA REPUTAÇÃO" styleClass="label-titulo-infopanel"/>				
+		
+	<p:outputPanel styleClass="info-panel ui-g div-info-reputacao">
+				
+		<div class="ui-g-6 div-label">
+			<p:outputLabel value="SUA REPUTAÇÃO" styleClass="label-titulo-infopanel"/>				
+		</div>
+		
+		<div class="ui-g-6 div-label">
+			<div id="div-label-nivel-reputacao" class="ui-g-12">
+				<p:outputLabel value="#{reputacao != null ? reputacao : 'REPUTAÇÃO'}"/>										
 			</div>
-			
-			<div class="ui-g-6 div-label">
-				<div id="div-label-nivel-reputacao" class="ui-g-12">
-					<p:outputLabel value="#{reputacao != null ? reputacao : 'REPUTAÇÃO'}"/>										
+
+			<div id="div-labels-avalicao" class="ui-g-12">
+				<div class="ui-g-6 div-info">
+					<p:rating id="avaliacao" value="#{quantEstrelas != null ? quantEstrelas : 0}" readonly="true"/>
 				</div>
-
-				<div id="div-labels-avalicao" class="ui-g-12">
-					<div class="ui-g-6 div-info">
-						<p:rating id="avaliacao" value="#{quantEstrelas != null ? quantEstrelas : 0}" readonly="true"/>
-					</div>
-					<div class="ui-g-6" id="div-label-total-avaliacoes">
-						<p:outputLabel value="#{totalAvaliacoes != null ? totalAvaliacoes : 0}" styleClass="label-direita"/>										
-						<p:outputLabel value="AVALIAÇÕES" styleClass="label-direita"/>
-					</div>
-				</div>					
-			</div>
-		</p:outputPanel>
-	</ui:composition>
-</html>
+				<div class="ui-g-6" id="div-label-total-avaliacoes">
+					<p:outputLabel value="#{totalAvaliacoes != null ? totalAvaliacoes : 0}" styleClass="label-direita"/>										
+					<p:outputLabel value="AVALIAÇÕES" styleClass="label-direita"/>
+				</div>
+			</div>					
+		</div>
+	</p:outputPanel>
+</ui:composition>

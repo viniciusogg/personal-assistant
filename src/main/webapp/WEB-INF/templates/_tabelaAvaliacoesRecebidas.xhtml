@@ -5,31 +5,28 @@
 		xmlns:f="http://xmlns.jcp.org/jsf/core"
 		xmlns:p="http://primefaces.org/ui"
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-		
-		<div class="ui-g">
-			<div class="ui-g-12">
-				<p:dataTable id="tabelaAvalicoesRecebidas" var="servico" 
-						value="#{listaServicos != null ? listaServicos : ''}" rows="20"
-                        paginator="true"
-                        paginatorTemplate="{PageLinks}">
-                    
-                    <f:facet name="header">
-						AVALIAÇÕES QUE VOCÊ RECEBEU
-      				</f:facet>
-                     
-					<p:column headerText="DATA ASSISTÊNCIA">
-						<p:outputLabel value="#{valorDataAssistencia != null ? valorDataAssistencia : '#'}"/>							
-					</p:column>
-					<p:column headerText="#{tipoUsuario != null ? tipoUsuario : ''}">
-						<p:outputLabel value="#{valorTipoUsuario != null ? valorTipoUsuario : '#'}"/>							
-					</p:column>
-					<p:column headerText="AVALIAÇÃO">
-						<p:rating readonly="true" cancel="false" value="#{valorAvaliacao}"/>							
-					</p:column>
-					<p:column headerText="DETALHES">
-						<p:commandButton icon="ui-icon-search" title="Detalhes do serviço" />
-					</p:column>
-				</p:dataTable>
-			</div>
-		</div>
+
+	<p:dataTable id="tabelaAvalicoesRecebidas" var="servico" 
+			value="#{listaServicos != null ? listaServicos : ''}" rows="20"
+                     paginator="true"
+                     paginatorTemplate="{PageLinks}">
+                 
+		<f:facet name="header">
+			AVALIAÇÕES QUE VOCÊ RECEBEU
+		</f:facet>
+                  
+		<p:column headerText="DATA ASSISTÊNCIA">
+			<p:outputLabel value="#{valorDataAssistencia != null ? valorDataAssistencia : '#'}"/>							
+		</p:column>
+		<p:column headerText="#{tipoUsuario != null ? tipoUsuario : ''}">
+			<p:outputLabel value="#{valorTipoUsuario != null ? valorTipoUsuario : '#'}"/>							
+		</p:column>
+		<p:column headerText="AVALIAÇÃO">
+			<p:rating readonly="true" cancel="false" value="#{valorAvaliacao}"/>							
+		</p:column>
+		<p:column headerText="DETALHES">
+			<p:commandButton icon="ui-icon-search" title="Detalhes do serviço" />
+		</p:column>
+	</p:dataTable>
+
 </ui:composition>

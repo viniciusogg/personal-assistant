@@ -1,75 +1,71 @@
 <?xml version='1.0' encoding="UTF-8" ?>
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:h="http://xmlns.jcp.org/jsf/html"
 		xmlns:f="http://xmlns.jcp.org/jsf/core"
 		xmlns:p="http://primefaces.org/ui"
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-
-	<ui:composition>
-		
-		<div class="ui-g-7">
-			<div class="ui-g-12">
-				<p:outputLabel value="NOME*"/>
-			</div>
-			<div class="ui-g-12">
-				<p:inputText required="true" 
-						placeholder="DIGITE SEU NOME" styleClass="campo-formulario"
-						requiredMessage="Você esqueceu de preencher o campo: 'NOME'"
-						value="#{nome}">
-				</p:inputText>
-			</div>
+	
+	<div class="ui-g-7">
+		<div class="ui-g-12">
+			<p:outputLabel value="NOME*"/>
 		</div>
-						
-		<div class="ui-g-5">
-			<div class="ui-g-12">
-				<p:outputLabel value="E-MAIL*"/>
-			</div>
-			<div class="ui-g-12">
-				<p:inputText required="true" 
-						placeholder="DIGITE SEU E-MAIL" styleClass="campo-formulario"
-						requiredMessage="Você esqueceu de preencher o campo: 'E-MAIL'"
-						value="#{email}"/>
-			</div>
+		<div class="ui-g-12">
+			<p:inputText required="true" 
+					placeholder="DIGITE SEU NOME" styleClass="campo-formulario"
+					requiredMessage="Você esqueceu de preencher o campo: 'NOME'"
+					value="#{nome}">
+			</p:inputText>
 		</div>
-		
-		<div class="ui-g-4">
-			<div class="ui-g-12">
-				<p:outputLabel value="SENHA*"/>
-			</div>
-			<div class="ui-g-12">
-				<p:password required="true" id="campo-senha-cadastro" 
-						match="campo-senha-cadastro-confirmacao" styleClass="campo-formulario" 
-						placeholder="CRIE UMA SENHA"
-						requiredMessage="Você esqueceu de preencher o campo: 'SENHA'"
-						value="#{senha}"
-						validatorMessage="AS SENHAS ESTÃO DIFERENTES: As duas senhas devem ser iguais !"/>
-			</div>
+	</div>
+					
+	<div class="ui-g-5">
+		<div class="ui-g-12">
+			<p:outputLabel value="E-MAIL*"/>
 		</div>
-		
-		<div class="ui-g-4">
-			<div class="ui-g-12">
-				<p:outputLabel value="CONFIRMAÇÃO DE SENHA*"/>
-			</div>
-			<div class="ui-g-12">
-				<p:password required="true" id="campo-senha-cadastro-confirmacao" styleClass="campo-formulario" 
-						placeholder="DIGITE A SENHA NOVAMENTE"
-						requiredMessage="Você esqueceu de preencher o campo: 'CONFIRMAÇÃO DE SENHA'"
-						update="msg"/>
-			</div>
+		<div class="ui-g-12">
+			<p:inputText required="true" 
+					placeholder="DIGITE SEU E-MAIL" styleClass="campo-formulario"
+					requiredMessage="Você esqueceu de preencher o campo: 'E-MAIL'"
+					value="#{email}"/>
 		</div>
-		
-		<div class="ui-g-4">
-			<div class="ui-g-12">
-				<p:outputLabel value="TELEFONE PARA CONTATO*"/>
-			</div>
-			<div class="ui-g-12">
-				<p:inputMask required="true" mask="(99) 99999-9999" styleClass="campo-formulario" 
-						placeholder="NÚMERO TELEFONICO"
-						requiredMessage="Você esqueceu de preencher o campo: 'TELEFONE PARA CONTATO'"
-						value="#{numTelefonico}"/>
-			</div>
+	</div>
+	
+	<div class="ui-g-4">
+		<div class="ui-g-12">
+			<p:outputLabel value="SENHA*"/>
 		</div>
-	</ui:composition>
-</html>
+		<div class="ui-g-12">
+			<p:password required="true" id="campo-senha-cadastro" 
+					match="campo-senha-cadastro-confirmacao" styleClass="campo-formulario" 
+					placeholder="CRIE UMA SENHA"
+					requiredMessage="Você esqueceu de preencher o campo: 'SENHA'"
+					value="#{senha}"
+					validatorMessage="AS SENHAS ESTÃO DIFERENTES: As duas senhas devem ser iguais !"/>
+		</div>
+	</div>
+	
+	<div class="ui-g-4">
+		<div class="ui-g-12">
+			<p:outputLabel value="CONFIRMAÇÃO DE SENHA*"/>
+		</div>
+		<div class="ui-g-12">
+			<p:password required="true" id="campo-senha-cadastro-confirmacao" styleClass="campo-formulario" 
+					placeholder="DIGITE A SENHA NOVAMENTE"
+					requiredMessage="Você esqueceu de preencher o campo: 'CONFIRMAÇÃO DE SENHA'"
+					update="msg"/>
+		</div>
+	</div>
+	
+	<div class="ui-g-4">
+		<div class="ui-g-12">
+			<p:outputLabel value="TELEFONE PARA CONTATO*"/>
+		</div>
+		<div class="ui-g-12">
+			<p:inputMask required="true" mask="(99) 99999-9999" styleClass="campo-formulario" 
+					placeholder="NÚMERO TELEFONICO"
+					requiredMessage="Você esqueceu de preencher o campo: 'TELEFONE PARA CONTATO'"
+					value="#{numTelefonico}"/>
+		</div>
+	</div>
+</ui:composition>

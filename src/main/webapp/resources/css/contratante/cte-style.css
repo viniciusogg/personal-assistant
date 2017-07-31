@@ -6,12 +6,15 @@
 	padding: unset;
 }
 
-.div-label-habilidades-assistentes{
-	margin-right: 10px;
-	margin-top: 2px;
-}
-
 #campo-busca-assistentes{
 	width: 97%;
     height: 22px;
+}
+
+.div-capacidades-servico-assistentes{
+	padding-top: 15px;
+}
+
+div#div-nova-oferta > button{
+	float:right;
 }
