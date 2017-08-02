@@ -11,7 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import br.com.personalassistant.enums.TIPO_USUARIO;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Table(name = "TB_ASSISTENTE")
 @Entity(name = "Assistente")
@@ -21,6 +22,8 @@ public class Assistente extends Usuario{
 	private static final long serialVersionUID = 5159659883981518233L;
 
 	private Integer experiencia; // quantidade de assistencias prestadas
+	
+	private Integer reputacao; 
 
 	@Column(nullable = false)
 	private Double precoFixo;
@@ -32,49 +35,37 @@ public class Assistente extends Usuario{
 	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco; // unidirecional
 
-	@OneToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+	@OneToOne
 	@JoinColumn(name = "categoriaServico_FK", nullable = false)
 	private CategoriaServico categoriaServico; // unidirecional
 
 	@Column(name="assistente_FK")
-	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "assistente")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "assistente")
 	private List<Lance> lances; // bidirecional
 	
-	/*@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
-	@JoinColumn(name = "assistente_avaliado_FK")
-	private List<AvaliacaoAssistente> avaliacoesRecebidas; // unidirecional*/
-	
-	/*@OneToMany(cascade = {CascadeType.MERGE})
-	@JoinColumn(name = "assistente_avaliador_FK")
-	private List<AvaliacaoContratante> avaliacoesFeitas; // unidirecional*/
-	
-	@OneToMany(cascade = {CascadeType.MERGE})
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "assistente_FK")
 	private List<Proposta> propostas; // unidirecional (são as negociações)
 
-	@OneToMany(cascade = {CascadeType.ALL})
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "assistente_FK")
 	private List<Capacidade> capacidades; // unidirecional
 	
 	public Assistente() {
 		super();
 	}
-	
-	public Assistente(String nome, String email, String senha, String numTelefonico, 
-			Double precoFixo, Double precoHora, Endereco endereco,
-			CategoriaServico categoriaServico, 
+
+	public Assistente(Double precoFixo, Double precoHora, Endereco endereco, CategoriaServico categoriaServico,
 			List<Capacidade> capacidades) {
 		super();
-		this.setNome(nome);
-		this.setEmail(email);
-		this.setSenha(senha);
-		this.setNumTelefonico(numTelefonico);
 		this.precoFixo = precoFixo;
 		this.precoHora = precoHora;
 		this.endereco = endereco;
 		this.categoriaServico = categoriaServico;
 		this.capacidades = capacidades;
-		this.setTipoUsuario(TIPO_USUARIO.ASSISTENTE);
 	}
 
 	public Double getPrecoFixo() {
@@ -101,6 +92,14 @@ public class Assistente extends Usuario{
 		this.experiencia = experiencia;
 	}
 
+	public Integer getReputacao() {
+		return reputacao;
+	}
+
+	public void setReputacao(Integer reputacao) {
+		this.reputacao = reputacao;
+	}
+
 	public CategoriaServico getCategoriaServico() {
 		return categoriaServico;
 	}
@@ -125,22 +124,6 @@ public class Assistente extends Usuario{
 		this.endereco = endereco;
 	}
 
-	/*public List<AvaliacaoAssistente> getAvaliacoesRecebidas() {
-		return avaliacoesRecebidas;
-	}
-
-	public void setAvaliacoesRecebidas(List<AvaliacaoAssistente> avaliacoesRecebidas) {
-		this.avaliacoesRecebidas = avaliacoesRecebidas;
-	}
-
-	public List<AvaliacaoContratante> getAvaliacoesFeitas() {
-		return avaliacoesFeitas;
-	}
-
-	public void setAvaliacoesFeitas(List<AvaliacaoContratante> avaliacoesFeitas) {
-		this.avaliacoesFeitas = avaliacoesFeitas;
-	}*/
-
 	public List<Proposta> getPropostas() {
 		return propostas;
 	}
@@ -161,8 +144,6 @@ public class Assistente extends Usuario{
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		/*result = prime * result + ((avaliacoesFeitas == null) ? 0 : avaliacoesFeitas.hashCode());
-		result = prime * result + ((avaliacoesRecebidas == null) ? 0 : avaliacoesRecebidas.hashCode());*/
 		result = prime * result + ((capacidades == null) ? 0 : capacidades.hashCode());
 		result = prime * result + ((categoriaServico == null) ? 0 : categoriaServico.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
@@ -171,8 +152,11 @@ public class Assistente extends Usuario{
 		result = prime * result + ((precoFixo == null) ? 0 : precoFixo.hashCode());
 		result = prime * result + ((precoHora == null) ? 0 : precoHora.hashCode());
 		result = prime * result + ((propostas == null) ? 0 : propostas.hashCode());
+		result = prime * result + ((reputacao == null) ? 0 : reputacao.hashCode());
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -183,16 +167,6 @@ public class Assistente extends Usuario{
 		if (getClass() != obj.getClass())
 			return false;
 		Assistente other = (Assistente) obj;
-		/*if (avaliacoesFeitas == null) {
-			if (other.avaliacoesFeitas != null)
-				return false;
-		} else if (!avaliacoesFeitas.equals(other.avaliacoesFeitas))
-			return false;
-		if (avaliacoesRecebidas == null) {
-			if (other.avaliacoesRecebidas != null)
-				return false;
-		} else if (!avaliacoesRecebidas.equals(other.avaliacoesRecebidas))
-			return false;*/
 		if (capacidades == null) {
 			if (other.capacidades != null)
 				return false;
@@ -233,17 +207,21 @@ public class Assistente extends Usuario{
 				return false;
 		} else if (!propostas.equals(other.propostas))
 			return false;
+		if (reputacao == null) {
+			if (other.reputacao != null)
+				return false;
+		} else if (!reputacao.equals(other.reputacao))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Assistente [experiencia=" + experiencia + ", precoFixo=" + precoFixo + ", precoHora=" + precoHora
-				+ ", endereco=" + endereco + ", categoriaServico=" + categoriaServico + ", lances=" + lances
-				/*+ ", avaliacoesRecebidas=" + avaliacoesRecebidas + ", avaliacoesFeitas=" + avaliacoesFeitas*/
-				+ ", propostas=" + propostas + ", capacidades=" + capacidades + ", getId()=" + getId() + ", getNome()="
-				+ getNome() + ", getEmail()=" + getEmail() + ", getSenha()=" + getSenha() + ", getNumTelefonico()="
-				+ getNumTelefonico() + ", getTipoUsuario()=" + getTipoUsuario() + "]";
+		return "Assistente [experiencia=" + experiencia + ", reputacao=" + reputacao + ", precoFixo=" + precoFixo
+				+ ", precoHora=" + precoHora + ", endereco=" + endereco + ", categoriaServico=" + categoriaServico
+				+ ", lances=" + lances + ", propostas=" + propostas + ", capacidades=" + capacidades + ", getId()="
+				+ getId() + ", getNome()=" + getNome() + ", getEmail()=" + getEmail() + ", getSenha()=" + getSenha()
+				+ ", getNumTelefonico()=" + getNumTelefonico() + ", getTipoUsuario()=" + getTipoUsuario() + "]";
 	}
-	
+
 }

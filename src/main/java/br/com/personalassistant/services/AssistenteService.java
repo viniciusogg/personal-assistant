@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 import br.com.personalassistant.dao.AssistenteDAO;
 import br.com.personalassistant.entidades.Assistente;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.util.Transacional;
@@ -48,7 +50,7 @@ public class AssistenteService implements Serializable {
 		}		
 	}
 	
-	public Assistente getById(Long id) throws ServiceException{
+	public Assistente getById(Long id) throws ServiceException, ObjetoNaoExisteException{
 		try{
 			return this.assistenteDAO.getById(id);
 		}
@@ -57,7 +59,7 @@ public class AssistenteService implements Serializable {
 		}
 	}
 	
-	public List<Assistente> getAll() throws ServiceException{
+	public List<Assistente> getAll() throws ServiceException, NaoExistemObjetosException{
 		try{
 			return this.assistenteDAO.getAll();
 		}

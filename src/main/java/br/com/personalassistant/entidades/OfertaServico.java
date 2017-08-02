@@ -17,6 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import br.com.personalassistant.enums.ESTADO_OFERTA;
 
 @Entity(name = "OfertaServico")
@@ -45,7 +48,7 @@ public class OfertaServico implements Serializable{
 	@Column(nullable = false)
 	private ESTADO_OFERTA status;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	private Endereco endereco; // unidirecional
 	
 	@ManyToOne
@@ -56,7 +59,8 @@ public class OfertaServico implements Serializable{
 	@JoinColumn(nullable = false)
 	private Contratante contratante; // bidirecional
 	
-	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "ofertaServico")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "ofertaServico")
 	@Column(name="ofertaServico_FK")
 	private List<Lance> lances; // bidirecional
 	

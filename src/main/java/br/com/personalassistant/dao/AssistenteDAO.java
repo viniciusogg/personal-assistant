@@ -7,6 +7,8 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.Assistente;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class AssistenteDAO extends DAO {
@@ -24,10 +26,6 @@ public class AssistenteDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao salvar assistente");
 		}
-		finally{
-			entityManager.close();
-		}
-		
 	}
 	
 	public void delete(Assistente assistente) throws PersistenciaException{	
@@ -40,10 +38,7 @@ public class AssistenteDAO extends DAO {
 		catch(PersistenceException ex){
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao remover assistente");
-		}
-		finally{
-			entityManager.close();
-		}
+		}	
 	}
 	
 	public Assistente update(Assistente assistente) throws PersistenciaException{
@@ -59,47 +54,57 @@ public class AssistenteDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao atualizar assistente");
 		}
-		finally{
-			entityManager.close();
-		}
 		
 		return assistenteAtualizado;
 	}
 	
-	public List<Assistente> getAll() throws PersistenciaException {
+	public List<Assistente> getAll() throws PersistenciaException, NaoExistemObjetosException {
 		
 		EntityManager entityManager = getEntityManager();
 		List<Assistente> assistentes = null;
 		
 		try{
-			TypedQuery<Assistente> typedQuery = entityManager.createQuery("SELECT assistente FROM Assistente assistente", Assistente.class);
+			TypedQuery<Assistente> typedQuery = entityManager.createQuery("SELECT ast "
+					+ "FROM Assistente ast, Usuario usr "
+					+ "WHERE ast.id = usr.id", Assistente.class);
+			
 			assistentes = typedQuery.getResultList();
 		}
 		catch(PersistenceException ex){
+			
+			if(assistentes == null){
+				throw new NaoExistemObjetosException("Não existem assistentes");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenceException("Erro ao recuperar assistentes");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return assistentes;
 	}
 	
-	public Assistente getById(Long id) throws PersistenciaException {
+	public Assistente getById(Long id) throws PersistenciaException, ObjetoNaoExisteException {
 		
 		EntityManager entityManager = getEntityManager();
 		Assistente assistente = null;
 		
-		try{
-			assistente = entityManager.find(Assistente.class, id);
+		try{			
+			TypedQuery<Assistente> typedQuery = entityManager.createQuery("SELECT ast "
+					+ "FROM Assistente ast, Usuario usr WHERE ast.id = usr.id "
+					+ "AND ast.id = :id", Assistente.class);
+			
+			typedQuery.setParameter("id", id);
+			
+			assistente = typedQuery.getSingleResult();
 		}
 		catch(PersistenceException ex){
+			
+			if(assistente == null){
+				throw new ObjetoNaoExisteException("Não existe assistente com este id");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao recuperar assistente");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return assistente;

@@ -14,6 +14,7 @@ import br.com.personalassistant.entidades.Capacidade;
 import br.com.personalassistant.entidades.CategoriaServico;
 import br.com.personalassistant.entidades.Endereco;
 import br.com.personalassistant.enums.TIPO_USUARIO;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.services.CategoriaServicoService;
 import br.com.personalassistant.services.UsuarioService;
@@ -53,7 +54,7 @@ public class CadastroAssistenteBean extends AbstractBean {
 				this.nomesCategoriasServicos.add(categoriaServico.getNome());
 			}
 		} 
-		catch (ServiceException e) {
+		catch (ServiceException | NaoExistemObjetosException e) {
 			e.printStackTrace();
 		}
 	}
@@ -87,7 +88,6 @@ public class CadastroAssistenteBean extends AbstractBean {
 			this.assistente.setTipoUsuario(TIPO_USUARIO.ASSISTENTE);
 			
 			this.usuarioService.criptografarSenha(assistente);
-			
 			this.usuarioService.save(this.assistente);
 			
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso, faça login na sua conta", ""));

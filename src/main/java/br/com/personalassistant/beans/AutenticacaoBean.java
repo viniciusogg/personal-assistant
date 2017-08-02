@@ -2,7 +2,6 @@ package br.com.personalassistant.beans;
 
 import java.io.IOException;
 
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -13,6 +12,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import br.com.personalassistant.enums.TIPO_USUARIO;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.services.UsuarioService;
 
@@ -38,7 +38,6 @@ public class AutenticacaoBean extends AbstractBean {
 			
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 
-
 			if(this.tipoUsuario != null){
 				
 				String endereco = null;
@@ -56,23 +55,21 @@ public class AutenticacaoBean extends AbstractBean {
 							"/contratante/index.xhtml?faces-redirect=true";			
 				}
 				
+				facesContext.getExternalContext().getFlash().clear();
+				
 				if(!isMesmaSessao){					
 					this.reportarMensagemSucesso();
 					isMesmaSessao = true;
 				}
 				
 				facesContext.getExternalContext().redirect(endereco);
-				
 			}
 			else{
 				facesContext.getExternalContext().redirect(facesContext.getExternalContext().
 						getApplicationContextPath() + "/login.xhtml?faces-redirect=true");
 			}	
 		}
-		catch (ServiceException e) {
-			e.printStackTrace();
-		}
-		catch (IOException e) {
+		catch (ServiceException | IOException | ObjetoNaoExisteException e) {
 			e.printStackTrace();
 		}
 	}
@@ -110,8 +107,9 @@ public class AutenticacaoBean extends AbstractBean {
 			flash.clear();
 		}
 		else if(!error && autenticou){
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem-vindo(a) !", ""));					
+
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem-vindo(a) !", ""));								
 		}
-		
 	}
+	
 }

@@ -11,6 +11,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import br.com.personalassistant.enums.TIPO_USUARIO;
 
 @Table(name = "TB_CONTRATANTE")
@@ -21,28 +24,23 @@ public class Contratante extends Usuario{
 	private static final long serialVersionUID = -1566617799006322877L;
 
 	@OneToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "favorito_do_contratante_FK")
 	private List<Assistente> assistentesFavoritos; // unidirecional
 	
 	@JoinColumn(name = "endereco_FK", nullable = false)
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco; // unidirecional
 	
 	@OneToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "contratante_FK")
 	private List<Proposta> propostas; // unidirecional
 	
-	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "contratante")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "contratante")
 	@Column(name = "contratante_FK")
 	private List<OfertaServico> ofertasServicos; // bidirecional
-	
-	/*@OneToMany
-	@JoinColumn(name = "contratante_avaliador_FK")
-	private List<AvaliacaoAssistente> avaliacoesFeitas; // unidirecional
-	
-	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
-	@JoinColumn(name = "contratante_avaliado_FK")
-	private List<AvaliacaoContratante> avaliacoesRecebidas; // unidirecional*/
 	
 	public Contratante() {
 		super();
@@ -91,29 +89,11 @@ public class Contratante extends Usuario{
 		this.ofertasServicos = ofertasServicos;
 	}
 
-	/*public List<AvaliacaoAssistente> getAvaliacoesFeitas() {
-		return avaliacoesFeitas;
-	}
-
-	public void setAvaliacoesFeitas(List<AvaliacaoAssistente> avaliacoesFeitas) {
-		this.avaliacoesFeitas = avaliacoesFeitas;
-	}
-
-	public List<AvaliacaoContratante> getAvaliacoesRecebidas() {
-		return avaliacoesRecebidas;
-	}
-
-	public void setAvaliacoesRecebidas(List<AvaliacaoContratante> avaliacoesRecebidas) {
-		this.avaliacoesRecebidas = avaliacoesRecebidas;
-	}*/
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((assistentesFavoritos == null) ? 0 : assistentesFavoritos.hashCode());
-		/*result = prime * result + ((avaliacoesFeitas == null) ? 0 : avaliacoesFeitas.hashCode());
-		result = prime * result + ((avaliacoesRecebidas == null) ? 0 : avaliacoesRecebidas.hashCode());*/
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((ofertasServicos == null) ? 0 : ofertasServicos.hashCode());
 		result = prime * result + ((propostas == null) ? 0 : propostas.hashCode());
@@ -134,16 +114,6 @@ public class Contratante extends Usuario{
 				return false;
 		} else if (!assistentesFavoritos.equals(other.assistentesFavoritos))
 			return false;
-		/*if (avaliacoesFeitas == null) {
-			if (other.avaliacoesFeitas != null)
-				return false;
-		} else if (!avaliacoesFeitas.equals(other.avaliacoesFeitas))
-			return false;
-		if (avaliacoesRecebidas == null) {
-			if (other.avaliacoesRecebidas != null)
-				return false;
-		} else if (!avaliacoesRecebidas.equals(other.avaliacoesRecebidas))
-			return false;*/
 		if (endereco == null) {
 			if (other.endereco != null)
 				return false;
@@ -165,8 +135,8 @@ public class Contratante extends Usuario{
 	@Override
 	public String toString() {
 		return "Contratante [assistentesFavoritos=" + assistentesFavoritos + ", endereco=" + endereco + ", propostas="
-				+ propostas + ", ofertasServicos=" + ofertasServicos + ", avaliacoesFeitas=" + /*avaliacoesFeitas
-				+ ", avaliacoesRecebidas=" + avaliacoesRecebidas +*/ ", getId()=" + getId() + ", getNome()=" + getNome()
+				+ propostas + ", ofertasServicos=" + ofertasServicos
+				+ ", getId()=" + getId() + ", getNome()=" + getNome()
 				+ ", getEmail()=" + getEmail() + ", getSenha()=" + getSenha() + ", getNumTelefonico()="
 				+ getNumTelefonico() + ", getTipoUsuario()=" + getTipoUsuario() + "]";
 	}

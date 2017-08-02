@@ -12,13 +12,14 @@ import javax.inject.Inject;
 import br.com.personalassistant.dao.UsuarioDAO;
 import br.com.personalassistant.entidades.Usuario;
 import br.com.personalassistant.enums.TIPO_USUARIO;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.util.Transacional;
 
 public class UsuarioService implements Serializable {
 
-	private static final long serialVersionUID = 6862815512457634483L;
+	private static final long serialVersionUID = -8991038872014020682L;
 
 	@Inject private UsuarioDAO usuarioDAO;
 	
@@ -52,7 +53,7 @@ public class UsuarioService implements Serializable {
 		}		
 	}
 	
-	public Usuario getById(Long id) throws ServiceException{
+	public Usuario getById(Long id) throws ServiceException, ObjetoNaoExisteException{
 		try{
 			return this.usuarioDAO.getById(id);
 		}
@@ -70,7 +71,7 @@ public class UsuarioService implements Serializable {
 		}
 	}
 
-	public TIPO_USUARIO getTipoUsuarioByEmail(String email) throws ServiceException{
+	public TIPO_USUARIO getTipoUsuarioByEmail(String email) throws ServiceException, ObjetoNaoExisteException{
 		try{
 			return this.usuarioDAO.getTipoUsuarioByEmail(email);
 		}
@@ -79,7 +80,7 @@ public class UsuarioService implements Serializable {
 		}
 	}
 	
-	public Usuario getUsuarioByEmail(String email) throws ServiceException{
+	public Usuario getUsuarioByEmail(String email) throws ServiceException, ObjetoNaoExisteException{
 		try{
 			return this.usuarioDAO.getUsuarioByEmail(email);
 		}
@@ -87,7 +88,6 @@ public class UsuarioService implements Serializable {
 			throw new ServiceException(ex.getMessage());
 		}
 	}
-
 	
 	public void criptografarSenha(Usuario usuario) throws ServiceException {
 		usuario.setSenha(criptografarSenha(usuario.getSenha()));

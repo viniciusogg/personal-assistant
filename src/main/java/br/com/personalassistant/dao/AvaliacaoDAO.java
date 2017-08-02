@@ -7,11 +7,13 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.Avaliacao;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class AvaliacaoDAO extends DAO {
 
-	private static final long serialVersionUID = -676008619997510435L;
+	private static final long serialVersionUID = -902709003677742503L;
 
 	public void save(Avaliacao avaliacao) throws PersistenciaException{
 		
@@ -24,10 +26,6 @@ public class AvaliacaoDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao salvar avaliacao");
 		}
-		finally{
-			entityManager.close();
-		}
-		
 	}
 	
 	public void delete(Avaliacao avaliacao) throws PersistenciaException{	
@@ -41,15 +39,12 @@ public class AvaliacaoDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao remover avaliacao");
 		}
-		finally{
-			entityManager.close();
-		}
 	}
 	
 	public Avaliacao update(Avaliacao avaliacao) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		Avaliacao avaliacaoAtualizada = avaliacao; 
+		Avaliacao avaliacaoAtualizado = avaliacao; 
 		
 		try{
 			entityManager.find(avaliacao.getClass(), avaliacao.getId());
@@ -59,14 +54,11 @@ public class AvaliacaoDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao atualizar avaliacao");
 		}
-		finally{
-			entityManager.close();
-		}
 		
-		return avaliacaoAtualizada;
+		return avaliacaoAtualizado;
 	}
 	
-	public List<Avaliacao> getAll() throws PersistenciaException {
+	public List<Avaliacao> getAll() throws PersistenciaException, NaoExistemObjetosException {
 		
 		EntityManager entityManager = getEntityManager();
 		List<Avaliacao> avaliacoes = null;
@@ -76,17 +68,19 @@ public class AvaliacaoDAO extends DAO {
 			avaliacoes = typedQuery.getResultList();
 		}
 		catch(PersistenceException ex){
+			
+			if(avaliacoes == null){
+				throw new NaoExistemObjetosException("Não existem avaliacoes");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenceException("Erro ao recuperar avaliacoes");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return avaliacoes;
 	}
 	
-	public Avaliacao getById(Long id) throws PersistenciaException {
+	public Avaliacao getById(Long id) throws PersistenciaException, ObjetoNaoExisteException {
 		
 		EntityManager entityManager = getEntityManager();
 		Avaliacao avaliacao = null;
@@ -95,14 +89,17 @@ public class AvaliacaoDAO extends DAO {
 			avaliacao = entityManager.find(Avaliacao.class, id);
 		}
 		catch(PersistenceException ex){
+			
+			if(avaliacao == null){
+				throw new ObjetoNaoExisteException("Não existe avaliacao com este id");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao recuperar avaliacao");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return avaliacao;
 	}
+	
 	
 }

@@ -27,7 +27,9 @@
 			<p:inputText required="true" 
 					placeholder="DIGITE SEU E-MAIL" styleClass="campo-formulario"
 					requiredMessage="Você esqueceu de preencher o campo: 'E-MAIL'"
-					value="#{email}"/>
+					value="#{email}">
+				<f:validator validatorId="emailValidator" />
+			</p:inputText>
 		</div>
 	</div>
 	

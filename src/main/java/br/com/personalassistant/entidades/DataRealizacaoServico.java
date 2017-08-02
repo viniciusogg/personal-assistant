@@ -22,41 +22,45 @@ public class DataRealizacaoServico implements Serializable{
 	private Date dataRealizacaoLimite;
 	
 	@Temporal(TemporalType.TIME)
-	private Date horaRealizacaoServico;
+	private Date horaRealizacaoServicoInicial;
+	
+	@Temporal(TemporalType.TIME)
+	private Date horaRealizacaoServicoFinal;
 	
 	public DataRealizacaoServico() {
 		super();
-	}
-	
-	public DataRealizacaoServico(Date dataRealizacaoInicial, Date dataRealizacaoLimite, Date horaRealizacaoServico) {
-		super();
-		this.dataRealizacaoInicial = dataRealizacaoInicial;
-		this.dataRealizacaoLimite = dataRealizacaoLimite;
-		this.horaRealizacaoServico = horaRealizacaoServico;
 	}
 
 	public Date getDataRealizacaoInicial() {
 		return dataRealizacaoInicial;
 	}
-	
+
 	public void setDataRealizacaoInicial(Date dataRealizacaoInicial) {
 		this.dataRealizacaoInicial = dataRealizacaoInicial;
 	}
-	
+
 	public Date getDataRealizacaoLimite() {
 		return dataRealizacaoLimite;
 	}
-	
+
 	public void setDataRealizacaoLimite(Date dataRealizacaoLimite) {
 		this.dataRealizacaoLimite = dataRealizacaoLimite;
 	}
-	
-	public Date getHoraRealizacaoServico() {
-		return horaRealizacaoServico;
+
+	public Date getHoraRealizacaoServicoInicial() {
+		return horaRealizacaoServicoInicial;
 	}
-	
-	public void setHoraRealizacaoServico(Date horaRealizacaoServico) {
-		this.horaRealizacaoServico = horaRealizacaoServico;
+
+	public void setHoraRealizacaoServicoInicial(Date horaRealizacaoServicoInicial) {
+		this.horaRealizacaoServicoInicial = horaRealizacaoServicoInicial;
+	}
+
+	public Date getHoraRealizacaoServicoFinal() {
+		return horaRealizacaoServicoFinal;
+	}
+
+	public void setHoraRealizacaoServicoFinal(Date horaRealizacaoServicoFinal) {
+		this.horaRealizacaoServicoFinal = horaRealizacaoServicoFinal;
 	}
 
 	@Override
@@ -65,7 +69,9 @@ public class DataRealizacaoServico implements Serializable{
 		int result = 1;
 		result = prime * result + ((dataRealizacaoInicial == null) ? 0 : dataRealizacaoInicial.hashCode());
 		result = prime * result + ((dataRealizacaoLimite == null) ? 0 : dataRealizacaoLimite.hashCode());
-		result = prime * result + ((horaRealizacaoServico == null) ? 0 : horaRealizacaoServico.hashCode());
+		result = prime * result + ((horaRealizacaoServicoFinal == null) ? 0 : horaRealizacaoServicoFinal.hashCode());
+		result = prime * result
+				+ ((horaRealizacaoServicoInicial == null) ? 0 : horaRealizacaoServicoInicial.hashCode());
 		return result;
 	}
 
@@ -88,19 +94,24 @@ public class DataRealizacaoServico implements Serializable{
 				return false;
 		} else if (!dataRealizacaoLimite.equals(other.dataRealizacaoLimite))
 			return false;
-		if (horaRealizacaoServico == null) {
-			if (other.horaRealizacaoServico != null)
+		if (horaRealizacaoServicoFinal == null) {
+			if (other.horaRealizacaoServicoFinal != null)
 				return false;
-		} else if (!horaRealizacaoServico.equals(other.horaRealizacaoServico))
+		} else if (!horaRealizacaoServicoFinal.equals(other.horaRealizacaoServicoFinal))
+			return false;
+		if (horaRealizacaoServicoInicial == null) {
+			if (other.horaRealizacaoServicoInicial != null)
+				return false;
+		} else if (!horaRealizacaoServicoInicial.equals(other.horaRealizacaoServicoInicial))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "DataRealizacaoServico [dataRealizacaoInicial=" + dataRealizacaoInicial
-				+ ", dataRealizacaoLimite=" + dataRealizacaoLimite + ", horaRealizacaoServico=" + horaRealizacaoServico
-				+ "]";
+		return "DataRealizacaoServico [dataRealizacaoInicial=" + dataRealizacaoInicial + ", dataRealizacaoLimite="
+				+ dataRealizacaoLimite + ", horaRealizacaoServicoInicial=" + horaRealizacaoServicoInicial
+				+ ", horaRealizacaoServicoFinal=" + horaRealizacaoServicoFinal + "]";
 	}
 	
 }

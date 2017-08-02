@@ -7,6 +7,8 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.Administrador;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class AdministradorDAO extends DAO {
@@ -24,10 +26,6 @@ public class AdministradorDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao salvar administrador");
 		}
-		finally{
-			entityManager.close();
-		}
-		
 	}
 	
 	public void delete(Administrador administrador) throws PersistenciaException{	
@@ -40,9 +38,6 @@ public class AdministradorDAO extends DAO {
 		catch(PersistenceException ex){
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao remover administrador");
-		}
-		finally{
-			entityManager.close();
 		}
 	}
 	
@@ -59,14 +54,11 @@ public class AdministradorDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao atualizar administrador");
 		}
-		finally{
-			entityManager.close();
-		}
 		
 		return administradorAtualizado;
 	}
 	
-	public List<Administrador> getAll() throws PersistenciaException {
+	public List<Administrador> getAll() throws PersistenciaException, NaoExistemObjetosException {
 		
 		EntityManager entityManager = getEntityManager();
 		List<Administrador> administradores = null;
@@ -76,17 +68,19 @@ public class AdministradorDAO extends DAO {
 			administradores = typedQuery.getResultList();
 		}
 		catch(PersistenceException ex){
+			
+			if(administradores == null){
+				throw new NaoExistemObjetosException("Não existem administradores");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenceException("Erro ao recuperar administradores");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return administradores;
 	}
 	
-	public Administrador getById(Long id) throws PersistenciaException {
+	public Administrador getById(Long id) throws PersistenciaException, ObjetoNaoExisteException {
 		
 		EntityManager entityManager = getEntityManager();
 		Administrador administrador = null;
@@ -95,14 +89,17 @@ public class AdministradorDAO extends DAO {
 			administrador = entityManager.find(Administrador.class, id);
 		}
 		catch(PersistenceException ex){
+			
+			if(administrador == null){
+				throw new ObjetoNaoExisteException("Não existe administrador com este id");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao recuperar administrador");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return administrador;
 	}
+	
 	
 }

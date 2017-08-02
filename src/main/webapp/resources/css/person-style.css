@@ -47,6 +47,10 @@ div{
 	overflow-x: hidden !important;	
 }
 
+#label-rodape{
+	color:gray;
+}
+
 .combobox{	
 	font-weight:normal !important; 
 	font-size: 18px !important
@@ -144,7 +148,7 @@ a{
 	color: white;
 	background: #78909C;
 	margin: 5px;
-	padding: 40px;
+	padding: 30px;
 	font-weight: bold; 
 	font-size: 40px !important;
 }
@@ -442,7 +446,7 @@ html .ui-spinner .ui-spinner-input{
 }
 
 .sub-div-superior-servico{
-	padding: unset !important;
+	padding: unset;
 }
 
 .div-info-usuario-servico{

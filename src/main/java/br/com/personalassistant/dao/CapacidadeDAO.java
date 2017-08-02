@@ -7,11 +7,13 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.Capacidade;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class CapacidadeDAO extends DAO {
 
-	private static final long serialVersionUID = -1411798947932553129L;
+	private static final long serialVersionUID = -902709003677742503L;
 
 	public void save(Capacidade capacidade) throws PersistenciaException{
 		
@@ -24,10 +26,6 @@ public class CapacidadeDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao salvar capacidade");
 		}
-		finally{
-			entityManager.close();
-		}
-		
 	}
 	
 	public void delete(Capacidade capacidade) throws PersistenciaException{	
@@ -41,15 +39,12 @@ public class CapacidadeDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao remover capacidade");
 		}
-		finally{
-			entityManager.close();
-		}
 	}
 	
 	public Capacidade update(Capacidade capacidade) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		Capacidade capacidadeAtualizada = capacidade; 
+		Capacidade capacidadeAtualizado = capacidade; 
 		
 		try{
 			entityManager.find(capacidade.getClass(), capacidade.getId());
@@ -59,14 +54,11 @@ public class CapacidadeDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao atualizar capacidade");
 		}
-		finally{
-			entityManager.close();
-		}
 		
-		return capacidadeAtualizada;
+		return capacidadeAtualizado;
 	}
 	
-	public List<Capacidade> getAll() throws PersistenciaException {
+	public List<Capacidade> getAll() throws PersistenciaException, NaoExistemObjetosException {
 		
 		EntityManager entityManager = getEntityManager();
 		List<Capacidade> capacidades = null;
@@ -76,17 +68,19 @@ public class CapacidadeDAO extends DAO {
 			capacidades = typedQuery.getResultList();
 		}
 		catch(PersistenceException ex){
+			
+			if(capacidades == null){
+				throw new NaoExistemObjetosException("Não existem capacidades");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenceException("Erro ao recuperar capacidades");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return capacidades;
 	}
 	
-	public Capacidade getById(Long id) throws PersistenciaException {
+	public Capacidade getById(Long id) throws PersistenciaException, ObjetoNaoExisteException {
 		
 		EntityManager entityManager = getEntityManager();
 		Capacidade capacidade = null;
@@ -95,14 +89,17 @@ public class CapacidadeDAO extends DAO {
 			capacidade = entityManager.find(Capacidade.class, id);
 		}
 		catch(PersistenceException ex){
+			
+			if(capacidade == null){
+				throw new ObjetoNaoExisteException("Não existe capacidade com este id");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao recuperar capacidade");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return capacidade;
 	}
+	
 	
 }

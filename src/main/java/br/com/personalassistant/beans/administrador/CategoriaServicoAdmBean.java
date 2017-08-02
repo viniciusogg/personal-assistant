@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import br.com.personalassistant.beans.AbstractBean;
 import br.com.personalassistant.entidades.CategoriaServico;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.services.CategoriaServicoService;
 
@@ -32,7 +33,7 @@ public class CategoriaServicoAdmBean extends AbstractBean{
 		try {
 			this.lista = categoriaServicoService.getAll();
 		} 
-		catch (ServiceException e) {
+		catch (ServiceException | NaoExistemObjetosException e) {
 			e.printStackTrace();
 		}
 	}

@@ -23,12 +23,15 @@
 	font-size: 24px !important;
 }
 
-.combobox-infopanel{	
-	float:right; 
+.div-label-combobox{	
+	text-align:right; 
 }
 
 .label-combobox{
-	float:right; 
 	margin-right:5px; 
-	font-size:20px !important;
+	font-size:23px !important;
+}
+
+.div-info-panel-adm{
+	text-align:center;
 }

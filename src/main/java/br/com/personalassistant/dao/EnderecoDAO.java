@@ -7,11 +7,13 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.Endereco;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class EnderecoDAO extends DAO {
 
-	private static final long serialVersionUID = -1426464964947275048L;
+	private static final long serialVersionUID = -902709003677742503L;
 
 	public void save(Endereco endereco) throws PersistenciaException{
 		
@@ -24,10 +26,6 @@ public class EnderecoDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao salvar endereco");
 		}
-		finally{
-			entityManager.close();
-		}
-		
 	}
 	
 	public void delete(Endereco endereco) throws PersistenciaException{	
@@ -40,9 +38,6 @@ public class EnderecoDAO extends DAO {
 		catch(PersistenceException ex){
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao remover endereco");
-		}
-		finally{
-			entityManager.close();
 		}
 	}
 	
@@ -59,14 +54,11 @@ public class EnderecoDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao atualizar endereco");
 		}
-		finally{
-			entityManager.close();
-		}
 		
 		return enderecoAtualizado;
 	}
 	
-	public List<Endereco> getAll() throws PersistenciaException {
+	public List<Endereco> getAll() throws PersistenciaException, NaoExistemObjetosException {
 		
 		EntityManager entityManager = getEntityManager();
 		List<Endereco> enderecos = null;
@@ -76,17 +68,19 @@ public class EnderecoDAO extends DAO {
 			enderecos = typedQuery.getResultList();
 		}
 		catch(PersistenceException ex){
+			
+			if(enderecos == null){
+				throw new NaoExistemObjetosException("Não existem enderecos");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenceException("Erro ao recuperar enderecos");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return enderecos;
 	}
 	
-	public Endereco getById(Long id) throws PersistenciaException {
+	public Endereco getById(Long id) throws PersistenciaException, ObjetoNaoExisteException {
 		
 		EntityManager entityManager = getEntityManager();
 		Endereco endereco = null;
@@ -95,14 +89,17 @@ public class EnderecoDAO extends DAO {
 			endereco = entityManager.find(Endereco.class, id);
 		}
 		catch(PersistenceException ex){
+			
+			if(endereco == null){
+				throw new ObjetoNaoExisteException("Não existe endereco com este id");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao recuperar endereco");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return endereco;
 	}
+	
 	
 }

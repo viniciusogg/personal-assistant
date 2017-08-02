@@ -11,6 +11,8 @@ import javax.inject.Inject;
 
 import br.com.personalassistant.dao.AdministradorDAO;
 import br.com.personalassistant.entidades.Administrador;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.util.Transacional;
@@ -52,7 +54,7 @@ public class AdministradorService implements Serializable {
 		}		
 	}
 	
-	public Administrador getById(Long id) throws ServiceException{
+	public Administrador getById(Long id) throws ServiceException, ObjetoNaoExisteException{
 		try{
 			return this.administradorDAO.getById(id);
 		}
@@ -61,7 +63,7 @@ public class AdministradorService implements Serializable {
 		}
 	}
 	
-	public List<Administrador> getAll() throws ServiceException{
+	public List<Administrador> getAll() throws ServiceException, NaoExistemObjetosException{
 		try{
 			return this.administradorDAO.getAll();
 		}

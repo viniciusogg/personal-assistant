@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 import br.com.personalassistant.dao.ServicoDAO;
 import br.com.personalassistant.entidades.Servico;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.util.Transacional;
@@ -48,7 +50,7 @@ public class ServicoService implements Serializable {
 		}		
 	}
 	
-	public Servico getById(Long id) throws ServiceException{
+	public Servico getById(Long id) throws ServiceException, ObjetoNaoExisteException{
 		try{
 			return this.servicoDAO.getById(id);
 		}
@@ -57,7 +59,7 @@ public class ServicoService implements Serializable {
 		}
 	}
 	
-	public List<Servico> getAll() throws ServiceException{
+	public List<Servico> getAll() throws ServiceException, NaoExistemObjetosException{
 		try{
 			return this.servicoDAO.getAll();
 		}

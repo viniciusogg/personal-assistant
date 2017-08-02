@@ -25,4 +25,5 @@ public class Administrador extends Usuario{
 		setSenha(senha);
 		setTipoUsuario(TIPO_USUARIO.ADMINISTRADOR);
 	}
+	
 }

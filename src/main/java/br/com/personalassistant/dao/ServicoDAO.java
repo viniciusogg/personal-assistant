@@ -7,11 +7,13 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.Servico;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class ServicoDAO extends DAO {
 
-	private static final long serialVersionUID = -1564085064355391443L;
+	private static final long serialVersionUID = -902709003677742503L;
 
 	public void save(Servico servico) throws PersistenciaException{
 		
@@ -24,10 +26,6 @@ public class ServicoDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao salvar servico");
 		}
-		finally{
-			entityManager.close();
-		}
-		
 	}
 	
 	public void delete(Servico servico) throws PersistenciaException{	
@@ -41,15 +39,12 @@ public class ServicoDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao remover servico");
 		}
-		finally{
-			entityManager.close();
-		}
 	}
 	
 	public Servico update(Servico servico) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		Servico avaliacaoAtualizada = servico; 
+		Servico servicoAtualizado = servico; 
 		
 		try{
 			entityManager.find(servico.getClass(), servico.getId());
@@ -59,14 +54,11 @@ public class ServicoDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao atualizar servico");
 		}
-		finally{
-			entityManager.close();
-		}
 		
-		return avaliacaoAtualizada;
+		return servicoAtualizado;
 	}
 	
-	public List<Servico> getAll() throws PersistenciaException {
+	public List<Servico> getAll() throws PersistenciaException, NaoExistemObjetosException {
 		
 		EntityManager entityManager = getEntityManager();
 		List<Servico> servicos = null;
@@ -76,17 +68,19 @@ public class ServicoDAO extends DAO {
 			servicos = typedQuery.getResultList();
 		}
 		catch(PersistenceException ex){
+			
+			if(servicos == null){
+				throw new NaoExistemObjetosException("Não existem servicos");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenceException("Erro ao recuperar servicos");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return servicos;
 	}
 	
-	public Servico getById(Long id) throws PersistenciaException {
+	public Servico getById(Long id) throws PersistenciaException, ObjetoNaoExisteException {
 		
 		EntityManager entityManager = getEntityManager();
 		Servico servico = null;
@@ -95,14 +89,17 @@ public class ServicoDAO extends DAO {
 			servico = entityManager.find(Servico.class, id);
 		}
 		catch(PersistenceException ex){
+			
+			if(servico == null){
+				throw new ObjetoNaoExisteException("Não existe servico com este id");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao recuperar servico");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return servico;
 	}
+	
 	
 }

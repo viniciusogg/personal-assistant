@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 import br.com.personalassistant.dao.LanceDAO;
 import br.com.personalassistant.entidades.Lance;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.util.Transacional;
@@ -48,7 +50,7 @@ public class LanceService implements Serializable {
 		}		
 	}
 	
-	public Lance getById(Long id) throws ServiceException{
+	public Lance getById(Long id) throws ServiceException, ObjetoNaoExisteException{
 		try{
 			return this.lanceDAO.getById(id);
 		}
@@ -57,7 +59,7 @@ public class LanceService implements Serializable {
 		}
 	}
 	
-	public List<Lance> getAll() throws ServiceException{
+	public List<Lance> getAll() throws ServiceException, NaoExistemObjetosException{
 		try{
 			return this.lanceDAO.getAll();
 		}

@@ -44,12 +44,11 @@ public class CadastroContratanteBean extends AbstractBean{
 			
 			this.usuarioService.criptografarSenha(this.contratante);
 			this.usuarioService.save(this.contratante);
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso, faça login na sua conta", ""));
 		} 
 		catch (ServiceException e) {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro, tente novamente", ""));
 			e.printStackTrace();
-		}
+		} 
 	}
 
 	public Contratante getContratante() {

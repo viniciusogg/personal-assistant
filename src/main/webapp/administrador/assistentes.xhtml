@@ -7,6 +7,10 @@
 	  	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	  	template="index.xhtml">
  
+ 	<f:metadata>
+		<f:event listener="#{assistentesAdmBean.preRenderView}" type="preRenderView" />
+	</f:metadata>
+ 
 	<ui:define name="titulo">
 		<p:outputLabel class="titulo" value="ASSISTENTES"/>
 	</ui:define>
@@ -14,33 +18,47 @@
 	<ui:define name="conteudo">
 		<div class="ui-g">
 			
-			<p:growl id="mensagem" escape="false" showDetail="false"/>
+			<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
 			
 			<div class="ui-g-12">
-				<p:dataTable id="tabelaAssistentes" var="#" value="#" rows="20"
-                         paginator="true"
-                         paginatorTemplate="{PageLinks}">
+				<p:dataTable id="tabelaAssistentes" var="assistente" 
+						value="#{assistentesAdmBean.assistentes}" rows="20"
+                		paginator="true" paginatorTemplate="{PageLinks}">
                     
-                    <f:facet name="header">
-           				ASSISTENTES CADASTRADOS
-      				</f:facet>
+                    <f:facet name="header"> ASSISTENTES CADASTRADOS </f:facet>
                      
 					<p:column headerText="NOME">
-						<p:outputLabel value="#"/>							
+						<p:outputLabel value="#{assistente.nome}"/>							
 					</p:column>
 					<p:column headerText="E-MAIL">
-						<p:outputLabel value="#"/>							
+						<p:outputLabel value="#{assistente.email}"/>							
 					</p:column>
 					<p:column headerText="TELEFONE">
-						<p:outputLabel value="#"/>							
+						<p:outputLabel value="#{assistente.numTelefonico}"/>							
 					</p:column>
-					<p:column headerText="CATEGORIAS SERVIÇO">
-						<p:outputLabel value="#"/>
+					<p:column headerText="CATEGORIA SERVIÇO">
+						<p:outputLabel value="#{assistente.categoriaServico.nome}"/>
+					</p:column>
+					<p:column headerText="REPUTAÇÃO">
+						<p:rating readonly="true" value="#{assistente.reputacao}"/>
 					</p:column>
 					<p:column headerText="REMOVER CONTA">						
-						<h:form>
-							<p:commandButton icon="ui-icon-recycle" title="Remove a conta do assistente"/>
-						</h:form>
+						<p:commandButton icon="ui-icon-recycle" title="Remover a conta do assistente" 
+								update="msg" onclick="PF('dialog').show()">
+							<f:setPropertyActionListener target="#{assistentesAdmBean.assistente}" 
+									value="#{assistente}" /> 
+						</p:commandButton>
+								
+						<p:confirmDialog appendTo="@(body)" widgetVar="dialog" header="CONFIRMAÇÃO" 
+								message="Tem certeza que deseja remover a conta do assistente selecionado ?">
+							<h:form>
+								<p:commandButton value="REMOVER" styleClass="botao-dialog" 
+										actionListener="#{assistentesAdmBean.deletarContaAssistente}"
+										action="assistentes?faces-redirect=true"/>
+								<p:commandButton value="CANCELAR" 
+										onclick="PF('dialog').hide()" styleClass="botao-dialog"/>
+							</h:form>
+						</p:confirmDialog>
 					</p:column>
 				</p:dataTable>
 			</div>

@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 import br.com.personalassistant.dao.PropostaDAO;
 import br.com.personalassistant.entidades.Proposta;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.util.Transacional;
@@ -48,7 +50,7 @@ public class PropostaService implements Serializable {
 		}		
 	}
 	
-	public Proposta getById(Long id) throws ServiceException{
+	public Proposta getById(Long id) throws ServiceException, ObjetoNaoExisteException{
 		try{
 			return this.propostaDAO.getById(id);
 		}
@@ -57,7 +59,7 @@ public class PropostaService implements Serializable {
 		}
 	}
 	
-	public List<Proposta> getAll() throws ServiceException{
+	public List<Proposta> getAll() throws ServiceException, NaoExistemObjetosException{
 		try{
 			return this.propostaDAO.getAll();
 		}

@@ -25,6 +25,18 @@
 			
 			<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
 		
+			<div class="ui-g-12 ">
+				<div class="ui-g-2 div-label-combobox">
+					<p:outputLabel styleClass="label-combobox" value="Filtrar por"/>
+				</div>
+				<div class="ui-g-10">
+					<p:selectOneMenu value="#{indexAdministradorBean.opcaoFiltro}" styleClass="combobox" >
+						<f:selectItems value="#{indexAdministradorBean.opcoesFiltro}" var="opcao"
+							itemLabel="#{opcao}" itemValue="#{opcao}" />	
+					</p:selectOneMenu>
+				</div>			
+			</div>
+		
 			<div class="ui-g-12 div-painel-info">
 				<ui:include src="/WEB-INF/templates/_infoAdmPanel.xhtml"> 
 					<ui:param name="valor" value="1.500"/>

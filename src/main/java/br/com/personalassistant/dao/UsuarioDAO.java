@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.Usuario;
 import br.com.personalassistant.enums.TIPO_USUARIO;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class UsuarioDAO extends DAO {
@@ -25,10 +26,6 @@ public class UsuarioDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao salvar usuario");
 		}
-		finally{
-			entityManager.close();
-		}
-		
 	}
 	
 	public void delete(Usuario usuario) throws PersistenciaException{	
@@ -41,9 +38,6 @@ public class UsuarioDAO extends DAO {
 		catch(PersistenceException ex){
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao remover usuario");
-		}
-		finally{
-			entityManager.close();
 		}
 	}
 	
@@ -59,9 +53,6 @@ public class UsuarioDAO extends DAO {
 		catch(PersistenceException ex){
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao atualizar usuario");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return usuarioAtualizado;
@@ -80,14 +71,11 @@ public class UsuarioDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenceException("Erro ao recuperar usuarios");
 		}
-		finally{
-			entityManager.close();
-		}
 		
 		return usuarios;
 	}
 	
-	public Usuario getById(Long id) throws PersistenciaException {
+	public Usuario getById(Long id) throws PersistenciaException, ObjetoNaoExisteException {
 		
 		EntityManager entityManager = getEntityManager();
 		Usuario usuario = null;
@@ -96,17 +84,19 @@ public class UsuarioDAO extends DAO {
 			usuario = entityManager.find(Usuario.class, id);
 		}
 		catch(PersistenceException ex){
+			
+			if(usuario == null){
+				throw new ObjetoNaoExisteException("Não existe usuario com este id");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao recuperar usuario");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return usuario;
 	}
 	
-	public TIPO_USUARIO getTipoUsuarioByEmail(String email) throws PersistenciaException{
+	public TIPO_USUARIO getTipoUsuarioByEmail(String email) throws PersistenciaException, ObjetoNaoExisteException{
 				
 		EntityManager entityManager = getEntityManager();
 		TIPO_USUARIO tipoUsuario = null;
@@ -116,23 +106,28 @@ public class UsuarioDAO extends DAO {
 		}
 
 		try{
-			TypedQuery<TIPO_USUARIO> typedQuery = entityManager.createQuery("SELECT u.tipoUsuario FROM Usuario u WHERE u.email = :email", 
-					TIPO_USUARIO.class);
+			TypedQuery<TIPO_USUARIO> typedQuery = entityManager.createQuery("SELECT u.tipoUsuario "
+					+ "FROM Usuario u "
+					+ "WHERE u.email = :email", TIPO_USUARIO.class);
+			
 			typedQuery.setParameter("email", email);			
+			
 			tipoUsuario = typedQuery.getSingleResult();
 		}
 		catch(PersistenceException ex){
+			
+			if(tipoUsuario == null){
+				throw new ObjetoNaoExisteException("Não existe usuario com este email");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao recuperar tipo usuario");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return tipoUsuario;
 	}
 	
-	public Usuario getUsuarioByEmail(String email) throws PersistenciaException{
+	public Usuario getUsuarioByEmail(String email) throws PersistenciaException, ObjetoNaoExisteException{
 		
 		EntityManager entityManager = getEntityManager();
 		Usuario usuario = null;
@@ -142,17 +137,22 @@ public class UsuarioDAO extends DAO {
 		}
 
 		try{
-			TypedQuery<Usuario> typedQuery = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", 
-					Usuario.class);
+			TypedQuery<Usuario> typedQuery = entityManager.createQuery("SELECT u "
+					+ "FROM Usuario u "
+					+ "WHERE u.email = :email", Usuario.class);
+			
 			typedQuery.setParameter("email", email);			
+			
 			usuario = typedQuery.getSingleResult();
 		}
 		catch(PersistenceException ex){
+			
+			if(usuario == null){
+				throw new ObjetoNaoExisteException("Não existe usuario com este email");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao recuperar tipo usuario");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return usuario;

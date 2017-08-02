@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import br.com.personalassistant.services.PropostaService;
 import br.com.personalassistant.entidades.Proposta;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.ServiceException;
 
 @Named
@@ -33,10 +34,13 @@ public class PropostaConverter implements Converter {
 			Proposta proposta = propostaService.getById(Long.valueOf(value));
 			return proposta;
 		} 
-		catch (NumberFormatException | ServiceException ex) {
+		catch (NumberFormatException | ServiceException | ObjetoNaoExisteException ex) {
 			String msgErroStr = String.format("Erro de conversão! Não foi possível " 
 					+ "realizar a conversão da string '%s' para o tipo esperado.", value);
 			FacesMessage msgErro = new FacesMessage(FacesMessage.SEVERITY_ERROR, msgErroStr, msgErroStr);
+			
+			ex.printStackTrace();
+			
 			throw new ConverterException(msgErro);
 		}
 	}

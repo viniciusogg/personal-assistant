@@ -15,5 +15,4 @@ public abstract class DAO implements Serializable{
 	protected EntityManager getEntityManager(){
 		return this.entityManager;
 	}
-
 }

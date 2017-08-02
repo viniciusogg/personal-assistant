@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 import br.com.personalassistant.dao.EnderecoDAO;
 import br.com.personalassistant.entidades.Endereco;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.util.Transacional;
@@ -48,7 +50,7 @@ public class EnderecoService implements Serializable {
 		}		
 	}
 	
-	public Endereco getById(Long id) throws ServiceException{
+	public Endereco getById(Long id) throws ServiceException, ObjetoNaoExisteException{
 		try{
 			return this.enderecoDAO.getById(id);
 		}
@@ -57,7 +59,7 @@ public class EnderecoService implements Serializable {
 		}
 	}
 	
-	public List<Endereco> getAll() throws ServiceException{
+	public List<Endereco> getAll() throws ServiceException, NaoExistemObjetosException{
 		try{
 			return this.enderecoDAO.getAll();
 		}

@@ -7,11 +7,13 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.Proposta;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class PropostaDAO extends DAO {
 
-	private static final long serialVersionUID = -5019167265942314710L;
+	private static final long serialVersionUID = -902709003677742503L;
 
 	public void save(Proposta proposta) throws PersistenciaException{
 		
@@ -24,10 +26,6 @@ public class PropostaDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao salvar proposta");
 		}
-		finally{
-			entityManager.close();
-		}
-		
 	}
 	
 	public void delete(Proposta proposta) throws PersistenciaException{	
@@ -41,15 +39,12 @@ public class PropostaDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao remover proposta");
 		}
-		finally{
-			entityManager.close();
-		}
 	}
 	
 	public Proposta update(Proposta proposta) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		Proposta propostaAtualizada = proposta; 
+		Proposta propostaAtualizado = proposta; 
 		
 		try{
 			entityManager.find(proposta.getClass(), proposta.getId());
@@ -59,14 +54,11 @@ public class PropostaDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao atualizar proposta");
 		}
-		finally{
-			entityManager.close();
-		}
 		
-		return propostaAtualizada;
+		return propostaAtualizado;
 	}
 	
-	public List<Proposta> getAll() throws PersistenciaException {
+	public List<Proposta> getAll() throws PersistenciaException, NaoExistemObjetosException {
 		
 		EntityManager entityManager = getEntityManager();
 		List<Proposta> propostas = null;
@@ -76,17 +68,19 @@ public class PropostaDAO extends DAO {
 			propostas = typedQuery.getResultList();
 		}
 		catch(PersistenceException ex){
+			
+			if(propostas == null){
+				throw new NaoExistemObjetosException("Não existem propostas");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenceException("Erro ao recuperar propostas");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return propostas;
 	}
 	
-	public Proposta getById(Long id) throws PersistenciaException {
+	public Proposta getById(Long id) throws PersistenciaException, ObjetoNaoExisteException {
 		
 		EntityManager entityManager = getEntityManager();
 		Proposta proposta = null;
@@ -95,14 +89,17 @@ public class PropostaDAO extends DAO {
 			proposta = entityManager.find(Proposta.class, id);
 		}
 		catch(PersistenceException ex){
+			
+			if(proposta == null){
+				throw new ObjetoNaoExisteException("Não existe proposta com este id");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao recuperar proposta");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return proposta;
 	}
+	
 	
 }

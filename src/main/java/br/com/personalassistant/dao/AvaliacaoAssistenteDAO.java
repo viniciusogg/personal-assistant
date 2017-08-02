@@ -7,11 +7,13 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.AvaliacaoAssistente;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
 public class AvaliacaoAssistenteDAO extends DAO {
 
-	private static final long serialVersionUID = 4093824774581627054L;
+	private static final long serialVersionUID = -902709003677742503L;
 
 	public void save(AvaliacaoAssistente avaliacaoAssistente) throws PersistenciaException{
 		
@@ -24,10 +26,6 @@ public class AvaliacaoAssistenteDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao salvar avaliacaoAssistente");
 		}
-		finally{
-			entityManager.close();
-		}
-		
 	}
 	
 	public void delete(AvaliacaoAssistente avaliacaoAssistente) throws PersistenciaException{	
@@ -41,16 +39,12 @@ public class AvaliacaoAssistenteDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao remover avaliacaoAssistente");
 		}
-		finally{
-			entityManager.close();
-		}
 	}
 	
 	public AvaliacaoAssistente update(AvaliacaoAssistente avaliacaoAssistente) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		
-		AvaliacaoAssistente avaliacaoAssistenteAtualizada = avaliacaoAssistente; 
+		AvaliacaoAssistente avaliacaoAssistenteAtualizado = avaliacaoAssistente; 
 		
 		try{
 			entityManager.find(avaliacaoAssistente.getClass(), avaliacaoAssistente.getId());
@@ -60,14 +54,11 @@ public class AvaliacaoAssistenteDAO extends DAO {
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao atualizar avaliacaoAssistente");
 		}
-		finally{
-			entityManager.close();
-		}
 		
-		return avaliacaoAssistenteAtualizada;
+		return avaliacaoAssistenteAtualizado;
 	}
 	
-	public List<AvaliacaoAssistente> getAll() throws PersistenciaException {
+	public List<AvaliacaoAssistente> getAll() throws PersistenciaException, NaoExistemObjetosException {
 		
 		EntityManager entityManager = getEntityManager();
 		List<AvaliacaoAssistente> avaliacoesAssistentes = null;
@@ -77,17 +68,19 @@ public class AvaliacaoAssistenteDAO extends DAO {
 			avaliacoesAssistentes = typedQuery.getResultList();
 		}
 		catch(PersistenceException ex){
+			
+			if(avaliacoesAssistentes == null){
+				throw new NaoExistemObjetosException("Não existem avaliacoesAssistentes");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenceException("Erro ao recuperar avaliacoesAssistentes");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return avaliacoesAssistentes;
 	}
 	
-	public AvaliacaoAssistente getById(Long id) throws PersistenciaException {
+	public AvaliacaoAssistente getById(Long id) throws PersistenciaException, ObjetoNaoExisteException {
 		
 		EntityManager entityManager = getEntityManager();
 		AvaliacaoAssistente avaliacaoAssistente = null;
@@ -96,14 +89,17 @@ public class AvaliacaoAssistenteDAO extends DAO {
 			avaliacaoAssistente = entityManager.find(AvaliacaoAssistente.class, id);
 		}
 		catch(PersistenceException ex){
+			
+			if(avaliacaoAssistente == null){
+				throw new ObjetoNaoExisteException("Não existe avaliacaoAssistente com este id");
+			}
+			
 			ex.printStackTrace();
 			throw new PersistenciaException("Erro ao recuperar avaliacaoAssistente");
-		}
-		finally{
-			entityManager.close();
 		}
 		
 		return avaliacaoAssistente;
 	}
+	
 	
 }

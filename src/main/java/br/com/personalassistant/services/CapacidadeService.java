@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 import br.com.personalassistant.dao.CapacidadeDAO;
 import br.com.personalassistant.entidades.Capacidade;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.util.Transacional;
@@ -48,7 +50,7 @@ public class CapacidadeService implements Serializable {
 		}		
 	}
 	
-	public Capacidade getById(Long id) throws ServiceException{
+	public Capacidade getById(Long id) throws ServiceException, ObjetoNaoExisteException{
 		try{
 			return this.capacidadeDAO.getById(id);
 		}
@@ -57,7 +59,7 @@ public class CapacidadeService implements Serializable {
 		}
 	}
 	
-	public List<Capacidade> getAll() throws ServiceException{
+	public List<Capacidade> getAll() throws ServiceException, NaoExistemObjetosException{
 		try{
 			return this.capacidadeDAO.getAll();
 		}

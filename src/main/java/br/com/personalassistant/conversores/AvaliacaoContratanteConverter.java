@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import br.com.personalassistant.services.AvaliacaoContratanteService;
 import br.com.personalassistant.entidades.AvaliacaoContratante;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.ServiceException;
 
 @Named
@@ -33,10 +34,13 @@ public class AvaliacaoContratanteConverter implements Converter {
 			AvaliacaoContratante assistente = avaliacaoContratanteService.getById(Long.valueOf(value));
 			return assistente;
 		} 
-		catch (NumberFormatException | ServiceException ex) {
+		catch (NumberFormatException | ServiceException | ObjetoNaoExisteException ex) {
 			String msgErroStr = String.format("Erro de conversão! Não foi possível " 
 					+ "realizar a conversão da string '%s' para o tipo esperado.", value);
 			FacesMessage msgErro = new FacesMessage(FacesMessage.SEVERITY_ERROR, msgErroStr, msgErroStr);
+			
+			ex.printStackTrace();
+			
 			throw new ConverterException(msgErro);
 		}
 	}

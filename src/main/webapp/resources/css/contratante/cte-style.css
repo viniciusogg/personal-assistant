@@ -18,3 +18,16 @@
 div#div-nova-oferta > button{
 	float:right;
 }
+
+div[class="ui-g-1 div-superior-servico"] > button > span[class="ui-button-icon-left ui-icon ui-c ui-icon-check"] {
+    top: 21px;
+    left: 21px;
+}
+
+#div-separador-lances{
+	padding-top: unset;
+}
+
+#label-lances{
+	font-size: 20px;
+}

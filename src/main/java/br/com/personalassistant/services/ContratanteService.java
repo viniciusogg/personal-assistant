@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 import br.com.personalassistant.dao.ContratanteDAO;
 import br.com.personalassistant.entidades.Contratante;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.util.Transacional;
@@ -48,7 +50,7 @@ public class ContratanteService implements Serializable {
 		}		
 	}
 	
-	public Contratante getById(Long id) throws ServiceException{
+	public Contratante getById(Long id) throws ServiceException, ObjetoNaoExisteException{
 		try{
 			return this.contratanteDAO.getById(id);
 		}
@@ -57,7 +59,7 @@ public class ContratanteService implements Serializable {
 		}
 	}
 	
-	public List<Contratante> getAll() throws ServiceException{
+	public List<Contratante> getAll() throws ServiceException, NaoExistemObjetosException{
 		try{
 			return this.contratanteDAO.getAll();
 		}
