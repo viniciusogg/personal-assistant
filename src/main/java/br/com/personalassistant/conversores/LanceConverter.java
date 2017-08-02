@@ -17,7 +17,7 @@ import br.com.personalassistant.excecoes.ServiceException;
 
 @Named
 @RequestScoped
-@FacesConverter(forClass = Lance.class)
+@FacesConverter(value="conversorLance", forClass = Lance.class)
 public class LanceConverter implements Converter{
 
 	@Inject

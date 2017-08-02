@@ -67,4 +67,13 @@ public class AssistenteService implements Serializable {
 			throw new ServiceException(ex.getMessage());
 		}
 	}
+	
+	public Long getQuantidadeByCategoriaServico(String nomeCategoriaServico) throws ServiceException, ObjetoNaoExisteException{
+		try{
+			return this.assistenteDAO.getQuantidadeByCategoriaServico(nomeCategoriaServico);
+		}
+		catch (PersistenciaException ex){
+			throw new ServiceException(ex.getMessage());
+		}
+	}
 }

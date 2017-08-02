@@ -18,7 +18,7 @@
 	<div class="ui-g">
 		<ui:define name="conteudo">
 			
-			<p:growl id="mensagem" escape="false" showDetail="false"/>
+			<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
 			
 			<div class="ui-g-12">
 				<p:dataTable id="tabelaContratantes" var="contratante" 
@@ -34,7 +34,7 @@
 						<p:outputLabel value="#{contratante.email}"/>							
 					</p:column>
 					<p:column headerText="TELEFONE">
-						<p:outputLabel value="#{contratante.numTelefone}"/>							
+						<p:outputLabel value="#{contratante.numTelefonico}"/>							
 					</p:column>
 					<p:column headerText="REMOVER CONTA">						
 						<p:commandButton icon="ui-icon-recycle" title="Remove a conta do contratante"
@@ -45,13 +45,11 @@
 								
 						<p:confirmDialog appendTo="@(body)" widgetVar="dialog" header="CONFIRMAÇÃO" 
 								message="Tem certeza que deseja remover a conta do contratante selecionado ?">
-							<h:form>
-								<p:commandButton value="REMOVER" styleClass="botao-dialog" 
-										actionListener="#{contratantesAdmBean.deletarContaContratante}"
-										action="contratantes?faces-redirect=true"/>
-								<p:commandButton value="CANCELAR" 
-										onclick="PF('dialog').hide()" styleClass="botao-dialog"/>
-							</h:form>
+							<p:commandButton value="REMOVER" styleClass="botao-dialog" 
+									actionListener="#{contratantesAdmBean.deletarContaContratante}"
+									action="contratantes?faces-redirect=true"/>
+							<p:commandButton value="CANCELAR" 
+									onclick="PF('dialog').hide()" styleClass="botao-dialog"/>
 						</p:confirmDialog>
 					</p:column>
 				</p:dataTable>

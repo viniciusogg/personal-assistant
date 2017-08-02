@@ -17,7 +17,7 @@ import br.com.personalassistant.excecoes.ServiceException;
 
 @Named
 @RequestScoped
-@FacesConverter(forClass = Endereco.class)
+@FacesConverter(value="conversorEndereco", forClass = Endereco.class)
 public class EnderecoConverter implements Converter {
 
 	@Inject

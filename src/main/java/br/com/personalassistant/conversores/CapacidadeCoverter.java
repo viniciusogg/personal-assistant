@@ -17,7 +17,7 @@ import br.com.personalassistant.excecoes.ServiceException;
 
 @Named
 @RequestScoped
-@FacesConverter(forClass = Capacidade.class)
+@FacesConverter(value="conversorCapacidade", forClass = Capacidade.class)
 public class CapacidadeCoverter implements Converter {
 	
 	@Inject

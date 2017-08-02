@@ -110,4 +110,31 @@ public class AssistenteDAO extends DAO {
 		return assistente;
 	}
 	
+	public Long getQuantidadeByCategoriaServico(String nomeCategoriaServico) throws PersistenciaException, ObjetoNaoExisteException {
+		
+		EntityManager entityManager = getEntityManager();
+		Long quantidade = null;
+		
+		try{			
+			TypedQuery<Long> typedQuery = entityManager.createQuery("SELECT COUNT(ast) "
+					+ "FROM Assistente ast "
+					+ "WHERE ast.categoriaServico.nome = :nomeCategoriaServico", Long.class);
+			
+			typedQuery.setParameter("nomeCategoriaServico", nomeCategoriaServico);
+			
+			quantidade = typedQuery.getSingleResult();
+		}
+		catch(PersistenceException ex){
+			
+			if(quantidade == null){
+				throw new ObjetoNaoExisteException("Não existe assistente com esta categoria de serviço");
+			}
+			
+			ex.printStackTrace();
+			throw new PersistenciaException("Erro ao recuperar assistente");
+		}
+		
+		return quantidade;
+	}
+	
 }

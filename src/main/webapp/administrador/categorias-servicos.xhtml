@@ -5,10 +5,11 @@
 	 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	  	xmlns:p="http://primefaces.org/ui"
 	  	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  		xmlns:o="http://omnifaces.org/ui"
 	  	template="index.xhtml">
 
 	<f:metadata>
-		<f:event listener="#{categoriaServicoAdmBean.preRenderView}" type="preRenderView" />
+		<f:event listener="#{categoriasServicosAdmBean.preRenderView}" type="preRenderView" />
 	</f:metadata>
 
 	<ui:define name="titulo">
@@ -17,11 +18,12 @@
 	
 	<div class="ui-g">
 
-		<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
-
 		<ui:define name="conteudo">
+
+			<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
+
 			<div class="ui-g-12">				
-				<p:panel class="ui-g-12" header="NOVA CATEGORIA DE SERVIÇO">
+				<p:panel id="painelEdicaoCategoria" class="ui-g-12" header="#{categoriasServicosAdmBean.tituloPanel}">
 					<div class="ui-g-12" id="div-painel-cadastro">
 						<h:form>
 							<div class="ui-g-4 align-element">
@@ -29,17 +31,17 @@
 							</div>
 							<div class="ui-g-4 align-element">
 								<p:inputText styleClass="campo-nome-categoria"
-											 value="#{categoriaServicoAdmBean.categoriaServico.nome}"
-											 placeholder="Nome da categoria de serviço"
-											 required="true"
-											 requiredMessage="Você esqueceu de digitar o nome da categoria de serviço que deseja cadastrar"/>
+										value="#{categoriasServicosAdmBean.categoriaServico.nome}"
+										placeholder="Nome da categoria de serviço"
+										required="true"
+										requiredMessage="Você esqueceu de digitar o nome da categoria de serviço que deseja cadastrar"/>
 							</div>				
 							<div class="ui-g-4 align-element">
 								<p:commandButton id="botaoSalvarCategoria" 
-												 actionListener="#{categoriaServicoAdmBean.salvarCategoriaServico}" 
-												 action="categorias-servicos?faces-redirect=true"
-												 icon="ui-icon-save" value="SALVAR"
-												 update="msg"/>
+										actionListener="#{categoriasServicosAdmBean.salvarCategoriaServico}" 
+										action="categorias-servicos?faces-redirect=true"
+										icon="ui-icon-save" value="SALVAR"
+										update="msg" />
 							</div>
 						</h:form>
 					</div>
@@ -47,37 +49,38 @@
 			</div>
 						
 			<div class="ui-g-12">
-				<p:dataTable  var="categoriaServico" value="#{categoriaServicoAdmBean.lista}" rows="20"
+				<p:dataTable  var="categoriaServico" value="#{categoriasServicosAdmBean.lista}" rows="20"
                          paginator="true"
                          paginatorTemplate="{PageLinks}">
                     
-                    <f:facet name="header">
-           				CATEGORIAS DE SERVIÇOS CADASTRADAS
-      				</f:facet>
+                    <f:facet name="header"> CATEGORIAS DE SERVIÇOS CADASTRADAS </f:facet>
                      
 					<p:column headerText="NOME">
 						<p:outputLabel value="#{categoriaServico.nome}"/>							
 					</p:column>
 					<p:column headerText="GERENCIAR">						
 						<p:commandButton icon="ui-icon-recycle" title="Remover categoria de serviço"
-								update="msg"
+								update=":msg"
 								onclick="PF('dialog').show()">
-							<f:setPropertyActionListener target="#{categoriaServicoAdmBean.categoriaServico}" 
+							<f:setPropertyActionListener target="#{categoriasServicosAdmBean.categoriaServico}" 
 									value="#{categoriaServico}" /> 
 						</p:commandButton>
 								
 						<p:confirmDialog appendTo="@(body)" widgetVar="dialog" header="CONFIRMAÇÃO" 
 								message="Tem certeza que deseja remover a categoria de serviço selecionada ?">
-							<h:form>
-								<p:commandButton value="REMOVER" styleClass="botao-dialog" 
-										actionListener="#{categoriaServicoAdmBean.deletarCategoriaServico}"
-										action="categorias-servicos?faces-redirect=true"/>
-								<p:commandButton value="CANCELAR" 
-										onclick="PF('dialog').hide()" styleClass="botao-dialog"/>
-							</h:form>
+							<p:commandButton value="REMOVER" styleClass="botao-dialog" 
+									actionListener="#{categoriasServicosAdmBean.deletarCategoriaServico}"
+									action="categorias-servicos?faces-redirect=true"/>
+							<p:commandButton value="CANCELAR" styleClass="botao-dialog"
+									onclick="PF('dialog').hide()"/>
 						</p:confirmDialog>
 							
-						<p:commandButton icon="ui-icon-edit" title="Editar categoria de serviço"/>
+						<p:commandButton icon="ui-icon-edit" title="Editar categoria de serviço"
+								actionListener="#{categoriasServicosAdmBean.editarCategoriaServico}"
+								update=":painelEdicaoCategoria">
+							<f:setPropertyActionListener target="#{categoriasServicosAdmBean.categoriaServico}" 
+									value="#{categoriaServico}" />
+						</p:commandButton>
 					</p:column>
 				</p:dataTable>
 			</div>
