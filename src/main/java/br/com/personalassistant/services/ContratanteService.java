@@ -67,4 +67,13 @@ public class ContratanteService implements Serializable {
 			throw new ServiceException(ex.getMessage());
 		}
 	}
+	
+	public Contratante getContratanteByEmail(String email) throws ServiceException, ObjetoNaoExisteException{
+		try{
+			return this.contratanteDAO.getContratanteByEmail(email);
+		}
+		catch(PersistenciaException ex){
+			throw new ServiceException(ex.getMessage());
+		}
+	}
 }

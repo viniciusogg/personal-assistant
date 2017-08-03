@@ -29,21 +29,19 @@ public class AssistentesAdmBean extends AbstractBean{
 		try {
 			this.assistentes = assistenteService.getAll();
 		} 
-		catch (ServiceException e) {
+		catch (ServiceException | NaoExistemObjetosException e) {
 			e.printStackTrace();
-		} 
-		catch (NaoExistemObjetosException e) {}
+		}
 	}
 	
 	public void deletarContaAssistente(){
-		System.out.println("Chegou no deletar conta");
+
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getFlash().setKeepMessages(true);
 		
 		String nomeAssistenteRemovido = assistente.getNome();
 		
 		try {
-			System.out.println(this.assistente.toString());
 			assistenteService.delete(this.assistente);
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Assistente '" + nomeAssistenteRemovido + "' removido com sucesso", ""));
 		} 

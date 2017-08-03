@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -22,7 +23,10 @@ import br.com.personalassistant.enums.TIPO_USUARIO;
 public class Contratante extends Usuario{
 
 	private static final long serialVersionUID = -1566617799006322877L;
-
+	
+	@Transient
+	private int reputacao;
+	
 	@OneToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "favorito_do_contratante_FK")
@@ -32,10 +36,10 @@ public class Contratante extends Usuario{
 	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco; // unidirecional
 	
-	@OneToMany
+	@OneToMany(mappedBy="contratante")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "contratante_FK")
-	private List<Proposta> propostas; // unidirecional
+	private List<Proposta> propostas; // bidirecional
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "contratante")
@@ -61,7 +65,7 @@ public class Contratante extends Usuario{
 		return assistentesFavoritos;
 	}
 
-	public void setAssistentesFavoritos(List<Assistente> assistentesFavoritos) {
+	public void setAssistenteFavoritos(List<Assistente> assistentesFavoritos) {
 		this.assistentesFavoritos = assistentesFavoritos;
 	}
 
@@ -87,6 +91,18 @@ public class Contratante extends Usuario{
 
 	public void setOfertasServicos(List<OfertaServico> ofertasServicos) {
 		this.ofertasServicos = ofertasServicos;
+	}
+	
+	/*public int getReputacao(){
+		return calcularReputacao();
+	}*/
+	
+	public int getReputacao() {
+		return reputacao;
+	}
+
+	public void setReputacao(int reputacao) {
+		this.reputacao = reputacao;
 	}
 
 	@Override
@@ -141,4 +157,38 @@ public class Contratante extends Usuario{
 				+ getNumTelefonico() + ", getTipoUsuario()=" + getTipoUsuario() + "]";
 	}
 	
+	/*private int calcularReputacao(){
+		
+		int indiceMaior = 0;
+		
+		try {
+			ArrayList<Double> valores = avaliacaoContratanteService.getAvaliacoesByIdContratante(getId());
+			
+			if(valores == null || valores.isEmpty()){
+				return 0;
+			}
+			
+			indiceMaior = 0;
+			Double maior = valores.get(0);
+			
+			for(int i = 1; i < valores.size(); i++){
+				if(valores.get(i) > maior){
+					indiceMaior = i;
+					maior = valores.get(i);
+				}
+				else if(valores.get(i).equals(maior)){
+					indiceMaior = Math.round(i/indiceMaior);
+				}
+			}
+		}
+		
+		catch (ServiceException e) {
+			e.printStackTrace();
+		} 
+		catch (ObjetoNaoExisteException e) {
+			e.printStackTrace();
+		}
+		
+		return indiceMaior + 1;
+	}*/
 }

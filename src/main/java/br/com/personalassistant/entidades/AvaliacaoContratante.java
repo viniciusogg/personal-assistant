@@ -66,5 +66,10 @@ public class AvaliacaoContratante extends Avaliacao{
 				+ ", getData()=" + getData() + ", getComentario()=" + getComentario() + "]";
 	}
 
-	
+	@Override
+	public Integer calcularMediaAvaliacao() {
+		
+		return Math.round((getPontualidade() + getCordialidade() + getFacilidadePagamento()) / 3);
+	}
+
 }

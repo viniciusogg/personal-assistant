@@ -1,16 +1,20 @@
 package br.com.personalassistant.beans.administrador;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import br.com.personalassistant.beans.AbstractBean;
 import br.com.personalassistant.entidades.Administrador;
 import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.services.AdministradorService;
 
@@ -29,10 +33,9 @@ public class AdministradoresAdmBean extends AbstractBean{
 		try {
 			this.administradores = administradorService.getAll();
 		} 
-		catch (ServiceException e) {
+		catch (ServiceException | NaoExistemObjetosException e) {
 			e.printStackTrace();
-		} 
-		catch (NaoExistemObjetosException e) {}
+		}
 	}
 	
 	public void deletarContaAdministrador(){
@@ -40,17 +43,40 @@ public class AdministradoresAdmBean extends AbstractBean{
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getFlash().setKeepMessages(true);
 		
-		String nomeAdministradorRemovido = administrador.getNome();
+		String msg = "";
+		Severity severity = null;
+		
+		String nomeAdministradorRemovido = this.administrador.getNome();
 		
 		try {
+			Long idRemovido = this.administrador.getId();
+						
+			Long idAtual = administradorService.getIdByEmail(getEmailUsuarioLogado());
+			
+			boolean idsIguais = idRemovido.equals(idAtual);
 
-			administradorService.delete(this.administrador);
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Administrador '" + nomeAdministradorRemovido + "' removido com sucesso", ""));
+			this.administradorService.delete(this.administrador);
+			
+			if(idsIguais){
+				
+				HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
+				httpSession.invalidate();
+				
+				context.getExternalContext().redirect(context.getExternalContext().
+						getApplicationContextPath() + "/login.xhtml?faces-redirect=true");
+			}
+			
+			severity = FacesMessage.SEVERITY_INFO;
+			msg = "Administrador '" + nomeAdministradorRemovido + "' removido com sucesso";
 		} 
-		catch (ServiceException e) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
+		catch (ServiceException | IOException | ObjetoNaoExisteException e) {
+			severity = FacesMessage.SEVERITY_ERROR;
+			msg = e.getMessage();
+			
 			e.printStackTrace();
 		}
+		
+		context.addMessage(null, new FacesMessage(severity, msg, ""));
 	}
 
 	public List<Administrador> getAdministradores() {

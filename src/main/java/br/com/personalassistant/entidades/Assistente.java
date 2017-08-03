@@ -1,5 +1,6 @@
 package br.com.personalassistant.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -18,18 +20,23 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity(name = "Assistente")
 @DiscriminatorValue("assist")
 public class Assistente extends Usuario{
-
-	private static final long serialVersionUID = 5159659883981518233L;
-
-	private Integer experiencia; // quantidade de assistencias prestadas
 	
-	private Integer reputacao; 
-
+	private static final long serialVersionUID = 5159659883981518233L;
+		
 	@Column(nullable = false)
 	private Double precoFixo;
 	
 	@Column(nullable = false)
 	private Double precoHora;
+	
+	@Transient
+	private Long quantServicosPrestados;
+	
+	@Transient
+	private String nivelExperiencia;
+	
+	@Transient
+	private int reputacao;
 	
 	@JoinColumn(name = "endereco_FK", nullable = false)
 	@OneToOne(cascade = CascadeType.ALL)
@@ -42,12 +49,12 @@ public class Assistente extends Usuario{
 	@Column(name="assistente_FK")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "assistente")
-	private List<Lance> lances; // bidirecional
+	private List<Lance> lances = new ArrayList<Lance>(); // bidirecional
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(cascade = CascadeType.REMOVE)
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy="assistente")
 	@JoinColumn(name = "assistente_FK")
-	private List<Proposta> propostas; // unidirecional (são as negociações)
+	private List<Proposta> propostas = new ArrayList<Proposta>(); // bidirecional (são as negociações)
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade = CascadeType.ALL)
@@ -82,22 +89,6 @@ public class Assistente extends Usuario{
 
 	public void setPrecoHora(Double precoHora) {
 		this.precoHora = precoHora;
-	}
-
-	public Integer getExperiencia() {
-		return experiencia;
-	}
-
-	public void setExperiencia(Integer experiencia) {
-		this.experiencia = experiencia;
-	}
-
-	public Integer getReputacao() {
-		return reputacao;
-	}
-
-	public void setReputacao(Integer reputacao) {
-		this.reputacao = reputacao;
 	}
 
 	public CategoriaServico getCategoriaServico() {
@@ -139,6 +130,30 @@ public class Assistente extends Usuario{
 	public void setCapacidades(List<Capacidade> capacidades){
 		this.capacidades = capacidades;
 	}
+	
+	public Long getQuantServicosPrestados() {
+		return quantServicosPrestados;
+	}
+
+	public void setQuantServicosPrestados(Long quantServicosPrestados) {
+		this.quantServicosPrestados = quantServicosPrestados;
+	}
+
+	public String getNivelExperiencia() {
+		return nivelExperiencia;
+	}
+
+	public void setNivelExperiencia(String nivelExperiencia) {
+		this.nivelExperiencia = nivelExperiencia;
+	}
+
+	public int getReputacao() {
+		return reputacao;
+	}
+
+	public void setReputacao(int reputacao) {
+		this.reputacao = reputacao;
+	}
 
 	@Override
 	public int hashCode() {
@@ -147,16 +162,12 @@ public class Assistente extends Usuario{
 		result = prime * result + ((capacidades == null) ? 0 : capacidades.hashCode());
 		result = prime * result + ((categoriaServico == null) ? 0 : categoriaServico.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result + ((experiencia == null) ? 0 : experiencia.hashCode());
 		result = prime * result + ((lances == null) ? 0 : lances.hashCode());
 		result = prime * result + ((precoFixo == null) ? 0 : precoFixo.hashCode());
 		result = prime * result + ((precoHora == null) ? 0 : precoHora.hashCode());
 		result = prime * result + ((propostas == null) ? 0 : propostas.hashCode());
-		result = prime * result + ((reputacao == null) ? 0 : reputacao.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -182,11 +193,6 @@ public class Assistente extends Usuario{
 				return false;
 		} else if (!endereco.equals(other.endereco))
 			return false;
-		if (experiencia == null) {
-			if (other.experiencia != null)
-				return false;
-		} else if (!experiencia.equals(other.experiencia))
-			return false;
 		if (lances == null) {
 			if (other.lances != null)
 				return false;
@@ -207,21 +213,16 @@ public class Assistente extends Usuario{
 				return false;
 		} else if (!propostas.equals(other.propostas))
 			return false;
-		if (reputacao == null) {
-			if (other.reputacao != null)
-				return false;
-		} else if (!reputacao.equals(other.reputacao))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Assistente [experiencia=" + experiencia + ", reputacao=" + reputacao + ", precoFixo=" + precoFixo
+		return "Assistente [quantServicos=" + getQuantServicosPrestados() + ", precoFixo=" + precoFixo
 				+ ", precoHora=" + precoHora + ", endereco=" + endereco + ", categoriaServico=" + categoriaServico
 				+ ", lances=" + lances + ", propostas=" + propostas + ", capacidades=" + capacidades + ", getId()="
 				+ getId() + ", getNome()=" + getNome() + ", getEmail()=" + getEmail() + ", getSenha()=" + getSenha()
 				+ ", getNumTelefonico()=" + getNumTelefonico() + ", getTipoUsuario()=" + getTipoUsuario() + "]";
 	}
-
+	
 }

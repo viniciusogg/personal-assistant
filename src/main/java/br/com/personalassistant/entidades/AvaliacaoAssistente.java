@@ -67,4 +67,10 @@ public class AvaliacaoAssistente extends Avaliacao{
 				+ ", getData()=" + getData() + ", getComentario()=" + getComentario() + "]";
 	}
 
+	@Override
+	public Integer calcularMediaAvaliacao() {
+		
+		return Math.round((getPontualidade() + getCordialidade() + getQualidadeServico()) / 3);
+	}
+
 }

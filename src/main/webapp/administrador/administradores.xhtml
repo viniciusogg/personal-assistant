@@ -37,7 +37,8 @@
 					<p:column headerText="TELEFONE">
 						<p:outputLabel value="#{administrador.numTelefonico}"/>							
 					</p:column>
-					<p:column headerText="REMOVER CONTA">						
+					<p:column headerText="REMOVER CONTA">
+											
 						<p:commandButton icon="ui-icon-recycle" title="Remover a conta do administrador"
 								update="msg" onclick="PF('dialog').show()">
 							<f:setPropertyActionListener target="#{administradoresAdmBean.administrador}" 

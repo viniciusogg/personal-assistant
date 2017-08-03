@@ -33,6 +33,12 @@ public class IndexContratanteBean extends AbstractBean{
 		 * TOTAL DE AVALIAÇÕES DE 4 ESTRELAS: 200 = 200/800 = 0,25x100 = 25%
 		 * TOTAL DE AVALIAÇÕES DE 5 ESTRELAS: 500 = 584/800 = 0,73x100 = 73%
 		 * 
+		 * pontualidade = 5
+		 * cordialidade = 4
+		 * qualidadeServico = 5
+		 * 
+		 * 5 + 4 + 5 = 14/3 = 4,6 = Math.round(4,6) = 5
+		 * 
 		 * PREVALECE A MAIOR PORCENTAGEM, NO CASO DE EMPATE, FAZER A MÉDIA DAS ESTRELAS QUE ESTÃO
 		 * EMPATADAS PELAS QUE NÃO ESTÃO.
 		 * quantEstrela = ...

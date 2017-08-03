@@ -110,5 +110,36 @@ public class ContratanteDAO extends DAO {
 		return contratante;
 	}
 	
+	public Contratante getContratanteByEmail(String email) throws PersistenciaException, ObjetoNaoExisteException{
+		
+		EntityManager entityManager = getEntityManager();
+		Contratante contratante = null;
+	
+		if (email == null) {
+			email = "";
+		}
+
+		try{
+			TypedQuery<Contratante> typedQuery = entityManager.createQuery("SELECT a "
+					+ "FROM Contratante c, Usuario u "
+					+ "WHERE c.id = u.id AND "
+					+ "u.email = :email", Contratante.class);
+			
+			typedQuery.setParameter("email", email);			
+			
+			contratante = typedQuery.getSingleResult();
+		}
+		catch(PersistenceException ex){
+			
+			if(contratante == null){
+				throw new ObjetoNaoExisteException("Não existe assistente com este email");
+			}
+			
+			ex.printStackTrace();
+			throw new PersistenciaException("Erro ao recuperar assistente");
+		}
+		
+		return contratante;
+	}
 	
 }

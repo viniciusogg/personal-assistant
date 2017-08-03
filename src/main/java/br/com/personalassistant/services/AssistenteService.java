@@ -76,4 +76,31 @@ public class AssistenteService implements Serializable {
 			throw new ServiceException(ex.getMessage());
 		}
 	}
+	
+	public Assistente getAssistenteByEmail(String email) throws ServiceException, ObjetoNaoExisteException{
+		try {
+			return this.assistenteDAO.getAssistenteByEmail(email);
+		} 
+		catch (PersistenciaException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+	
+	public Long getQuantidadeServicosById(Long id) throws ServiceException, ObjetoNaoExisteException{
+		try {
+			return this.assistenteDAO.getQuantidadeServicosById(id);
+		} 
+		catch (PersistenciaException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+	
+	public List<Assistente> getAllSemPropostasDoContratante(Long idContratante) throws ServiceException{
+		try {
+			return this.assistenteDAO.getAllSemPropostasDoContratante(idContratante);
+		} 
+		catch (PersistenciaException | NaoExistemObjetosException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
 }

@@ -101,5 +101,32 @@ public class AdministradorDAO extends DAO {
 		return administrador;
 	}
 	
+	public Long getIdByEmail(String email) throws PersistenciaException, ObjetoNaoExisteException {
+		
+		EntityManager entityManager = getEntityManager();
+		Long id = null;
+		
+		try{
+			TypedQuery<Long> typedQuery = entityManager.createQuery("SELECT a.id "
+					+ "FROM Administrador a "
+					+ "WHERE a.email = :email", Long.class);
+			
+			typedQuery.setParameter("email", email);
+			
+			id = typedQuery.getSingleResult();
+		}
+		catch(PersistenceException ex){
+			
+			if(id == null){
+				throw new ObjetoNaoExisteException("Não existe administrador com este email");
+			}
+			
+			ex.printStackTrace();
+			throw new PersistenceException("Erro ao recuperar administradores");
+		}
+		
+		return id;
+	}
+	
 	
 }

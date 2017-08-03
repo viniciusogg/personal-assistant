@@ -19,7 +19,7 @@
 		</div>
 	</div>
 					
-	<div class="ui-g-5">
+	<p:outputPanel styleClass="ui-g-5" rendered="#{renderizarEmail != null ? renderizarEmail : true}">
 		<div class="ui-g-12">
 			<p:outputLabel value="E-MAIL*"/>
 		</div>
@@ -31,11 +31,12 @@
 				<f:validator validatorId="emailValidator" />
 			</p:inputText>
 		</div>
-	</div>
+	</p:outputPanel>
 	
-	<div class="ui-g-4">
+	<p:outputPanel styleClass="ui-g-4" rendered="#{renderizarSenha != null ? renderizarSenha : true}">
 		<div class="ui-g-12">
-			<p:outputLabel value="SENHA*"/>
+			<p:outputLabel value="SENHA*"
+					rendered="#{renderizarLabelSenha != null ? renderizarLabelSenha : true}"/>
 		</div>
 		<div class="ui-g-12">
 			<p:password required="true" id="campo-senha-cadastro" 
@@ -45,9 +46,9 @@
 					value="#{senha}"
 					validatorMessage="AS SENHAS ESTÃO DIFERENTES: As duas senhas devem ser iguais !"/>
 		</div>
-	</div>
+	</p:outputPanel>
 	
-	<div class="ui-g-4">
+	<p:outputPanel styleClass="ui-g-4" rendered="#{renderizarConfirmacaoSenha != null ? renderizarConfirmacaoSenha : true}">
 		<div class="ui-g-12">
 			<p:outputLabel value="CONFIRMAÇÃO DE SENHA*"/>
 		</div>
@@ -57,7 +58,7 @@
 					requiredMessage="Você esqueceu de preencher o campo: 'CONFIRMAÇÃO DE SENHA'"
 					update="msg"/>
 		</div>
-	</div>
+	</p:outputPanel>
 	
 	<div class="ui-g-4">
 		<div class="ui-g-12">

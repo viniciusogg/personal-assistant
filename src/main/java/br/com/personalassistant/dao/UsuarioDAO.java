@@ -152,7 +152,7 @@ public class UsuarioDAO extends DAO {
 			}
 			
 			ex.printStackTrace();
-			throw new PersistenciaException("Erro ao recuperar tipo usuario");
+			throw new PersistenciaException("Erro ao recuperar usuario");
 		}
 		
 		return usuario;

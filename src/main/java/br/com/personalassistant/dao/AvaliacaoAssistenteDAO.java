@@ -1,5 +1,6 @@
 package br.com.personalassistant.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -101,5 +102,121 @@ public class AvaliacaoAssistenteDAO extends DAO {
 		return avaliacaoAssistente;
 	}
 	
+	public Long getTotalAvaliacoesById(Long id) throws ObjetoNaoExisteException, PersistenciaException{
+		
+		EntityManager entityManager = getEntityManager();
+		Long total = new Long(0);
+		
+		try{
+			TypedQuery<Long> consultaTotal = entityManager.createQuery("SELECT COUNT(a) "
+					+ "FROM AvaliacaoAssistente a, Servico s "
+					+ "WHERE s.assistente.id = :id "
+					+ "AND s.avaliacaoAssistenteRecebeu.id = a.id "
+					+ "AND s.status = 'CONCLUIDO'", Long.class);
+			consultaTotal.setParameter("id", id);
+			total = consultaTotal.getSingleResult();
+		}
+		catch(PersistenceException ex){
+			
+			if(total == null){
+				throw new ObjetoNaoExisteException("Não existe avaliacaoAssistente com este id");
+			}
+			
+			ex.printStackTrace();
+			throw new PersistenciaException("Erro ao recuperar avaliacaoAssistente");
+		}
+		
+		return total;
+	}
+	
+	public ArrayList<Double> getAvaliacoesByIdAssistente(Long id) throws PersistenciaException, ObjetoNaoExisteException{
+
+		EntityManager entityManager = getEntityManager();
+		
+		Double umaEstrela = 0.0;
+		Double duasEstrelas = 0.0;
+		Double tresEstrelas = 0.0;
+		Double quatroEstrelas = 0.0;
+		Double cincoEstrelas = 0.0;
+		
+		ArrayList<Double> valores = new ArrayList<Double>();
+		
+		try{
+			Long totalAvaliacoes = getTotalAvaliacoesById(id);
+			
+			TypedQuery<Long> consultaUm = entityManager.createQuery("SELECT COUNT(a) "
+					+ "FROM AvaliacaoAssistente a, Servico s "
+					+ "WHERE a.mediaAvaliacao = 1 "
+					+ "AND s.assistente.id = :id "
+					+ "AND s.avaliacaoAssistenteRecebeu.id = a.id "
+					+ "AND s.status = 'CONCLUIDO'", Long.class);
+			consultaUm.setParameter("id", id);
+			
+			if(consultaUm.getSingleResult() != null && consultaUm.getSingleResult() != 0.0){
+				umaEstrela = (double) ((consultaUm.getSingleResult()/totalAvaliacoes) * 100);
+			}
+			
+			TypedQuery<Long> consultaDois = entityManager.createQuery("SELECT COUNT(a) "
+					+ "FROM AvaliacaoAssistente a, Servico s "
+					+ "WHERE a.mediaAvaliacao = 2 "
+					+ "AND s.assistente.id = :id "
+					+ "AND s.avaliacaoAssistenteRecebeu.id = a.id "
+					+ "AND s.status = 'CONCLUIDO'", Long.class);
+			consultaDois.setParameter("id", id);
+			
+			if(consultaDois.getSingleResult() != null && consultaDois.getSingleResult() != 0.0){
+				duasEstrelas = (double) (consultaDois.getSingleResult()/totalAvaliacoes) * 100;				
+			}
+			
+			TypedQuery<Long> consultaTres = entityManager.createQuery("SELECT COUNT(a) "
+					+ "FROM AvaliacaoAssistente a, Servico s "
+					+ "WHERE a.mediaAvaliacao = 3 "
+					+ "AND s.assistente.id = :id "
+					+ "AND s.avaliacaoAssistenteRecebeu.id = a.id "
+					+ "AND s.status = 'CONCLUIDO'", Long.class);
+			consultaTres.setParameter("id", id);
+
+			if(consultaTres.getSingleResult() != null && consultaTres.getSingleResult() != 0.0){
+				tresEstrelas = (double) (consultaTres.getSingleResult()/totalAvaliacoes) * 100;
+			}
+			
+			TypedQuery<Long> consultaQuatro = entityManager.createQuery("SELECT COUNT(a) "
+					+ "FROM AvaliacaoAssistente a, Servico s "
+					+ "WHERE a.mediaAvaliacao = 4 "
+					+ "AND s.assistente.id = :id "
+					+ "AND s.avaliacaoAssistenteRecebeu.id = a.id "
+					+ "AND s.status = 'CONCLUIDO'", Long.class);
+			consultaQuatro.setParameter("id", id);
+			
+			if(consultaQuatro.getSingleResult() != null && consultaQuatro.getSingleResult() != 0.0){
+				quatroEstrelas = (double) (consultaQuatro.getSingleResult()/totalAvaliacoes) * 100;
+			}
+			
+			TypedQuery<Long> consultaCinco = entityManager.createQuery("SELECT COUNT(a) "
+					+ "FROM AvaliacaoAssistente a, Servico s "
+					+ "WHERE a.mediaAvaliacao = 5 "
+					+ "AND s.assistente.id = :id "
+					+ "AND s.avaliacaoAssistenteRecebeu.id = a.id "
+					+ "AND s.status = 'CONCLUIDO'", Long.class);
+			consultaCinco.setParameter("id", id);
+			
+			if(consultaCinco.getSingleResult() != null && consultaCinco.getSingleResult() != 0.0){
+				cincoEstrelas = (double) (consultaCinco.getSingleResult()/totalAvaliacoes) * 100;
+			}
+			
+			valores.add(umaEstrela);
+			valores.add(duasEstrelas);
+			valores.add(tresEstrelas);
+			valores.add(quatroEstrelas);
+			valores.add(cincoEstrelas);
+		}
+		catch(PersistenceException ex){
+			ex.printStackTrace();
+			throw new PersistenciaException("Erro ao recuperar assistente");
+		}
+		
+		return valores;
+	}
 	
 }
+

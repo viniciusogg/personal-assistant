@@ -48,7 +48,7 @@ public class CadastroContratanteBean extends AbstractBean{
 		catch (ServiceException e) {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro, tente novamente", ""));
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	public Contratante getContratante() {

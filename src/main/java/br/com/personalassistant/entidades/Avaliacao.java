@@ -38,6 +38,8 @@ public abstract class Avaliacao implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date data;
 	
+	private Integer mediaAvaliacao;
+	
 	@Column(nullable = false)
 	private String comentario;
 
@@ -75,6 +77,10 @@ public abstract class Avaliacao implements Serializable{
 
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
+	}
+
+	public Integer getMediaAvaliacao() {
+		return calcularMediaAvaliacao();
 	}
 
 	@Override
@@ -131,5 +137,7 @@ public abstract class Avaliacao implements Serializable{
 		return "Avaliacao [id=" + id + ", cordialidade=" + cordialidade + ", pontualidade=" + pontualidade + ", data="
 				+ data + ", comentario=" + comentario + "]";
 	}
+	
+	public abstract Integer calcularMediaAvaliacao();
 
 }

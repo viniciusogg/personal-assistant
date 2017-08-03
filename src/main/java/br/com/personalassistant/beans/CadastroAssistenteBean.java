@@ -88,6 +88,7 @@ public class CadastroAssistenteBean extends AbstractBean {
 			this.assistente.setTipoUsuario(TIPO_USUARIO.ASSISTENTE);
 			
 			this.usuarioService.criptografarSenha(assistente);
+			
 			this.usuarioService.save(this.assistente);
 			
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso, faça login na sua conta", ""));

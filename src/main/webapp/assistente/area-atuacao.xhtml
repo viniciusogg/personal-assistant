@@ -21,22 +21,22 @@
 					<p:fieldset legend="VALORES COBRADOS POR SERVIÇOS REALIZADOS">
 						<div class="ui-g-12">
 							<div class="ui-g-12">
-								<p:outputLabel value="Preço cobrado por hora trabalhada: R$ #{areaAtuacaoBean.valorHora}"/>
+								<p:outputLabel value="Preço cobrado por hora trabalhada: R$ #{areaAtuacaoAstBean.valorHora}"/>
 							</div>
 						</div>
 						
 						<div class="ui-g-12">
 							<div class="ui-g-12">
-								<p:outputLabel value="Preço fixo: R$ #{areaAtuacaoBean.valorFixo}"/>
+								<p:outputLabel value="Preço fixo: R$ #{areaAtuacaoAstBean.valorFixo}"/>
 							</div>
 						</div>
 					</p:fieldset>
 				</div>
 				
 				<div class="ui-g-12">
-					<p:panel header="#{areaAtuacaoBean.nomeCategoriaServico}" styleClass="ui-g-12">
+					<p:panel header="#{areaAtuacaoAstBean.nomeCategoriaServico}" styleClass="ui-g-12">
 						<ul class="ul-capacidades">
-							<ui:repeat var="capacidade" value="#{areaAtuacaoBean.capacidades}">
+							<ui:repeat var="capacidade" value="#{areaAtuacaoAstBean.capacidades}">
 								<li class="ui-chips-token">
 									<p:outputLabel value="#{capacidade}" styleClass="label-capacidade"/> 
 								</li>

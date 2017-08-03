@@ -1,6 +1,7 @@
 package br.com.personalassistant.services;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -65,6 +66,24 @@ public class AvaliacaoAssistenteService implements Serializable {
 		}
 		catch(PersistenciaException ex){
 			throw new ServiceException(ex.getMessage());
+		}
+	}
+	
+	public ArrayList<Double> getAvaliacoesByIdAssistente(Long id) throws ServiceException, ObjetoNaoExisteException{
+		try {
+			return this.avaliacaoAssistenteDAO.getAvaliacoesByIdAssistente(id);
+		}
+		catch (PersistenciaException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+	
+	public Long getTotalAvaliacoesById(Long id) throws ServiceException, ObjetoNaoExisteException{
+		try {
+			return this.avaliacaoAssistenteDAO.getTotalAvaliacoesById(id);
+		} 
+		catch (PersistenciaException e) {
+			throw new ServiceException(e.getMessage());
 		}
 	}
 }

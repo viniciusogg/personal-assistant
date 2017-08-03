@@ -72,6 +72,15 @@ public class AdministradorService implements Serializable {
 		}
 	}
 	
+	public Long getIdByEmail(String email) throws ObjetoNaoExisteException, ServiceException{
+		try {
+			return this.administradorDAO.getIdByEmail(email);
+		} 
+		catch (PersistenciaException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+	
 	public void criptografarSenha(Administrador administrador) throws ServiceException {
 		administrador.setSenha(criptografarSenha(administrador.getSenha()));
 	}

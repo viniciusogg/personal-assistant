@@ -35,11 +35,11 @@ public class CategoriasServicosAdmBean extends AbstractBean{
 								
 		if(this.categoriaServico == null){
 			this.categoriaServico = new CategoriaServico();
-			isEdicao = false;
-			tituloPanel = "NOVA CATEGORIA DE SERVIÇO";
+			this.isEdicao = false;
+			this.tituloPanel = "NOVA CATEGORIA DE SERVIÇO";
 		}
 		else{
-			tituloPanel = "EDITAR CATEGORIA DE SERVIÇO";
+			this.tituloPanel = "EDITAR CATEGORIA DE SERVIÇO";
 		}
 
 		try {
@@ -55,28 +55,32 @@ public class CategoriasServicosAdmBean extends AbstractBean{
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getFlash().setKeepMessages(true);
 		
+		String msg = "";
+		Severity severity = null;
+
 		try {
-			String msg = "";
-			
 			if(!this.isEdicao){
-				categoriaServicoService.save(categoriaServico);
-				msg = "Categoria '" + categoriaServico.getNome() + "' cadastrada com sucesso";
+				this.categoriaServicoService.save(this.categoriaServico);
+				msg = "Categoria '" + this.categoriaServico.getNome() + "' cadastrada com sucesso";
 			}
 			else{
-				categoriaServicoService.update(categoriaServico);
-				msg = "Categoria '" + categoriaServico.getNome() + "' atualizada com sucesso";;
+				this.categoriaServicoService.update(this.categoriaServico);
+				msg = "Categoria '" + this.categoriaServico.getNome() + "' atualizada com sucesso";;
 			}
 						
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, ""));				
+			severity = FacesMessage.SEVERITY_INFO;
 		} 
 		catch (ServiceException e) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
+			severity = FacesMessage.SEVERITY_ERROR;
+			msg = e.getMessage();
 			e.printStackTrace();
 		}
+		
+		context.addMessage(null, new FacesMessage(severity, msg, ""));				
 	}
 	
 	public void editarCategoriaServico(){
-		isEdicao = true;
+		this.isEdicao = true;
 	}
 	
 	public void deletarCategoriaServico(){
@@ -84,19 +88,19 @@ public class CategoriasServicosAdmBean extends AbstractBean{
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getFlash().setKeepMessages(true);
 		
-		String nomeCategoriaRemovida = categoriaServico.getNome();
+		String nomeCategoriaRemovida = this.categoriaServico.getNome();
 		String msg = "";
 		Severity severity = null;
 		
 		try {
 						
-			Long quantidadeAssistentes = assistenteService.getQuantidadeByCategoriaServico(nomeCategoriaRemovida);
+			Long quantidadeAssistentes = this.assistenteService.getQuantidadeByCategoriaServico(nomeCategoriaRemovida);
 			
 			if(quantidadeAssistentes > 0){
 				throw new RemocaoNaoPermitidaException("Não é possível remover a categoria de serviço, pois existem assistentes associados à ela");
 			}
 			
-			categoriaServicoService.delete(categoriaServico);
+			this.categoriaServicoService.delete(this.categoriaServico);
 			
 			severity = FacesMessage.SEVERITY_INFO;
 			msg = "Categoria '" + nomeCategoriaRemovida + "' removida com sucesso";

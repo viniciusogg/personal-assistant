@@ -44,7 +44,7 @@ public class CategoriaServicoDAO extends DAO {
 	public CategoriaServico update(CategoriaServico categoriaServico) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
-		CategoriaServico categoriaServicoAtualizado = categoriaServico; 
+		CategoriaServico categoriaServicoAtualizada = categoriaServico; 
 		
 		try{
 			entityManager.find(categoriaServico.getClass(), categoriaServico.getId());
@@ -55,7 +55,7 @@ public class CategoriaServicoDAO extends DAO {
 			throw new PersistenciaException("Erro ao atualizar categoriaServico");
 		}
 		
-		return categoriaServicoAtualizado;
+		return categoriaServicoAtualizada;
 	}
 	
 	public List<CategoriaServico> getAll() throws PersistenciaException, NaoExistemObjetosException {

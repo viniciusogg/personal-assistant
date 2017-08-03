@@ -10,7 +10,7 @@ import br.com.personalassistant.beans.AbstractBean;
 
 @Named
 @ViewScoped
-public class AreaAtuacaoBean extends AbstractBean {
+public class AreaAtuacaoAstBean extends AbstractBean {
 
 	private static final long serialVersionUID = -79280093168767924L;
 
@@ -20,7 +20,7 @@ public class AreaAtuacaoBean extends AbstractBean {
 	private List<String> capacidades = new ArrayList<String>();
 	private List<String> categoriasServicos = new ArrayList<String>();
 	
-	public AreaAtuacaoBean(){
+	public AreaAtuacaoAstBean(){
 		capacidades.add("ca55 145432f");
 		capacidades.add("capacidrteade 2");
 		capacidades.add("capacidade 35345");

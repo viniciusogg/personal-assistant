@@ -7,43 +7,102 @@
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 		template="index.xhtml">
 		
+	<f:metadata>
+		<f:event listener="#{perfilAstBean.preRenderView}" type="preRenderView" />
+	</f:metadata>
+		
 	<ui:define name="titulo">
 		<p:outputLabel class="titulo" value="PERFIL"/>
 	</ui:define>
 	
 	<ui:define name="conteudo">
 		
+		<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
+		
 		<div class="ui-g">
 			<div class="ui-g-12">
-				
-				<p:fieldset styleClass="fieldset" legend="INFORMAÇÕES PESSOAIS">
-					<ui:include src="/WEB-INF/templates/_infoUsuario.xhtml">
-						<ui:param name="nome" value="Otávio"/>
-						<ui:param name="telefone" value="(87) 99158-7626"/>
-						<ui:param name="email" value="otavio@gmail.com" />
-					</ui:include>
-				</p:fieldset>
-				
-				<p:fieldset styleClass="fieldset" legend="INFORMAÇÕES DE ENDEREÇO">
-					<ui:include src="/WEB-INF/templates/_infoEndereco.xhtml">
-						<ui:param name="rua" value="Rua"/>
-						<ui:param name="numero" value="6"/>
-						<ui:param name="cep" value="55600-000" />
-						<ui:param name="bairro" value="centro"/>
-						<ui:param name="referencia" value="ref"/>
-						<ui:param name="estado" value="PE" />
-						<ui:param name="cidade" value="Sertania" />					
-					</ui:include>
-				</p:fieldset>
-			
-				<div class="ui-g-12">
+				<h:panelGroup id="painelPrincipal">
 					<h:form>
-						<p:commandButton value="DESATIVAR CONTA" styleClass="botao-acao-perfil"/>
-						<p:commandButton value="EDITAR PERFIL" styleClass="botao-acao-perfil"/>
-						<p:commandButton value="ALTERAR SENHA" styleClass="botao-acao-perfil"/>
-					</h:form>
-				</div>
+						<p:fieldset id="fieldsetInfoPessoal" styleClass="fieldset" legend="INFORMAÇÕES PESSOAIS">
+							<p:outputPanel rendered="#{perfilAstBean.renderizarPainelVisualizacao}">
+								<ui:include src="/WEB-INF/templates/_infoUsuario.xhtml">
+									<ui:param name="nome" value="#{perfilAstBean.assistente.nome}"/>
+									<ui:param name="telefone" value="#{perfilAstBean.assistente.numTelefonico}"/>
+									<ui:param name="email" value="#{perfilAstBean.assistente.email}" />
+								</ui:include>
+							</p:outputPanel>
+							<p:outputPanel rendered="#{!perfilAstBean.renderizarPainelVisualizacao}" >
+								<ui:include src="/WEB-INF/templates/_formUsuario.xhtml">
+									<ui:param name="nome" value="#{perfilAstBean.assistente.nome}"/>
+									<ui:param name="renderizarLabelEmail" value="false" />
+									<ui:param name="renderizarEmail" value="false"/>
+									<ui:param name="renderizarLabelSenha" value="false" />
+									<ui:param name="renderizarSenha" value="false" />
+									<ui:param name="renderizarLabelConfirmacaoSenha" value="false"/>
+									<ui:param name="renderizarConfirmacaoSenha" value="false" />
+									<ui:param name="numTelefonico" value="#{perfilAstBean.assistente.numTelefonico}" />
+								</ui:include>
+							</p:outputPanel>
+						</p:fieldset>
+						
+						<p:fieldset id="fieldsetInfoEndereco" styleClass="fieldset" legend="INFORMAÇÕES DE ENDEREÇO">
+							<p:outputPanel rendered="#{perfilAstBean.renderizarPainelVisualizacao}">
+								<ui:include src="/WEB-INF/templates/_infoEndereco.xhtml">
+									<ui:param name="rua" value="#{perfilAstBean.assistente.endereco.rua}"/>
+									<ui:param name="numero" value="#{perfilAstBean.assistente.endereco.numero}"/>
+									<ui:param name="cep" value="#{perfilAstBean.assistente.endereco.cep}" />
+									<ui:param name="bairro" value="#{perfilAstBean.assistente.endereco.bairro}"/>
+									<ui:param name="referencia" value="#{perfilAstBean.assistente.endereco.referencia}"/>
+									<ui:param name="estado" value="#{perfilAstBean.assistente.endereco.estado}" />
+									<ui:param name="cidade" value="#{perfilAstBean.assistente.endereco.cidade}" />					
+								</ui:include>
+							</p:outputPanel>
+							<p:outputPanel rendered="#{!perfilAstBean.renderizarPainelVisualizacao}">
+								<ui:include src="/WEB-INF/templates/_formEndereco.xhtml">
+									<ui:param name="rua" value="#{perfilAstBean.assistente.endereco.rua}"/>
+									<ui:param name="numero" value="#{perfilAstBean.assistente.endereco.numero}"/>
+									<ui:param name="cep" value="#{perfilAstBean.assistente.endereco.cep}" />
+									<ui:param name="bairro" value="#{perfilAstBean.assistente.endereco.bairro}"/>
+									<ui:param name="referencia" value="#{perfilAstBean.assistente.endereco.referencia}"/>
+									<ui:param name="estado" value="#{perfilAstBean.assistente.endereco.estado}" />
+									<ui:param name="cidade" value="#{perfilAstBean.assistente.endereco.cidade}" />					
+								</ui:include>
+							</p:outputPanel>
+						</p:fieldset>
 					
+						<p:outputPanel rendered="#{perfilAstBean.renderizarPainelVisualizacao}" styleClass="ui-g-12">
+							<p:commandButton value="EXCLUIR CONTA" styleClass="botao-acao-perfil"
+									onclick="PF('dialog').show()">
+							</p:commandButton>
+							
+							<p:dialog styleClass="dialog" appendTo="@(body)" resizable="false" 
+									responsive="true" widgetVar="dialog" modal="true" draggable="false" header="CONFIRMAÇÃO" 
+									dynamic="true">
+								<h:form>
+									<div class="ui-g-12">
+										<p:outputLabel value="Tem certeza que deseja excluir a sua conta ?"/>
+									</div>
+									<div class="ui-g-12">
+										<p:commandButton value="REMOVER" styleClass="botao-dialog" 
+												actionListener="#{perfilAstBean.removerContaAssistente}"
+												process="@form"/> 
+										<p:commandButton value="CANCELAR" 
+												onclick="PF('dialog').hide()" styleClass="botao-dialog"/>
+									</div>								
+								</h:form>
+							</p:dialog>
+							
+							<p:commandButton value="EDITAR PERFIL" update=":painelPrincipal" actionListener="#{perfilAstBean.editarPerfil}" styleClass="botao-acao-perfil"/>
+							<p:commandButton value="ALTERAR SENHA" actionListener="#{perfilAstBean.alterarSenha}" styleClass="botao-acao-perfil"/>
+						</p:outputPanel>
+						
+						<p:outputPanel rendered="#{!perfilAstBean.renderizarPainelVisualizacao}" styleClass="ui-g-12">
+							<p:commandButton value="SALVAR ALTERAÇÕES" action="perfil?faces-redirect=true"
+									actionListener="#{perfilAstBean.concluirEdicao}" 
+									update="msg" styleClass="botao-acao-perfil"/>
+						</p:outputPanel>
+					</h:form>
+				</h:panelGroup>
 			</div>
 		</div>
 	</ui:define>			
