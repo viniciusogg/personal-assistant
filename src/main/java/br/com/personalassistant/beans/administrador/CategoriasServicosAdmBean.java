@@ -29,17 +29,12 @@ public class CategoriasServicosAdmBean extends AbstractBean{
 	private CategoriaServico categoriaServico;
 	private List<CategoriaServico> lista;
 	private boolean isEdicao;
-	private String tituloPanel;
+	private String tituloPanel = "NOVA CATEGORIA DE SERVIÇO";
 	
 	public void preRenderView(){
 								
 		if(this.categoriaServico == null){
 			this.categoriaServico = new CategoriaServico();
-			this.isEdicao = false;
-			this.tituloPanel = "NOVA CATEGORIA DE SERVIÇO";
-		}
-		else{
-			this.tituloPanel = "EDITAR CATEGORIA DE SERVIÇO";
 		}
 
 		try {
@@ -80,6 +75,7 @@ public class CategoriasServicosAdmBean extends AbstractBean{
 	}
 	
 	public void editarCategoriaServico(){
+		this.tituloPanel = "EDITAR CATEGORIA DE SERVIÇO";
 		this.isEdicao = true;
 	}
 	

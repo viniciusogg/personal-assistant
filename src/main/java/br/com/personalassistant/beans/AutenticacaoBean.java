@@ -37,7 +37,7 @@ public class AutenticacaoBean extends AbstractBean {
 			}
 			
 			FacesContext facesContext = FacesContext.getCurrentInstance();
-
+			
 			if(this.tipoUsuario != null){
 				
 				String endereco = null;
@@ -54,9 +54,7 @@ public class AutenticacaoBean extends AbstractBean {
 					endereco =  facesContext.getExternalContext().getApplicationContextPath() + 
 							"/contratante/index.xhtml?faces-redirect=true";			
 				}
-				
-				facesContext.getExternalContext().getFlash().clear();
-				
+								
 				if(!isMesmaSessao){					
 					this.reportarMensagemSucesso();
 					isMesmaSessao = true;
@@ -102,12 +100,15 @@ public class AutenticacaoBean extends AbstractBean {
 		Flash flash = context.getExternalContext().getFlash();
 		flash.setKeepMessages(true);
 
+		flash.clear();
+		
 		if(error){		
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "E-mail ou senha incorreto(a)", ""));					
-			flash.clear();
 		}
 		else if(!error && autenticou){
-
+			flash = context.getExternalContext().getFlash();
+			flash.setKeepMessages(true);
+			
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem-vindo(a) !", ""));								
 		}
 	}

@@ -205,18 +205,37 @@ public class AssistenteDAO extends DAO {
 		
 		try{
 			TypedQuery<Assistente> typedQuery = entityManager.createQuery("SELECT ast "
-					+ "FROM Assistente ast, Usuario usr, Contratante c, IN(c.propostas) p"
-					+ "WHERE c.id = :idContratante"
-					+ "AND ast.id = usr.id "
-					+ "AND p.assistente.id <> ast.id", Assistente.class);
-			
-			//+ "AND c.id = :idContratante "
-
-			
-			//SELECIONE TODOS OS OS ASSISTENTES QUE NÃO ESTÃO NAS PROPOSTAS DO CONTRATANTE;
+					+ "FROM Assistente ast, Usuario usr, Contratante c, IN(c.propostas) p "
+					+ "WHERE ast.id = usr.id "
+					+ "AND ast.id <> p.assistente.id "
+					+ "AND p.contratante.id = :idContratante", Assistente.class);
 			
 			typedQuery.setParameter("idContratante", idContratante);
 			
+			/*
+			 * 
+			 * "SELECT ast "
+					+ "FROM Assistente ast, Usuario usr, Contratante c, IN(c.propostas) p "
+					+ "WHERE c.id = :idContratante "
+					+ "AND ast.id = usr.id "
+					+ "AND p.assistente.id <> ast.id"
+			 * 
+			 * 
+			 *	vou na tabela propostas, verifico se o contratante é igual ao que passei, (tem que
+			 *	ser diferente)
+			 * 
+			 * 
+			 * SELECT ast FROM Assistente ast, Usuario usr, Proposta p
+			 * WHERE ast.id = usr.id
+			 * AND p.contratante.id <> :
+			 * 
+			 * 
+			 * SELECT ast From Assistente ast, Contratante c, IN(c.propostas) p
+			 * WHERE ast.id <> p.assistente.id
+			 * AND c.id <> p.contratante
+			 * 
+			 */
+						
 			assistentes = typedQuery.getResultList();
 		}
 		catch(PersistenceException ex){

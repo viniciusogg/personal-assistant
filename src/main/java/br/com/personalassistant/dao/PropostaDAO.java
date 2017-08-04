@@ -101,5 +101,30 @@ public class PropostaDAO extends DAO {
 		return proposta;
 	}
 	
+	public List<Proposta> getAllById(Long id) throws PersistenciaException, NaoExistemObjetosException {
+		
+		EntityManager entityManager = getEntityManager();
+		List<Proposta> propostas = null;
+		
+		try{
+			TypedQuery<Proposta> typedQuery = entityManager.createQuery("SELECT proposta FROM "
+					+ "Proposta proposta "
+					+ "WHERE proposta.contratante.id = :id", Proposta.class);
+			typedQuery.setParameter("id", id);
+			
+			propostas = typedQuery.getResultList();
+		}
+		catch(PersistenceException ex){
+			
+			if(propostas == null){
+				throw new NaoExistemObjetosException("Não existem propostas");
+			}
+			
+			ex.printStackTrace();
+			throw new PersistenceException("Erro ao recuperar propostas");
+		}
+		
+		return propostas;
+	}
 	
 }

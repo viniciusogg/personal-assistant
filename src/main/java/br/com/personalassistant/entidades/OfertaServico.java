@@ -49,14 +49,15 @@ public class OfertaServico implements Serializable{
 	private ESTADO_OFERTA status;
 	
 	@ManyToOne
+	@JoinColumn(name="endereco_FK")
 	private Endereco endereco; // unidirecional
 	
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = false, name="categoriaServico_FK")
 	private CategoriaServico categoriaServico; // unidirecional
 	
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = false, name="contratante_FK")
 	private Contratante contratante; // bidirecional
 	
 	@LazyCollection(LazyCollectionOption.FALSE)

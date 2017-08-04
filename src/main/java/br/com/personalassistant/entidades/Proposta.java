@@ -40,11 +40,11 @@ public class Proposta implements Serializable{
 	private ESTADO_NEGOCIACAO status;
 	
 	@ManyToOne
-	@Column(nullable = false)
+	@JoinColumn(name="assistente_FK",nullable = false)
 	private Assistente assistente; //bidirecional
 	
 	@ManyToOne
-	@Column(nullable = false)
+	@JoinColumn(name="contratante_FK", nullable = false)
 	private Contratante contratante; //bidirecional
 	
 	@ManyToOne

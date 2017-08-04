@@ -39,11 +39,11 @@ public class Lance implements Serializable{
 	private ESTADO_LANCE status;
 	
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = false, name="assistente_FK")
 	private Assistente assistente; // bidirecional
 	
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = false, name="ofertaServico_FK")
 	private OfertaServico ofertaServico; // bidirecional
 	
 	@Embedded

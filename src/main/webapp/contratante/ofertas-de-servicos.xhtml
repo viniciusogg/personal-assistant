@@ -7,6 +7,10 @@
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 		template="index.xhtml">
 		
+	<f:metadata>
+		<f:event listener="#{ofertaServicoCteBean.preRenderView}" type="preRenderView" />
+	</f:metadata>
+		
 	<ui:define name="titulo">
 		<p:outputLabel class="titulo" value="ASSISTENTES"/>
 	</ui:define>
@@ -20,10 +24,93 @@
 			<div class="ui-g-12">
 				
 				<div id="div-nova-oferta" class="ui-g-12">
-					<p:commandButton icon="ui-icon-plusthick" value="NOVA OFERTA"/>
+					<p:commandButton icon="ui-icon-plusthick" value="NOVA OFERTA"
+							onclick="PF('dialog').show()"/>
 					
 					<p:dialog styleClass="dialog" appendTo="@(body)" resizable="false" 
-								responsive="true" widgetVar="dialog" modal="true" draggable="false" header="NOVA OFERTA" >
+							responsive="true" widgetVar="dialog" modal="true" draggable="false" header="NOVA OFERTA" >
+						<h:form >
+							<div class="ui-g-12">
+								<div class="ui-g-12">
+									<div class="ui-g-6">
+										<p:outputLabel value="DESCRICÃO*"/>
+									</div>
+									<div class="ui-g-6">
+										<p:inputText required="true" styleClass="campo-formulario"
+												value="#{ofertaServicoCteBean.ofertaServico.descricao}"
+												requiredMessage="Você esqueceu de preencher o campo 'DESCRIÇÃO'" />
+									</div>
+								</div>
+								<div class="ui-g-12">
+									<div class="ui-g-6">
+										<p:outputLabel value="PREÇO FIXO*"/>
+									</div>
+									<div class="ui-g-6">
+										<p:inputNumber required="true"
+												value="#{ofertaServicoCteBean.ofertaServico.precoFixo}"
+												requiredMessage="Você esqueceu de preencher o campo 'PREÇO FIXO'"/>
+									</div>
+								</div>
+								<div class="ui-g-12">
+									<div class="ui-g-6">
+										<p:outputLabel value="PREÇO HORA*"/>
+									</div>
+									<div class="ui-g-6">
+										<p:inputNumber required="true"
+												value="#{ofertaServicoCteBean.ofertaServico.precoHora}"
+												requiredMessage="Você esqueceu de preencher o campo 'PREÇO HORA'"/>
+									</div>
+								</div>
+								<div class="ui-g-12">
+									<div class="ui-g-6">
+										<p:outputLabel value="CATEGORIA DE SERVIÇO*"/>
+									</div>
+									<div class="ui-g-6">
+										<p:selectOneMenu value="#{ofertaServicoCteBean.ofertaServico.categoriaServico}" styleClass="combobox">
+											<f:selectItems value="#{ofertaServicoCteBean.categoriasServicos}" 
+													var="categoria" itemLabel="#{categoria.nome}" itemValue="#{categoria}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="ui-g-12">
+									<div class="ui-g-6">
+										<p:outputLabel value="Data de início do serviço*"/>
+									</div>
+									<div class="ui-g-6">
+										<p:calendar showButtonPanel="false"
+												navigator="true"
+												pattern="dd/MM/yyyy" 
+												required="true" 
+												requiredMessage="Você esqueceu de informar a data que você começará à trabalhar no serviço">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</p:calendar>
+									</div>
+								</div>
+								<div class="ui-g-12">
+									<div class="ui-g-6">
+										<p:outputLabel value="Data limite para realização do serviço*"/>
+									</div>
+									<div class="ui-g-6">
+										<p:calendar showButtonPanel="false"
+												navigator="true"
+												pattern="dd/MM/yyyy"
+												required="true" 
+												requiredMessage="Você esqueceu de informar a data limite para a conclusão do serviço">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</p:calendar>
+									</div>
+									
+								</div>
+								<div class="ui-g-12">
+									<p:commandButton value="ENVIAR" styleClass="botao-dialog"/> 
+									<!-- actionListener="#{categoriaServicoAdmBean.deletarCategoriaServico}"
+											action="categorias-servicos?faces-redirect=true" -->
+									<p:commandButton value="CANCELAR" 
+											onclick="PF('dialog').hide()" styleClass="botao-dialog"/>
+								</div>
+							</div>
+						</h:form>
+							
 					</p:dialog>				
 				</div>
 				

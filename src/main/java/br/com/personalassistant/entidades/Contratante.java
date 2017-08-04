@@ -38,7 +38,7 @@ public class Contratante extends Usuario{
 	
 	@OneToMany(mappedBy="contratante")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinColumn(name = "contratante_FK")
+	@Column(name = "contratante_FK")
 	private List<Proposta> propostas; // bidirecional
 	
 	@LazyCollection(LazyCollectionOption.FALSE)

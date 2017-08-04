@@ -67,4 +67,12 @@ public class PropostaService implements Serializable {
 			throw new ServiceException(ex.getMessage());
 		}
 	}
+	
+	public List<Proposta> getAllById(Long id) throws NaoExistemObjetosException, ServiceException{
+		try {
+			return this.propostaDAO.getAllById(id);
+		} catch (PersistenciaException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
 }

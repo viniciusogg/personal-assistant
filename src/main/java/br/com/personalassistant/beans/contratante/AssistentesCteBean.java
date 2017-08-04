@@ -1,8 +1,11 @@
 package br.com.personalassistant.beans.contratante;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -11,7 +14,10 @@ import javax.inject.Named;
 import br.com.personalassistant.beans.AbstractBean;
 import br.com.personalassistant.entidades.Assistente;
 import br.com.personalassistant.entidades.Contratante;
+import br.com.personalassistant.entidades.DataRealizacaoServico;
 import br.com.personalassistant.entidades.Proposta;
+import br.com.personalassistant.enums.ESTADO_NEGOCIACAO;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.services.AssistenteService;
@@ -29,6 +35,8 @@ public class AssistentesCteBean extends AbstractBean {
 	@Inject private ContratanteService contratanteService;
 	@Inject private AvaliacaoAssistenteService avaliacaoAssistenteService;
 	@Inject private PropostaService propostaService;
+	private Assistente assistente; 
+	private Contratante contratante;
 	private List<Assistente> assistentes;
 	private Proposta proposta;
 	private boolean precisaEndereco;
@@ -38,13 +46,17 @@ public class AssistentesCteBean extends AbstractBean {
 		proposta = new Proposta();
 		
 		try {
-			String email = getEmailUsuarioLogado();
+			contratante = contratanteService.getContratanteByEmail(getEmailUsuarioLogado());
 			
-			Contratante contratante = contratanteService.getContratanteByEmail(email);
+			DataRealizacaoServico dataRealizacaoServico = new DataRealizacaoServico();
+			dataRealizacaoServico.setDataRealizacaoInicial(new Date());
+			dataRealizacaoServico.setDataRealizacaoLimite(new Date());
 			
 			proposta.setContratante(contratante);
+			proposta.setDataRealizacaoServico(dataRealizacaoServico);
+			proposta.setStatus(ESTADO_NEGOCIACAO.EM_ANDAMENTO);
 			
-			assistentes = assistenteService.getAllSemPropostasDoContratante(contratante.getId());
+			assistentes = assistenteService.getAll();
 			
 			for(Assistente a: assistentes){
 				a.setNivelExperiencia(calcularNivelExperiencia(a.getId()));
@@ -52,7 +64,7 @@ public class AssistentesCteBean extends AbstractBean {
 				a.setReputacao(calcularReputacao(a.getId()));
 			}
 		}
-		catch (ServiceException | ObjetoNaoExisteException e) {
+		catch (ServiceException | ObjetoNaoExisteException | NaoExistemObjetosException e) {
 			e.printStackTrace();
 		}
 	}
@@ -80,22 +92,46 @@ public class AssistentesCteBean extends AbstractBean {
 	public void setPrecisaEndereco(boolean precisaEndereco) {
 		this.precisaEndereco = precisaEndereco;
 	}
+	
+	public Assistente getAssistente() {
+		return assistente;
+	}
+
+	public void setAssistente(Assistente assistente) {
+		this.assistente = assistente;
+	}
 
 	public void enviarProposta(){
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getFlash().setKeepMessages(true);
 		
-		try {
-			proposta.getAssistente().getPropostas().add(proposta);
+		String msg = "";
+		Severity severity = null;
 		
+		try {			
+			proposta.setContratante(this.contratante);
+			proposta.setAssistente(this.assistente);
+			
+			//this.contratante.getPropostas().add(proposta);
+			
+			//contratanteService.update(contratante);
+			
+			//assistenteService.update(assistente);
+			
 			propostaService.save(proposta);
 			
+			severity = FacesMessage.SEVERITY_INFO;
+			msg = "Proposta enviada com sucesso";
 		} 
 		catch (ServiceException e) {
+			severity = FacesMessage.SEVERITY_INFO;
+			msg = "Falha ao enviar proposta";
+			
 			e.printStackTrace();
 		}
 		
+		context.addMessage(null, new FacesMessage(severity, msg, ""));				
 	}
 
 	private int calcularReputacao(Long id){

@@ -7,6 +7,10 @@
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 		template="index.xhtml">
 		
+	<f:metadata>
+		<f:event listener="#{negociacoesAstBean.preRenderView}" type="preRenderView" />
+	</f:metadata>
+		
 	<ui:define name="titulo">
 		<p:outputLabel class="titulo" value="NEGOCIAÇÕES"/>
 	</ui:define>
@@ -16,10 +20,10 @@
 		<div class="ui-g">
 			<div class="ui-g-12">
 				<ui:include src="/WEB-INF/templates/_tabelaNegociacoes.xhtml">
-					<ui:param name="valueTabela" value="#"/>
+					<ui:param name="valueTabela" value="#{negociacoesAstBean.propostas}"/>
 					<ui:param name="valueDataInicio" value="#" />
 					<ui:param name="tipoUsuario" value="CONTRATANTE" />
-					<ui:param name="valueTipoUsuairo" value="#" />
+					<ui:param name="valueTipoUsuairo" value="" />
 					<ui:param name="valueStatus" value="#" />
 				</ui:include>
 			</div>

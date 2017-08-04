@@ -53,7 +53,7 @@ public class Assistente extends Usuario{
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy="assistente")
-	@JoinColumn(name = "assistente_FK")
+	@Column(name = "assistente_FK")
 	private List<Proposta> propostas = new ArrayList<Proposta>(); // bidirecional (são as negociações)
 
 	@LazyCollection(LazyCollectionOption.FALSE)

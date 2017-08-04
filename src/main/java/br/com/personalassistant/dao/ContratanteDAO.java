@@ -120,7 +120,7 @@ public class ContratanteDAO extends DAO {
 		}
 
 		try{
-			TypedQuery<Contratante> typedQuery = entityManager.createQuery("SELECT a "
+			TypedQuery<Contratante> typedQuery = entityManager.createQuery("SELECT c "
 					+ "FROM Contratante c, Usuario u "
 					+ "WHERE c.id = u.id AND "
 					+ "u.email = :email", Contratante.class);

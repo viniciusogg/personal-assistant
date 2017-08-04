@@ -81,7 +81,7 @@
 							<div class="ui-g-1 div-superior-servico">
 								<p:commandButton title="Fazer uma proposta" styleClass="botao-iniciar-negociacao" icon="ui-icon-plus" update="msg"
 										onclick="PF('dialog').show()">
-									<f:setPropertyActionListener target="#{assistentesCteBean.proposta.assistente}" 
+									<f:setPropertyActionListener target="#{assistentesCteBean.assistente}" 
 											value="#{assistente}" />		
 								</p:commandButton>
 										
@@ -157,7 +157,8 @@
 											<div class="ui-g-12">
 												<p:commandButton value="ENVIAR" styleClass="botao-dialog"
 														actionListener="#{assistentesCteBean.enviarProposta}"
-														action="assistentes?faces-redirect=true" /> 
+														action="assistentes?faces-redirect=true" 
+														update="msg"/> 
 												<p:commandButton value="CANCELAR" 
 														onclick="PF('dialog').hide()" styleClass="botao-dialog"/>
 											</div>
