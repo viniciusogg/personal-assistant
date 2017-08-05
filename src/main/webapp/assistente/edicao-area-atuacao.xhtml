@@ -7,6 +7,10 @@
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
 		template="index.xhtml">
 		
+	<f:metadata>
+		<f:event listener="#{edicaoAreaAtuacaoAstBean.preRenderView}" type="preRenderView" />
+	</f:metadata>
+		
 	<ui:define name="titulo">
 		<p:outputLabel class="titulo" value="EDIÇÃO DA ÁREA DE ATUAÇÃO"/>
 	</ui:define>
@@ -15,23 +19,29 @@
 		
 		<div class="ui-g">
 		
-			<div class="ui-g-12">
+			<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
+		
+			<h:form>
 				<div class="ui-g-12">
-					<p:fieldset legend="INFORMAÇÕES PROFISSIONAIS" styleClass="fieldset-cadastro">
-						<ui:include src="/WEB-INF/templates/_formAreaAtuacao.xhtml">
-							<ui:param name="nomeCategoriaServico" value="#{areaAtuacaoBean.nomeCategoriaServico}"/>
-							<ui:param name="listaNomesCategoriasServicos" value="#{areaAtuacaoBean.categoriasServicos}" />
-							<ui:param name="precoHora" value="33" />
-							<ui:param name="precoFixo" value="2000" />
-							<ui:param name="capacidades" value="#{areaAtuacaoBean.capacidades}" />
-						</ui:include>
-					</p:fieldset>
+					<div class="ui-g-12">
+						<p:fieldset legend="INFORMAÇÕES PROFISSIONAIS" styleClass="fieldset-cadastro">
+							<ui:include src="/WEB-INF/templates/_formAreaAtuacao.xhtml">
+								<ui:param name="categoriaServico" value="#{edicaoAreaAtuacaoAstBean.assistente.categoriaServico}"/>
+								<ui:param name="categoriasServicos" value="#{edicaoAreaAtuacaoAstBean.categoriasServicos}" />
+								<ui:param name="precoHora" value="#{edicaoAreaAtuacaoAstBean.assistente.precoHora}" />
+								<ui:param name="precoFixo" value="#{edicaoAreaAtuacaoAstBean.assistente.precoFixo}" />
+								<ui:param name="capacidades" value="#{edicaoAreaAtuacaoAstBean.nomesCapacidades}" />
+							</ui:include>
+						</p:fieldset>
+					</div>
+					<div class="ui-g-12">
+						<p:commandButton styleClass="botao-concluir-edicao-categoria-servico" 
+								value="CONCLUIR EDIÇÃO"
+								actionListener="#{edicaoAreaAtuacaoAstBean.concluirEdicao}"
+								action="area-atuacao?faces-redirect=true"/>
+					</div>
 				</div>
-				<div class="ui-g-12">
-					<p:commandButton id="botao-concluir-edicao-categoria-servico" 
-							value="CONCLUIR EDIÇÃO"/>
-				</div>
-			</div>
+			</h:form>
 		</div>
 	</ui:define>			
 </ui:composition>

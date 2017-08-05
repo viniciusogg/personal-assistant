@@ -31,7 +31,7 @@ public class CategoriaServicoConverter implements Converter {
 		}
 
 		try {
-			CategoriaServico categoriaServico = categoriaServicoService.getById(Long.valueOf(value));
+			CategoriaServico categoriaServico = categoriaServicoService.getByName(value);
 			return categoriaServico;
 		} 
 		catch (NumberFormatException | ServiceException | ObjetoNaoExisteException ex) {			

@@ -25,6 +25,7 @@ public class AvaliacaoAssistente extends Avaliacao{
 		this.setPontualidade(pontualidade);
 		this.qualidadeServico = qualidadeServico;
 		this.setComentario(comentario);
+		this.setMediaAvaliacao();
 	}
 
 	public Integer getQualidadeServico() {
@@ -68,7 +69,7 @@ public class AvaliacaoAssistente extends Avaliacao{
 	}
 
 	@Override
-	public Integer calcularMediaAvaliacao() {
+	protected Integer calcularMediaAvaliacao() {
 		
 		return Math.round((getPontualidade() + getCordialidade() + getQualidadeServico()) / 3);
 	}

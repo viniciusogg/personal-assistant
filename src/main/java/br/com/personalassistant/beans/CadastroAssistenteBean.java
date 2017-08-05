@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -29,15 +30,15 @@ public class CadastroAssistenteBean extends AbstractBean {
 	@Inject private CategoriaServicoService categoriaServicoService;
 	private Assistente assistente;
 	private Endereco endereco;
-	private String nomeCategoriaServico;
 	private List<String> nomesCapacidades;
-	private List<String> nomesCategoriasServicos;
 	private List<CategoriaServico> categoriasServicos;
+	private String nomeCategoriaServico;
 
 	public void preRenderView(){
 		
 		if(this.assistente == null){
-			this.assistente = new Assistente();			
+			this.assistente = new Assistente();
+			this.assistente.setCapacidades(new ArrayList<Capacidade>());
 		}
 		
 		if(this.endereco == null){
@@ -45,14 +46,9 @@ public class CadastroAssistenteBean extends AbstractBean {
 		}
 		
 		this.nomesCapacidades = new ArrayList<String>();
-		this.nomesCategoriasServicos = new ArrayList<String>();
 		
 		try {
 			this.categoriasServicos = this.categoriaServicoService.getAll();
-
-			for(CategoriaServico categoriaServico: this.categoriasServicos){
-				this.nomesCategoriasServicos.add(categoriaServico.getNome());
-			}
 		} 
 		catch (ServiceException | NaoExistemObjetosException e) {
 			e.printStackTrace();
@@ -64,26 +60,15 @@ public class CadastroAssistenteBean extends AbstractBean {
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getFlash().setKeepMessages(true);
 		
+		Severity severity = null;
+		String msg = "";
+		
 		try {
-			
-			List<Capacidade> capacidades = new ArrayList<Capacidade>();
 						
 			for(String nomeCapacidade: this.nomesCapacidades){	
-				Capacidade capacidade = new Capacidade();
-				capacidade.setNome(nomeCapacidade);
-				capacidades.add(capacidade);
+				this.assistente.getCapacidades().add(new Capacidade(nomeCapacidade));
 			}
-			
-			CategoriaServico categoriaServico = null;
 						
-			for(CategoriaServico cs: categoriasServicos){
-				if(cs.getNome().equals(this.nomeCategoriaServico)){
-					categoriaServico = cs;
-				}
-			}
-			
-			this.assistente.setCapacidades(capacidades);						
-			this.assistente.setCategoriaServico(categoriaServico);
 			this.assistente.setEndereco(this.endereco);
 			this.assistente.setTipoUsuario(TIPO_USUARIO.ASSISTENTE);
 			
@@ -91,12 +76,17 @@ public class CadastroAssistenteBean extends AbstractBean {
 			
 			this.usuarioService.save(this.assistente);
 			
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso, faça login na sua conta", ""));
+			severity = FacesMessage.SEVERITY_INFO;
+			msg = "Cadastrado com sucesso, faça login na sua conta";
 		} 
 		catch (ServiceException e) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro, tente novamente", ""));
+			severity = FacesMessage.SEVERITY_ERROR;
+			msg = "Ocorreu um erro, tente novamente";
+			
 			e.printStackTrace();
 		}
+		
+		context.addMessage(null, new FacesMessage(severity, msg, ""));
 	}
 
 	public Assistente getAssistente() {
@@ -115,14 +105,6 @@ public class CadastroAssistenteBean extends AbstractBean {
 		this.endereco = endereco;
 	}
 
-	public String getNomeCategoriaServico() {
-		return nomeCategoriaServico;
-	}
-
-	public void setNomeCategoriaServico(String nomeCategoriaServico) {
-		this.nomeCategoriaServico = nomeCategoriaServico;
-	}
-
 	public List<String> getNomesCapacidades() {
 		return nomesCapacidades;
 	}
@@ -131,11 +113,20 @@ public class CadastroAssistenteBean extends AbstractBean {
 		this.nomesCapacidades = nomesCapacidades;
 	}
 
-	public List<String> getNomesCategoriasServicos() {
-		return nomesCategoriasServicos;
+	public List<CategoriaServico> getCategoriasServicos() {
+		return categoriasServicos;
 	}
 
-	public void setNomesCategoriasServicos(List<String> nomesCategoriasServicos) {
-		this.nomesCategoriasServicos = nomesCategoriasServicos;
+	public void setCategoriasServicos(List<CategoriaServico> categoriasServicos) {
+		this.categoriasServicos = categoriasServicos;
 	}
+
+	public String getNomeCategoriaServico() {
+		return nomeCategoriaServico;
+	}
+
+	public void setNomeCategoriaServico(String nomeCategoriaServico) {
+		this.nomeCategoriaServico = nomeCategoriaServico;
+	}
+
 }

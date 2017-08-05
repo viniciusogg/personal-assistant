@@ -11,38 +11,41 @@
 			<p:outputLabel value="CATEGORIAS DE SERVIÇOS"/>
 		</div>
 		<div class="ui-g-12">
-			<p:selectOneMenu value="#{nomeCategoriaServico}" styleClass="combobox">
-				<f:selectItems value="#{listaNomesCategoriasServicos}" var="categoria"
-						itemLabel="#{categoria}" itemValue="#{categoria}" />
+			<p:selectOneMenu value="#{categoriaServico}" styleClass="combobox" converter="conversorCategoriaServico">
+				<f:selectItems value="#{categoriasServicos}" var="categoria"
+						itemLabel="#{categoria.nome}" itemValue="#{categoria.nome}" />	
 			</p:selectOneMenu>
 		</div>
 	</div>
 	
 	<div class="ui-g-6">
 		<div class="ui-g-12">
-			<p:outputLabel value="PREÇO COBRADO POR HORA TRABALHADA"/>
+			<p:outputLabel value="PREÇO COBRADO POR HORA TRABALHADA*"/>
 		</div>
 		<div class="ui-g-12">
-			<p:inputNumber value="#{precoHora}"/>
+			<p:inputNumber value="#{precoHora}" required="true" 
+					requiredMessage="Você esqueceu de preencher o campo 'PREÇO COBRADO POR HORA TRABALHADA'"/>
 		</div>
 	</div>
 	
 	<div class="ui-g-6">
 		<div class="ui-g-12">
-			<p:outputLabel value="PREÇO FIXO COBRADO POR TRABALHO REALIZADO"/>
+			<p:outputLabel value="PREÇO FIXO COBRADO POR TRABALHO REALIZADO*"/>
 		</div>
 		<div class="ui-g-12">
-			<p:inputNumber value="#{precoFixo}"/>
+			<p:inputNumber value="#{precoFixo}" required="true" 
+					requiredMessage="Você esqueceu de preencher o campo 'PREÇO FIXO COBRADO POR TRABALHADO REALIZADO'"/>
 		</div>
 	</div>
 	
 	<div class="ui-g-12">
 		<div class="ui-g-12">
-			<p:outputLabel value="SUAS QUALIDADES"/>
-			<p:outputLabel value="(o que você sabe fazer ? Escreva algo e aperte 'enter'. Ex: formatação de computador)" styleClass="label-descricao-qualidades"/>
+			<p:outputLabel value="SUAS QUALIDADES*"/>
+			<p:outputLabel value="(o que você sabe fazer ? Escreva pelo menos uma e aperte 'enter'. Ex: formatação de computador)" styleClass="label-descricao-qualidades"/>
 		</div>
 		<div class="ui-g-12">
-			<p:chips value="#{capacidades}"/>
+			<p:chips value="#{capacidades}" required="true" 
+					requiredMessage="Você esqueceu de preencher o campo 'CAPACIDADES'"/>
 		</div>
 	</div>
 	

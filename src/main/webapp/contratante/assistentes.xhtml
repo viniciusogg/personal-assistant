@@ -64,7 +64,7 @@
 				
 					<ui:repeat var="assistente" value="#{assistentesCteBean.assistentes}">
 				
-						<p:outputPanel styleClass="ui-g info-panel div-info">
+						<p:outputPanel styleClass="ui-g info-panel div-info-painel">
 							
 							<div class="ui-g-11 div-superior-servico">
 								<div class="ui-g-5 sub-div-superior-servico">
@@ -95,8 +95,8 @@
 												</div>
 												<div class="ui-g-6">
 													<p:selectOneMenu value="#{assistentesCteBean.proposta.tipoPagamento}" styleClass="combobox">
-														<f:selectItem itemLabel="HORA TRABALHADA" itemValue="HORA_TRABALHADA" />
-														<f:selectItem itemLabel="PREÇO FIXO" itemValue="PRECO_FIXO" />														
+														<f:selectItem itemLabel="Hora trabalhada" itemValue="HORA_TRABALHADA" />
+														<f:selectItem itemLabel="Preço fixo" itemValue="PRECO_FIXO" />														
 													</p:selectOneMenu>
 												</div>
 											</div>
@@ -195,14 +195,10 @@
 								<div class="ui-g-1 div-label-capacidades-servico">
 									<p:outputLabel value="Habilidades:" styleClass="label-capacidades-necessarias-oferta"/>
 								</div>
-								<div class="ui-g-9 div-capacidades-servico">
-									<ul class="ul-capacidades">
-										<ui:repeat var="capacidade" value="#{assistente.capacidades}">
-											<li class="ui-chips-token">
-												<p:outputLabel value="#{capacidade.nome}" styleClass="label-capacidade"/>
-											</li>
-										</ui:repeat>
-									</ul>							
+								<div class="ui-g-10 div-capacidades-servico">
+									<ui:repeat var="capacidade" value="#{assistente.capacidades}">
+										<p:outputLabel value="#{capacidade.nome}" styleClass="label-capacidade"/>
+									</ui:repeat>
 								</div>
 							</div>					
 						</p:outputPanel>

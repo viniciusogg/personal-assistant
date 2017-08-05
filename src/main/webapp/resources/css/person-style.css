@@ -26,11 +26,11 @@
     outline-width: 0px !important;
 }
 
-.align-element{ /*APLICAR NAS <div>s*/
+/*.align-element{ APLICAR NAS <div>s
 	height: 50px;
     text-align: center;
     line-height: 2.2em;
-}
+}*/
 
 div{
 	border-radius: 0px !important;
@@ -67,6 +67,8 @@ input[type=text]{
     color: #3f3f3f !important;
     border: 1px solid gray !important;
     border-radius: 2px;
+    padding: 4px;
+	width: 96%;
 }
 
 input[type=text]:focus{
@@ -95,10 +97,15 @@ input[type="password"]{
     color: #3f3f3f !important;
     border: 1px solid gray !important;
     border-radius: 2px;
+    width: 96%;
 }
 
 input[type="password"]:focus{
 	border-color:#1e88e5 !important;
+}
+
+span[class="ui-inputnumber ui-widget"] > input {
+    width: 40% !important;
 }
 
 button{
@@ -154,7 +161,8 @@ a{
 }
 
 .info-panel:hover{
-	box-shadow: 2.5px 2.5px 5px 0px rgba(0,0,0,.26);
+	/*box-shadow: 2.5px 2.5px 5px 0px rgba(0,0,0,.26);*/
+	box-shadow: -15.5px 14.5px 9px -3px rgba(0,0,0,.26);
 }
 
 .botao-pagina-login{
@@ -299,7 +307,6 @@ a{
 
 .campo-formulario{
 	text-align:center; 
-	width:97%;
 }
 
 .componente-acao-cadastro-usuario{
@@ -347,11 +354,14 @@ div[class="ui-g-2 sub-div-info-servico"] > div[class="ui-rating"] > div[class="u
 }
 
 .label-capacidade{
-	border-radius: 10px;
+	border-radius: 5px;
 	background: #1976D2;
 	color: white;
-	padding: 6px;
-	margin: unset !important;
+	padding: 4px;
+	margin: 2px !important;
+	white-space: nowrap;
+	overflow: hidden;
+	display: inline-block;
 }
 
 .ul-capacidades{
@@ -422,6 +432,7 @@ a[class="ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-sta
 
 html .ui-spinner .ui-spinner-input{
 	padding: 4px !important;
+	width: 84%;
 }
 
 .ui-spinner-input {
@@ -430,12 +441,49 @@ html .ui-spinner .ui-spinner-input{
     padding-right: unset;
 }
 
-/*************************/
+.ui-spinner .ui-spinner-input{
+	left: 89%;
+}
+
+.div-painel-label{
+	padding:2px; 
+	text-align:center;
+	display: inline-table;
+}
+
+/* INICIO PAINEL REPUTAÇÃO */
+.painel-info-label-titulo{
+	line-height: 120px;
+}
+
+#div-painel-reputacao-label-nivel-reputacao{
+	padding-top:15.5px !important; 
+	padding-bottom:0px !important;
+}
+
+#div-painel-reputacao-labels-avalicao{
+	padding-top:0px !important; 
+	padding-bottom:14.5px !important;
+}
+
+
+#painel-reputacao-valor-reputacao{
+	float: right;
+}
+/* FINAL PAINEL REPUTACAO */
+
+.div-info-painel{
+	padding:2px !important;
+	font-weight: normal !important; 
+	font-size: unset !important;
+}
+
 .sub-div-info-servico-label{
 	font-size: 20px !important;
 	padding-bottom: unset !important;
 	padding-top: unset !important;
 	text-align: center !important;
+	border-radius: 5px;
 }
 
 .sub-div-info-servico-label-descritiva{
@@ -480,12 +528,57 @@ html .ui-spinner .ui-spinner-input{
 
 .div-label-capacidades-servico{
 	margin-top: 2px;
-	margin-right: 45px;
 	padding: unset;
+	display: inline-table;
+}
+
+div[class="ui-g-1 div-label-capacidades-servico"] > label{
+	marging-rigth: unset !important;
 }
 
 .sub-div-info-servico{
 	padding-bottom: 5px;
 	padding-top: 10px;
 	text-align: center;
+	display: inline-table;
+}
+
+ul[class="ui-chips-container ui-inputfield ui-state-default ui-corner-all"] {
+    background: white !important;
+    border: 1px solid gray !important;
+}
+
+ul[class="ui-chips-container ui-inputfield ui-state-default ui-corner-all ui-state-hover"] {
+    background: white !important;
+    border: 1px solid gray !important;
+}
+
+ul[class="ui-chips-container ui-inputfield ui-state-default ui-corner-all ui-state-hover ui-state-focus"] {
+    background: white !important;
+    border: 1px solid gray !important;
+}
+
+ul[class="ui-chips-container ui-inputfield ui-state-default ui-corner-all ui-state-focus"] {
+    background: white !important;
+    border: 1px solid gray !important;
+}
+
+ul[class="ui-chips-container ui-inputfield ui-state-default ui-corner-all ui-state-focus ui-state-hover"] {
+    background: white !important;
+    border: 1px solid gray !important;
+}
+
+li[class="ui-chips-input-token" ] > input {
+	border: unset !important;
+}
+
+li[class="ui-chips-token ui-state-active ui-corner-all"] > span[class="ui-chips-token-icon ui-icon ui-icon-close"]{
+	top: 8px;
+}
+
+div[class="ui-outputpanel ui-widget ui-g info-panel div-info-painel"]:hover {
+	margin-top: 1% !important;
+	margin-right: 0% !important;
+	margin-left: 1% !important;
+	margin-bottom: 3%;
 }

@@ -8,7 +8,7 @@
 		template="login.xhtml">
 
 	<f:metadata>
-		<f:event listener="#{cadastroAssistenteBean.preRenderView()}" type="preRenderView" />
+		<f:event listener="#{cadastroAssistenteBean.preRenderView}" type="preRenderView" />
 	</f:metadata>
 
 	<ui:define name="botao-menu"/>
@@ -43,8 +43,8 @@
 					
 					<p:fieldset legend="INFORMAÇÕES PROFISSIONAIS" styleClass="fieldset">
 						<ui:include src="/WEB-INF/templates/_formAreaAtuacao.xhtml">
-							<ui:param name="nomeCategoriaServico" value="#{cadastroAssistenteBean.nomeCategoriaServico}"/>
-							<ui:param name="listaNomesCategoriasServicos" value="#{cadastroAssistenteBean.nomesCategoriasServicos}"/>
+							<ui:param name="categoriaServico" value="#{cadastroAssistenteBean.assistente.categoriaServico}"/>
+							<ui:param name="categoriasServicos" value="#{cadastroAssistenteBean.categoriasServicos}"/>
 							<ui:param name="precoHora" value="#{cadastroAssistenteBean.assistente.precoHora}" />
 							<ui:param name="precoFixo" value="#{cadastroAssistenteBean.assistente.precoFixo}" />
 							<ui:param name="capacidades" value="#{cadastroAssistenteBean.nomesCapacidades}" />

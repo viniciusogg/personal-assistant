@@ -7,6 +7,10 @@
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 		template="index.xhtml">
 		
+	<f:metadata>
+		<f:event listener="#{areaAtuacaoAstBean.preRenderView}" type="preRenderView" />
+	</f:metadata>
+		
 	<ui:define name="titulo">
 		<p:outputLabel class="titulo" value="ÁREA DE ATUAÇÃO"/>
 	</ui:define>
@@ -14,6 +18,8 @@
 	<ui:define name="conteudo">
 		
 		<div class="ui-g">
+		
+			<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
 			
 			<div class="ui-g-12">
 				
@@ -21,33 +27,23 @@
 					<p:fieldset legend="VALORES COBRADOS POR SERVIÇOS REALIZADOS">
 						<div class="ui-g-12">
 							<div class="ui-g-12">
-								<p:outputLabel value="Preço cobrado por hora trabalhada: R$ #{areaAtuacaoAstBean.valorHora}"/>
+								<p:outputLabel value="Preço cobrado por hora trabalhada: R$ #{areaAtuacaoAstBean.assistente.precoHora}"/>
 							</div>
 						</div>
 						
 						<div class="ui-g-12">
 							<div class="ui-g-12">
-								<p:outputLabel value="Preço fixo: R$ #{areaAtuacaoAstBean.valorFixo}"/>
+								<p:outputLabel value="Preço fixo: R$ #{areaAtuacaoAstBean.assistente.precoFixo}"/>
 							</div>
 						</div>
 					</p:fieldset>
 				</div>
 				
 				<div class="ui-g-12">
-					<p:panel header="#{areaAtuacaoAstBean.nomeCategoriaServico}" styleClass="ui-g-12">
-						<ul class="ul-capacidades">
-							<ui:repeat var="capacidade" value="#{areaAtuacaoAstBean.capacidades}">
-								<li class="ui-chips-token">
-									<p:outputLabel value="#{capacidade}" styleClass="label-capacidade"/> 
-								</li>
-								<li class="ui-chips-token"> 
-									<p:outputLabel value="#{capacidade}" styleClass="label-capacidade"/> 
-								</li>
-								<li class="ui-chips-token"> 
-									<p:outputLabel value="#{capacidade}" styleClass="label-capacidade"/>
-								</li>
-							</ui:repeat>
-						</ul>
+					<p:panel header="#{areaAtuacaoAstBean.assistente.categoriaServico.nome}" styleClass="ui-g-12">
+						<ui:repeat var="capacidade" value="#{areaAtuacaoAstBean.assistente.capacidades}">
+								<p:outputLabel value="#{capacidade.nome}" styleClass="label-capacidade"/> 
+						</ui:repeat>
 					</p:panel>
 				</div>
 				

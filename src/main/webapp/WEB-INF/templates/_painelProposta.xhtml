@@ -8,11 +8,8 @@
 	
 	<p:fieldset styleClass="fieldset" legend="PROPOSTA">
 		<div class="ui-g-6">
-			<div class="ui-g-3">
-				<p:outputLabel value="#{tipoUsuario != null ? tipoUsuario : ''}" />
-			</div>
-			<div class="ui-g-9">
-				<p:outputLabel value="#{nomeUsuario != null ? nomeUsuario : ''}" />
+			<div class="ui-g-12">
+				<p:outputLabel value="#{tipoUsuario != null ? tipoUsuario : ''}: #{nomeUsuario != null ? nomeUsuario : ''}" />
 			</div>
 		</div>
 		<div class="ui-g-6">
@@ -25,45 +22,30 @@
 		</div>
 	
 		<div class="ui-g-6">
-			<div class="ui-g-5">
-				<p:outputLabel value="TIPO DE PAGAMENTO:" />
-			</div>
-			<div class="ui-g-7">
-				<p:outputLabel value="#{tipoPagamento != null ? tipoPagamento : ''}" />
+			<div class="ui-g-12">
+				<p:outputLabel value="TIPO DE PAGAMENTO: #{tipoPagamento != null ? tipoPagamento : ''}" />
 			</div>
 		</div>
 		<div class="ui-g-6">
-			<div class="ui-g-5">
-				<p:outputLabel value="VALOR DA PROPOSTA:" />
-			</div>
-			<div class="ui-g-7">
-				<p:outputLabel value="R$ #{valorProposta != null ? valorProposta : ''}" />
+			<div class="ui-g-12">
+				<p:outputLabel value="VALOR DA PROPOSTA: R$ #{valorProposta != null ? valorProposta : ''}" />
 			</div>
 		</div>
 		
 		<div class="ui-g-6">
-			<div class="ui-g-6">
-				<p:outputLabel value="DATA DE INÍCIO DO SERVIÇO:" />
-			</div>
-			<div class="ui-g-6">
-				<p:outputLabel value="#{dataInicio != null ? dataInicio : ''}" />				
+			<div class="ui-g-12">
+				<p:outputLabel value="DATA DE INÍCIO DO SERVIÇO: #{dataInicio != null ? dataInicio : ''}" />				
 			</div>
 		</div>
 		<div class="ui-g-6">
-			<div class="ui-g-7">
-				<p:outputLabel value="DATA DE CONCLUSÃO DO SERVIÇO:" />
-			</div>
-			<div class="ui-g-5">
-				<p:outputLabel value="#{dataFinal != null ? dataFinal : ''}" />
+			<div class="ui-g-12">
+				<p:outputLabel value="DATA DE CONCLUSÃO DO SERVIÇO: #{dataFinal != null ? dataFinal : ''}" />
 			</div>
 		</div>
 		
 		<div class="ui-g-12">
-			<div class="ui-g-2">
-				<p:outputLabel value="COMENTÁRIO:"/>
-			</div>
-			<div class="ui-g-10">
-				<p:outputLabel value="#{comentario != null ? comentario : ''}" />
+			<div class="ui-g-12">
+				<p:outputLabel value="COMENTÁRIO: #{comentario != null ? comentario : ''}" />
 			</div>
 		</div>
 		

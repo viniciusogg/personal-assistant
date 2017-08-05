@@ -29,9 +29,9 @@ public class NegociacoesAstBean extends AbstractBean {
 	public void preRenderView(){
 		
 		try {
-			assistente = assistenteService.getAssistenteByEmail(getEmailUsuarioLogado());
+			this.assistente = assistenteService.getAssistenteByEmail(getEmailUsuarioLogado());
 			
-			propostas = propostaService.getAllById(assistente.getId());
+			this.propostas = propostaService.getAllById(assistente.getId());
 		} 
 		catch (ServiceException | NaoExistemObjetosException | ObjetoNaoExisteException e) {
 			e.printStackTrace();

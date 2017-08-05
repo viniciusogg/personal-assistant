@@ -2,24 +2,16 @@
 	padding:2px !important;
 }
 
-.div-info{
-	padding:2px !important;
-	font-weight: normal !important; 
-	font-size: unset !important;
-}
-
-.div-label{
-	padding:2px; 
-	text-align:center;
+#div-painel-reputacao-label-total-avaliacoes{
+	padding: 2px;
+	text-align: left;
+	display: inline-table;
 }
 
 #painel-experiencia{
 	padding: 1px;
 }
 
-.label-titulo-infopanel{
-	line-height: 120px;
-}
 
 #div-label-nivel-experiencia{
 	padding-top:15.5px !important; 
@@ -35,25 +27,6 @@
 	font-size: 24px !important;
 }
 
-#div-label-nivel-reputacao{
-	padding-top:15.5px !important; 
-	padding-bottom:0px !important;
-}
-
-#div-labels-avalicao{
-	padding-top:0px !important; 
-	padding-bottom:14.5px !important;
-}
-
-#avaliacao{
-	float: right;
-}
-
-#div-label-total-avaliacoes{
-	padding: 2px;
-	text-align: left;
-}
-
 #div-tabela{
 	padding:7px !important;
 }
@@ -62,7 +35,7 @@
 	float: right;
 }
 
-#botao-concluir-edicao-categoria-servico{
+.botao-concluir-edicao-categoria-servico{
 	float: right;
 }
 
@@ -76,7 +49,8 @@
 }
 
 .div-contratante-oferta{
-	padding-top: 0px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 button[id^="tabelaAssistencias"] > span[class="ui-button-icon-left ui-icon ui-c ui-icon-check"] {

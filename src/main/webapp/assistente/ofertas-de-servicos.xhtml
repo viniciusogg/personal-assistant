@@ -19,15 +19,15 @@
 		
 			<div class="ui-g-12">
 
-				<p:outputPanel styleClass="ui-g info-panel div-info">
+				<p:outputPanel styleClass="ui-g info-panel div-info-painel">
 					
-					<div class="ui-g-10 div-superior-servico">
+					<div class="ui-g-11 div-superior-servico">
 						<div class="ui-g-12 sub-div-superior-servico">
 							<p:outputLabel value="TÍTULO" styleClass="titulo-oferta"/>
 						</div>
 					</div>
 					
-					<div class="ui-g-2 div-superior-servico">
+					<div class="ui-g-1 div-superior-servico">
 						<p:commandButton title="Fazer um lance" styleClass="botao-iniciar-negociacao" icon="ui-icon-plus" update="msg"
 								onclick="PF('dialog').show()">
 							<!-- <f:setPropertyActionListener /> -->  
@@ -144,21 +144,12 @@
 						<div class="ui-g-1 div-label-capacidades-servico">
 							<p:outputLabel value="Requisitos:" styleClass="label-capacidades-necessarias-oferta"/>
 						</div>
-						<div class="ui-g-10 div-capacidades-servico">
-							<ul class="ul-capacidades">
-								<li class="ui-chips-token">
-									<p:outputLabel value="capacidade 1" styleClass="label-capacidade"/>
-								</li>
-								<li class="ui-chips-token">
-									<p:outputLabel value="capacidade 2" styleClass="label-capacidade"/>
-								</li>	
-								<li class="ui-chips-token">							
-									<p:outputLabel value="capacidade 3" styleClass="label-capacidade"/>							
-								</li>
-							</ul>
+						<div class="ui-g-10 div-capacidades-servico">	
+							<p:outputLabel value="capacidade 1" styleClass="label-capacidade"/>
+							<p:outputLabel value="capacidade 2" styleClass="label-capacidade"/>
+							<p:outputLabel value="capacidade 3" styleClass="label-capacidade"/>							
 						</div>
 					</div>
-					
 				</p:outputPanel>
 			</div>
 		</div>

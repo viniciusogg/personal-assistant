@@ -19,11 +19,13 @@ public class AvaliacaoContratante extends Avaliacao{
 		super();
 	}
 
-	public AvaliacaoContratante(Integer cordialidade, Integer pontualidade, Integer facilidadePagamento) {
+	public AvaliacaoContratante(Integer cordialidade, Integer pontualidade, Integer facilidadePagamento, String comentario) {
 		super();
 		this.setCordialidade(cordialidade);
 		this.setPontualidade(pontualidade);
 		this.facilidadePagamento = facilidadePagamento;
+		this.setComentario(comentario);
+		this.setMediaAvaliacao();
 	}
 
 	public Integer getFacilidadePagamento() {
@@ -67,7 +69,7 @@ public class AvaliacaoContratante extends Avaliacao{
 	}
 
 	@Override
-	public Integer calcularMediaAvaliacao() {
+	protected Integer calcularMediaAvaliacao() {
 		
 		return Math.round((getPontualidade() + getCordialidade() + getFacilidadePagamento()) / 3);
 	}
