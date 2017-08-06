@@ -154,7 +154,7 @@ a{
 	border-radius: 4px !important;
 	color: white;
 	background: #78909C;
-	margin: 5px;
+	margin: 20px;
 	padding: 30px;
 	font-weight: bold; 
 	font-size: 40px !important;
@@ -162,7 +162,8 @@ a{
 
 .info-panel:hover{
 	/*box-shadow: 2.5px 2.5px 5px 0px rgba(0,0,0,.26);*/
-	box-shadow: -15.5px 14.5px 9px -3px rgba(0,0,0,.26);
+	/*box-shadow: -15.5px 14.5px 9px -3px rgba(0,0,0,.26); PRINCIPAL*/
+	box-shadow: -8.5px 14.5px 9px -3px rgba(0,0,0,.26);
 }
 
 .botao-pagina-login{
@@ -577,8 +578,44 @@ li[class="ui-chips-token ui-state-active ui-corner-all"] > span[class="ui-chips-
 }
 
 div[class="ui-outputpanel ui-widget ui-g info-panel div-info-painel"]:hover {
-	margin-top: 1% !important;
+	/*margin-top: 1% !important; PRINCIPAL*/
+	margin-top: -1% !important;
 	margin-right: 0% !important;
-	margin-left: 1% !important;
-	margin-bottom: 3%;
+	margin-left: 3% !important;
+	margin-bottom: 4% !important;
 }
+
+/*ADMIN*/
+div[class="ui-outputpanel ui-widget info-panel div-info-panel-adm"]:hover {
+    margin-left: 1%;
+    margin-bottom: 3%;
+    margin-right: 0%;
+    margin-top: 1%;
+}
+/*ADMIN*/
+
+/*Assistente experiencia*/
+div[id="painel-experiencia"] {
+	margin: 5px !important;
+}
+
+div[id="painel-experiencia"]:hover {
+	margin-top: 0% !important;
+	margin-right: 0% !important;
+	margin-left: 2% !important;
+	margin-bottom: 1% !important;
+}
+/*Assistente experiencia*/
+
+/*painel reputacao*/
+div[class="ui-outputpanel ui-widget info-panel ui-g div-info-reputacao"] {
+    margin: 5px !important;
+}
+
+div[class="ui-outputpanel ui-widget info-panel ui-g div-info-reputacao"]:hover {
+	margin-top: 0% !important;
+	margin-right: 0% !important;
+	margin-left: 2% !important;
+	margin-bottom: 1% !important;
+}
+/*painel reputacao*/

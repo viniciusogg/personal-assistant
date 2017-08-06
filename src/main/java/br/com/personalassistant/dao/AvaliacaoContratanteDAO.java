@@ -218,4 +218,6 @@ public class AvaliacaoContratanteDAO extends DAO {
 
 		return valores;
 	}
+	
+	
 }

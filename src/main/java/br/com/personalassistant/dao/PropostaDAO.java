@@ -101,7 +101,7 @@ public class PropostaDAO extends DAO {
 		return proposta;
 	}
 	
-	public List<Proposta> getAllById(Long id) throws PersistenciaException, NaoExistemObjetosException {
+	public List<Proposta> getToAssistenteAllById(Long id) throws PersistenciaException, NaoExistemObjetosException {
 		
 		EntityManager entityManager = getEntityManager();
 		List<Proposta> propostas = null;
@@ -109,7 +109,7 @@ public class PropostaDAO extends DAO {
 		try{
 			TypedQuery<Proposta> typedQuery = entityManager.createQuery("SELECT proposta FROM "
 					+ "Proposta proposta "
-					+ "WHERE proposta.contratante.id = :id", Proposta.class);
+					+ "WHERE proposta.assistente.id = :id", Proposta.class);
 			typedQuery.setParameter("id", id);
 			
 			propostas = typedQuery.getResultList();

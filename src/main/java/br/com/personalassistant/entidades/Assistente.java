@@ -51,10 +51,10 @@ public class Assistente extends Usuario{
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "assistente")
 	private List<Lance> lances = new ArrayList<Lance>(); // bidirecional
 	
-	@LazyCollection(LazyCollectionOption.FALSE)
+	/*@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy="assistente")
 	@Column(name = "assistente_FK")
-	private List<Proposta> propostas = new ArrayList<Proposta>(); // bidirecional (são as negociações)
+	private List<Proposta> propostas = new ArrayList<Proposta>(); // bidirecional (são as negociações)*/
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade = CascadeType.ALL)
@@ -115,13 +115,13 @@ public class Assistente extends Usuario{
 		this.endereco = endereco;
 	}
 
-	public List<Proposta> getPropostas() {
+	/*public List<Proposta> getPropostas() {
 		return propostas;
 	}
 
 	public void setPropostas(List<Proposta> propostas) {
 		this.propostas = propostas;
-	}
+	}*/
 	
 	public List<Capacidade> getCapacidades(){
 		return capacidades;
@@ -165,7 +165,7 @@ public class Assistente extends Usuario{
 		result = prime * result + ((lances == null) ? 0 : lances.hashCode());
 		result = prime * result + ((precoFixo == null) ? 0 : precoFixo.hashCode());
 		result = prime * result + ((precoHora == null) ? 0 : precoHora.hashCode());
-		result = prime * result + ((propostas == null) ? 0 : propostas.hashCode());
+		//result = prime * result + ((propostas == null) ? 0 : propostas.hashCode());
 		return result;
 	}
 
@@ -208,11 +208,11 @@ public class Assistente extends Usuario{
 				return false;
 		} else if (!precoHora.equals(other.precoHora))
 			return false;
-		if (propostas == null) {
+		/*if (propostas == null) {
 			if (other.propostas != null)
 				return false;
 		} else if (!propostas.equals(other.propostas))
-			return false;
+			return false;*/
 		return true;
 	}
 
@@ -220,9 +220,9 @@ public class Assistente extends Usuario{
 	public String toString() {
 		return "Assistente [quantServicos=" + getQuantServicosPrestados() + ", precoFixo=" + precoFixo
 				+ ", precoHora=" + precoHora + ", endereco=" + endereco + ", categoriaServico=" + categoriaServico
-				+ ", lances=" + lances + ", propostas=" + propostas + ", capacidades=" + capacidades + ", getId()="
+				+ ", lances=" + lances + ", capacidades=" + capacidades + ", getId()="
 				+ getId() + ", getNome()=" + getNome() + ", getEmail()=" + getEmail() + ", getSenha()=" + getSenha()
-				+ ", getNumTelefonico()=" + getNumTelefonico() + ", getTipoUsuario()=" + getTipoUsuario() + "]";
+				+ ", getNumTelefonico()=" + getNumTelefonico() + ", getTipoUsuario()=" + getTipoUsuario() + "]"; // ", propostas=" + propostas +
 	}
 	
 }

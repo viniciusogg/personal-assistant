@@ -36,10 +36,10 @@ public class Contratante extends Usuario{
 	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco; // unidirecional
 	
-	@OneToMany(mappedBy="contratante")
+	/*@OneToMany(mappedBy="contratante")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@Column(name = "contratante_FK")
-	private List<Proposta> propostas; // bidirecional
+	private List<Proposta> propostas; // bidirecional*/
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "contratante")
@@ -77,13 +77,13 @@ public class Contratante extends Usuario{
 		this.endereco = endereco;
 	}
 
-	public List<Proposta> getPropostas() {
+	/*public List<Proposta> getPropostas() {
 		return propostas;
 	}
 
 	public void setPropostas(List<Proposta> propostas) {
 		this.propostas = propostas;
-	}
+	}*/
 
 	public List<OfertaServico> getOfertasServicos() {
 		return ofertasServicos;
@@ -92,10 +92,6 @@ public class Contratante extends Usuario{
 	public void setOfertasServicos(List<OfertaServico> ofertasServicos) {
 		this.ofertasServicos = ofertasServicos;
 	}
-	
-	/*public int getReputacao(){
-		return calcularReputacao();
-	}*/
 	
 	public int getReputacao() {
 		return reputacao;
@@ -112,7 +108,7 @@ public class Contratante extends Usuario{
 		result = prime * result + ((assistentesFavoritos == null) ? 0 : assistentesFavoritos.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((ofertasServicos == null) ? 0 : ofertasServicos.hashCode());
-		result = prime * result + ((propostas == null) ? 0 : propostas.hashCode());
+		//result = prime * result + ((propostas == null) ? 0 : propostas.hashCode());
 		return result;
 	}
 
@@ -140,55 +136,21 @@ public class Contratante extends Usuario{
 				return false;
 		} else if (!ofertasServicos.equals(other.ofertasServicos))
 			return false;
-		if (propostas == null) {
+		/*if (propostas == null) {
 			if (other.propostas != null)
 				return false;
 		} else if (!propostas.equals(other.propostas))
-			return false;
+			return false;*/
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Contratante [assistentesFavoritos=" + assistentesFavoritos + ", endereco=" + endereco + ", propostas="
-				+ propostas + ", ofertasServicos=" + ofertasServicos
+		return "Contratante [assistentesFavoritos=" + assistentesFavoritos + ", endereco=" + endereco + ", ofertasServicos=" + ofertasServicos
 				+ ", getId()=" + getId() + ", getNome()=" + getNome()
 				+ ", getEmail()=" + getEmail() + ", getSenha()=" + getSenha() + ", getNumTelefonico()="
 				+ getNumTelefonico() + ", getTipoUsuario()=" + getTipoUsuario() + "]";
-	}
+	} //", propostas=" + propostas
 	
-	/*private int calcularReputacao(){
-		
-		int indiceMaior = 0;
-		
-		try {
-			ArrayList<Double> valores = avaliacaoContratanteService.getAvaliacoesByIdContratante(getId());
-			
-			if(valores == null || valores.isEmpty()){
-				return 0;
-			}
-			
-			indiceMaior = 0;
-			Double maior = valores.get(0);
-			
-			for(int i = 1; i < valores.size(); i++){
-				if(valores.get(i) > maior){
-					indiceMaior = i;
-					maior = valores.get(i);
-				}
-				else if(valores.get(i).equals(maior)){
-					indiceMaior = Math.round(i/indiceMaior);
-				}
-			}
-		}
-		
-		catch (ServiceException e) {
-			e.printStackTrace();
-		} 
-		catch (ObjetoNaoExisteException e) {
-			e.printStackTrace();
-		}
-		
-		return indiceMaior + 1;
-	}*/
+	
 }

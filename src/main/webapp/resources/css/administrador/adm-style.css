@@ -35,3 +35,7 @@
 .div-info-panel-adm{
 	text-align:center;
 }
+
+div[class="ui-g-12 div-painel-info"] > div {
+    margin: 5px;
+}

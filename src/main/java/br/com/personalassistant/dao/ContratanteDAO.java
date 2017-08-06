@@ -142,4 +142,6 @@ public class ContratanteDAO extends DAO {
 		return contratante;
 	}
 	
+	
+	
 }

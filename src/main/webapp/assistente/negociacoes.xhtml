@@ -19,13 +19,32 @@
 		
 		<div class="ui-g">
 			<div class="ui-g-12">
-				<ui:include src="/WEB-INF/templates/_tabelaNegociacoes.xhtml">
-					<ui:param name="valueTabela" value="#{negociacoesAstBean.propostas}"/>
-					<ui:param name="valueDataInicio" value="#" />
-					<ui:param name="tipoUsuario" value="CONTRATANTE" />
-					<ui:param name="valueTipoUsuairo" value="" />
-					<ui:param name="valueStatus" value="#" />
-				</ui:include>
+				
+				<p:dataTable id="tabelaNegociacoes" var="proposta" 
+						value="#{negociacoesAstBean.propostas}" rows="20"
+			            paginator="true"
+			            paginatorTemplate="{PageLinks}">
+			                 
+			        <f:facet name="header"> SUAS NEGOCIAÇÕES </f:facet>
+			                  
+					<p:column headerText="DATA DA PROPOSTA">
+						<h:outputText value="#{proposta.dataDaProposta}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>
+					</p:column>
+					<p:column headerText="CONTRATANTE">
+						<p:outputLabel value="#{proposta.contratante.nome}" />		
+					</p:column>
+					<p:column headerText="STATUS">
+						<p:outputLabel value="#{proposta.status == 'EM_ANDAMENTO' ? 'Em andamento' : 
+								(proposta.status == 'CANCELADA' ? 'Cancelada' : 'Concluída')}"/> 			
+					</p:column>
+					<p:column headerText="DETALHES">
+						<p:commandButton icon="ui-icon-search" title="Detalhes da negociação"
+							actionListener="#{negociacoesAstBean.verDetalhesProposta(proposta.id)}">
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
 			</div>
 		</div>
 	</ui:define>			

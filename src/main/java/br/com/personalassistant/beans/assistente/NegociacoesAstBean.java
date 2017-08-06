@@ -1,7 +1,9 @@
 package br.com.personalassistant.beans.assistente;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -31,7 +33,7 @@ public class NegociacoesAstBean extends AbstractBean {
 		try {
 			this.assistente = assistenteService.getAssistenteByEmail(getEmailUsuarioLogado());
 			
-			this.propostas = propostaService.getAllById(assistente.getId());
+			this.propostas = propostaService.getToAssistenteAllById(assistente.getId());
 		} 
 		catch (ServiceException | NaoExistemObjetosException | ObjetoNaoExisteException e) {
 			e.printStackTrace();
@@ -54,6 +56,14 @@ public class NegociacoesAstBean extends AbstractBean {
 		this.assistente = assistente;
 	}
 
-
-	
+	public void verDetalhesProposta(String idProposta){
+				
+		try {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.getExternalContext().redirect(facesContext.getExternalContext().getApplicationContextPath() + "/assistente/proposta.xhtml?id="+idProposta);
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

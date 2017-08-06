@@ -15,17 +15,17 @@ public class DataRealizacaoServico implements Serializable{
 	
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
-	private Date dataRealizacaoInicial;
+	private Date dataRealizacaoInicial = new Date();
 	
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
-	private Date dataRealizacaoLimite;
+	private Date dataRealizacaoLimite = new Date();
 	
 	@Temporal(TemporalType.TIME)
-	private Date horaRealizacaoServicoInicial;
+	private Date horaRealizacaoServicoInicial = new Date();
 	
 	@Temporal(TemporalType.TIME)
-	private Date horaRealizacaoServicoFinal;
+	private Date horaRealizacaoServicoFinal = new Date();
 	
 	public DataRealizacaoServico() {
 		super();

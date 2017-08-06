@@ -9,11 +9,11 @@
 	<h:head>
 		<title><ui:insert name="title"> PERSONAL ASSISTANT </ui:insert></title>
 		
-		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/person-style.css?v=21.8" />
+		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/person-style.css?v=22.9" />
 		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/prime-faces-style-edited.css?v=12.4" />
 	    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/jquery-ui-1.12.icon-font.css?v=12.3" /> 
-		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/administrador/adm-style.css?v=2.7" />
-		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/assistente/ast-style.css?v=7.8" />
+		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/administrador/adm-style.css?v=2.8" />
+		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/assistente/ast-style.css?v=7.9" />
 		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/contratante/cte-style.css?v=1.8" />
 
 	</h:head>
@@ -27,18 +27,18 @@
 						<f:facet name="left">
 							<ui:insert name="botao-menu">
 								<p:commandButton update=":conteudo" 
-									actionListener="#{templateBean.acionarMenuLateral}" 
-									icon="ui-icon-bars"
-									styleClass="botao-menu-superior" />
+										actionListener="#{templateBean.acionarMenuLateral}" 
+										icon="ui-icon-bars"
+										styleClass="botao-menu-superior" />
 							</ui:insert>
 							<ui:insert name="titulo"/>
 						</f:facet>
 						<f:facet name="right">
 							<ui:insert name="conteudo-menu-superior">
 								<p:commandButton actionListener="#{autenticacaoBean.efetuarLogout}" 
-									icon="ui-icon-logout"
-									styleClass="botao-menu-superior botao-logout" 
-									title="Sair"/>
+										icon="ui-icon-logout"
+										styleClass="botao-menu-superior botao-logout" 
+										title="Sair"/>
 							</ui:insert>
 						</f:facet>
 					</p:toolbar>

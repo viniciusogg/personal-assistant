@@ -2,6 +2,6 @@ package br.com.personalassistant.enums;
 
 public enum ESTADO_NEGOCIACAO {
 
-	FINALIZADA, EM_ANDAMENTO, CANCELADA;
+	CONCLUÍDA, EM_ANDAMENTO, CANCELADA;
 
 }

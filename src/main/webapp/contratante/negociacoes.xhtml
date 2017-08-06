@@ -15,13 +15,31 @@
 		
 		<div class="ui-g">
 			<div class="ui-g-12">
-				<ui:include src="/WEB-INF/templates/_tabelaNegociacoes.xhtml">
-					<ui:param name="valueTabela" value="#"/>
-					<ui:param name="valueDataInicio" value="#" />
-					<ui:param name="tipoUsuario" value="ASSISTENTE" />
-					<ui:param name="valueTipoUsuairo" value="#" />
-					<ui:param name="valueStatus" value="#" />
-				</ui:include>
+				<p:dataTable id="tabelaNegociacoes" var="proposta" 
+						value="#{valueTabela}" rows="20"
+			            paginator="true"
+			            paginatorTemplate="{PageLinks}">
+			                 
+			        <f:facet name="header"> SUAS NEGOCIAÇÕES </f:facet>
+			                  
+					<p:column headerText="DATA DA PROPOSTA">
+						<h:outputText value="#{proposta.dataDaProposta}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>
+					</p:column>
+					<p:column headerText="ASSISTENTE">
+						<p:outputLabel value="#{proposta.assistente.nome}" />		
+					</p:column>
+					<p:column headerText="STATUS">
+						<p:outputLabel value="#{proposta.status == 'EM_ANDAMENTO' ? 'Em andamento' : 
+								(proposta.status == 'CANCELADA' ? 'Cancelada' : 'Concluída')}"/> 			
+					</p:column>
+					<p:column headerText="DETALHES">
+						<p:commandButton icon="ui-icon-search" title="Detalhes da negociação"
+								actionListener="#">
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
 			</div>
 		</div>
 	</ui:define>			

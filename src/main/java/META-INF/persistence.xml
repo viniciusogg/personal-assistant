@@ -23,7 +23,7 @@
 		<class>br.com.personalassistant.entidades.Servico</class>
 		<class>br.com.personalassistant.entidades.Usuario</class>
 		<class>br.com.personalassistant.entidades.DataRealizacaoServico</class>
-		
+		<class>br.com.personalassistant.entidades.Negociacao</class>
 		
 		<properties>
 
