@@ -67,6 +67,32 @@ public class NegociacaoService implements Serializable {
 			throw new ServiceException(ex.getMessage());
 		}
 	}
-
+	
+	public List<Negociacao> getToAssistenteAllById(Long id) throws ServiceException, NaoExistemObjetosException{
+		try {
+			return this.negociacaoDAO.getToAssistenteAllById(id);
+		}
+		catch (PersistenciaException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+	
+	public List<Negociacao> getToContratanteAllById(Long id) throws ServiceException, NaoExistemObjetosException{
+		try {
+			return this.negociacaoDAO.getToContratanteAllById(id);
+		}
+		catch (PersistenciaException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+	
+	public Negociacao refresh(Negociacao negociacao) throws ServiceException {
+		try {
+			return this.negociacaoDAO.refresh(negociacao);
+		}
+		catch (PersistenciaException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
 
 }

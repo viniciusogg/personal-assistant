@@ -22,10 +22,10 @@ public class DataRealizacaoServico implements Serializable{
 	private Date dataRealizacaoLimite = new Date();
 	
 	@Temporal(TemporalType.TIME)
-	private Date horaRealizacaoServicoInicial = new Date();
+	private Date horaRealizacaoServicoInicial;
 	
 	@Temporal(TemporalType.TIME)
-	private Date horaRealizacaoServicoFinal = new Date();
+	private Date horaRealizacaoServicoFinal;
 	
 	public DataRealizacaoServico() {
 		super();

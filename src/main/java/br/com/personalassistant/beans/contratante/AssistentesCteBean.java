@@ -46,7 +46,7 @@ public class AssistentesCteBean extends AbstractBean {
 			this.negociacao.setContratante(this.contratante);
 
 			this.proposta = new Proposta();
-			this.proposta.setContratante(this.contratante);
+			this.proposta.setAutorProposta(this.contratante);
 			this.proposta.setNegociacao(this.negociacao);
 			
 			this.assistentes = assistenteService.getAll();
@@ -65,7 +65,6 @@ public class AssistentesCteBean extends AbstractBean {
 		Severity severity = null;
 		
 		try {			
-			this.proposta.setAssistente(this.assistente);
 			
 			if(this.precisaEndereco){
 				this.proposta.setEndereco(this.contratante.getEndereco());

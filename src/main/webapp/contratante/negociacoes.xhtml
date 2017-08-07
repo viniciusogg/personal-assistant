@@ -7,6 +7,10 @@
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 		template="index.xhtml">
 		
+	<f:metadata>
+		<f:event listener="#{negociacoesCteBean.preRenderView}" type="preRenderView" />
+	</f:metadata>
+		
 	<ui:define name="titulo">
 		<p:outputLabel class="titulo" value="NEGOCIAÇÕES"/>
 	</ui:define>
@@ -15,28 +19,28 @@
 		
 		<div class="ui-g">
 			<div class="ui-g-12">
-				<p:dataTable id="tabelaNegociacoes" var="proposta" 
-						value="#{valueTabela}" rows="20"
+				<p:dataTable id="tabelaNegociacoes" var="negociacao" 
+						value="#{negociacoesCteBean.negociacoes}" rows="20"
 			            paginator="true"
 			            paginatorTemplate="{PageLinks}">
 			                 
 			        <f:facet name="header"> SUAS NEGOCIAÇÕES </f:facet>
 			                  
 					<p:column headerText="DATA DA PROPOSTA">
-						<h:outputText value="#{proposta.dataDaProposta}">
+						<h:outputText value="#{negociacao.dataInicioNegociacao}">
 							<f:convertDateTime pattern="dd/MM/yyyy"/>
 						</h:outputText>
 					</p:column>
 					<p:column headerText="ASSISTENTE">
-						<p:outputLabel value="#{proposta.assistente.nome}" />		
+						<p:outputLabel value="#{negociacao.assistente.nome}" />		
 					</p:column>
 					<p:column headerText="STATUS">
-						<p:outputLabel value="#{proposta.status == 'EM_ANDAMENTO' ? 'Em andamento' : 
+						<p:outputLabel value="#{negociacao.status == 'EM_ANDAMENTO' ? 'Em andamento' : 
 								(proposta.status == 'CANCELADA' ? 'Cancelada' : 'Concluída')}"/> 			
 					</p:column>
 					<p:column headerText="DETALHES">
 						<p:commandButton icon="ui-icon-search" title="Detalhes da negociação"
-								actionListener="#">
+								actionListener="#{negociacoesCteBean.verDetalhesNegociacao(negociacao.id)}">
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>

@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<p:dialog styleClass="dialog" appendTo="@(body)" resizable="false" 
+			responsive="true" widgetVar="dialog" modal="true" draggable="false" header="#{headerDialog}" >
+		<h:form >
+			<div class="ui-g-12">
+				<div class="ui-g-12">
+					<div class="ui-g-6">
+						<p:outputLabel value="Escolha o tipo de pagamento*"/>
+					</div>
+					<div class="ui-g-6">
+						<p:selectOneMenu value="#{tipoPagamento}" styleClass="combobox">
+							<f:selectItem itemLabel="Hora trabalhada" itemValue="HORA_TRABALHADA" />
+							<f:selectItem itemLabel="Preço fixo" itemValue="PRECO_FIXO" />														
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="ui-g-12">
+					<div class="ui-g-6">
+						<p:outputLabel value="Valor da proposta*"/>
+					</div>
+					<div class="ui-g-6">
+						<p:inputNumber value="#{valorProposta}" required="true"
+								requiredMessage="Você esqueceu de informar o preço que você pagará"/>
+					</div>
+				</div>
+				<div class="ui-g-12">
+					<div class="ui-g-6">
+						<p:outputLabel value="Data de início do serviço*"/>
+					</div>
+					<div class="ui-g-6">
+						<p:calendar showButtonPanel="false"
+								value="#{dataInicioServico}"
+								navigator="true"
+								pattern="dd/MM/yyyy" 
+								required="true" 
+								requiredMessage="Você esqueceu de informar a data de ínicio do serviço">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</p:calendar>
+					</div>
+				</div>
+				<div class="ui-g-12">
+					<div class="ui-g-6">
+						<p:outputLabel value="Data limite para realização do serviço*"/>
+					</div>
+					<div class="ui-g-6">
+						<p:calendar showButtonPanel="false"
+								value="#{dataLimiteServico}"
+								navigator="true"
+								pattern="dd/MM/yyyy"
+								required="true" 
+								requiredMessage="Você esqueceu de informar a data limite para a conclusão do serviço">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</p:calendar>
+					</div>
+				</div>
+				<div class="ui-g-12">
+					<div class="ui-g-12">
+						<p:outputLabel value="COMENTÁRIO"/>
+					</div>
+					<div class="ui-g-12">
+						<p:inputTextarea value="#{comentario}" maxlength="350" 
+								styleClass="ui-g-12" autoResize="false" size="103"/>
+					</div>
+				</div>
+				<div class="ui-g-12">
+					<div class="ui-g-12">
+						<p:selectBooleanCheckbox id="checkbox" value="#{checkbox}" rendered="#{renderizarCheckbox != null ? renderizarCheckbox : true}"
+								itemLabel="O assistente deverá deslocar-se até o meu endereço para realizar o serviço"/>
+					</div>
+				</div>
+				<div class="ui-g-12">
+					<p:commandButton value="ENVIAR" styleClass="botao-dialog"
+							actionListener="#{managedBean[acao]}"
+							update="msg"/> 
+					<p:commandButton value="CANCELAR" 
+							onclick="PF('dialog').hide()" styleClass="botao-dialog"/>
+				</div>
+			</div>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>

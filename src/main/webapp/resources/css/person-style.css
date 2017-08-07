@@ -306,6 +306,11 @@ a{
 	margin-bottom: 20px;
 }
 
+.fieldset-negociacao{
+	border: 3px solid #1976D2 !important;
+	margin-bottom: 20px;
+}
+
 .campo-formulario{
 	text-align:center; 
 }

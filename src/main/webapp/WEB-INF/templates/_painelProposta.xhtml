@@ -6,18 +6,23 @@
 		xmlns:p="http://primefaces.org/ui"
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
-	<p:fieldset styleClass="fieldset" legend="PROPOSTA">
-		<div class="ui-g-6">
+	<p:fieldset styleClass="#{class}" legend="PROPOSTA">
+		<div class="ui-g-4">
 			<div class="ui-g-12">
 				<p:outputLabel value="#{tipoUsuario != null ? tipoUsuario : ''}: #{nomeUsuario != null ? nomeUsuario : ''}" />
 			</div>
 		</div>
-		<div class="ui-g-6">
+		<div class="ui-g-5">
 			<div class="ui-g-3">
 				<p:outputLabel value="REPUTAÇÃO:"/>
 			</div>
 			<div class="ui-g-9">
 				<p:rating readonly="true" value="#{reputacaoUsuario != null ? reputacaoUsuario : 0}"/>
+			</div>
+		</div>
+		<div class="ui-g-3">
+			<div class="ui-g-12">
+				<p:outputLabel value="CONTATO: #{contato}"/>
 			</div>
 		</div>
 	
@@ -33,13 +38,23 @@
 		</div>
 		
 		<div class="ui-g-6">
-			<div class="ui-g-12">
-				<p:outputLabel value="DATA DE INÍCIO DO SERVIÇO: #{dataInicio != null ? dataInicio : ''}" />				
+			<div class="ui-g-5">
+				<p:outputLabel value="DATA DE INÍCIO DO SERVIÇO:" />			
+			</div>
+			<div class="ui-g-5">
+				<p:outputLabel value="#{dataInicio != null ? dataInicio : ''}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</p:outputLabel>
 			</div>
 		</div>
 		<div class="ui-g-6">
-			<div class="ui-g-12">
-				<p:outputLabel value="DATA DE CONCLUSÃO DO SERVIÇO: #{dataFinal != null ? dataFinal : ''}" />
+			<div class="ui-g-6">
+				<p:outputLabel value="DATA DE CONCLUSÃO DO SERVIÇO:"/>
+			</div>
+			<div class="ui-g-5">
+				<p:outputLabel value="#{dataFinal != null ? dataFinal : ''}" >
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</p:outputLabel>
 			</div>
 		</div>
 		
@@ -61,12 +76,6 @@
 					<ui:param name="cidade" value="#{cidade != null ? cidade : ''}" />					
 				</ui:include>
 			</p:fieldset>
-		</div>
-		
-		<div class="ui-g-12">
-			<p:commandButton value="ACEITAR" styleClass="botao-proposta"/>
-			<p:commandButton value="ENCERRAR NEGOCIAÇÃO" styleClass="botao-proposta"/>
-			<p:commandButton value="EDITAR" styleClass="botao-proposta" />
 		</div>
 		
 	</p:fieldset>

@@ -101,5 +101,72 @@ public class NegociacaoDAO extends DAO {
 		return negociacao;
 	}
 	
+	public List<Negociacao> getToAssistenteAllById(Long id) throws PersistenciaException, NaoExistemObjetosException {
+		
+		EntityManager entityManager = getEntityManager();
+		List<Negociacao> negociacoes = null;
+		
+		try{
+			TypedQuery<Negociacao> typedQuery = entityManager.createQuery("SELECT negociacao FROM "
+					+ "Negociacao negociacao "
+					+ "WHERE negociacao.assistente.id = :id", Negociacao.class);
+			typedQuery.setParameter("id", id);
+			
+			negociacoes = typedQuery.getResultList();
+		}
+		catch(PersistenceException ex){
+			
+			if(negociacoes == null){
+				throw new NaoExistemObjetosException("Não existem negociacoes");
+			}
+			
+			ex.printStackTrace();
+			throw new PersistenceException("Erro ao recuperar negociacoes");
+		}
+		
+		return negociacoes;
+	}
 	
+	public List<Negociacao> getToContratanteAllById(Long id) throws PersistenciaException, NaoExistemObjetosException {
+		
+		EntityManager entityManager = getEntityManager();
+		List<Negociacao> negociacoes = null;
+		
+		try{
+			TypedQuery<Negociacao> typedQuery = entityManager.createQuery("SELECT negociacao FROM "
+					+ "Negociacao negociacao "
+					+ "WHERE negociacao.contratante.id = :id", Negociacao.class);
+			typedQuery.setParameter("id", id);
+			
+			negociacoes = typedQuery.getResultList();
+		}
+		catch(PersistenceException ex){
+			
+			if(negociacoes == null){
+				throw new NaoExistemObjetosException("Não existem negociacoes");
+			}
+			
+			ex.printStackTrace();
+			throw new PersistenceException("Erro ao recuperar negociacoes");
+		}
+		
+		return negociacoes;
+	}
+	
+	public Negociacao refresh(Negociacao negociacao) throws PersistenciaException {
+		
+		EntityManager entityManager = getEntityManager();
+		
+		try{
+			negociacao = entityManager.find(Negociacao.class, negociacao.getId());
+			entityManager.refresh(negociacao);
+			negociacao = entityManager.find(Negociacao.class, negociacao.getId());
+		}
+		catch(PersistenceException ex){
+			ex.printStackTrace();
+			throw new PersistenciaException("Refresh falhou");
+		}
+		
+		return negociacao;
+	}
 }

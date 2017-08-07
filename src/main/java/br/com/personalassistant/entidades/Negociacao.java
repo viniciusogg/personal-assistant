@@ -14,6 +14,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -30,16 +31,16 @@ public class Negociacao {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 
+	@Column(name="negociacao_FK", nullable=false)
 	@OneToMany(mappedBy = "negociacao", cascade = CascadeType.ALL)
-	@Column(nullable = false)
 	private List<Proposta> propostas = new ArrayList<Proposta>();
 	
 	@OneToOne
-	@Column(nullable = false)
+	@JoinColumn(nullable = false, name="contratante_FK")
 	private Contratante contratante;
 	
 	@OneToOne
-	@Column(nullable = false)
+	@JoinColumn(nullable = false, name="assistente_FK")
 	private Assistente assistente;
 
 	@Temporal(TemporalType.DATE)

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:o="http://omnifaces.org/ui">
+
+	<f:metadata>
+		<o:viewParam name="id" value="#{negociacaoCteBean.negociacao}" converter="conversorNegociacao" />
+		<f:event listener="#{negociacaoCteBean.preRenderView}" type="preRenderView" />
+	</f:metadata>	
+	
+	<ui:composition template="index.xhtml">
+			
+		<ui:define name="titulo">
+			<p:outputLabel class="titulo" value="PROPOSTAS"/>
+		</ui:define>
+		
+		<ui:define name="conteudo">
+			
+			<p:growl id="msg" life="3500" showDetail="false" escape="false"/>			
+			
+			<div class="ui-g">
+				
+				<div class="ui-g-12">
+					<div class="ui-g-12">
+						<ui:repeat var="proposta" value="#{negociacaoCteBean.negociacao.propostas}" varStatus="indice">
+							<ui:include src="/WEB-INF/templates/_painelProposta.xhtml">
+								<ui:param name="class" value="#{indice.last == true ? 'fieldset-negociacao' : 'fieldset'}" />
+								<ui:param name="tipoUsuario" value="#{proposta.autorProposta.tipoUsuario}" />
+								<ui:param name="nomeUsuario" value="#{proposta.autorProposta.nome}" />
+								<ui:param name="reputacaoUsuario" value="#{proposta.autorProposta.tipoUsuario == 'CONTRATANTE' ? 
+										proposta.negociacao.contratante.reputacao : proposta.negociacao.assistente.reputacao}" />
+								<ui:param name="contato" value="#{proposta.autorProposta.numTelefonico}" />
+								<ui:param name="tipoPagamento" value="#{proposta.tipoPagamento == 'PRECO_FIXO' ? 'Preço fixo' : 'Hora trabalhada'}" />
+								<ui:param name="valorProposta" value="#{proposta.preco}" />
+								<ui:param name="dataInicio" value="#{proposta.dataRealizacaoServico.dataRealizacaoInicial}" />
+								<ui:param name="dataFinal" value="#{proposta.dataRealizacaoServico.dataRealizacaoLimite}" />
+								<ui:param name="comentario" value="#{proposta.comentario}"/>
+								
+								<ui:param name="renderizarEndereco" value="#{proposta.endereco != null}"/>
+								<ui:param name="rua" value="#{proposta.endereco.rua != null ? 
+										proposta.endereco.rua : '#'}"/>
+								<ui:param name="numero" value="#{proposta.endereco.numero != null ? 
+										proposta.endereco.numero : '#'}"/>
+								<ui:param name="cep" value="#{proposta.endereco.cep != null ? 
+										proposta.endereco.cep : '#'}" />
+								<ui:param name="bairro" value="#{proposta.endereco.bairro != null ? 
+										proposta.endereco.bairro : '#'}"/>
+								<ui:param name="referencia" value="#{proposta.endereco.referencia != null ? 
+										proposta.endereco.referencia : '#'}"/>
+								<ui:param name="estado" value="#{proposta.endereco.estado != null ? 
+										proposta.endereco.estado : '#'}" />
+								<ui:param name="cidade" value="#{proposta.endereco.cidade != null ? 
+										proposta.endereco.cidade : '#'}" />
+																		
+							</ui:include>
+						</ui:repeat>						
+					</div>
+					
+					<p:outputPanel class="ui-g-12" rendered="#{negociacaoCteBean.negociacao.status == 'EM_ANDAMENTO' 
+							and negociacaoCteBean.renderizarBotoes}">
+						<p:commandButton value="ACEITAR" styleClass="botao-proposta"/>
+						<p:commandButton value="ENCERRAR NEGOCIAÇÃO" styleClass="botao-proposta"/>
+						
+						<p:commandButton value="EDITAR" styleClass="botao-proposta" onclick="PF('dialog').show()"/>
+						<ui:include src="/WEB-INF/templates/_dialogProposta.xhtml">
+							<ui:param name="headerDialog" value="EDIÇÃO DA PROPOSTA" />
+							<ui:param name="tipoPagamento" value="#{negociacaoCteBean.propostaEditada.tipoPagamento}" />
+							<ui:param name="valorProposta" value="#{negociacaoCteBean.propostaEditada.preco}" />
+							<ui:param name="dataInicioServico" value="#{negociacaoCteBean.propostaEditada.dataRealizacaoServico.dataRealizacaoInicial}" />
+							<ui:param name="dataLimiteServico" value="#{negociacaoCteBean.propostaEditada.dataRealizacaoServico.dataRealizacaoLimite}" />
+							<ui:param name="comentario" value="#{negociacaoCteBean.propostaEditada.comentario}" />
+							<ui:param name="checkbox" value="#{negociacaoCteBean.precisaEndereco}" />
+							<ui:param name="managedBean" value="#{negociacaoCteBean}" />
+							<ui:param name="acao" value="editarProposta" />
+						</ui:include>
+						
+					</p:outputPanel>
+				</div>
+			</div>
+		</ui:define>			
+	</ui:composition>
+
+</html>

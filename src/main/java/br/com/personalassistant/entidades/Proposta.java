@@ -40,12 +40,8 @@ public class Proposta implements Serializable{
 	private Negociacao negociacao = new Negociacao();
 	
 	@ManyToOne
-	@JoinColumn(name="assistente_FK",nullable = false)
-	private Assistente assistente; //bidirecional
-	
-	@ManyToOne
-	@JoinColumn(name="contratante_FK", nullable = false)
-	private Contratante contratante; //bidirecional
+	@JoinColumn(name="usuario_FK",nullable = false)
+	private Usuario autorProposta; //unidirecional
 	
 	@ManyToOne
 	@JoinColumn(name = "endereco_FK")
@@ -60,15 +56,14 @@ public class Proposta implements Serializable{
 	}
 	
 	public Proposta(Double preco, String comentario, TIPO_PAGAMENTO tipoPagamento, Negociacao negociacao,
-			Assistente assistente, Contratante contratante, Endereco endereco,
+			Usuario autorProposta, Endereco endereco,
 			DataRealizacaoServico dataRealizacaoServico) {
 		super();
 		this.preco = preco;
 		this.comentario = comentario;
 		this.tipoPagamento = tipoPagamento;
 		this.negociacao = negociacao;
-		this.assistente = assistente;
-		this.contratante = contratante;
+		this.autorProposta = autorProposta;
 		this.endereco = endereco;
 		this.dataRealizacaoServico = dataRealizacaoServico;
 	}
@@ -105,20 +100,12 @@ public class Proposta implements Serializable{
 		this.negociacao = negociacao;
 	}
 
-	public Assistente getAssistente() {
-		return assistente;
+	public Usuario getAutorProposta() {
+		return autorProposta;
 	}
 
-	public void setAssistente(Assistente assistente) {
-		this.assistente = assistente;
-	}
-
-	public Contratante getContratante() {
-		return contratante;
-	}
-
-	public void setContratante(Contratante contratante) {
-		this.contratante = contratante;
+	public void setAutorProposta(Usuario autorProposta) {
+		this.autorProposta = autorProposta;
 	}
 
 	public Endereco getEndereco() {
@@ -145,9 +132,7 @@ public class Proposta implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((assistente == null) ? 0 : assistente.hashCode());
 		result = prime * result + ((comentario == null) ? 0 : comentario.hashCode());
-		result = prime * result + ((contratante == null) ? 0 : contratante.hashCode());
 		result = prime * result + ((dataRealizacaoServico == null) ? 0 : dataRealizacaoServico.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -166,20 +151,10 @@ public class Proposta implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Proposta other = (Proposta) obj;
-		if (assistente == null) {
-			if (other.assistente != null)
-				return false;
-		} else if (!assistente.equals(other.assistente))
-			return false;
 		if (comentario == null) {
 			if (other.comentario != null)
 				return false;
 		} else if (!comentario.equals(other.comentario))
-			return false;
-		if (contratante == null) {
-			if (other.contratante != null)
-				return false;
-		} else if (!contratante.equals(other.contratante))
 			return false;
 		if (dataRealizacaoServico == null) {
 			if (other.dataRealizacaoServico != null)
@@ -214,8 +189,8 @@ public class Proposta implements Serializable{
 	@Override
 	public String toString() {
 		return "Proposta [id=" + id + ", preco=" + preco + ", comentario=" + comentario + ", tipoPagamento="
-				+ tipoPagamento + ", negociacao=" + negociacao + ", assistente=" + assistente + ", contratante="
-				+ contratante + ", endereco=" + endereco + ", dataRealizacaoServico=" + dataRealizacaoServico + "]";
+				+ tipoPagamento + ", negociacao=" + negociacao + ", autorProposta="
+				+ autorProposta + ", endereco=" + endereco + ", dataRealizacaoServico=" + dataRealizacaoServico + "]";
 	}
 
 }

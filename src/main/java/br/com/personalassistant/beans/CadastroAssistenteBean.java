@@ -57,8 +57,8 @@ public class CadastroAssistenteBean extends AbstractBean {
 	
 	public void salvarAssistente(){
 		
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.getExternalContext().getFlash().setKeepMessages(true);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.getExternalContext().getFlash().setKeepMessages(true);
 		
 		Severity severity = null;
 		String msg = "";
@@ -86,7 +86,7 @@ public class CadastroAssistenteBean extends AbstractBean {
 			e.printStackTrace();
 		}
 		
-		context.addMessage(null, new FacesMessage(severity, msg, ""));
+		facesContext.addMessage(null, new FacesMessage(severity, msg, ""));
 	}
 
 	public Assistente getAssistente() {

@@ -20,29 +20,28 @@
 		<div class="ui-g">
 			<div class="ui-g-12">
 				
-				<p:dataTable id="tabelaNegociacoes" var="proposta" 
-						value="#{negociacoesAstBean.propostas}" rows="20"
+				<p:dataTable id="tabelaNegociacoes" var="negociacao" 
+						value="#{negociacoesAstBean.negociacoes}" rows="20"
 			            paginator="true"
 			            paginatorTemplate="{PageLinks}">
 			                 
 			        <f:facet name="header"> SUAS NEGOCIAÇÕES </f:facet>
 			                  
-					<p:column headerText="DATA DA PROPOSTA">
-						<h:outputText value="#{proposta.dataDaProposta}">
+					<p:column headerText="DATA DE INICIO DA NEGOCIAÇÃO">
+						<p:outputLabel value="#{negociacao.dataInicioNegociacao}">
 							<f:convertDateTime pattern="dd/MM/yyyy"/>
-						</h:outputText>
+						</p:outputLabel>
 					</p:column>
 					<p:column headerText="CONTRATANTE">
-						<p:outputLabel value="#{proposta.contratante.nome}" />		
+						<p:outputLabel value="#{negociacao.contratante.nome}" />		
 					</p:column>
 					<p:column headerText="STATUS">
-						<p:outputLabel value="#{proposta.status == 'EM_ANDAMENTO' ? 'Em andamento' : 
-								(proposta.status == 'CANCELADA' ? 'Cancelada' : 'Concluída')}"/> 			
+						<p:outputLabel value="#{negociacao.status == 'EM_ANDAMENTO' ? 'Em andamento' : 
+								(negociacao.status == 'CANCELADA' ? 'Cancelada' : 'Concluída')}"/> 			
 					</p:column>
 					<p:column headerText="DETALHES">
 						<p:commandButton icon="ui-icon-search" title="Detalhes da negociação"
-							actionListener="#{negociacoesAstBean.verDetalhesProposta(proposta.id)}">
-						</p:commandButton>
+							actionListener="#{negociacoesAstBean.verDetalhesNegociacao(negociacao.id)}" />
 					</p:column>
 				</p:dataTable>
 			</div>
