@@ -1,6 +1,9 @@
 package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -13,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import br.com.personalassistant.enums.TIPO_PAGAMENTO;
 
@@ -51,8 +56,15 @@ public class Proposta implements Serializable{
 	@Column(nullable = false)
 	private DataRealizacaoServico dataRealizacaoServico = new DataRealizacaoServico();
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataProposta;
+	
 	public Proposta() {
 		super();
+		
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(new Date());
+		this.dataProposta =  calendar.getTime();
 	}
 	
 	public Proposta(Double preco, String comentario, TIPO_PAGAMENTO tipoPagamento, Negociacao negociacao,
@@ -66,6 +78,10 @@ public class Proposta implements Serializable{
 		this.autorProposta = autorProposta;
 		this.endereco = endereco;
 		this.dataRealizacaoServico = dataRealizacaoServico;
+		
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(new Date());
+		this.dataProposta =  calendar.getTime();
 	}
 
 	public Double getPreco() {
@@ -126,6 +142,14 @@ public class Proposta implements Serializable{
 
 	public Long getId() {
 		return id;
+	}
+	
+	public Date getDataProposta() {
+		return dataProposta;
+	}
+
+	public void setDataProposta(Date dataProposta) {
+		this.dataProposta = dataProposta;
 	}
 
 	@Override
@@ -193,4 +217,5 @@ public class Proposta implements Serializable{
 				+ autorProposta + ", endereco=" + endereco + ", dataRealizacaoServico=" + dataRealizacaoServico + "]";
 	}
 
+	
 }

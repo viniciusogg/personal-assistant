@@ -160,7 +160,6 @@ public class NegociacaoDAO extends DAO {
 		try{
 			negociacao = entityManager.find(Negociacao.class, negociacao.getId());
 			entityManager.refresh(negociacao);
-			negociacao = entityManager.find(Negociacao.class, negociacao.getId());
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();

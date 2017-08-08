@@ -80,6 +80,59 @@ public class OfertaServicoDAO extends DAO {
 		return ofertasServicos;
 	}
 	
+	public List<OfertaServico> getAllByIdContratante(Long id) throws PersistenciaException, NaoExistemObjetosException {
+		
+		EntityManager entityManager = getEntityManager();
+		List<OfertaServico> ofertasServicos = null;
+		
+		try{
+			TypedQuery<OfertaServico> typedQuery = entityManager.createQuery("SELECT ofertaServico "
+					+ "FROM OfertaServico ofertaServico "
+					+ "WHERE ofertaServico.contratante.id = :id", OfertaServico.class);
+			typedQuery.setParameter("id", id);
+			
+			ofertasServicos = typedQuery.getResultList();
+		}
+		catch(PersistenceException ex){
+			
+			if(ofertasServicos == null){
+				throw new NaoExistemObjetosException("Não existem ofertasServicos");
+			}
+			
+			ex.printStackTrace();
+			throw new PersistenceException("Erro ao recuperar ofertasServicos");
+		}
+		
+		return ofertasServicos;
+	}
+	
+	public List<OfertaServico> getAllByIdCategoriaServico(Long id) throws PersistenciaException, NaoExistemObjetosException {
+		
+		EntityManager entityManager = getEntityManager();
+		List<OfertaServico> ofertasServicos = null;
+		
+		try{
+			TypedQuery<OfertaServico> typedQuery = entityManager.createQuery("SELECT ofertaServico "
+					+ "FROM OfertaServico ofertaServico "
+					+ "WHERE ofertaServico.categoriaServico.id = :id "
+					+ "AND ofertaServico.status = 'EM_ESPERA'", OfertaServico.class);
+			typedQuery.setParameter("id", id);
+			
+			ofertasServicos = typedQuery.getResultList();
+		}
+		catch(PersistenceException ex){
+			
+			if(ofertasServicos == null){
+				throw new NaoExistemObjetosException("Não existem ofertasServicos");
+			}
+			
+			ex.printStackTrace();
+			throw new PersistenceException("Erro ao recuperar ofertasServicos");
+		}
+		
+		return ofertasServicos;
+	}
+	
 	public OfertaServico getById(Long id) throws PersistenciaException, ObjetoNaoExisteException {
 		
 		EntityManager entityManager = getEntityManager();

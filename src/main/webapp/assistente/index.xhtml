@@ -7,6 +7,10 @@
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 		template="/WEB-INF/templates/__pageLayout.xhtml">
 		
+	<f:metadata>
+		<f:event listener="#{indexAssistenteBean.preRenderView}" type="preRenderView" />
+	</f:metadata>
+		
 	<ui:define name="titulo">
 		<p:outputLabel class="titulo" value="PAINEL DE CONTROLE"/>
 	</ui:define>
@@ -25,7 +29,7 @@
 		
 		<div class="ui-g">
 		
-			<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
+			<p:growl id="msg" life="3500" showDetail="false" escape="false" autoUpdate="true"/>
 		
 			<div class="ui-g-12 div-info-panel">
 				<p:outputPanel id="painel-experiencia" styleClass="ui-g info-panel">
@@ -36,11 +40,11 @@
 					
 					<div class="ui-g-6 div-painel-label">
 						<div id="div-label-nivel-experiencia" class="ui-g-12">
-							<p:outputLabel value="#{indexAssistenteBean.nivelExperiencia}"/>										
+							<p:outputLabel value="#{indexAssistenteBean.assistente.nivelExperiencia}"/>										
 						</div>
 		
 						<div id="div-labels-direita" class="ui-g-12">
-							<p:outputLabel value="#{indexAssistenteBean.quantAssistencias}" styleClass="label-direita"/>		
+							<p:outputLabel value="#{indexAssistenteBean.assistente.quantServicosPrestados}" styleClass="label-direita"/>		
 							<p:outputLabel value="assistencias prestadas" styleClass="label-direita"/>
 						</div>					
 					</div>
@@ -50,41 +54,62 @@
 			<div class="ui-g-12 div-info-panel">
 				<ui:include src="/WEB-INF/templates/_painelReputacaoUsuario.xhtml"> 
 					<ui:param name="reputacao" value="#{indexAssistenteBean.reputacao}"/>
-					<ui:param name="quantEstrelas" value="#{indexAssistenteBean.quantAssistencias}" />
-					<ui:param name="totalAvaliacoes" value="#{indexAssistenteBean.totalAvaliacoes}" />
+					<ui:param name="quantEstrelas" value="#{indexAssistenteBean.assistente.reputacao}" />
+					<ui:param name="totalAvaliacoes" value="0" /> <!-- CORRIGIR PARA TOTAL SERVIÇOS -->
 				</ui:include>
 			</div>
 		
 			<div id="div-tabela" class="ui-g-12">
-				<p:dataTable id="tabelaAssistencias" var="#" value="#" rows="20"
+				<p:dataTable id="tabelaAssistencias" var="servico" value="#{indexAssistenteBean.servicos}" rows="20"
                          paginator="true"
                          paginatorTemplate="{PageLinks}">
                     
-                    <f:facet name="header"> SERVIÇOS EM ANDAMENTO </f:facet>
+                    <f:facet name="header"> SERVIÇOS CONTRATADOS </f:facet>
                      
-					<p:column headerText="DATA DE ÍNICIO">
-						<p:outputLabel value="01/04/2017"/>							
-					</p:column>
-					<p:column headerText="DATA LIMITE">
-						<p:outputLabel value="03/04/2017"/>							
+					<p:column headerText="PRAZO PARA REALIZAÇÃO">
+						<p:outputLabel value="Entre"/>
+						<p:outputLabel value="#{servico.dataRealizacaoServico.dataRealizacaoInicial}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>			
+						</p:outputLabel>
+						
+						<p:outputLabel value="e"/>
+						
+						<p:outputLabel value="#{servico.dataRealizacaoServico.dataRealizacaoLimite}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>									
+						</p:outputLabel>
 					</p:column>
 					<p:column headerText="CONTRATANTE">
-						<p:outputLabel value="Vitor"/>
+						<p:outputLabel value="#{servico.contratante.nome}"/>
 					</p:column>
-					<p:column headerText="ENDEREÇO" rendered="true">
-						<p:outputLabel value="Remoto"/>
+					<p:column headerText="ENDEREÇO" rendered="#{servico.endereco != null}">
+						<p:outputLabel value="#{servico.endereco != null ? servico.endereco.enderecoFormatado : '#'}"/>
 					</p:column>
 					<p:column headerText="TIPO PAGAMENTO">
-						<p:outputLabel value="Hora trabalhada"/>
+						<p:outputLabel value="#{servico.tipoPagamento == 'HORA_TRABALHADA' ? 'Hora trabalhada' : 'Preço fixo'}"/>
 					</p:column>
 					<p:column headerText="PREÇO (R$)">
-						<p:outputLabel value="20,00"/>
+						<p:outputLabel value="#{servico.preco}"/>
 					</p:column>
-					<p:column headerText="">						
-						<h:form>
-							<p:commandButton icon="ui-icon-close" title="Desistir do serviço"/>
-							<p:commandButton icon="ui-icon-check" title="Serviço concluído"/>
-						</h:form>
+					<p:column headerText="STATUS">						
+						<p:commandButton icon="ui-icon-close" title="Desistir do serviço"
+								onclick="PF('cd').show()" rendered="#{servico.status == 'EM_ANDAMENTO'}"/>
+						<p:confirmDialog message="Tem certeza que deseja desistir do serviço ?" appendTo="@(body)"
+								header="CONFIRMAÇÃO" severity="alert" widgetVar="cd" >
+							<p:commandButton value="DESISTIR" actionListener="#{indexAssistenteBean.gerenciarServico(servico.id, false)}"/>
+							<p:commandButton value="CANCELAR" onclick="PF('cd').hide()"/>										
+						</p:confirmDialog>
+							
+						<p:commandButton icon="ui-icon-check" title="Serviço concluído" 
+								onclick="PF('dialogConcluir').show()" rendered="#{servico.status == 'EM_ANDAMENTO'}"/>
+						<p:confirmDialog message="Confirma que concluiu o serviço ?" appendTo="@(body)"
+								header="CONFIRMAÇÃO" severity="info" widgetVar="dialogConcluir">
+							<p:commandButton value="CONFIRMAR" actionListener="#{indexAssistenteBean.gerenciarServico(servico.id, true)}"/>
+							<p:commandButton value="CANCELAR" onclick="PF('dialogConcluir').hide()"/>					
+						</p:confirmDialog>							
+					
+						<p:outputLabel value="#{servico.status == 'EM_ANDAMENTO' ? 'Em andamento' : 
+								(servico.status == 'CONCLUIDO' ? 'Concluído' : 'Cancelado')}"
+								rendered="#{servico.status != 'EM_ANDAMENTO'}"/>
 					</p:column>
 				</p:dataTable>
 			</div>

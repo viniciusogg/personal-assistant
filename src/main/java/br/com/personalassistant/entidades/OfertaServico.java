@@ -1,6 +1,7 @@
 package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -32,8 +35,9 @@ public class OfertaServico implements Serializable{
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
-	private Integer duracaoOferta;
+	private Date dataFinalOferta;
 	
 	@Column(nullable = false)
 	private Double precoHora;
@@ -71,13 +75,14 @@ public class OfertaServico implements Serializable{
 	
 	public OfertaServico() {
 		super();
+		this.status = ESTADO_OFERTA.EM_ESPERA;
 	}
 
-	public OfertaServico(Integer duracaoOferta, Double precoHora, Double precoFixo, String descricao, ESTADO_OFERTA status,
+	public OfertaServico(Date dataFinalOferta, Double precoHora, Double precoFixo, String descricao, ESTADO_OFERTA status,
 			CategoriaServico categoriaServico, Contratante contratante,
 			DataRealizacaoServico dataRealizacaoServico) {
 		super();
-		this.duracaoOferta = duracaoOferta;
+		this.dataFinalOferta = dataFinalOferta;
 		this.precoHora = precoHora;
 		this.precoFixo = precoFixo;
 		this.descricao = descricao;
@@ -85,18 +90,19 @@ public class OfertaServico implements Serializable{
 		this.categoriaServico = categoriaServico;
 		this.contratante = contratante;
 		this.dataRealizacaoServico = dataRealizacaoServico;
+		this.status = ESTADO_OFERTA.EM_ESPERA;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public Integer getDuracaoOferta() {
-		return duracaoOferta;
+	public Date getDataFinalOferta() {
+		return dataFinalOferta;
 	}
 
-	public void setDuracaoOferta(Integer duracaoOferta) {
-		this.duracaoOferta = duracaoOferta;
+	public void setDataFinalOferta(Date dataFinalOferta) {
+		this.dataFinalOferta = dataFinalOferta;
 	}
 
 	public Double getPrecoHora() {
@@ -178,7 +184,7 @@ public class OfertaServico implements Serializable{
 		result = prime * result + ((categoriaServico == null) ? 0 : categoriaServico.hashCode());
 		result = prime * result + ((contratante == null) ? 0 : contratante.hashCode());
 		result = prime * result + ((dataRealizacaoServico == null) ? 0 : dataRealizacaoServico.hashCode());
-		result = prime * result + ((duracaoOferta == null) ? 0 : duracaoOferta.hashCode());
+		result = prime * result + ((dataFinalOferta == null) ? 0 : dataFinalOferta.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lances == null) ? 0 : lances.hashCode());
@@ -213,10 +219,10 @@ public class OfertaServico implements Serializable{
 				return false;
 		} else if (!dataRealizacaoServico.equals(other.dataRealizacaoServico))
 			return false;
-		if (duracaoOferta == null) {
-			if (other.duracaoOferta != null)
+		if (dataFinalOferta == null) {
+			if (other.dataFinalOferta != null)
 				return false;
-		} else if (!duracaoOferta.equals(other.duracaoOferta))
+		} else if (!dataFinalOferta.equals(other.dataFinalOferta))
 			return false;
 		if (endereco == null) {
 			if (other.endereco != null)
@@ -255,7 +261,7 @@ public class OfertaServico implements Serializable{
 
 	@Override
 	public String toString() {
-		return "OfertaServico [id=" + id + ", duracaoOferta=" + duracaoOferta + ", precoHora=" + precoHora
+		return "OfertaServico [id=" + id + ", dataFinalOferta=" + dataFinalOferta + ", precoHora=" + precoHora
 				+ ", precoFixo=" + precoFixo + ", descricao=" + descricao + ", status=" + status + ", endereco=" + endereco
 				+ ", categoriaServico=" + categoriaServico + ", contratante=" + contratante + ", lances=" + lances
 				+ ", dataRealizacaoServico=" + dataRealizacaoServico + "]";

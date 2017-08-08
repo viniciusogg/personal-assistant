@@ -32,15 +32,16 @@
 						<h:form >
 							<div class="ui-g-12">
 								<div class="ui-g-12">
-									<div class="ui-g-6">
+									<div class="ui-g-3">
 										<p:outputLabel value="DESCRICÃO*"/>
 									</div>
-									<div class="ui-g-6">
-										<p:inputText required="true" styleClass="campo-formulario"
+									<div class="ui-g-9">
+										<p:inputText required="true"
 												value="#{ofertaServicoCteBean.ofertaServico.descricao}"
 												requiredMessage="Você esqueceu de preencher o campo 'DESCRIÇÃO'" />
 									</div>
 								</div>
+								
 								<div class="ui-g-12">
 									<div class="ui-g-6">
 										<p:outputLabel value="PREÇO FIXO*"/>
@@ -51,6 +52,7 @@
 												requiredMessage="Você esqueceu de preencher o campo 'PREÇO FIXO'"/>
 									</div>
 								</div>
+								
 								<div class="ui-g-12">
 									<div class="ui-g-6">
 										<p:outputLabel value="PREÇO HORA*"/>
@@ -61,6 +63,7 @@
 												requiredMessage="Você esqueceu de preencher o campo 'PREÇO HORA'"/>
 									</div>
 								</div>
+								
 								<div class="ui-g-12">
 									<div class="ui-g-6">
 										<p:outputLabel value="CATEGORIA DE SERVIÇO*"/>
@@ -72,39 +75,60 @@
 										</p:selectOneMenu>
 									</div>
 								</div>
+								
 								<div class="ui-g-12">
 									<div class="ui-g-6">
 										<p:outputLabel value="Data de início do serviço*"/>
 									</div>
 									<div class="ui-g-6">
-										<p:calendar showButtonPanel="false"
-												navigator="true"
-												pattern="dd/MM/yyyy" 
-												required="true" 
+										<p:calendar showButtonPanel="false" navigator="true"
+												pattern="dd/MM/yyyy" required="true" 
+												value="#{ofertaServicoCteBean.ofertaServico.dataRealizacaoServico.dataRealizacaoInicial}"
 												requiredMessage="Você esqueceu de informar a data que você começará à trabalhar no serviço">
 											<f:convertDateTime pattern="dd/MM/yyyy" />
 										</p:calendar>
 									</div>
 								</div>
+								
 								<div class="ui-g-12">
 									<div class="ui-g-6">
 										<p:outputLabel value="Data limite para realização do serviço*"/>
 									</div>
 									<div class="ui-g-6">
-										<p:calendar showButtonPanel="false"
-												navigator="true"
-												pattern="dd/MM/yyyy"
-												required="true" 
+										<p:calendar showButtonPanel="false" navigator="true"
+												pattern="dd/MM/yyyy" required="true"
+												value="#{ofertaServicoCteBean.ofertaServico.dataRealizacaoServico.dataRealizacaoLimite}"
 												requiredMessage="Você esqueceu de informar a data limite para a conclusão do serviço">
 											<f:convertDateTime pattern="dd/MM/yyyy" />
 										</p:calendar>
 									</div>
-									
 								</div>
+								
 								<div class="ui-g-12">
-									<p:commandButton value="ENVIAR" styleClass="botao-dialog"/> 
-									<!-- actionListener="#{categoriaServicoAdmBean.deletarCategoriaServico}"
-											action="categorias-servicos?faces-redirect=true" -->
+									<div class="ui-g-6">
+										<p:outputLabel value="Data de validade dessa oferta*"/>
+									</div>
+									<div class="ui-g-6">
+										<p:calendar showButtonPanel="false" navigator="true"
+												pattern="dd/MM/yyyy" required="true"
+												value="#{ofertaServicoCteBean.ofertaServico.dataFinalOferta}"
+												requiredMessage="Você esqueceu de informar a data de validade da oferta">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</p:calendar>
+									</div>
+								</div>
+							
+								<div class="ui-g-12">
+									<div class="ui-g-12">
+										<p:selectBooleanCheckbox id="checkbox" value="#{ofertaServicoCteBean.precisaEndereco}"
+												itemLabel="O assistente deverá deslocar-se até o meu endereço para realizar o serviço"/>
+									</div>
+								</div>
+								
+								<div class="ui-g-12">
+									<p:commandButton value="CRIAR" styleClass="botao-dialog" 
+										actionListener="#{ofertaServicoCteBean.criarOfertaServico}"
+											action="ofertas-de-servicos?faces-redirect=true">
 									<p:commandButton value="CANCELAR" 
 											onclick="PF('dialog').hide()" styleClass="botao-dialog"/>
 								</div>

@@ -74,7 +74,7 @@ public class ServicoDAO extends DAO {
 			}
 			
 			ex.printStackTrace();
-			throw new PersistenceException("Erro ao recuperar servicos");
+			throw new PersistenciaException("Erro ao recuperar servicos");
 		}
 		
 		return servicos;
@@ -101,5 +101,53 @@ public class ServicoDAO extends DAO {
 		return servico;
 	}
 	
+	public List<Servico> getAllByIdAssistente(Long id) throws NaoExistemObjetosException, PersistenciaException{
+		EntityManager entityManager = getEntityManager();
+		List<Servico> servicos = null;
+		
+		try{
+			TypedQuery<Servico> typedQuery = entityManager.createQuery("SELECT servico "
+					+ "FROM Servico servico "
+					+ "WHERE servico.assistente.id = :id", Servico.class);
+			typedQuery.setParameter("id", id);
+			
+			servicos = typedQuery.getResultList();
+		}
+		catch(PersistenceException ex){
+			
+			if(servicos == null){
+				throw new NaoExistemObjetosException("Não existem servicos");
+			}
+			
+			ex.printStackTrace();
+			throw new PersistenciaException("Erro ao recuperar servicos");
+		}
+		
+		return servicos;
+	}
 	
+	public List<Servico> getAllByIdContratante(Long id) throws NaoExistemObjetosException, PersistenciaException{
+		EntityManager entityManager = getEntityManager();
+		List<Servico> servicos = null;
+		
+		try{
+			TypedQuery<Servico> typedQuery = entityManager.createQuery("SELECT servico "
+					+ "FROM Servico servico "
+					+ "WHERE servico.contratante.id = :id", Servico.class);
+			typedQuery.setParameter("id", id);
+			
+			servicos = typedQuery.getResultList();
+		}
+		catch(PersistenceException ex){
+			
+			if(servicos == null){
+				throw new NaoExistemObjetosException("Não existem servicos");
+			}
+			
+			ex.printStackTrace();
+			throw new PersistenciaException("Erro ao recuperar servicos");
+		}
+		
+		return servicos;
+	}
 }

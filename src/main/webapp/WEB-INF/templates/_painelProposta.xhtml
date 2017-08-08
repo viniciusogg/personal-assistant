@@ -26,16 +26,21 @@
 			</div>
 		</div>
 	
-		<div class="ui-g-6">
+		<!-- <p:outputPanel styleClass="ui-g-4" rendered="#{renderizarExperiencia != null ? renderizarExperiencia : false}">
+			<div class="ui-g-12">
+				<p:outputLabel value="EXPERIÊNCIA: #{experiencia != null ? experiencia : '#'}" />
+			</div>
+		</p:outputPanel> -->
+		<p:outputPanel styleClass="ui-g-6">
 			<div class="ui-g-12">
 				<p:outputLabel value="TIPO DE PAGAMENTO: #{tipoPagamento != null ? tipoPagamento : ''}" />
 			</div>
-		</div>
-		<div class="ui-g-6">
+		</p:outputPanel>
+		<p:outputPanel styleClass="ui-g-6">
 			<div class="ui-g-12">
 				<p:outputLabel value="VALOR DA PROPOSTA: R$ #{valorProposta != null ? valorProposta : ''}" />
 			</div>
-		</div>
+		</p:outputPanel>
 		
 		<div class="ui-g-6">
 			<div class="ui-g-5">

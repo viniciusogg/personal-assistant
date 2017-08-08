@@ -522,7 +522,10 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after { content: '\e670';
 .ui-icon-circle-help:after,
 .ui-icon-help:after { content: '\e662'; }
 .ui-icon-circle-info:after,
-.ui-icon-info:after { content: '\e665'; }
+.ui-icon-info:after { content: '\e665'; 
+	top: 11px !important;
+	left: 10px !important;
+}
 .ui-icon-circle-minus:after { content: '\e67d'; }
 .ui-icon-circle-notice:after,
 .ui-icon-notice:after { content: '\e668'; }

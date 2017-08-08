@@ -67,4 +67,22 @@ public class ServicoService implements Serializable {
 			throw new ServiceException(ex.getMessage());
 		}
 	}
+	
+	public List<Servico> getAllByIdAssistente(Long id) throws NaoExistemObjetosException, ServiceException{
+		try{
+			return this.servicoDAO.getAllByIdAssistente(id);
+		}
+		catch(PersistenciaException ex){
+			throw new ServiceException(ex.getMessage());
+		}
+	}
+
+	public List<Servico> getAllByIdContratante(Long id) throws NaoExistemObjetosException, ServiceException{
+		try{
+			return this.servicoDAO.getAllByIdContratante(id);
+		}
+		catch(PersistenciaException ex){
+			throw new ServiceException(ex.getMessage());
+		}
+	}
 }

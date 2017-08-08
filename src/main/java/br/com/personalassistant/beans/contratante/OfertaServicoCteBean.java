@@ -1,6 +1,5 @@
 package br.com.personalassistant.beans.contratante;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -9,12 +8,15 @@ import javax.inject.Named;
 
 import br.com.personalassistant.beans.AbstractBean;
 import br.com.personalassistant.entidades.CategoriaServico;
+import br.com.personalassistant.entidades.Contratante;
 import br.com.personalassistant.entidades.DataRealizacaoServico;
 import br.com.personalassistant.entidades.OfertaServico;
-import br.com.personalassistant.enums.ESTADO_OFERTA;
 import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.services.CategoriaServicoService;
+import br.com.personalassistant.services.ContratanteService;
+import br.com.personalassistant.services.OfertaServicoService;
 
 @ViewScoped
 @Named
@@ -22,29 +24,33 @@ public class OfertaServicoCteBean extends AbstractBean {
 
 	private static final long serialVersionUID = -8650273559758651189L;
 
+	@Inject private ContratanteService contratanteService;
 	@Inject private CategoriaServicoService categoriaServicoService;
+	@Inject private OfertaServicoService ofertaServicoService;
 	private List<CategoriaServico> categoriasServicos;
 	private OfertaServico ofertaServico;
+	private boolean precisaEndereco;
 	
 	public void preRenderView(){
-		
-		DataRealizacaoServico dataRealizacaoServico = new DataRealizacaoServico();
-		
-		dataRealizacaoServico.setDataRealizacaoInicial(new Date());
-		dataRealizacaoServico.setDataRealizacaoLimite(new Date());
-		
-		ofertaServico = new OfertaServico();
-		ofertaServico.setDataRealizacaoServico(dataRealizacaoServico);
-		ofertaServico.setStatus(ESTADO_OFERTA.EM_ESPERA);
-		
+	
 		try {
+			Contratante contratante = contratanteService.getContratanteByEmail(getEmailUsuarioLogado());
+
+			this.ofertaServico = new OfertaServico();
+			this.ofertaServico.setDataRealizacaoServico(new DataRealizacaoServico());
+			this.ofertaServico.setContratante(contratante);
+			
 			categoriasServicos = categoriaServicoService.getAll();
 		} 
-		catch (ServiceException | NaoExistemObjetosException e) {
+		catch (ServiceException | NaoExistemObjetosException | ObjetoNaoExisteException e) {
 			e.printStackTrace();
 		}
 	}
 
+	public void criarOfertaServico(){
+		
+	}
+	
 	public List<CategoriaServico> getCategoriasServicos() {
 		return categoriasServicos;
 	}
@@ -59,6 +65,14 @@ public class OfertaServicoCteBean extends AbstractBean {
 
 	public void setOfertaServico(OfertaServico ofertaServico) {
 		this.ofertaServico = ofertaServico;
+	}
+
+	public boolean isPrecisaEndereco() {
+		return precisaEndereco;
+	}
+
+	public void setPrecisaEndereco(boolean precisaEndereco) {
+		this.precisaEndereco = precisaEndereco;
 	}
 	
 	

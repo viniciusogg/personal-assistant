@@ -183,6 +183,6 @@ public class Endereco implements Serializable{
 	}
 	
 	public String getEnderecoFormatado(){
-		return rua+", "+numero+", "+cep+", "+referencia+", "+bairro+", "+cidade + ", "+estado;
+		return "Rua: "+rua+", Nº: "+numero+", CEP: "+cep+", referência: "+referencia+", bairro: "+bairro+", cidade: "+cidade + ", estado: "+estado;
 	}
 }

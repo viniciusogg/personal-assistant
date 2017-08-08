@@ -26,11 +26,9 @@
     outline-width: 0px !important;
 }
 
-/*.align-element{ APLICAR NAS <div>s
-	height: 50px;
-    text-align: center;
-    line-height: 2.2em;
-}*/
+tbody[id="tabelaAssistencias_data"] > tr > td > label{
+	display: -moz-deck !important;
+}
 
 div{
 	border-radius: 0px !important;
@@ -582,12 +580,17 @@ li[class="ui-chips-token ui-state-active ui-corner-all"] > span[class="ui-chips-
 	top: 8px;
 }
 
+
 div[class="ui-outputpanel ui-widget ui-g info-panel div-info-painel"]:hover {
-	/*margin-top: 1% !important; PRINCIPAL*/
-	margin-top: -1% !important;
+
+/*	margin-top: -1% !important;
 	margin-right: 0% !important;
 	margin-left: 3% !important;
-	margin-bottom: 4% !important;
+	margin-bottom: 4% !important;*/
+
+	margin-left: 35px !important;
+	margin-right: 10px !important;
+	margin-top: 14px !important;
 }
 
 /*ADMIN*/

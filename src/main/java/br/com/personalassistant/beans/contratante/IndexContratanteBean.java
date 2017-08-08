@@ -1,48 +1,74 @@
 package br.com.personalassistant.beans.contratante;
 
-import br.com.personalassistant.beans.AbstractBean;
+import java.util.List;
 
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import br.com.personalassistant.beans.AbstractBean;
+import br.com.personalassistant.entidades.Contratante;
+import br.com.personalassistant.entidades.Servico;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
+import br.com.personalassistant.excecoes.ServiceException;
+import br.com.personalassistant.services.ContratanteService;
+import br.com.personalassistant.services.ServicoService;
+
+@Named
+@ViewScoped
 public class IndexContratanteBean extends AbstractBean{
 
 	private static final long serialVersionUID = -7936163110122575442L;
 
-	private Long totalAvaliacoes = new Long(800);
-	private Integer quantEstrelas = 4;
+	@Inject private ServicoService servicoService;
+	@Inject private ContratanteService contratanteService;
+	private Contratante contratante;
+	private List<Servico> servicos;
 	
-	public Long getTotalAvaliacoes() {
-		return totalAvaliacoes;
-	}
-	
-	public void setTotalAvaliacoes(Long totalAvaliacoes) {
-		this.totalAvaliacoes = totalAvaliacoes;
-	}
-	
-	public Integer getQuantEstrelas() {
-		return quantEstrelas;
-	}
-	
-	public void setQuantEstrelas(Integer quantEstrelas) {
-		this.quantEstrelas = quantEstrelas;
+	public void preRenderView(){
+		try {
+			this.contratante = contratanteService.getContratanteByEmail(getEmailUsuarioLogado());
+			this.servicos = this.servicoService.getAllByIdContratante(this.contratante.getId());
+		} 
+		catch (ObjetoNaoExisteException | NaoExistemObjetosException e) {} 
+		catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String getReputacao(){
-		/*
-		 * TOTAL DE AVALIAÇÕES DE 1 ESTRELA: 4 = 4/800 = 0,005x100 = 0,5%
-		 * TOTAL DE AVALIAÇÕES DE 2 ESTRELAS: 2 = 2/800 = 0,0025x100 = 0,25%
-		 * TOTAL DE AVALIAÇÕES DE 3 ESTRELAS: 10 = 10/800 = 0,0125x100 = 1,25%
-		 * TOTAL DE AVALIAÇÕES DE 4 ESTRELAS: 200 = 200/800 = 0,25x100 = 25%
-		 * TOTAL DE AVALIAÇÕES DE 5 ESTRELAS: 500 = 584/800 = 0,73x100 = 73%
-		 * 
-		 * pontualidade = 5
-		 * cordialidade = 4
-		 * qualidadeServico = 5
-		 * 
-		 * 5 + 4 + 5 = 14/3 = 4,6 = Math.round(4,6) = 5
-		 * 
-		 * PREVALECE A MAIOR PORCENTAGEM, NO CASO DE EMPATE, FAZER A MÉDIA DAS ESTRELAS QUE ESTÃO
-		 * EMPATADAS PELAS QUE NÃO ESTÃO.
-		 * quantEstrela = ...
-		 */			
-		return "BOA";
+		
+		if(contratante.getReputacao() == 0){
+			return "SEM REPUTAÇÃO";
+		}
+		else if(contratante.getReputacao() < 2){
+			return "RUIM";
+		}
+		else if(contratante.getReputacao() == 3){
+			return "REGULAR";
+		}
+		else if(contratante.getReputacao() == 4){
+			return "BOA";			
+		}
+		
+		return "MUITO BOA";		
 	}
+
+	public Contratante getContratante() {
+		return contratante;
+	}
+
+	public void setContratante(Contratante contratante) {
+		this.contratante = contratante;
+	}
+
+	public List<Servico> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<Servico> servicos) {
+		this.servicos = servicos;
+	}
+	
 }

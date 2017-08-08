@@ -1,7 +1,9 @@
 package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -70,22 +72,36 @@ public class Servico implements Serializable {
 	@Column(nullable = false)
 	private DataRealizacaoServico dataRealizacaoServico;
 	
+	@OneToOne
+	@JoinColumn(name = "endereco_FK")
+	private Endereco endereco;
+	
 	public Servico(){
 		super();
+		
+		this.status = ESTADO_SERVICO.EM_ANDAMENTO;
+		
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(new Date());
+		this.dataConclusaoNegociacao = calendar.getTime();
 	}
 	
-	public Servico(ESTADO_SERVICO status, Date dataConclusaoNegociacao, Double preco, TIPO_PAGAMENTO tipoPagamento,
+	public Servico(Double preco, TIPO_PAGAMENTO tipoPagamento,
 			CategoriaServico categoriaServico, Assistente assistente, Contratante contratante,
-			DataRealizacaoServico dataRealizacaoServico) {
+			DataRealizacaoServico dataRealizacaoServico, Endereco endereco) {
 		super();
-		this.status = status;
-		this.dataConclusaoNegociacao = dataConclusaoNegociacao;
 		this.preco = preco;
 		this.tipoPagamento = tipoPagamento;
 		this.categoriaServico = categoriaServico;
 		this.assistente = assistente;
 		this.contratante = contratante;
 		this.dataRealizacaoServico = dataRealizacaoServico;
+		
+		this.status = ESTADO_SERVICO.EM_ANDAMENTO;
+		
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(new Date());
+		this.dataConclusaoNegociacao = calendar.getTime();
 	}
 
 	public ESTADO_SERVICO getStatus() {
@@ -172,6 +188,14 @@ public class Servico implements Serializable {
 		return id;
 	}
 
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -183,6 +207,7 @@ public class Servico implements Serializable {
 		result = prime * result + ((contratante == null) ? 0 : contratante.hashCode());
 		result = prime * result + ((dataConclusaoNegociacao == null) ? 0 : dataConclusaoNegociacao.hashCode());
 		result = prime * result + ((dataRealizacaoServico == null) ? 0 : dataRealizacaoServico.hashCode());
+		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((preco == null) ? 0 : preco.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
@@ -234,6 +259,11 @@ public class Servico implements Serializable {
 				return false;
 		} else if (!dataRealizacaoServico.equals(other.dataRealizacaoServico))
 			return false;
+		if (endereco == null) {
+			if (other.endereco != null)
+				return false;
+		} else if (!endereco.equals(other.endereco))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -255,9 +285,9 @@ public class Servico implements Serializable {
 	public String toString() {
 		return "Servico [id=" + id + ", status=" + status + ", dataConclusaoNegociacao=" + dataConclusaoNegociacao
 				+ ", preco=" + preco + ", tipoPagamento=" + tipoPagamento + ", categoriaServico=" + categoriaServico
-				+ ", avaliacaoAssistenteRecebeu=" + avaliacaoAssistenteRecebeu + ", avaliacaoContratanteRecebeu=" + avaliacaoContratanteRecebeu
-				+ ", assistente=" + assistente + ", contratante=" + contratante + ", dataRealizacaoServico="
-				+ dataRealizacaoServico + "]";
+				+ ", avaliacaoAssistenteRecebeu=" + avaliacaoAssistenteRecebeu + ", avaliacaoContratanteRecebeu="
+				+ avaliacaoContratanteRecebeu + ", assistente=" + assistente + ", contratante=" + contratante
+				+ ", dataRealizacaoServico=" + dataRealizacaoServico + ", endereco=" + endereco + "]";
 	}
 	
 }

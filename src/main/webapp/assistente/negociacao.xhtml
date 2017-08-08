@@ -24,7 +24,7 @@
 			
 			<div class="ui-g">
 				
-				<div class="ui-g-12">
+				<p:outputPanel styleClass="ui-g-12">
 					<div class="ui-g-12">
 						<ui:repeat var="proposta" value="#{negociacaoAstBean.negociacao.propostas}" varStatus="indice">
 							<ui:include src="/WEB-INF/templates/_painelProposta.xhtml">
@@ -33,6 +33,10 @@
 								<ui:param name="nomeUsuario" value="#{proposta.autorProposta.nome}" />
 								<ui:param name="reputacaoUsuario" value="#{proposta.autorProposta.tipoUsuario == 'ASSISTENTE' ? 
 										proposta.negociacao.assistente.reputacao : proposta.negociacao.contratante.reputacao}" />
+								<!-- <ui:param name="experiencia" value="#{proposta.negociacao.assistente.nivelExperiencia}, 
+										#{proposta.negociacao.assistente.quantServicosPrestados} serviços prestados" />
+								<ui:param name="renderizarExperiencia" value="#{proposta.autorProposta.tipoUsuario == 'ASSISTENTE' ?
+										true : false}" /> -->
 								<ui:param name="contato" value="#{proposta.autorProposta.numTelefonico}" />							
 								<ui:param name="tipoPagamento" value="#{proposta.tipoPagamento == 'PRECO_FIXO' ? 'Preço fixo' : 'Hora trabalhada'}" />
 								<ui:param name="valorProposta" value="#{proposta.preco}" />
@@ -60,9 +64,15 @@
 						</ui:repeat>						
 					</div>
 					
-					<p:outputPanel class="ui-g-12" rendered="#{negociacaoAstBean.negociacao.status == 'EM_ANDAMENTO' 
+					<p:outputPanel styleClass="ui-g-12" rendered="#{negociacaoAstBean.negociacao.status == 'EM_ANDAMENTO' 
 							and negociacaoAstBean.renderizarBotoes}">
-						<p:commandButton value="ACEITAR" styleClass="botao-proposta"/>
+						<p:commandButton value="ACEITAR" styleClass="botao-proposta" onclick="PF('dialogAceitar').show()"/>
+						<p:confirmDialog appendTo="@(body)" message="Confirma que aceita a proposta ?"
+									header="CONFIRMAÇÃO" severity="alert" widgetVar="dialogAceitar">
+								<p:commandButton value="CONFIRMAR" actionListener="#{negociacaoAstBean.aceitarProposta}"/>
+								<p:commandButton value="CANCELAR" onclick="PF('dialogAceitar').hide()"/>					
+						</p:confirmDialog>
+						
 						<p:commandButton value="ENCERRAR NEGOCIAÇÃO" styleClass="botao-proposta"/>
 					
 						<p:commandButton value="EDITAR" styleClass="botao-proposta" onclick="PF('dialog').show()"/>
@@ -76,10 +86,12 @@
 							<ui:param name="renderizarCheckbox" value="false" />
 							<ui:param name="managedBean" value="#{negociacaoAstBean}" />
 							<ui:param name="acao" value="editarProposta" />
+							<ui:param name="update" value="msg" />
+							<ui:param name="beanCancelar" value="#{negociacaoAstBean}" />
+							<ui:param name="acaoCancelar" value="cancelarEdicao" />							
 						</ui:include>
-					
 					</p:outputPanel>
-				</div>
+				</p:outputPanel>
 			</div>
 		</ui:define>			
 	</ui:composition>

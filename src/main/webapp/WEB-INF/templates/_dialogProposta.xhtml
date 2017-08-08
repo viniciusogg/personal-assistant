@@ -7,7 +7,7 @@
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 	<p:dialog styleClass="dialog" appendTo="@(body)" resizable="false" 
-			responsive="true" widgetVar="dialog" modal="true" draggable="false" header="#{headerDialog}" >
+			responsive="true" widgetVar="dialog" modal="true" draggable="false" closable="false" header="#{headerDialog}" >
 		<h:form >
 			<div class="ui-g-12">
 				<div class="ui-g-12">
@@ -78,8 +78,8 @@
 				<div class="ui-g-12">
 					<p:commandButton value="ENVIAR" styleClass="botao-dialog"
 							actionListener="#{managedBean[acao]}"
-							update="msg"/> 
-					<p:commandButton value="CANCELAR" 
+							update="#{update}"/> 
+					<p:commandButton value="CANCELAR" action="#{beanCancelar[acaoCancelar]}"
 							onclick="PF('dialog').hide()" styleClass="botao-dialog"/>
 				</div>
 			</div>

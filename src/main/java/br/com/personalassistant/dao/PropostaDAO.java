@@ -108,7 +108,6 @@ public class PropostaDAO extends DAO {
 		try{
 			proposta = entityManager.find(Proposta.class, proposta.getId());
 			entityManager.refresh(proposta);
-			proposta = entityManager.find(Proposta.class, proposta.getId());
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();

@@ -19,7 +19,6 @@ public class AssistenteService implements Serializable {
 	private static final long serialVersionUID = 3541164974033649233L;
 
 	@Inject private AssistenteDAO assistenteDAO;
-	
 	@Inject private AvaliacaoAssistenteService avaliacaoAssistenteService;
 	
 	@Transacional
@@ -116,6 +115,7 @@ public class AssistenteService implements Serializable {
 			throw new ServiceException(e.getMessage());
 		}
 	}
+
 	
 	/*public List<Assistente> getAllSemPropostasDoContratante(Long idContratante) throws ServiceException{
 		try {

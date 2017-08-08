@@ -1,13 +1,24 @@
 package br.com.personalassistant.beans.assistente;
 
+import java.io.IOException;
+import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-//import javax.inject.Inject;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.personalassistant.beans.AbstractBean;
-
-//import br.com.personalassistant.services.AssistenteService;
+import br.com.personalassistant.entidades.Assistente;
+import br.com.personalassistant.entidades.Servico;
+import br.com.personalassistant.enums.ESTADO_SERVICO;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
+import br.com.personalassistant.excecoes.ServiceException;
+import br.com.personalassistant.services.AssistenteService;
+import br.com.personalassistant.services.ServicoService;
 
 @Named
 @ViewScoped
@@ -15,21 +26,33 @@ public class IndexAssistenteBean extends AbstractBean{
 
 	private static final long serialVersionUID = 1328929115686436730L;
 	
-	//@Inject private AssistenteService assistenteService;
-	private Long quantAssistencias = new Long(120);
-	private Long totalAvaliacoes = new Long(800);
-	private Integer quantEstrelas = 4;
-
+	@Inject private ServicoService servicoService;
+	@Inject private AssistenteService assistenteService;
+	private Assistente assistente;
+	private List<Servico> servicos;
+	
+	public void preRenderView(){
+		
+		try {
+			this.assistente = assistenteService.getAssistenteByEmail(getEmailUsuarioLogado());
+			this.servicos = this.servicoService.getAllByIdAssistente(this.assistente.getId());
+		} 
+		catch (ObjetoNaoExisteException | NaoExistemObjetosException e) {} 
+		catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	public String getNivelExperiencia(){
 		
-		if(quantAssistencias < 500){
+		if(this.assistente.getQuantServicosPrestados() < 500){
 			return "SEM EXPERIÊNCIA";
 		}
-		else if(quantAssistencias > 500 && quantAssistencias < 1500){
+		else if(this.assistente.getQuantServicosPrestados() > 500 && this.assistente.getQuantServicosPrestados() < 1500){
 			return "POUCO EXPERIENTE";
 		}
-		else if(quantAssistencias > 1500 && quantAssistencias < 3000){
+		else if(this.assistente.getQuantServicosPrestados() > 1500 && this.assistente.getQuantServicosPrestados() < 3000){
 			return "EXPERIENTE";
 		}
 		
@@ -37,29 +60,76 @@ public class IndexAssistenteBean extends AbstractBean{
 	}
 
 	public String getReputacao(){
-		/*
-		 * TOTAL DE AVALIAÇÕES DE 1 ESTRELA: 4 = 4/800 = 0,005x100 = 0,5%
-		 * TOTAL DE AVALIAÇÕES DE 2 ESTRELAS: 2 = 2/800 = 0,0025x100 = 0,25%
-		 * TOTAL DE AVALIAÇÕES DE 3 ESTRELAS: 10 = 10/800 = 0,0125x100 = 1,25%
-		 * TOTAL DE AVALIAÇÕES DE 4 ESTRELAS: 200 = 200/800 = 0,25x100 = 25%
-		 * TOTAL DE AVALIAÇÕES DE 5 ESTRELAS: 500 = 584/800 = 0,73x100 = 73%
-		 * 
-		 * PREVALECE A MAIOR PORCENTAGEM, NO CASO DE EMPATE, FAZER A MÉDIA DAS ESTRELAS QUE ESTÃO
-		 * EMPATADAS PELAS QUE NÃO ESTÃO.
-		 * quantEstrela = ...
-		 */			
-		return "BOA";
-	}
-
-	public long getQuantAssistencias() {
-		return quantAssistencias;
-	}
-
-	public long getTotalAvaliacoes() {
-		return totalAvaliacoes;
+		
+		if(assistente.getReputacao() == 0){
+			return "SEM REPUTAÇÃO";
+		}
+		else if(assistente.getReputacao() < 2){
+			return "RUIM";
+		}
+		else if(assistente.getReputacao() == 3){
+			return "REGULAR";
+		}
+		else if(assistente.getReputacao() == 4){
+			return "BOA";			
+		}
+		
+		return "MUITO BOA";		
 	}
 	
-	public int getQuantEstrelas() {
-		return quantEstrelas;
+	public void gerenciarServico(Long id, boolean concluiu){
+		System.out.println("ENTROU");
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.getExternalContext().getFlash().setKeepMessages(true);
+
+		String msg = "";
+		Severity severity = FacesMessage.SEVERITY_INFO;
+
+		try {
+			Servico servico = this.servicoService.getById(id);
+			
+			if(concluiu){
+				servico.setStatus(ESTADO_SERVICO.CONCLUIDO);
+				msg = "Concluiu o serviço com sucesso";				
+			}
+			else{
+				servico.setStatus(ESTADO_SERVICO.CANCELADO);
+				msg = "Desistiu do serviço com sucesso";
+			}
+			
+			servicoService.update(servico);
+		}
+		catch (ServiceException | ObjetoNaoExisteException e) {
+			e.printStackTrace();
+			msg = e.getMessage();
+			severity = FacesMessage.SEVERITY_ERROR;
+		}
+		
+		facesContext.addMessage(null, new FacesMessage(severity, msg, ""));
+		
+		try {
+			facesContext.getExternalContext().redirect(facesContext.getExternalContext().getApplicationContextPath() + 
+					"/assistente/index.xhtml");
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
+	
+	public Assistente getAssistente() {
+		return assistente;
+	}
+
+	public void setAssistente(Assistente assistente) {
+		this.assistente = assistente;
+	}
+	
+	public List<Servico> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<Servico> servicos) {
+		this.servicos = servicos;
+	}
+
 }

@@ -26,9 +26,9 @@
 						<p:fieldset styleClass="fieldset" legend="INFORMAÇÕES PESSOAIS">
 							<p:outputPanel rendered="#{perfilCteBean.renderizarPainelVisualizacao}">	
 								<ui:include src="/WEB-INF/templates/_infoUsuario.xhtml">
-									<ui:param name="nome" value="Gomes"/>
-									<ui:param name="telefone" value="(87) 99158-7626"/>
-									<ui:param name="email" value="otavio@gmail.com" />
+									<ui:param name="nome" value="#{perfilCteBean.contratante.nome}"/>
+									<ui:param name="telefone" value="#{perfilCteBean.contratante.numTelefonico}"/>
+									<ui:param name="email" value="#{perfilCteBean.contratante.email}" />
 								</ui:include>
 							</p:outputPanel>
 							<p:outputPanel rendered="#{!perfilCteBean.renderizarPainelVisualizacao}" >
