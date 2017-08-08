@@ -19,7 +19,7 @@
 		
 		<div class="ui-g">
 		
-			<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
+			<p:growl id="msg" life="3500" showDetail="false" escape="false" autoUpdate="true"/>
 		
 			<div class="ui-g-12">
 				
@@ -143,28 +143,37 @@
 				</div>
 				
 				<div class="ui-g-12">
-					<p:dataTable id="tabelaAvalicoesRecebidas" var="servico" 
-							value="#{listaServicos != null ? listaServicos : ''}" rows="20"
+					<p:dataTable id="tabelaOfertasServicos" var="oferta" 
+							value="#{ofertaServicoCteBean.ofertasServicos}" rows="20"
 		            		paginator="true"
 		            		paginatorTemplate="{PageLinks}">
 				                 
 						<f:facet name="header"> SUAS OFERTAS </f:facet>
 				                  
 						<p:column headerText="STATUS">
-							<p:outputLabel value="#"/>							
+							<p:outputLabel value="#{oferta.status == 'ARREMATADA' ? 'Arrematada' : 
+							(oferta.status == 'EXPIRADA' ? 'Expirada' : 'Em andamento')}"/>							
 						</p:column>
-						<p:column headerText="TEMPO RESTANTE">
-							<p:outputLabel value="#"/>							
+						<p:column headerText="DATA EXPIRAÇÃO">
+							<p:outputLabel value="#{oferta.dataFinalOferta}"/>							
 						</p:column>
-						<p:column headerText="DATA REALIZAÇÃO">
-							<p:outputLabel value="#"/>							
+						<p:column headerText="DATA REALIZAÇÃO DO SERVIÇO">
+							<p:outputLabel value="Entre"/>							
+							<p:outputLabel value="#{oferta.dataRealizacaoServico.dataRealizacaoInicial}">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>								
+							</p:outputLabel>							
+							<p:outputLabel value="e"/>							
+							<p:outputLabel value="#{oferta.dataRealizacaoServico.dataRealizacaoFinal}">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>						
+							</p:outputLabel>							
+
 						</p:column>
 						<p:column headerText="CATEGORIA DE SERVIÇO">
-							<p:outputLabel value="#"/>							
+							<p:outputLabel value="#{oferta.categoriaServico.nome}"/>							
 						</p:column>
 						<p:column headerText="LANCES">
-							<p:commandButton icon="ui-icon-search" title="VEJA OS LANCES" 
-									action="lances?faces-redirect=true"/>
+							<p:commandButton icon="ui-icon-search" title="VER LANCES PARA ESTA OFERTA" 
+									actionListener="#{ofertaServicoCteBean.verDetalhesOferta(oferta.id)}"/> 
 						</p:column>
 					</p:dataTable>
 				</div>

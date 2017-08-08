@@ -7,7 +7,6 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.Assistente;
-import br.com.personalassistant.entidades.Contratante;
 import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;

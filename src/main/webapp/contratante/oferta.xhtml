@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:o="http://omnifaces.org/ui"
+		template="index.xhtml">
+		
+	<f:metadata>
+		<o:viewParam name="id" value="#{lancesOfertaBean.ofertaServico}" converter="conversorOfertaServico" />
+		<f:event listener="#{lancesOfertaBean.preRenderView}" type="preRenderView" />
+	</f:metadata>
+		
+	<ui:define name="titulo">
+		<p:outputLabel class="titulo" value="OFERTA DE SERVIÇO"/>
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		
+		<div class="ui-g">
+		
+			<p:growl id="msg" life="3500" showDetail="false" escape="false"/>
+		
+			<div class="ui-g-12">
+				<div class="ui-g-12">
+					<p:fieldset legend="DETALHES DO SERVIÇO" styleClass="fieldset">
+						<div class="ui-g-12">
+							<div class="ui-g-12">
+								<p:outputLabel value="DESCRIÇÃO: #{lancesOfertaServicoBean.ofertaServico.descricao}"/>
+							</div>
+						</div>
+						
+						<div class="ui-g-6">
+							<div class="ui-g-12">
+								<p:outputLabel value="PREÇO FIXO: R$ #{lancesOfertaServicoBean.ofertaServico.precoFixo}"/>
+							</div>
+						</div>
+						<div class="ui-g-6">
+							<div class="ui-g-12">
+								<p:outputLabel value="PREÇO HORA TRABALHADA: R$ #{lancesOfertaServicoBean.ofertaServico.precoHora}"/>
+							</div>
+						</div>
+						
+						<div class="ui-g-6">
+							<div class="ui-g-12">
+								<p:outputLabel value="CATEGORIA DE SERVIÇO: #{lancesOfertaServicoBean.ofertaServico.categoriaServico.nome}"/>
+							</div>
+						</div>
+						<div class="ui-g-6">
+							<div class="ui-g-12">
+								<p:outputLabel value="DATA DE REALIZAÇÃO: Entre"/>
+								<p:outputLabel value="#{lancesOfertaServicoBean.ofertaServico.dataRealizacaoServico.dataRealizacaoInicial}">
+									<f:convertDateTime pattern="dd/MM/yyyy"/>							
+								</p:outputLabel>
+								<p:outputLabel value="e"/>
+								<p:outputLabel value="#{lancesOfertaServicoBean.ofertaServico.dataRealizacaoServico.dataRealizacaoLimite}">
+									<f:convertDateTime pattern="dd/MM/yyyy"/>							
+								</p:outputLabel>
+							</div>
+						</div>
+						
+						<p:fieldset legend="INFORMAÇÕES DE ENDEREÇO"
+								rendered="#{lancesOfertaServicoBean.ofertaServico.endereco != null}" styleClass="fieldset" >
+							<ui:include src="/WEB-INF/templates/_infoEndereco.xhtml">
+								<ui:param name="rua" value="#{lancesOfertaServicoBean.ofertaServico.endereco != null ? 
+										lancesOfertaServicoBean.ofertaServico.endereco.rua : '#'}"/>
+								<ui:param name="numero" value="#{lancesOfertaServicoBean.ofertaServico.endereco != null ? 
+										lancesOfertaServicoBean.ofertaServico.endereco.numero : '#'}"/>
+								<ui:param name="cep" value="#{lancesOfertaServicoBean.ofertaServico.endereco != null ? 
+										lancesOfertaServicoBean.ofertaServico.endereco.cep : '#'}" />
+								<ui:param name="bairro" value="#{lancesOfertaServicoBean.ofertaServico.endereco != null ? 
+										lancesOfertaServicoBean.ofertaServico.endereco.bairro : '#'}"/>
+								<ui:param name="referencia" value="#{lancesOfertaServicoBean.ofertaServico.endereco != null ? 
+										lancesOfertaServicoBean.ofertaServico.endereco.referencia : '#'}"/>
+								<ui:param name="estado" value="#{lancesOfertaServicoBean.ofertaServico.endereco != null ? 
+										lancesOfertaServicoBean.ofertaServico.endereco.estado : '#'}" />
+								<ui:param name="cidade" value="#{lancesOfertaServicoBean.ofertaServico.endereco != null ? 
+										lancesOfertaServicoBean.ofertaServico.endereco.cidade : '#'}" />					
+							</ui:include>
+						</p:fieldset>
+					</p:fieldset>					
+				</div>
+				
+				<div id="div-separador-lances" class="ui-g-12 ">
+					<p:separator/>
+				</div>
+				
+				<div class="ui-g-12">
+					<p:outputLabel id="label-lances" value="LANCES PARA ESTA OFERTA"/>
+				</div>
+				
+				<div class="ui-g-12">
+					
+					<ui:repeat var="lance" value="#{lancesOfertaCteBean.ofertaServico.lances}" varStatus="indice">
+					
+						<p:outputPanel styleClass="ui-g info-panel div-info-painel">
+						
+							<div class="ui-g-11 div-superior-servico">
+								<div class="ui-g-6 sub-div-superior-servico">
+									<p:outputLabel value="#{lance.assistente.nome}" />
+								</div>
+								<div class="ui-g-6 sub-div-superior-servico">
+									<p:outputLabel value="Contato: #{lance.assistente.numTelefonico}" />
+								</div>
+								<div class="ui-g-12 sub-div-superior-servico div-endereco-servico">
+									<p:outputLabel rendered="#{lancesOfertaCteBean.ofertaServico.endereco != null}" value="Endereço: #{lance.assistente.endereco.enderecoFormatadoReduzido}" />
+								</div>
+							</div>
+							
+							<div class="ui-g-1 div-superior-servico">
+								<p:commandButton title="Aceitar lance" styleClass="botao-iniciar-negociacao" 
+										icon="ui-icon-check" update="msg" onclick="PF('dialogAceitarLance').show()" /> 
+									 				
+								<p:confirmDialog appendTo="@(body)" message="Confirma que aceita o lance ?"
+										header="CONFIRMAÇÃO" severity="alert" widgetVar="dialogAceitarLance">
+									<p:commandButton value="CONFIRMAR" actionListener="#{lancesOfertaCteBean.aceitarLance(lance.id)}"/>
+									<p:commandButton value="CANCELAR" onclick="PF('dialogAceitar').hide()"/>					
+								</p:confirmDialog>
+							</div>
+				
+							<div class="ui-g-3 sub-div-info-servico">
+								<p:outputLabel styleClass="sub-div-info-servico-label ui-g-12" value="R$ #{lance.valorLance}"/>										
+								<p:outputLabel styleClass="sub-div-info-servico-label-descritiva ui-g-12" value="#{lance.tipoPagamento == 'PRECO_FIXO' ? 
+										'Preço fixo' : 'Por hora trabalhada'}"/>										
+							</div>
+				
+							<!-- <div class="ui-g-3 sub-div-info-servico">
+								<p:outputLabel value="Categoria de serviço" styleClass="sub-div-info-servico-label ui-g-12"/>		
+							</div> -->					
+							
+							<div class="ui-g-3 sub-div-info-servico">
+								<p:rating value="#{lance.assistente.reputacao}" readonly="true"/>
+								<p:outputLabel value="#{lance.assistente.nivelReputacao}" styleClass="sub-div-info-servico-label-descritiva ui-g-12"/>					
+							</div>
+							
+							<div class="ui-g-3 sub-div-info-servico">
+								<p:outputLabel value="#{lance.assistente.nivelExperiencia}" styleClass="sub-div-info-servico-label ui-g-12"/>					
+								<p:outputLabel value="#{lance.assistente.quantServicosPrestados} serviços realizados" styleClass="sub-div-info-servico-label-descritiva ui-g-12"/>					
+							</div>
+							
+							<div class="ui-g-3 sub-div-info-servico">
+								<p:outputLabel value="Entre" styleClass="sub-div-info-servico-label ui-g-3"/>					
+								<p:outputLabel value="#{lance.dataRealizacaoServico.dataRealizacaoInicial}" styleClass="sub-div-info-servico-label ui-g-4">
+									<f:convertDateTime pattern="dd/MM/yyyy"/>							
+								</p:outputLabel>					
+								<p:outputLabel value="e" styleClass="sub-div-info-servico-label ui-g-1"/>
+								<p:outputLabel value="#{lance.dataRealizacaoServico.dataRealizacaoLimite}" styleClass="sub-div-info-servico-label ui-g-4">
+									<f:convertDateTime pattern="dd/MM/yyyy"/>							
+								</p:outputLabel>
+
+								<p:outputLabel value="Prazo para realização" styleClass="sub-div-info-servico-label-descritiva ui-g-12"/>					
+							</div>
+							
+							<div class="ui-g-12 div-capacidades-servico">
+								<div class="ui-g-1 div-label-capacidades-servico">
+									<p:outputLabel value="Capacidades" styleClass="label-capacidades-necessarias-oferta"/>
+								</div>
+								<div class="ui-g-10 div-capacidades-servico">
+									<p:outputLabel value="capacidade 1" styleClass="label-capacidade"/>
+									<p:outputLabel value="capacidade 2" styleClass="label-capacidade"/>
+									<p:outputLabel value="capacidade 3" styleClass="label-capacidade"/>							
+								</div>
+							</div>
+						</p:outputPanel>
+					</ui:repeat>	<!-- ADICIONAR O CAMPO CAPACIDADES NO DIALOG DE OFERTA
+											
+									 -->
+				</div>
+			</div>
+		</div>
+	</ui:define>			
+</ui:composition>

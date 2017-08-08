@@ -68,19 +68,24 @@ public class OfertaServico implements Serializable{
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "ofertaServico")
 	@Column(name="ofertaServico_FK")
 	private List<Lance> lances; // bidirecional
+
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade = CascadeType.REMOVE)
+	@Column(name="ofertaServico_FK")
+	private List<Capacidade> capacidades;
 	
 	@Embedded
 	@Column(nullable = false)
-	private DataRealizacaoServico dataRealizacaoServico; // unidirecional
+	private DataRealizacaoServico dataRealizacaoServico = new DataRealizacaoServico(); // unidirecional
 	
 	public OfertaServico() {
 		super();
-		this.status = ESTADO_OFERTA.EM_ESPERA;
+		this.status = ESTADO_OFERTA.EM_ANDAMENTO;
 	}
 
 	public OfertaServico(Date dataFinalOferta, Double precoHora, Double precoFixo, String descricao, ESTADO_OFERTA status,
 			CategoriaServico categoriaServico, Contratante contratante,
-			DataRealizacaoServico dataRealizacaoServico) {
+			DataRealizacaoServico dataRealizacaoServico, List<Capacidade> capacidades) {
 		super();
 		this.dataFinalOferta = dataFinalOferta;
 		this.precoHora = precoHora;
@@ -90,7 +95,8 @@ public class OfertaServico implements Serializable{
 		this.categoriaServico = categoriaServico;
 		this.contratante = contratante;
 		this.dataRealizacaoServico = dataRealizacaoServico;
-		this.status = ESTADO_OFERTA.EM_ESPERA;
+		this.capacidades = capacidades;
+		this.status = ESTADO_OFERTA.EM_ANDAMENTO;
 	}
 
 	public Long getId() {
@@ -177,21 +183,30 @@ public class OfertaServico implements Serializable{
 		this.dataRealizacaoServico = dataRealizacaoServico;
 	}
 
+	public List<Capacidade> getCapacidades() {
+		return capacidades;
+	}
+
+	public void setCapacidades(List<Capacidade> capacidades) {
+		this.capacidades = capacidades;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((capacidades == null) ? 0 : capacidades.hashCode());
 		result = prime * result + ((categoriaServico == null) ? 0 : categoriaServico.hashCode());
 		result = prime * result + ((contratante == null) ? 0 : contratante.hashCode());
-		result = prime * result + ((dataRealizacaoServico == null) ? 0 : dataRealizacaoServico.hashCode());
 		result = prime * result + ((dataFinalOferta == null) ? 0 : dataFinalOferta.hashCode());
+		result = prime * result + ((dataRealizacaoServico == null) ? 0 : dataRealizacaoServico.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lances == null) ? 0 : lances.hashCode());
 		result = prime * result + ((precoFixo == null) ? 0 : precoFixo.hashCode());
 		result = prime * result + ((precoHora == null) ? 0 : precoHora.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 
@@ -204,6 +219,11 @@ public class OfertaServico implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		OfertaServico other = (OfertaServico) obj;
+		if (capacidades == null) {
+			if (other.capacidades != null)
+				return false;
+		} else if (!capacidades.equals(other.capacidades))
+			return false;
 		if (categoriaServico == null) {
 			if (other.categoriaServico != null)
 				return false;
@@ -214,15 +234,20 @@ public class OfertaServico implements Serializable{
 				return false;
 		} else if (!contratante.equals(other.contratante))
 			return false;
+		if (dataFinalOferta == null) {
+			if (other.dataFinalOferta != null)
+				return false;
+		} else if (!dataFinalOferta.equals(other.dataFinalOferta))
+			return false;
 		if (dataRealizacaoServico == null) {
 			if (other.dataRealizacaoServico != null)
 				return false;
 		} else if (!dataRealizacaoServico.equals(other.dataRealizacaoServico))
 			return false;
-		if (dataFinalOferta == null) {
-			if (other.dataFinalOferta != null)
+		if (descricao == null) {
+			if (other.descricao != null)
 				return false;
-		} else if (!dataFinalOferta.equals(other.dataFinalOferta))
+		} else if (!descricao.equals(other.descricao))
 			return false;
 		if (endereco == null) {
 			if (other.endereco != null)
@@ -251,20 +276,17 @@ public class OfertaServico implements Serializable{
 			return false;
 		if (status != other.status)
 			return false;
-		if (descricao == null) {
-			if (other.descricao != null)
-				return false;
-		} else if (!descricao.equals(other.descricao))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "OfertaServico [id=" + id + ", dataFinalOferta=" + dataFinalOferta + ", precoHora=" + precoHora
-				+ ", precoFixo=" + precoFixo + ", descricao=" + descricao + ", status=" + status + ", endereco=" + endereco
-				+ ", categoriaServico=" + categoriaServico + ", contratante=" + contratante + ", lances=" + lances
-				+ ", dataRealizacaoServico=" + dataRealizacaoServico + "]";
+				+ ", precoFixo=" + precoFixo + ", descricao=" + descricao + ", status=" + status + ", endereco="
+				+ endereco + ", categoriaServico=" + categoriaServico + ", contratante=" + contratante + ", lances="
+				+ lances + ", capacidades=" + capacidades + ", dataRealizacaoServico=" + dataRealizacaoServico + "]";
 	}
+
+	
 
 }

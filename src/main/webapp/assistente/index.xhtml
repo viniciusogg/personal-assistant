@@ -71,9 +71,7 @@
 						<p:outputLabel value="#{servico.dataRealizacaoServico.dataRealizacaoInicial}">
 							<f:convertDateTime pattern="dd/MM/yyyy"/>			
 						</p:outputLabel>
-						
 						<p:outputLabel value="e"/>
-						
 						<p:outputLabel value="#{servico.dataRealizacaoServico.dataRealizacaoLimite}">
 							<f:convertDateTime pattern="dd/MM/yyyy"/>									
 						</p:outputLabel>
@@ -81,8 +79,8 @@
 					<p:column headerText="CONTRATANTE">
 						<p:outputLabel value="#{servico.contratante.nome}"/>
 					</p:column>
-					<p:column headerText="ENDEREÇO" rendered="#{servico.endereco != null}">
-						<p:outputLabel value="#{servico.endereco != null ? servico.endereco.enderecoFormatado : '#'}"/>
+					<p:column headerText="ENDEREÇO">
+						<p:outputLabel value="#{servico.endereco != null ? servico.endereco.enderecoFormatado : 'Não se aplica'}"/>
 					</p:column>
 					<p:column headerText="TIPO PAGAMENTO">
 						<p:outputLabel value="#{servico.tipoPagamento == 'HORA_TRABALHADA' ? 'Hora trabalhada' : 'Preço fixo'}"/>

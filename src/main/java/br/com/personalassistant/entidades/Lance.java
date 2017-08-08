@@ -48,21 +48,23 @@ public class Lance implements Serializable{
 	
 	@Embedded
 	@Column(nullable = false)
-	private DataRealizacaoServico dataRealizacaoServico; // unidirecional
+	private DataRealizacaoServico dataRealizacaoServico = new DataRealizacaoServico(); // unidirecional
 	
 	public Lance() {
 		super();
+		
+		this.status = ESTADO_LANCE.EM_ESPERA; 
 	}
 
 	public Lance(Double valorLance, TIPO_PAGAMENTO tipoPagamento, Assistente assistente, OfertaServico ofertaServico,
-			DataRealizacaoServico dataRealizacaoServico, ESTADO_LANCE status) {
+			DataRealizacaoServico dataRealizacaoServico) {
 		super();
 		this.valorLance = valorLance;
 		this.tipoPagamento = tipoPagamento;
 		this.assistente = assistente;
 		this.ofertaServico = ofertaServico;
 		this.dataRealizacaoServico = dataRealizacaoServico;
-		this.status = status;
+		this.status = ESTADO_LANCE.EM_ESPERA; 
 	}
 
 	public Long getId() {
