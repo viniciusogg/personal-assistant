@@ -90,7 +90,8 @@ public class NegociacaoAstBean extends AbstractBean {
 		facesContext.addMessage(null, new FacesMessage(severity, msg, ""));
 		
 		try {
-			facesContext.getExternalContext().redirect(facesContext.getExternalContext().getApplicationContextPath() + "/assistente/negociacao.xhtml?id="+this.negociacao.getId());
+			facesContext.getExternalContext().redirect(facesContext.getExternalContext().getApplicationContextPath() 
+					+ "/assistente/negociacao.xhtml?id="+this.negociacao.getId());
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -103,7 +104,8 @@ public class NegociacaoAstBean extends AbstractBean {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		
 		try {
-			facesContext.getExternalContext().redirect(facesContext.getExternalContext().getApplicationContextPath() + "/assistente/negociacao.xhtml?id="+this.negociacao.getId());
+			facesContext.getExternalContext().redirect(facesContext.getExternalContext().getApplicationContextPath() 
+					+ "/assistente/negociacao.xhtml?id="+this.negociacao.getId());
 		} 
 		catch (IOException e) {
 			e.printStackTrace();

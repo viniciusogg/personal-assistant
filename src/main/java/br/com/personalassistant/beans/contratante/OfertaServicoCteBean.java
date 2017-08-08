@@ -1,6 +1,7 @@
 package br.com.personalassistant.beans.contratante;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -11,6 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.personalassistant.beans.AbstractBean;
+import br.com.personalassistant.entidades.Capacidade;
 import br.com.personalassistant.entidades.CategoriaServico;
 import br.com.personalassistant.entidades.Contratante;
 import br.com.personalassistant.entidades.OfertaServico;
@@ -35,6 +37,7 @@ public class OfertaServicoCteBean extends AbstractBean {
 	private OfertaServico ofertaServico;
 	private Contratante contratante;
 	private boolean precisaEndereco;
+	private List<String> nomesCapacidades = new ArrayList<String>();
 	
 	public void preRenderView(){
 	
@@ -66,6 +69,10 @@ public class OfertaServicoCteBean extends AbstractBean {
 				this.ofertaServico.setEndereco(this.contratante.getEndereco());
 			}
 
+			for(String nome: nomesCapacidades){
+				this.ofertaServico.getCapacidades().add(new Capacidade(nome));
+			}
+			
 			this.ofertaServicoService.save(this.ofertaServico);
 			
 			msg = "Oferta de serviço criada com sucesso";
@@ -120,5 +127,14 @@ public class OfertaServicoCteBean extends AbstractBean {
 	public void setOfertasServicos(List<OfertaServico> ofertasServicos) {
 		this.ofertasServicos = ofertasServicos;
 	}
+
+	public List<String> getNomesCapacidades() {
+		return nomesCapacidades;
+	}
+
+	public void setNomesCapacidades(List<String> nomesCapacidades) {
+		this.nomesCapacidades = nomesCapacidades;
+	}
+	
 	
 }

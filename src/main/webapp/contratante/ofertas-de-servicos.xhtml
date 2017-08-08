@@ -42,7 +42,7 @@
 									</div>
 								</div>
 								
-								<div class="ui-g-12">
+								<div class="ui-g-6">
 									<div class="ui-g-6">
 										<p:outputLabel value="PREÇO FIXO*"/>
 									</div>
@@ -53,7 +53,7 @@
 									</div>
 								</div>
 								
-								<div class="ui-g-12">
+								<div class="ui-g-6">
 									<div class="ui-g-6">
 										<p:outputLabel value="PREÇO HORA*"/>
 									</div>
@@ -115,6 +115,16 @@
 												requiredMessage="Você esqueceu de informar a data de validade da oferta">
 											<f:convertDateTime pattern="dd/MM/yyyy" />
 										</p:calendar>
+									</div>
+								</div>
+								
+								<div class="ui-g-12">
+									<div class="ui-g-12">
+										<p:outputLabel value="Capacidades* (Escreva pelo menos uma habilidade necessária para execução do serviço e aperte 'enter'.)"/>
+									</div>
+									<div class="ui-g-12">
+										<p:chips value="#{ofertaServicoCteBean.nomesCapacidades}" required="true" 
+												requiredMessage="Você esqueceu de preencher o campo 'CAPACIDADES'">										
 									</div>
 								</div>
 							

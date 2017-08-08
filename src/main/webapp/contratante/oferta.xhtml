@@ -10,7 +10,7 @@
 		
 	<f:metadata>
 		<o:viewParam name="id" value="#{lancesOfertaBean.ofertaServico}" converter="conversorOfertaServico" />
-		<f:event listener="#{lancesOfertaBean.preRenderView}" type="preRenderView" />
+		<!-- <f:event listener="#{lancesOfertaBean.preRenderView}" type="preRenderView" /> -->
 	</f:metadata>
 		
 	<ui:define name="titulo">
@@ -43,11 +43,12 @@
 							</div>
 						</div>
 						
-						<div class="ui-g-6">
+						<!-- <div class="ui-g-6"> PAINEL DE CAPACIDADES JÁ TEM O NOME
 							<div class="ui-g-12">
 								<p:outputLabel value="CATEGORIA DE SERVIÇO: #{lancesOfertaServicoBean.ofertaServico.categoriaServico.nome}"/>
 							</div>
-						</div>
+						</div> --> 
+						
 						<div class="ui-g-6">
 							<div class="ui-g-12">
 								<p:outputLabel value="DATA DE REALIZAÇÃO: Entre"/>
@@ -59,6 +60,19 @@
 									<f:convertDateTime pattern="dd/MM/yyyy"/>							
 								</p:outputLabel>
 							</div>
+						</div>
+						
+						<div class="ui-g-12">
+							<div class="ui-g-12 div-label-capacidades-servico">
+								<p:outputLabel value="HABILIDADES NECESSÁRIAS PARA EXECUÇÃO DO SERVIÇO" styleClass="label-capacidades-necessarias-oferta"/>
+							</div>
+							<!-- <div class="ui-g-10 div-capacidades-servico"> -->
+							<p:panel header="#{ofertaServicoCteBean.ofertaServico.categoriaServico.nome}" styleClass="ui-g-12">
+								<ui:repeat value="#{ofertaServicoCteBean.ofertaServico.capacidades}" var="capacidade">
+									<p:outputLabel value="#{capacidade.nome}" styleClass="label-capacidade"/>							
+								</ui:repeat>
+							</p:panel>
+							<!-- </div> -->
 						</div>
 						
 						<p:fieldset legend="INFORMAÇÕES DE ENDEREÇO"
@@ -158,15 +172,13 @@
 									<p:outputLabel value="Capacidades" styleClass="label-capacidades-necessarias-oferta"/>
 								</div>
 								<div class="ui-g-10 div-capacidades-servico">
-									<p:outputLabel value="capacidade 1" styleClass="label-capacidade"/>
-									<p:outputLabel value="capacidade 2" styleClass="label-capacidade"/>
-									<p:outputLabel value="capacidade 3" styleClass="label-capacidade"/>							
+									<ui:repeat value="#{lance.assistente.capacidades}" var="capacidade">
+										<p:outputLabel value="#{capacidade.nome}" styleClass="label-capacidade"/>							
+									</ui:repeat>
 								</div>
 							</div>
 						</p:outputPanel>
-					</ui:repeat>	<!-- ADICIONAR O CAMPO CAPACIDADES NO DIALOG DE OFERTA
-											
-									 -->
+					</ui:repeat>	
 				</div>
 			</div>
 		</div>

@@ -1,6 +1,7 @@
 package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,14 +66,14 @@ public class OfertaServico implements Serializable{
 	private Contratante contratante; // bidirecional
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "ofertaServico")
+	@OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE}, mappedBy = "ofertaServico")
 	@Column(name="ofertaServico_FK")
 	private List<Lance> lances; // bidirecional
 
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(cascade = CascadeType.REMOVE)
-	@Column(name="ofertaServico_FK")
-	private List<Capacidade> capacidades;
+	@OneToMany(cascade = CascadeType.ALL)
+	@Column(name="ofertaServico_FK", nullable = false)
+	private List<Capacidade> capacidades = new ArrayList<Capacidade>();
 	
 	@Embedded
 	@Column(nullable = false)
