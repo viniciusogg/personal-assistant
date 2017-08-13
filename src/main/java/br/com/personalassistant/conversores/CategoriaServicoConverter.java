@@ -53,7 +53,7 @@ public class CategoriaServicoConverter implements Converter {
 		}
 
 		CategoriaServico categoriaServico = (CategoriaServico) value;
-		return String.valueOf(categoriaServico.getId());
+		return String.valueOf(categoriaServico.getPk());
 	}
 
 }

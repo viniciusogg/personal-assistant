@@ -19,11 +19,18 @@ public class Administrador extends Usuario{
 	
 	public Administrador(String nome, String numTelefonico, 
 			String email, String senha) {
-		setNome(nome);
-		setNumTelefonico(numTelefonico);
-		setEmail(email);
-		setSenha(senha);
-		setTipoUsuario(TIPO_USUARIO.ADMINISTRADOR);
+		this.setNome(nome);
+		this.setNumTelefonico(numTelefonico);
+		this.setEmail(email);
+		this.setSenha(senha);
+		this.setTipoUsuario(TIPO_USUARIO.ADMINISTRADOR);
+	}
+
+	@Override
+	public String toString() {
+		return "Administrador [getPk()=" + getPk() + ", getNome()=" + getNome() + ", getEmail()=" + getEmail()
+				+ ", getSenha()=" + getSenha() + ", getNumTelefonico()=" + getNumTelefonico() + ", getTipoUsuario()="
+				+ getTipoUsuario() + "]";
 	}
 	
 }

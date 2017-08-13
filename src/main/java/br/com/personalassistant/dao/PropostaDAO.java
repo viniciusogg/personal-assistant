@@ -1,21 +1,21 @@
 package br.com.personalassistant.dao;
 
-import java.util.List;
+//import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
-import javax.persistence.TypedQuery;
+//import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.Proposta;
-import br.com.personalassistant.excecoes.NaoExistemObjetosException;
-import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
+/*import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.excecoes.ObjetoNaoExisteException;*/
 import br.com.personalassistant.excecoes.PersistenciaException;
 
-public class PropostaDAO extends DAO {
+public class PropostaDAO extends DAO<Proposta> {
 
 	private static final long serialVersionUID = -902709003677742503L;
 
-	public void save(Proposta proposta) throws PersistenciaException{
+	/*public void save(Proposta proposta) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
 		
@@ -99,7 +99,7 @@ public class PropostaDAO extends DAO {
 		}
 		
 		return proposta;
-	}
+	}*/
 	
 	public Proposta refresh(Proposta proposta) throws PersistenciaException{
 		

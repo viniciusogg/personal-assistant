@@ -20,37 +20,30 @@ import br.com.personalassistant.services.AssistenteService;
 import br.com.personalassistant.services.LanceService;
 import br.com.personalassistant.services.OfertaServicoService;
 
-@Named
 @ViewScoped
-public class OfertasServicosAstBean extends AbstractBean {
+@Named
+public class LancesAstBean extends AbstractBean {
 
-	private static final long serialVersionUID = -3648717368496249778L;
-	
-	@Inject private OfertaServicoService ofertaServicoService;
-	@Inject private AssistenteService assistenteService;
+	private static final long serialVersionUID = -1758490246931547633L;
+
 	@Inject private LanceService lanceService;
-	private List<OfertaServico> ofertasServicos;
-	private OfertaServico ofertaServico;
-	private Lance lance;
-	
+	@Inject private AssistenteService assistenteService;
+	@Inject private OfertaServicoService ofertaServicoService;
+	private List<Lance> lances;
+
 	public void preRenderView(){
-		
+				
 		try {
-			this.lance = new Lance();
-			
 			Assistente assistente = this.assistenteService.getAssistenteByEmail(getEmailUsuarioLogado());
-			Long idCategoriaServico = assistente.getCategoriaServico().getPk().getId();
-			this.ofertasServicos = ofertaServicoService.getAll();
-		
-			this.lance.setAssistente(assistente);
-		}
+			this.lances = this.lanceService.getAllByIdAssistente(assistente.getPk().getId());
+		} 
 		catch (ServiceException | ObjetoNaoExisteException | NaoExistemObjetosException e) {
 			e.printStackTrace();
 		}
 		
 	}
-
-	public void fazerLance(OfertaServico oferta){
+	
+	public void removerLance(Lance lance){
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getFlash().setKeepMessages(true);
@@ -59,48 +52,44 @@ public class OfertasServicosAstBean extends AbstractBean {
 		Severity severity = null;
 		
 		try {
-			this.lance.setOfertaServico(oferta);
+			//Lance lance = this.lanceService.getById(id);
 			
-			this.lanceService.save(this.lance);
+			OfertaServico oferta = this.ofertaServicoService.getById(lance.getOfertaServico().getId());
+			
+			int indice = 0;
+			
+			for(Lance l: oferta.getLances()){
+				if(l.getId().equals(lance.getId())){
+					indice = oferta.getLances().indexOf(l);
+				}
+			}
+			
+			oferta.getLances().remove(indice);
 			
 			this.ofertaServicoService.update(oferta);
 			
-			msg = "Lance feito com sucesso, aguarde a resposta do contratante";
-			severity = FacesMessage.SEVERITY_INFO;
-		}
-		catch (ServiceException e) {
-			msg = "Ocorreu um erro ao tentar fazer o lance, recarregue a página e tente novamente";
-			severity = FacesMessage.SEVERITY_ERROR;
+			this.lanceService.delete(lance);
 			
+			msg = "Lance removido com sucesso";
+			severity = FacesMessage.SEVERITY_INFO;
+		} 
+		catch (ServiceException | ObjetoNaoExisteException e) {
+			msg = "Falha ao tentar remover o lance, recarregue a página e tente novamente";
+			severity = FacesMessage.SEVERITY_ERROR;
+		
 			e.printStackTrace();
 		}
-		
+	
 		context.addMessage(null, new FacesMessage(severity, msg, ""));
-		
 	}
 	
-	public List<OfertaServico> getOfertasServicos() {
-		return ofertasServicos;
+	public List<Lance> getLances() {
+		return lances;
 	}
 
-	public void setOfertasServicos(List<OfertaServico> ofertasServicos) {
-		this.ofertasServicos = ofertasServicos;
+	public void setLances(List<Lance> lances) {
+		this.lances = lances;
 	}
 
-	public Lance getLance() {
-		return lance;
-	}
-
-	public void setLance(Lance lance) {
-		this.lance = lance;
-	}
-
-	public OfertaServicoService getOfertaServicoService() {
-		return ofertaServicoService;
-	}
-
-	public void setOfertaServicoService(OfertaServicoService ofertaServicoService) {
-		this.ofertaServicoService = ofertaServicoService;
-	}
 	
 }

@@ -2,20 +2,24 @@ package br.com.personalassistant.dao;
 
 import java.util.List;
 
+//import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.Assistente;
 import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+//import br.com.personalassistant.entidades.PK;
+//import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
-public class AssistenteDAO extends DAO {
+public class AssistenteDAO extends DAO<Assistente> {
 
 	private static final long serialVersionUID = 3088908627019097676L;
 
-	public void save(Assistente assistente) throws PersistenciaException{
+	/*public void save(Assistente assistente) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
 		
@@ -56,7 +60,7 @@ public class AssistenteDAO extends DAO {
 		}
 		
 		return assistenteAtualizado;
-	}
+	}*/
 	
 	public List<Assistente> getAll() throws PersistenciaException, NaoExistemObjetosException {
 		
@@ -66,7 +70,8 @@ public class AssistenteDAO extends DAO {
 		try{
 			TypedQuery<Assistente> typedQuery = entityManager.createQuery("SELECT ast "
 					+ "FROM Assistente ast, Usuario usr "
-					+ "WHERE ast.id = usr.id", Assistente.class);
+					+ "WHERE ast.pk.id = usr.pk.id "
+					+ "AND usr.senha <> 'null'", Assistente.class);
 			
 			assistentes = typedQuery.getResultList();
 		}
@@ -83,7 +88,7 @@ public class AssistenteDAO extends DAO {
 		return assistentes;
 	}
 	
-	public Assistente getById(Long id) throws PersistenciaException, ObjetoNaoExisteException {
+	/*public Assistente getById(PK id) throws PersistenciaException, ObjetoNaoExisteException {
 		
 		EntityManager entityManager = getEntityManager();
 		Assistente assistente = null;
@@ -108,7 +113,7 @@ public class AssistenteDAO extends DAO {
 		}
 		
 		return assistente;
-	}
+	}*/
 	
 	public Long getQuantidadeByCategoriaServico(String nomeCategoriaServico) throws PersistenciaException, ObjetoNaoExisteException {
 		
@@ -148,10 +153,8 @@ public class AssistenteDAO extends DAO {
 
 		try{
 			TypedQuery<Assistente> typedQuery = entityManager.createQuery("SELECT a "
-					+ "FROM Assistente a, Usuario u "
-					+ "WHERE a.id = u.id AND "
-					+ "u.email = :email", Assistente.class);
-			
+					+ "FROM Assistente a "
+					+ "WHERE a.email = :email", Assistente.class);
 			typedQuery.setParameter("email", email);			
 			
 			assistente = typedQuery.getSingleResult();
@@ -175,10 +178,12 @@ public class AssistenteDAO extends DAO {
 		Long quantidade = null;
 		
 		try{			
-			TypedQuery<Long> typedQuery = entityManager.createQuery("SELECT COUNT(servico) "
-					+ "FROM Servico servico "
-					+ "WHERE servico.assistente.id = :id "
-					+ "AND servico.status = 'CONCLUIDO'", Long.class);
+			TypedQuery<Long> typedQuery = entityManager.createQuery("SELECT COUNT(s) "
+					+ "FROM Servico s, Usuario u "
+					+ "WHERE s.status = 'CONCLUIDO' "
+					+ "AND s.assistente.pk.id = :id "
+					+ "AND s.assistente.pk.id = u.pk.id "
+					+ "AND u.senha <> 'null'", Long.class);
 			
 			typedQuery.setParameter("id", id);
 			
@@ -197,7 +202,7 @@ public class AssistenteDAO extends DAO {
 		return quantidade;
 	}
 	
-	public List<Assistente> getAllSemPropostasDoContratante(Long idContratante) throws NaoExistemObjetosException, PersistenciaException{
+	/*public List<Assistente> getAllSemPropostasDoContratante(Long idContratante) throws NaoExistemObjetosException, PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
 		List<Assistente> assistentes = null;
@@ -211,29 +216,29 @@ public class AssistenteDAO extends DAO {
 			
 			typedQuery.setParameter("idContratante", idContratante);
 			
-			/*
-			 * 
-			 * "SELECT ast "
-					+ "FROM Assistente ast, Usuario usr, Contratante c, IN(c.propostas) p "
-					+ "WHERE c.id = :idContratante "
-					+ "AND ast.id = usr.id "
-					+ "AND p.assistente.id <> ast.id"
-			 * 
-			 * 
-			 *	vou na tabela propostas, verifico se o contratante é igual ao que passei, (tem que
-			 *	ser diferente)
-			 * 
-			 * 
-			 * SELECT ast FROM Assistente ast, Usuario usr, Proposta p
-			 * WHERE ast.id = usr.id
-			 * AND p.contratante.id <> :
-			 * 
-			 * 
-			 * SELECT ast From Assistente ast, Contratante c, IN(c.propostas) p
-			 * WHERE ast.id <> p.assistente.id
-			 * AND c.id <> p.contratante
-			 * 
-			 */
+//			/*
+//			 * 
+//			 * "SELECT ast "
+//					+ "FROM Assistente ast, Usuario usr, Contratante c, IN(c.propostas) p "
+//					+ "WHERE c.id = :idContratante "
+//					+ "AND ast.id = usr.id "
+//					+ "AND p.assistente.id <> ast.id"
+//			 * 
+//			 * 
+//			 *	vou na tabela propostas, verifico se o contratante é igual ao que passei, (tem que
+//			 *	ser diferente)
+//			 * 
+//			 * 
+//			 * SELECT ast FROM Assistente ast, Usuario usr, Proposta p
+//			 * WHERE ast.id = usr.id
+//			 * AND p.contratante.id <> :
+//			 * 
+//			 * 
+//			 * SELECT ast From Assistente ast, Contratante c, IN(c.propostas) p
+//			 * WHERE ast.id <> p.assistente.id
+//			 * AND c.id <> p.contratante
+//			 * 
+			 
 						
 			assistentes = typedQuery.getResultList();
 		}
@@ -248,7 +253,7 @@ public class AssistenteDAO extends DAO {
 		}
 		
 		return assistentes;
-	}
+	}*/
 	
 	
 }

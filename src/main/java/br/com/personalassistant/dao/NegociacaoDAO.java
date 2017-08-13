@@ -8,14 +8,14 @@ import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.Negociacao;
 import br.com.personalassistant.excecoes.NaoExistemObjetosException;
-import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
+//import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
-public class NegociacaoDAO extends DAO {
+public class NegociacaoDAO extends DAO<Negociacao> {
 
 	private static final long serialVersionUID = -505353346213062846L;
 
-	public void save(Negociacao negociacao) throws PersistenciaException{
+	/*public void save(Negociacao negociacao) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
 		
@@ -99,7 +99,7 @@ public class NegociacaoDAO extends DAO {
 		}
 		
 		return negociacao;
-	}
+	}*/
 	
 	public List<Negociacao> getToAssistenteAllById(Long id) throws PersistenciaException, NaoExistemObjetosException {
 		
@@ -107,9 +107,9 @@ public class NegociacaoDAO extends DAO {
 		List<Negociacao> negociacoes = null;
 		
 		try{
-			TypedQuery<Negociacao> typedQuery = entityManager.createQuery("SELECT negociacao FROM "
-					+ "Negociacao negociacao "
-					+ "WHERE negociacao.assistente.id = :id", Negociacao.class);
+			TypedQuery<Negociacao> typedQuery = entityManager.createQuery("SELECT n "
+					+ "FROM Negociacao n "
+					+ "WHERE n.assistente.pk.id = :id ", Negociacao.class);
 			typedQuery.setParameter("id", id);
 			
 			negociacoes = typedQuery.getResultList();
@@ -133,9 +133,9 @@ public class NegociacaoDAO extends DAO {
 		List<Negociacao> negociacoes = null;
 		
 		try{
-			TypedQuery<Negociacao> typedQuery = entityManager.createQuery("SELECT negociacao FROM "
-					+ "Negociacao negociacao "
-					+ "WHERE negociacao.contratante.id = :id", Negociacao.class);
+			TypedQuery<Negociacao> typedQuery = entityManager.createQuery("SELECT n "
+					+ "FROM Negociacao n "
+					+ "WHERE n.contratante.pk.id = :id", Negociacao.class);
 			typedQuery.setParameter("id", id);
 			
 			negociacoes = typedQuery.getResultList();

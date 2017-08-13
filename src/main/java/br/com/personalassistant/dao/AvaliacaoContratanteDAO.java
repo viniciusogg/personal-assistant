@@ -1,22 +1,24 @@
 package br.com.personalassistant.dao;
 
 import java.util.ArrayList;
-import java.util.List;
+//import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.AvaliacaoContratante;
-import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.entidades.Contratante;
+import br.com.personalassistant.entidades.PK;
+//import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
-public class AvaliacaoContratanteDAO extends DAO {
+public class AvaliacaoContratanteDAO extends DAO<AvaliacaoContratante> {
 
 	private static final long serialVersionUID = -902709003677742503L;
 
-	public void save(AvaliacaoContratante avaliacaoContratante) throws PersistenciaException{
+	/*public void save(AvaliacaoContratante avaliacaoContratante) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
 		
@@ -100,20 +102,21 @@ public class AvaliacaoContratanteDAO extends DAO {
 		}
 		
 		return avaliacaoContratante;
-	}
+	}*/
 	
-	public Long getTotalAvaliacoesById(Long id) throws ObjetoNaoExisteException, PersistenciaException{
+	public Long getTotalAvaliacoesById(PK id) throws ObjetoNaoExisteException, PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
 		Long total = new Long(0);
 		
 		try{
-			TypedQuery<Long> consultaTotal = entityManager.createQuery("SELECT COUNT(a) "
-					+ "FROM AvaliacaoContratante a, Servico s "
-					+ "WHERE s.contratante.id = :id "
-					+ "AND s.avaliacaoContratanteRecebeu.id = a.id "
+			TypedQuery<Long> consultaTotal = entityManager.createQuery("SELECT COUNT(ac) "
+					+ "FROM AvaliacaoContratante ac, Servico s "
+					+ "WHERE s.contratante.pk.id = :id AND "
+					+ "AND s.avaliacaoContratanteRecebeu.id = ac.id "
 					+ "AND s.status = 'CONCLUIDO'", Long.class);
-			consultaTotal.setParameter("id", id);
+			consultaTotal.setParameter("id", id.getId());
+			consultaTotal.setParameter("ultimaAtualizacao", id.getUltimaAtualizacao());
 			total = consultaTotal.getSingleResult();
 		}
 		catch(PersistenceException ex){
@@ -129,7 +132,7 @@ public class AvaliacaoContratanteDAO extends DAO {
 		return total;
 	}
 	
-	public ArrayList<Double> getAvaliacoesByIdContratante(Long id) throws PersistenciaException, ObjetoNaoExisteException{
+	public ArrayList<Double> getAvaliacoesByIdContratante(PK id) throws PersistenciaException, ObjetoNaoExisteException{
 
 		EntityManager entityManager = getEntityManager();
 		
@@ -144,61 +147,66 @@ public class AvaliacaoContratanteDAO extends DAO {
 		try{
 			Long totalAvaliacoes = getTotalAvaliacoesById(id);
 			
-			TypedQuery<Long> consultaUm = entityManager.createQuery("SELECT COUNT(a) "
-					+ "FROM AvaliacaoContratante a, Servico s "
-					+ "WHERE a.mediaAvaliacao = 1 "
-					+ "AND s.contratante.id = :id "
-					+ "AND s.avaliacaoContratanteRecebeu.id = a.id "
+			TypedQuery<Long> consultaUm = entityManager.createQuery("SELECT COUNT(ac) "
+					+ "FROM AvaliacaoContratante ac, Servico s "
+					+ "WHERE ac.mediaAvaliacao = 1 "
+					+ "AND s.contratante.id = :id AND s.contratante.ultimaAtualizacao = :ultimaAtualizacao "
+					+ "AND s.avaliacaoContratanteRecebeu.id = ac.id "
 					+ "AND s.status = 'CONCLUIDO'", Long.class);
-			consultaUm.setParameter("id", id);
+			consultaUm.setParameter("id", id.getId());
+			consultaUm.setParameter("ultimaAtualizacao", id.getUltimaAtualizacao());
 
 			if(consultaUm.getSingleResult() != null && consultaUm.getSingleResult() != 0.0){
 				umaEstrela = (double) ((consultaUm.getSingleResult()/totalAvaliacoes) * 100);
 			}
 			
 			TypedQuery<Long> consultaDois = entityManager.createQuery("SELECT COUNT(a) "
-					+ "FROM AvaliacaoContratante a, Servico s "
-					+ "WHERE a.mediaAvaliacao = 2 "
-					+ "AND s.contratante.id = :id "
-					+ "AND s.avaliacaoContratanteRecebeu.id = a.id "
+					+ "FROM AvaliacaoContratante ac, Servico s "
+					+ "WHERE ac.mediaAvaliacao = 2 "
+					+ "AND s.contratante.id = :id AND s.contratante.ultimaAtualizacao = :ultimaAtualizacao "
+					+ "AND s.avaliacaoContratanteRecebeu.id = ac.id "
 					+ "AND s.status = 'CONCLUIDO'", Long.class);
-			consultaDois.setParameter("id", id);
+			consultaDois.setParameter("id", id.getId());
+			consultaDois.setParameter("ultimaAtualizacao", id.getUltimaAtualizacao());
 			
 			if(consultaDois.getSingleResult() != null && consultaDois.getSingleResult() != 0.0){
 				duasEstrelas = (double) (consultaDois.getSingleResult()/totalAvaliacoes) * 100;
 			}
 			
-			TypedQuery<Long> consultaTres = entityManager.createQuery("SELECT COUNT(a) "
-					+ "FROM AvaliacaoContratante a, Servico s "
-					+ "WHERE a.mediaAvaliacao = 3 "
-					+ "AND s.contratante.id = :id "
-					+ "AND s.avaliacaoContratanteRecebeu.id = a.id "
+			TypedQuery<Long> consultaTres = entityManager.createQuery("SELECT COUNT(ac) "
+					+ "FROM AvaliacaoContratante ac, Servico s "
+					+ "WHERE ac.mediaAvaliacao = 3 "
+					+ "AND s.contratante.id = :id AND s.contratante.ultimaAtualizacao = :ultimaAtualizacao "
+					+ "AND s.avaliacaoContratanteRecebeu.id = ac.id "
 					+ "AND s.status = 'CONCLUIDO'", Long.class);
-			consultaTres.setParameter("id", id);
+			consultaTres.setParameter("id", id.getId());
+			consultaTres.setParameter("ultimaAtualizacao", id.getUltimaAtualizacao());
 			
 			if(consultaTres.getSingleResult() != null && consultaTres.getSingleResult() != 0.0){
 				tresEstrelas = (double) (consultaTres.getSingleResult()/totalAvaliacoes) * 100;
 			}
 			
-			TypedQuery<Long> consultaQuatro = entityManager.createQuery("SELECT COUNT(a) "
-					+ "FROM AvaliacaoContratante a, Servico s "
-					+ "WHERE a.mediaAvaliacao = 4 "
-					+ "AND s.contratante.id = :id "
-					+ "AND s.avaliacaoContratanteRecebeu.id = a.id "
+			TypedQuery<Long> consultaQuatro = entityManager.createQuery("SELECT COUNT(ac) "
+					+ "FROM AvaliacaoContratante ac, Servico s "
+					+ "WHERE ac.mediaAvaliacao = 4 "
+					+ "AND s.contratante.id = :id AND s.contratante.ultimaAtualizacao = :ultimaAtualizacao "
+					+ "AND s.avaliacaoContratanteRecebeu.id = ac.id "
 					+ "AND s.status = 'CONCLUIDO'", Long.class);
-			consultaQuatro.setParameter("id", id);
+			consultaQuatro.setParameter("id", id.getId());
+			consultaQuatro.setParameter("ultimaAtualizacao", id.getUltimaAtualizacao());
 			
 			if(consultaQuatro.getSingleResult() != null && consultaQuatro.getSingleResult() != 0.0){
 				quatroEstrelas = (double) (consultaQuatro.getSingleResult()/totalAvaliacoes) * 100;
 			}
 			
-			TypedQuery<Long> consultaCinco = entityManager.createQuery("SELECT COUNT(a) "
-					+ "FROM AvaliacaoContratante a, Servico s "
-					+ "WHERE a.mediaAvaliacao = 5 "
-					+ "AND s.contratante.id = :id "
-					+ "AND s.avaliacaoContratanteRecebeu.id = a.id "
+			TypedQuery<Long> consultaCinco = entityManager.createQuery("SELECT COUNT(ac) "
+					+ "FROM AvaliacaoContratante ac, Servico s "
+					+ "WHERE ac.mediaAvaliacao = 5 "
+					+ "AND s.contratante.id = :id AND s.contratante.ultimaAtualizacao = :ultimaAtualizacao "
+					+ "AND s.avaliacaoContratanteRecebeu.id = ac.id "
 					+ "AND s.status = 'CONCLUIDO'", Long.class);
-			consultaCinco.setParameter("id", id);
+			consultaCinco.setParameter("id", id.getId());
+			consultaCinco.setParameter("ultimaAtualizacao", id.getUltimaAtualizacao());
 			
 			if(consultaCinco.getSingleResult() != null && consultaCinco.getSingleResult() != 0.0){
 				cincoEstrelas = (double) (consultaCinco.getSingleResult()/totalAvaliacoes) * 100;

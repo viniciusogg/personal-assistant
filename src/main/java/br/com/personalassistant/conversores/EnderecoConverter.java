@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import br.com.personalassistant.services.EnderecoService;
 import br.com.personalassistant.entidades.Endereco;
+import br.com.personalassistant.entidades.PK;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.ServiceException;
 
@@ -31,7 +32,7 @@ public class EnderecoConverter implements Converter {
 		}
 
 		try {
-			Endereco endereco = enderecoService.getById(Long.valueOf(value));
+			Endereco endereco = enderecoService.getById(PK.class.cast(value));
 			return endereco;
 		} 
 		catch (NumberFormatException | ServiceException | ObjetoNaoExisteException ex) {
@@ -53,7 +54,7 @@ public class EnderecoConverter implements Converter {
 		}
 
 		Endereco endereco = (Endereco) value;
-		return String.valueOf(endereco.getId());
+		return String.valueOf(endereco.getPk());
 	}
 
 }

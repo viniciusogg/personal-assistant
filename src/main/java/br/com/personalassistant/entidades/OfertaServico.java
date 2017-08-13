@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -54,15 +55,27 @@ public class OfertaServico implements Serializable{
 	private ESTADO_OFERTA status;
 	
 	@ManyToOne
-	@JoinColumn(name="endereco_FK")
+	@JoinColumns({
+		@JoinColumn(name = "endereco_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoEndereco_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
+	//@JoinColumn(name="endereco_FK")
 	private Endereco endereco; // unidirecional
 	
 	@ManyToOne
-	@JoinColumn(nullable = false, name="categoriaServico_FK")
+	@JoinColumns({
+		@JoinColumn(name = "categoriaServico_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoCategoriaServico_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
+	//@JoinColumn(name="categoriaServico_FK", nullable=false)
 	private CategoriaServico categoriaServico; // unidirecional
 	
 	@ManyToOne
-	@JoinColumn(nullable = false, name="contratante_FK")
+	@JoinColumns({
+		@JoinColumn(name = "contratante_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoContratante_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
+	//@JoinColumn(name="contratante_FK", nullable=false)
 	private Contratante contratante; // bidirecional
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -84,7 +97,7 @@ public class OfertaServico implements Serializable{
 		this.status = ESTADO_OFERTA.EM_ANDAMENTO;
 	}
 
-	public OfertaServico(Date dataFinalOferta, Double precoHora, Double precoFixo, String descricao, ESTADO_OFERTA status,
+	public OfertaServico(Date dataFinalOferta, Double precoHora, Double precoFixo, String descricao,
 			CategoriaServico categoriaServico, Contratante contratante,
 			DataRealizacaoServico dataRealizacaoServico, List<Capacidade> capacidades) {
 		super();
@@ -92,7 +105,6 @@ public class OfertaServico implements Serializable{
 		this.precoHora = precoHora;
 		this.precoFixo = precoFixo;
 		this.descricao = descricao;
-		this.status = status;
 		this.categoriaServico = categoriaServico;
 		this.contratante = contratante;
 		this.dataRealizacaoServico = dataRealizacaoServico;

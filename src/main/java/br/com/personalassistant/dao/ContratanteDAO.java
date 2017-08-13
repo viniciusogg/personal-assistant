@@ -1,21 +1,21 @@
 package br.com.personalassistant.dao;
 
-import java.util.List;
+//import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.Contratante;
-import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+//import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
-public class ContratanteDAO extends DAO {
+public class ContratanteDAO extends DAO<Contratante> {
 
 	private static final long serialVersionUID = -902709003677742503L;
 
-	public void save(Contratante contratante) throws PersistenciaException{
+	/*public void save(Contratante contratante) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
 		
@@ -108,7 +108,7 @@ public class ContratanteDAO extends DAO {
 		}
 		
 		return contratante;
-	}
+	}*/
 	
 	public Contratante getContratanteByEmail(String email) throws PersistenciaException, ObjetoNaoExisteException{
 		
@@ -121,9 +121,8 @@ public class ContratanteDAO extends DAO {
 
 		try{
 			TypedQuery<Contratante> typedQuery = entityManager.createQuery("SELECT c "
-					+ "FROM Contratante c, Usuario u "
-					+ "WHERE c.id = u.id AND "
-					+ "u.email = :email", Contratante.class);
+					+ "FROM Contratante c "
+					+ "WHERE c.email = :email", Contratante.class);
 			
 			typedQuery.setParameter("email", email);			
 			

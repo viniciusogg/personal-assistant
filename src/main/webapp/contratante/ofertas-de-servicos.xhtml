@@ -12,7 +12,7 @@
 	</f:metadata>
 		
 	<ui:define name="titulo">
-		<p:outputLabel class="titulo" value="ASSISTENTES"/>
+		<p:outputLabel class="titulo" value="OFERTAS DE SERVIÇOS"/>
 	</ui:define>
 	
 	<ui:define name="conteudo">
@@ -43,10 +43,10 @@
 								</div>
 								
 								<div class="ui-g-6">
-									<div class="ui-g-6">
+									<div class="ui-g-4">
 										<p:outputLabel value="PREÇO FIXO*"/>
 									</div>
-									<div class="ui-g-6">
+									<div class="ui-g-8">
 										<p:inputNumber required="true"
 												value="#{ofertaServicoCteBean.ofertaServico.precoFixo}"
 												requiredMessage="Você esqueceu de preencher o campo 'PREÇO FIXO'"/>
@@ -54,10 +54,10 @@
 								</div>
 								
 								<div class="ui-g-6">
-									<div class="ui-g-6">
+									<div class="ui-g-4">
 										<p:outputLabel value="PREÇO HORA*"/>
 									</div>
-									<div class="ui-g-6">
+									<div class="ui-g-8">
 										<p:inputNumber required="true"
 												value="#{ofertaServicoCteBean.ofertaServico.precoHora}"
 												requiredMessage="Você esqueceu de preencher o campo 'PREÇO HORA'"/>
@@ -69,9 +69,9 @@
 										<p:outputLabel value="CATEGORIA DE SERVIÇO*"/>
 									</div>
 									<div class="ui-g-6">
-										<p:selectOneMenu value="#{ofertaServicoCteBean.ofertaServico.categoriaServico}" styleClass="combobox">
+										<p:selectOneMenu value="#{ofertaServicoCteBean.nomeCategoriaServico}" styleClass="combobox">
 											<f:selectItems value="#{ofertaServicoCteBean.categoriasServicos}" 
-													var="categoria" itemLabel="#{categoria.nome}" itemValue="#{categoria}" />
+													var="categoria" itemLabel="#{categoria.nome}" itemValue="#{categoria.nome}" />
 										</p:selectOneMenu>
 									</div>
 								</div>
@@ -124,7 +124,7 @@
 									</div>
 									<div class="ui-g-12">
 										<p:chips value="#{ofertaServicoCteBean.nomesCapacidades}" required="true" 
-												requiredMessage="Você esqueceu de preencher o campo 'CAPACIDADES'">										
+												requiredMessage="Você esqueceu de preencher o campo 'CAPACIDADES'"/>										
 									</div>
 								</div>
 							
@@ -138,7 +138,7 @@
 								<div class="ui-g-12">
 									<p:commandButton value="CRIAR" styleClass="botao-dialog" 
 										actionListener="#{ofertaServicoCteBean.criarOfertaServico}"
-											action="ofertas-de-servicos?faces-redirect=true">
+											action="ofertas-de-servicos?faces-redirect=true"/>
 									<p:commandButton value="CANCELAR" 
 											onclick="PF('dialog').hide()" styleClass="botao-dialog"/>
 								</div>
@@ -165,7 +165,9 @@
 							(oferta.status == 'EXPIRADA' ? 'Expirada' : 'Em andamento')}"/>							
 						</p:column>
 						<p:column headerText="DATA EXPIRAÇÃO">
-							<p:outputLabel value="#{oferta.dataFinalOferta}"/>							
+							<p:outputLabel value="#{oferta.dataFinalOferta}">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>															
+							</p:outputLabel>							
 						</p:column>
 						<p:column headerText="DATA REALIZAÇÃO DO SERVIÇO">
 							<p:outputLabel value="Entre"/>							
@@ -173,7 +175,7 @@
 								<f:convertDateTime pattern="dd/MM/yyyy"/>								
 							</p:outputLabel>							
 							<p:outputLabel value="e"/>							
-							<p:outputLabel value="#{oferta.dataRealizacaoServico.dataRealizacaoFinal}">
+							<p:outputLabel value="#{oferta.dataRealizacaoServico.dataRealizacaoLimite}">
 								<f:convertDateTime pattern="dd/MM/yyyy"/>						
 							</p:outputLabel>							
 

@@ -6,16 +6,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import br.com.personalassistant.entidades.PK;
 import br.com.personalassistant.entidades.Servico;
 import br.com.personalassistant.excecoes.NaoExistemObjetosException;
-import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
+//import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
-public class ServicoDAO extends DAO {
+public class ServicoDAO extends DAO<Servico> {
 
 	private static final long serialVersionUID = -902709003677742503L;
 
-	public void save(Servico servico) throws PersistenciaException{
+	/*public void save(Servico servico) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
 		
@@ -99,17 +100,19 @@ public class ServicoDAO extends DAO {
 		}
 		
 		return servico;
-	}
+	}*/
 	
-	public List<Servico> getAllByIdAssistente(Long id) throws NaoExistemObjetosException, PersistenciaException{
+	public List<Servico> getAllByIdAssistente(PK id) throws NaoExistemObjetosException, PersistenciaException{
 		EntityManager entityManager = getEntityManager();
 		List<Servico> servicos = null;
 		
 		try{
-			TypedQuery<Servico> typedQuery = entityManager.createQuery("SELECT servico "
-					+ "FROM Servico servico "
-					+ "WHERE servico.assistente.id = :id", Servico.class);
-			typedQuery.setParameter("id", id);
+			TypedQuery<Servico> typedQuery = entityManager.createQuery("SELECT s "
+					+ "FROM Servico s "
+					+ "WHERE s.assistente.pk.id = :id"
+					+ "AND s.assistente.pk.ultimaAtualizacao = :ultimaAtualizacao", Servico.class);
+			typedQuery.setParameter("id", id.getId());
+			typedQuery.setParameter("ultimaAtualizacao", id.getUltimaAtualizacao());
 			
 			servicos = typedQuery.getResultList();
 		}
@@ -131,9 +134,9 @@ public class ServicoDAO extends DAO {
 		List<Servico> servicos = null;
 		
 		try{
-			TypedQuery<Servico> typedQuery = entityManager.createQuery("SELECT servico "
-					+ "FROM Servico servico "
-					+ "WHERE servico.contratante.id = :id", Servico.class);
+			TypedQuery<Servico> typedQuery = entityManager.createQuery("SELECT s "
+					+ "FROM Servico s "
+					+ "WHERE s.contratante.pk.id = :id", Servico.class);
 			typedQuery.setParameter("id", id);
 			
 			servicos = typedQuery.getResultList();

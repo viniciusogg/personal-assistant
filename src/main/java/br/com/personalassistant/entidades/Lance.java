@@ -1,6 +1,7 @@
 package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -11,11 +12,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import br.com.personalassistant.enums.ESTADO_LANCE;
 import br.com.personalassistant.enums.TIPO_PAGAMENTO;
+import br.com.personalassistant.util.DataAtual;
 
 @Table(name = "TB_LANCE")
 @Entity(name = "Lance")
@@ -29,6 +34,10 @@ public class Lance implements Serializable{
 	
 	@Column(nullable = false)
 	private Double valorLance;
+	
+	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
+	private Date dataCriacaoLance;
 
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -39,7 +48,11 @@ public class Lance implements Serializable{
 	private ESTADO_LANCE status;
 	
 	@ManyToOne
-	@JoinColumn(nullable = false, name="assistente_FK")
+	@JoinColumns({
+		@JoinColumn(name = "assistente_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoAssistente_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
+	//@JoinColumn(name="assistente_FK", nullable=false)
 	private Assistente assistente; // bidirecional
 	
 	@ManyToOne
@@ -54,6 +67,7 @@ public class Lance implements Serializable{
 		super();
 		
 		this.status = ESTADO_LANCE.EM_ESPERA; 
+		this.dataCriacaoLance = DataAtual.getDataAtual();
 	}
 
 	public Lance(Double valorLance, TIPO_PAGAMENTO tipoPagamento, Assistente assistente, OfertaServico ofertaServico,
@@ -65,6 +79,7 @@ public class Lance implements Serializable{
 		this.ofertaServico = ofertaServico;
 		this.dataRealizacaoServico = dataRealizacaoServico;
 		this.status = ESTADO_LANCE.EM_ESPERA; 
+		this.dataCriacaoLance = DataAtual.getDataAtual();
 	}
 
 	public Long getId() {
@@ -117,6 +132,14 @@ public class Lance implements Serializable{
 
 	public void setDataRealizacaoServico(DataRealizacaoServico dataRealizacaoServico) {
 		this.dataRealizacaoServico = dataRealizacaoServico;
+	}
+	
+	public Date getDataCriacaoLance() {
+		return dataCriacaoLance;
+	}
+
+	public void setDataCriacaoLance(Date dataCriacaoLance) {
+		this.dataCriacaoLance = dataCriacaoLance;
 	}
 
 	@Override

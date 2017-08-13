@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import br.com.personalassistant.dao.CategoriaServicoDAO;
 import br.com.personalassistant.entidades.CategoriaServico;
+import br.com.personalassistant.entidades.PK;
 import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
@@ -50,7 +51,7 @@ public class CategoriaServicoService implements Serializable {
 		}		
 	}
 	
-	public CategoriaServico getById(Long id) throws ServiceException, ObjetoNaoExisteException{
+	public CategoriaServico getById(PK id) throws ServiceException, ObjetoNaoExisteException{
 		try{
 			return this.categoriaServicoDAO.getById(id);
 		}
@@ -75,5 +76,15 @@ public class CategoriaServicoService implements Serializable {
 		catch(PersistenciaException ex){
 			throw new ServiceException(ex.getMessage());
 		}
+	}
+	
+	@Transacional
+	public Long generateId() throws ServiceException{
+	
+		Long id = this.categoriaServicoDAO.generateId();
+		
+		this.categoriaServicoDAO.updateSequenceId();
+		
+		return id;
 	}
 }

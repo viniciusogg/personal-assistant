@@ -6,37 +6,45 @@
 		xmlns:p="http://primefaces.org/ui"
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 		template="index.xhtml">
-		
+	
+	<f:metadata>
+		<f:event listener="#{lancesAstBean.preRenderView}" type="preRenderView" />
+	</f:metadata>
+	
 	<ui:define name="titulo">
 		<p:outputLabel class="titulo" value="LANCES"/>
 	</ui:define>
 	
 	<ui:define name="conteudo">
 		
+		<p:growl id="msg" life="3500" showDetail="false" escape="false" autoUpdate="true"/>
+
 		<div class="ui-g">
 			<div class="ui-g-12">
-				<p:dataTable id="tabelaLances" var="#" value="#" rows="20"
+				<p:dataTable id="tabelaLances" var="lance" value="#{lancesAstBean.lances}" rows="20"
                          paginator="true"
                          paginatorTemplate="{PageLinks}">
                     
-                    <f:facet name="header">
-                    	<p:outputLabel value="SEUS LANCES" />
-      				</f:facet>
+                    <f:facet name="header"> SEUS LANCES </f:facet>
                      
 					<p:column headerText="DATA">
-						<p:outputLabel value="#"/>							
+						<p:outputLabel value="#{lance.dataCriacaoLance}"/>							
 					</p:column>
 					<p:column headerText="STATUS">
-						<p:outputLabel value="#"/>							
+						<p:outputLabel value="#{lance.status}"/>							
 					</p:column>
 					<p:column headerText="VALOR DO LANCE">
-						<p:outputLabel value="#"/>							
+						<p:outputLabel value="#{lance.valorLance}"/>							
 					</p:column>
 					<p:column headerText="">						
-						<h:form>
-							<p:commandButton icon="ui-icon-delete" title="Remover o lance"/>
-							<p:commandButton icon="ui-icon-search" title="Detalhes do lance" />
-						</h:form>
+						<p:commandButton icon="ui-icon-delete" title="Remover o lance" onclick="PF('dialogRemoverLance').show()"/>
+						<p:confirmDialog appendTo="@(body)" message="Confirma que deseja remover o lance ?"
+									header="CONFIRMAÇÃO" severity="alert" widgetVar="dialogAceitar">
+								<p:commandButton value="CONFIRMAR" actionListener="#{lancesAstBean.removerLance(lance)}"
+										action="lances?faces-redirect=true"/>
+								<p:commandButton value="CANCELAR" onclick="PF('dialogAceitar').hide()"/>					
+						</p:confirmDialog>
+						<p:commandButton icon="ui-icon-search" title="Detalhes do lance" />
 					</p:column>
 				</p:dataTable>
 			</div>

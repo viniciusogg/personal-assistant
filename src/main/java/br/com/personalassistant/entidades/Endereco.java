@@ -3,10 +3,8 @@ package br.com.personalassistant.entidades;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity(name = "Endereco")
@@ -14,10 +12,9 @@ import javax.persistence.Table;
 public class Endereco implements Serializable{
 
 	private static final long serialVersionUID = -4023551797287042535L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	private Long id;
+	
+	@EmbeddedId
+	private PK pk;
 	
 	@Column(nullable = false)
 	private Integer numero;
@@ -43,8 +40,8 @@ public class Endereco implements Serializable{
 		super();
 	}
 
-	public Endereco(int numero, String rua, String referencia, String cep, String bairro, String cidade,
-			String estado) {
+	public Endereco(int numero, String rua, String referencia, String cep, String bairro, 
+			String cidade, String estado) {
 		super();
 		this.numero = numero;
 		this.rua = rua;
@@ -54,11 +51,7 @@ public class Endereco implements Serializable{
 		this.cidade = cidade;
 		this.estado = estado;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
+	
 	public Integer getNumero() {
 		return numero;
 	}
@@ -115,6 +108,14 @@ public class Endereco implements Serializable{
 		this.estado = estado;
 	}
 
+	public PK getPk() {
+		return pk;
+	}
+
+	public void setPk(PK pk){
+		this.pk = pk;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -123,8 +124,8 @@ public class Endereco implements Serializable{
 		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
 		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
 		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + numero;
+		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
+		result = prime * result + ((pk == null) ? 0 : pk.hashCode());
 		result = prime * result + ((referencia == null) ? 0 : referencia.hashCode());
 		result = prime * result + ((rua == null) ? 0 : rua.hashCode());
 		return result;
@@ -159,9 +160,15 @@ public class Endereco implements Serializable{
 				return false;
 		} else if (!estado.equals(other.estado))
 			return false;
-		if (id != other.id)
+		if (numero == null) {
+			if (other.numero != null)
+				return false;
+		} else if (!numero.equals(other.numero))
 			return false;
-		if (numero != other.numero)
+		if (pk == null) {
+			if (other.pk != null)
+				return false;
+		} else if (!pk.equals(other.pk))
 			return false;
 		if (referencia == null) {
 			if (other.referencia != null)
@@ -175,18 +182,20 @@ public class Endereco implements Serializable{
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Endereco [id=" + id + ", numero=" + numero + ", rua=" + rua + ", referencia=" + referencia + ", cep="
+		return "Endereco [pk=" + pk + ", numero=" + numero + ", rua=" + rua + ", referencia=" + referencia + ", cep="
 				+ cep + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + "]";
 	}
-	
+
 	public String getEnderecoFormatado(){
-		return "Rua: "+rua+", Nº: "+numero+", CEP: "+cep+", referência: "+referencia+", bairro: "+bairro+", cidade: "+cidade + ", estado: "+estado;
+		return "Rua: "+rua+", Nº: "+numero+", CEP: "+cep+", referência: "+referencia
+				+", bairro: "+bairro+", cidade: "+cidade + ", estado: "+estado;
 	}
 	
-	public String getEnderecoFormatadoReduziso(){
+	public String getEnderecoFormatadoReduzido(){
 		return "Cidade: "+cidade + ", Estado: "+estado;
 	}
+	
 }

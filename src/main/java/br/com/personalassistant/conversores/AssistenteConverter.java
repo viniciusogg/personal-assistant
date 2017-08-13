@@ -10,10 +10,11 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.personalassistant.services.AssistenteService;
 import br.com.personalassistant.entidades.Assistente;
+import br.com.personalassistant.entidades.PK;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.ServiceException;
+import br.com.personalassistant.services.AssistenteService;
 
 @Named
 @RequestScoped
@@ -31,7 +32,7 @@ public class AssistenteConverter implements Converter {
 		}
 
 		try {
-			Assistente assistente = assistenteService.getById(Long.valueOf(value));
+			Assistente assistente = assistenteService.getById(PK.class.cast(value));
 			return assistente;
 		} 
 		catch (NumberFormatException | ServiceException | ObjetoNaoExisteException ex) {
@@ -53,7 +54,7 @@ public class AssistenteConverter implements Converter {
 		}
 
 		Assistente assistente = (Assistente) value;
-		return String.valueOf(assistente.getId());
+		return String.valueOf(assistente.getPk());
 	}
 
 }

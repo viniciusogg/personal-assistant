@@ -8,13 +8,14 @@ import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.OfertaServico;
 import br.com.personalassistant.excecoes.NaoExistemObjetosException;
-import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
+//import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
-public class OfertaServicoDAO extends DAO {
+public class OfertaServicoDAO extends DAO<OfertaServico> {
 
 	private static final long serialVersionUID = -902709003677742503L;
 
+	/*
 	public void save(OfertaServico ofertaServico) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
@@ -80,15 +81,36 @@ public class OfertaServicoDAO extends DAO {
 		return ofertasServicos;
 	}
 	
+	public OfertaServico getById(Long id) throws PersistenciaException, ObjetoNaoExisteException {
+		
+		EntityManager entityManager = getEntityManager();
+		OfertaServico ofertaServico = null;
+		
+		try{
+			ofertaServico = entityManager.find(OfertaServico.class, id);
+		}
+		catch(PersistenceException ex){
+			
+			if(ofertaServico == null){
+				throw new ObjetoNaoExisteException("Não existe ofertaServico com este id");
+			}
+			
+			ex.printStackTrace();
+			throw new PersistenciaException("Erro ao recuperar ofertaServico");
+		}
+		
+		return ofertaServico;
+	}*/
+	
 	public List<OfertaServico> getAllByIdContratante(Long id) throws PersistenciaException, NaoExistemObjetosException {
 		
 		EntityManager entityManager = getEntityManager();
 		List<OfertaServico> ofertasServicos = null;
 		
 		try{
-			TypedQuery<OfertaServico> typedQuery = entityManager.createQuery("SELECT ofertaServico "
-					+ "FROM OfertaServico ofertaServico "
-					+ "WHERE ofertaServico.contratante.id = :id", OfertaServico.class);
+			TypedQuery<OfertaServico> typedQuery = entityManager.createQuery("SELECT os "
+					+ "FROM OfertaServico os "
+					+ "WHERE os.contratante.pk.id = :id ", OfertaServico.class);
 			typedQuery.setParameter("id", id);
 			
 			ofertasServicos = typedQuery.getResultList();
@@ -112,10 +134,9 @@ public class OfertaServicoDAO extends DAO {
 		List<OfertaServico> ofertasServicos = null;
 		
 		try{
-			TypedQuery<OfertaServico> typedQuery = entityManager.createQuery("SELECT ofertaServico "
-					+ "FROM OfertaServico ofertaServico "
-					+ "WHERE ofertaServico.categoriaServico.id = :id "
-					+ "AND ofertaServico.status = 'EM_ESPERA'", OfertaServico.class);
+			TypedQuery<OfertaServico> typedQuery = entityManager.createQuery("SELECT os "
+					+ "FROM OfertaServico os "
+					+ "WHERE os.categoriaServico.pk.id = :id", OfertaServico.class);
 			typedQuery.setParameter("id", id);
 			
 			ofertasServicos = typedQuery.getResultList();
@@ -132,27 +153,5 @@ public class OfertaServicoDAO extends DAO {
 		
 		return ofertasServicos;
 	}
-	
-	public OfertaServico getById(Long id) throws PersistenciaException, ObjetoNaoExisteException {
-		
-		EntityManager entityManager = getEntityManager();
-		OfertaServico ofertaServico = null;
-		
-		try{
-			ofertaServico = entityManager.find(OfertaServico.class, id);
-		}
-		catch(PersistenceException ex){
-			
-			if(ofertaServico == null){
-				throw new ObjetoNaoExisteException("Não existe ofertaServico com este id");
-			}
-			
-			ex.printStackTrace();
-			throw new PersistenciaException("Erro ao recuperar ofertaServico");
-		}
-		
-		return ofertaServico;
-	}
-	
 	
 }

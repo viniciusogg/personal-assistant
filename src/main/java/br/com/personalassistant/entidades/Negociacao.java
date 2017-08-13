@@ -1,9 +1,7 @@
 package br.com.personalassistant.entidades;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -22,6 +21,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.personalassistant.enums.ESTADO_NEGOCIACAO;
+import br.com.personalassistant.util.DataAtual;
 
 @Entity
 @Table(name="TB_NEGOCIACAO")
@@ -36,11 +36,19 @@ public class Negociacao {
 	private List<Proposta> propostas = new ArrayList<Proposta>();
 	
 	@OneToOne
-	@JoinColumn(nullable = false, name="contratante_FK")
+	@JoinColumns({
+		@JoinColumn(name = "contratante_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoContratante_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
+	//@JoinColumn(name="contratante_FK", nullable=false)
 	private Contratante contratante;
 	
 	@OneToOne
-	@JoinColumn(nullable = false, name="assistente_FK")
+	@JoinColumns({
+		@JoinColumn(name = "assistente_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoAssistente_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
+	//@JoinColumn(name="assistente_FK", nullable=false)
 	private Assistente assistente;
 
 	@Temporal(TemporalType.DATE)
@@ -53,22 +61,20 @@ public class Negociacao {
 	
 	public Negociacao() {
 		super();
-		
-		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(new Date());
 
-		setDataInicioNegociacao(calendar.getTime());
-		setStatus(ESTADO_NEGOCIACAO.EM_ANDAMENTO);
+		this.status = ESTADO_NEGOCIACAO.EM_ANDAMENTO;
+		this.dataInicioNegociacao = DataAtual.getDataAtual();
 	}
 
 	public Negociacao(List<Proposta> propostas, Contratante contratante, Assistente assistente,
-			Date dataInicioNegociacao, ESTADO_NEGOCIACAO status) {
+			Date dataInicioNegociacao) {
 		super();
 		this.propostas = propostas;
 		this.contratante = contratante;
 		this.assistente = assistente;
 		this.dataInicioNegociacao = dataInicioNegociacao;
-		this.status = status;
+		this.status = ESTADO_NEGOCIACAO.EM_ANDAMENTO;
+		this.dataInicioNegociacao = DataAtual.getDataAtual();
 	}
 
 	public Long getId() {

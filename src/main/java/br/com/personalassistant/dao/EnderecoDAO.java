@@ -1,21 +1,21 @@
 package br.com.personalassistant.dao;
 
-import java.util.List;
+/*import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
-import javax.persistence.TypedQuery;
+import javax.persistence.TypedQuery;*/
 
 import br.com.personalassistant.entidades.Endereco;
-import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+/*import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
-import br.com.personalassistant.excecoes.PersistenciaException;
+import br.com.personalassistant.excecoes.PersistenciaException;*/
 
-public class EnderecoDAO extends DAO {
+public class EnderecoDAO extends DAO<Endereco> {
 
 	private static final long serialVersionUID = -902709003677742503L;
 
-	public void save(Endereco endereco) throws PersistenciaException{
+	/*public void save(Endereco endereco) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
 		
@@ -99,7 +99,6 @@ public class EnderecoDAO extends DAO {
 		}
 		
 		return endereco;
-	}
-	
+	}*/
 	
 }

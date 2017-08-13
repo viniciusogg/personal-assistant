@@ -1,21 +1,22 @@
 package br.com.personalassistant.dao;
 
-import java.util.List;
+//import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
+
 
 import br.com.personalassistant.entidades.Usuario;
 import br.com.personalassistant.enums.TIPO_USUARIO;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
-public class UsuarioDAO extends DAO {
+public class UsuarioDAO extends DAO<Usuario> {
 
 	private static final long serialVersionUID = -7126348235587089639L;
 
-	public void save(Usuario usuario) throws PersistenciaException{
+	/*public void save(Usuario usuario) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
 		
@@ -94,7 +95,7 @@ public class UsuarioDAO extends DAO {
 		}
 		
 		return usuario;
-	}
+	}*/
 	
 	public TIPO_USUARIO getTipoUsuarioByEmail(String email) throws PersistenciaException, ObjetoNaoExisteException{
 				

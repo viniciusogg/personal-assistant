@@ -67,4 +67,13 @@ public class LanceService implements Serializable {
 			throw new ServiceException(ex.getMessage());
 		}
 	}
+	
+	public List<Lance> getAllByIdAssistente(Long id) throws ServiceException, NaoExistemObjetosException{
+		try{
+			return this.lanceDAO.getAllByIdAssistente(id);
+		}
+		catch(PersistenciaException ex){
+			throw new ServiceException(ex.getMessage());
+		}
+	}
 }

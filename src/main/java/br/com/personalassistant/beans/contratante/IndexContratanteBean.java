@@ -14,6 +14,7 @@ import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.services.ContratanteService;
 import br.com.personalassistant.services.ServicoService;
+import br.com.personalassistant.services.UsuarioService;
 
 @Named
 @ViewScoped
@@ -22,14 +23,14 @@ public class IndexContratanteBean extends AbstractBean{
 	private static final long serialVersionUID = -7936163110122575442L;
 
 	@Inject private ServicoService servicoService;
-	@Inject private ContratanteService contratanteService;
+	@Inject private UsuarioService contratanteService;
 	private Contratante contratante;
 	private List<Servico> servicos;
 	
 	public void preRenderView(){
 		try {
-			this.contratante = contratanteService.getContratanteByEmail(getEmailUsuarioLogado());
-			this.servicos = this.servicoService.getAllByIdContratante(this.contratante.getId());
+			this.contratante = (Contratante) contratanteService.getUsuarioByEmail(getEmailUsuarioLogado());
+			this.servicos = this.servicoService.getAllByIdContratante(this.contratante.getPk().getId());
 		} 
 		catch (ObjetoNaoExisteException | NaoExistemObjetosException e) {} 
 		catch (ServiceException e) {

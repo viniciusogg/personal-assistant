@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import br.com.personalassistant.dao.AvaliacaoContratanteDAO;
 import br.com.personalassistant.entidades.AvaliacaoContratante;
+import br.com.personalassistant.entidades.PK;
 import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
@@ -69,7 +70,7 @@ public class AvaliacaoContratanteService implements Serializable {
 		}
 	}
 	
-	public ArrayList<Double> getAvaliacoesByIdContratante(Long id) throws ServiceException, ObjetoNaoExisteException{
+	public ArrayList<Double> getAvaliacoesByIdContratante(PK id) throws ServiceException, ObjetoNaoExisteException{
 		try {
 			return this.avaliacaoContratanteDAO.getAvaliacoesByIdContratante(id);
 		}
@@ -78,7 +79,7 @@ public class AvaliacaoContratanteService implements Serializable {
 		}
 	}
 	
-	public Long getTotalAvaliacoesById(Long id) throws ServiceException, ObjetoNaoExisteException{
+	public Long getTotalAvaliacoesById(PK id) throws ServiceException, ObjetoNaoExisteException{
 		try {
 			return this.avaliacaoContratanteDAO.getTotalAvaliacoesById(id);
 		} 

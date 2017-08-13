@@ -10,8 +10,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.personalassistant.dao.UsuarioDAO;
+import br.com.personalassistant.entidades.PK;
 import br.com.personalassistant.entidades.Usuario;
 import br.com.personalassistant.enums.TIPO_USUARIO;
+import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 import br.com.personalassistant.excecoes.ServiceException;
@@ -62,7 +64,16 @@ public class UsuarioService implements Serializable {
 		}
 	}
 	
-	public List<Usuario> getAll() throws ServiceException{
+	public Usuario getById(PK pk) throws ServiceException, ObjetoNaoExisteException {
+		try{
+			return this.usuarioDAO.getById(pk);
+		}
+		catch(PersistenciaException ex){
+			throw new ServiceException(ex.getMessage());
+		}
+	}
+	
+	public List<Usuario> getAll() throws ServiceException, NaoExistemObjetosException{
 		try{
 			return this.usuarioDAO.getAll();
 		}
@@ -71,6 +82,18 @@ public class UsuarioService implements Serializable {
 		}
 	}
 
+	@Transacional
+	public Long generateId() {
+		
+		Long id = null;
+		
+		id = this.usuarioDAO.generateId();
+		
+		this.usuarioDAO.updateSequenceId();			
+		
+		return id;
+	}
+	
 	public TIPO_USUARIO getTipoUsuarioByEmail(String email) throws ServiceException, ObjetoNaoExisteException{
 		try{
 			return this.usuarioDAO.getTipoUsuarioByEmail(email);
@@ -90,7 +113,7 @@ public class UsuarioService implements Serializable {
 	}
 	
 	public void criptografarSenha(Usuario usuario) throws ServiceException {
-		usuario.setSenha(criptografarSenha(usuario.getSenha()));
+		usuario.setSenha(criptografarDado(usuario.getSenha()));
 	}
 
 	/**
@@ -102,13 +125,13 @@ public class UsuarioService implements Serializable {
 	 * @throws ServiceDacaException
 	 *             lançada caso ocorra algum erro durante o processo
 	 */
-	private static String criptografarSenha(String senha) throws ServiceException {
+	private static String criptografarDado(String dado) throws ServiceException {
 		
 		MessageDigest messageDigest;
 		
 		try {
 			messageDigest = MessageDigest.getInstance("SHA-256");
-			messageDigest.update(senha.getBytes("UTF-8"));
+			messageDigest.update(dado.getBytes("UTF-8"));
 			
 			byte[] digest = messageDigest.digest();
 			

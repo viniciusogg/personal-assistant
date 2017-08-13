@@ -20,6 +20,7 @@ import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.services.AssistenteService;
 import br.com.personalassistant.services.ContratanteService;
 import br.com.personalassistant.services.NegociacaoService;
+import br.com.personalassistant.services.UsuarioService;
 
 @ViewScoped
 @Named
@@ -27,6 +28,7 @@ public class AssistentesCteBean extends AbstractBean {
 
 	private static final long serialVersionUID = 3584566994926099104L;
 
+	@Inject private UsuarioService usuarioService;
 	@Inject private AssistenteService assistenteService;
 	@Inject private ContratanteService contratanteService;
 	@Inject private NegociacaoService negociacaoService;
@@ -40,7 +42,7 @@ public class AssistentesCteBean extends AbstractBean {
 	public void preRenderView() {
 				
 		try {
-			this.contratante = contratanteService.getContratanteByEmail(getEmailUsuarioLogado());
+			this.contratante = (Contratante) usuarioService.getUsuarioByEmail(getEmailUsuarioLogado());
 		
 			this.negociacao = new Negociacao();			
 			this.negociacao.setContratante(this.contratante);

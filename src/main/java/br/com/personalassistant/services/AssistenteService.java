@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import br.com.personalassistant.dao.AssistenteDAO;
 import br.com.personalassistant.entidades.Assistente;
+import br.com.personalassistant.entidades.PK;
 import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
@@ -51,13 +52,13 @@ public class AssistenteService implements Serializable {
 		}		
 	}
 	
-	public Assistente getById(Long id) throws ServiceException, ObjetoNaoExisteException{
+	public Assistente getById(PK id) throws ServiceException, ObjetoNaoExisteException{
 		try{
 			Assistente assistente = this.assistenteDAO.getById(id);
 			
-			assistente.setQuantServicosPrestados(calcularQuantServicosPrestados(assistente.getId()));
-			assistente.setNivelExperiencia(calcularNivelExperiencia(assistente.getId()));
-			assistente.setReputacao(calcularReputacao(assistente.getId()));
+			assistente.setQuantServicosPrestados(calcularQuantServicosPrestados(assistente.getPk().getId()));
+			assistente.setNivelExperiencia(calcularNivelExperiencia(assistente.getPk().getId()));
+			assistente.setReputacao(calcularReputacao(assistente.getPk()));
 			
 			return assistente;
 		}
@@ -71,9 +72,9 @@ public class AssistenteService implements Serializable {
 			List<Assistente> assistentes = this.assistenteDAO.getAll();
 			
 			for(Assistente a: assistentes){
-				a.setQuantServicosPrestados(calcularQuantServicosPrestados(a.getId()));
-				a.setNivelExperiencia(calcularNivelExperiencia(a.getId()));
-				a.setReputacao(calcularReputacao(a.getId()));
+				a.setQuantServicosPrestados(calcularQuantServicosPrestados(a.getPk().getId()));
+				a.setNivelExperiencia(calcularNivelExperiencia(a.getPk().getId()));
+				a.setReputacao(calcularReputacao(a.getPk()));
 			}
 			
 			return assistentes;
@@ -96,9 +97,9 @@ public class AssistenteService implements Serializable {
 		try {
 			Assistente assistente =  this.assistenteDAO.getAssistenteByEmail(email);
 			
-			assistente.setQuantServicosPrestados(calcularQuantServicosPrestados(assistente.getId()));
-			assistente.setNivelExperiencia(calcularNivelExperiencia(assistente.getId()));
-			assistente.setReputacao(calcularReputacao(assistente.getId()));
+			assistente.setQuantServicosPrestados(calcularQuantServicosPrestados(assistente.getPk().getId()));
+			assistente.setNivelExperiencia(calcularNivelExperiencia(assistente.getPk().getId()));
+			assistente.setReputacao(calcularReputacao(assistente.getPk()));
 			
 			return assistente;
 		}
@@ -126,7 +127,7 @@ public class AssistenteService implements Serializable {
 		}
 	}*/
 	
-	private int calcularReputacao(Long id){
+	private int calcularReputacao(PK id){
 		
 		int indiceMaior = 0;
 		

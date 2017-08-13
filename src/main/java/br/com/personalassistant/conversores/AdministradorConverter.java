@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import br.com.personalassistant.services.AdministradorService;
 import br.com.personalassistant.entidades.Administrador;
+import br.com.personalassistant.entidades.PK;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.ServiceException;
 
@@ -31,7 +32,7 @@ public class AdministradorConverter implements Converter {
 		}
 
 		try {
-			Administrador admin = adminService.getById(Long.valueOf(value));
+			Administrador admin = adminService.getById(PK.class.cast(value));
 			return admin;
 		} 
 		catch (NumberFormatException | ServiceException | ObjetoNaoExisteException ex) {
@@ -53,7 +54,7 @@ public class AdministradorConverter implements Converter {
 		}
 
 		Administrador admin = (Administrador) value;
-		return String.valueOf(admin.getId());
+		return String.valueOf(admin.getPk());
 	}
 
 }

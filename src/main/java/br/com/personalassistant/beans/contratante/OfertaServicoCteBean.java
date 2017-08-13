@@ -22,6 +22,7 @@ import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.services.CategoriaServicoService;
 import br.com.personalassistant.services.ContratanteService;
 import br.com.personalassistant.services.OfertaServicoService;
+import br.com.personalassistant.services.UsuarioService;
 
 @ViewScoped
 @Named
@@ -30,6 +31,7 @@ public class OfertaServicoCteBean extends AbstractBean {
 	private static final long serialVersionUID = -8650273559758651189L;
 
 	@Inject private ContratanteService contratanteService;
+	@Inject private UsuarioService usuarioService;	
 	@Inject private CategoriaServicoService categoriaServicoService;
 	@Inject private OfertaServicoService ofertaServicoService;
 	private List<CategoriaServico> categoriasServicos;
@@ -38,13 +40,14 @@ public class OfertaServicoCteBean extends AbstractBean {
 	private Contratante contratante;
 	private boolean precisaEndereco;
 	private List<String> nomesCapacidades = new ArrayList<String>();
+	private String nomeCategoriaServico;
 	
 	public void preRenderView(){
 	
 		try {
-			this.contratante = contratanteService.getContratanteByEmail(getEmailUsuarioLogado());
+			this.contratante = (Contratante) usuarioService.getUsuarioByEmail(getEmailUsuarioLogado());
 			
-			this.ofertasServicos = ofertaServicoService.getAllByIdContratante(this.contratante.getId());
+			this.ofertasServicos = ofertaServicoService.getAllByIdContratante(this.contratante.getPk().getId());
 			
 			this.ofertaServico = new OfertaServico();
 			this.ofertaServico.setContratante(this.contratante);
@@ -73,17 +76,18 @@ public class OfertaServicoCteBean extends AbstractBean {
 				this.ofertaServico.getCapacidades().add(new Capacidade(nome));
 			}
 			
+			this.ofertaServico.setCategoriaServico(this.categoriaServicoService.getByName(this.nomeCategoriaServico));
 			this.ofertaServicoService.save(this.ofertaServico);
 			
 			msg = "Oferta de serviço criada com sucesso";
 			severity = FacesMessage.SEVERITY_INFO;
 		}
-		catch(ServiceException e){
+		catch(ServiceException | ObjetoNaoExisteException e){
 			msg = "Erro ao tentar criar oferta de serviço, atualize a página e tente novamente";
 			severity = FacesMessage.SEVERITY_ERROR;
 		}
 		
-		context.addMessage(null, new FacesMessage(severity, msg, ""));;
+		context.addMessage(null, new FacesMessage(severity, msg, ""));
 	}
 	
 	public void verDetalhesOferta(Long id){
@@ -134,6 +138,14 @@ public class OfertaServicoCteBean extends AbstractBean {
 
 	public void setNomesCapacidades(List<String> nomesCapacidades) {
 		this.nomesCapacidades = nomesCapacidades;
+	}
+
+	public String getNomeCategoriaServico() {
+		return nomeCategoriaServico;
+	}
+
+	public void setNomeCategoriaServico(String nomeCategoriaServico) {
+		this.nomeCategoriaServico = nomeCategoriaServico;
 	}
 	
 	

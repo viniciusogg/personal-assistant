@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import br.com.personalassistant.dao.ContratanteDAO;
 import br.com.personalassistant.entidades.Contratante;
+import br.com.personalassistant.entidades.PK;
 import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
@@ -52,7 +53,7 @@ public class ContratanteService implements Serializable {
 		}		
 	}
 	
-	public Contratante getById(Long id) throws ServiceException, ObjetoNaoExisteException{
+	public Contratante getById(PK id) throws ServiceException, ObjetoNaoExisteException{
 		try{
 			Contratante contratante = this.contratanteDAO.getById(id);
 			
@@ -68,7 +69,7 @@ public class ContratanteService implements Serializable {
 			List<Contratante> contratantes = this.contratanteDAO.getAll();
 			
 			for(Contratante c: contratantes){
-				c.setReputacao(calcularReputacao(c.getId()));
+				c.setReputacao(calcularReputacao(c.getPk()));
 			}
 			
 			return contratantes;
@@ -82,7 +83,7 @@ public class ContratanteService implements Serializable {
 		try{
 			Contratante contratante = this.contratanteDAO.getContratanteByEmail(email);
 			
-			contratante.setReputacao(calcularReputacao(contratante.getId()));;
+			contratante.setReputacao(calcularReputacao(contratante.getPk()));
 			
 			return contratante;
 		}
@@ -91,7 +92,7 @@ public class ContratanteService implements Serializable {
 		}
 	}
 	
-	private int calcularReputacao(Long id){
+	private int calcularReputacao(PK id){
 		
 		int indiceMaior = 0;
 		

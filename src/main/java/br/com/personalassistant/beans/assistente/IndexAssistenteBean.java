@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import br.com.personalassistant.beans.AbstractBean;
 import br.com.personalassistant.entidades.Assistente;
+import br.com.personalassistant.entidades.PK;
 import br.com.personalassistant.entidades.Servico;
 import br.com.personalassistant.enums.ESTADO_SERVICO;
 import br.com.personalassistant.excecoes.NaoExistemObjetosException;
@@ -35,7 +36,7 @@ public class IndexAssistenteBean extends AbstractBean{
 		
 		try {
 			this.assistente = assistenteService.getAssistenteByEmail(getEmailUsuarioLogado());
-			this.servicos = this.servicoService.getAllByIdAssistente(this.assistente.getId());
+			this.servicos = this.servicoService.getAllByIdAssistente(this.assistente.getPk());
 		} 
 		catch (ObjetoNaoExisteException | NaoExistemObjetosException e) {} 
 		catch (ServiceException e) {

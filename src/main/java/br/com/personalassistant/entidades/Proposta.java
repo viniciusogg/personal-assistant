@@ -1,9 +1,7 @@
 package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -14,12 +12,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.personalassistant.enums.TIPO_PAGAMENTO;
+import br.com.personalassistant.util.DataAtual;
 
 @Table(name = "TB_PROPOSTA")
 @Entity(name = "Proposta")
@@ -45,11 +45,19 @@ public class Proposta implements Serializable{
 	private Negociacao negociacao = new Negociacao();
 	
 	@ManyToOne
-	@JoinColumn(name="usuario_FK",nullable = false)
+	@JoinColumns({
+		@JoinColumn(name = "usuario_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoUsuario_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
+	//@JoinColumn(name="usuario_FK", nullable=false)
 	private Usuario autorProposta; //unidirecional
 	
 	@ManyToOne
-	@JoinColumn(name = "endereco_FK")
+	@JoinColumns({
+		@JoinColumn(name = "endereco_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoEndereco_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
+	//@JoinColumn(name="endereco_FK")
 	private Endereco endereco; // unidirecional
 	
 	@Embedded
@@ -61,10 +69,7 @@ public class Proposta implements Serializable{
 	
 	public Proposta() {
 		super();
-		
-		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(new Date());
-		this.dataProposta =  calendar.getTime();
+		this.dataProposta = DataAtual.getDataAtual();
 	}
 	
 	public Proposta(Double preco, String comentario, TIPO_PAGAMENTO tipoPagamento, Negociacao negociacao,
@@ -78,10 +83,7 @@ public class Proposta implements Serializable{
 		this.autorProposta = autorProposta;
 		this.endereco = endereco;
 		this.dataRealizacaoServico = dataRealizacaoServico;
-		
-		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(new Date());
-		this.dataProposta =  calendar.getTime();
+		this.dataProposta = DataAtual.getDataAtual();
 	}
 
 	public Double getPreco() {

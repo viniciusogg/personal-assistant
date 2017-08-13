@@ -16,8 +16,6 @@ import br.com.personalassistant.entidades.Servico;
 import br.com.personalassistant.enums.ESTADO_LANCE;
 import br.com.personalassistant.enums.ESTADO_OFERTA;
 import br.com.personalassistant.excecoes.ServiceException;
-//import br.com.personalassistant.services.AssistenteService;
-//import br.com.personalassistant.services.LanceService;
 import br.com.personalassistant.services.OfertaServicoService;
 import br.com.personalassistant.services.ServicoService;
 
@@ -27,14 +25,11 @@ public class LancesOfertaCteBean extends AbstractBean {
 
 	private static final long serialVersionUID = -4895432624706215868L;
 
-	//@Inject private AssistenteService assistenteService;
 	@Inject private OfertaServicoService ofertaServicoService;
 	@Inject private ServicoService servicoService;
 	private OfertaServico ofertaServico;
-	//private Lance lance;
 	
 	public void preRenderView(){
-		
 		
 	}
 

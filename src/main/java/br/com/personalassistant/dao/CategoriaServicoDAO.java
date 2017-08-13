@@ -1,21 +1,21 @@
 package br.com.personalassistant.dao;
 
-import java.util.List;
+//import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.CategoriaServico;
-import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+//import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
-public class CategoriaServicoDAO extends DAO {
+public class CategoriaServicoDAO extends DAO<CategoriaServico> {
 
 	private static final long serialVersionUID = -902709003677742503L;
 
-	public void save(CategoriaServico categoriaServico) throws PersistenciaException{
+	/*public void save(CategoriaServico categoriaServico) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
 		
@@ -99,7 +99,7 @@ public class CategoriaServicoDAO extends DAO {
 		}
 		
 		return categoriaServico;
-	}
+	}*/
 	
 	public CategoriaServico getByName(String nome) throws PersistenciaException, ObjetoNaoExisteException {
 		
@@ -107,8 +107,9 @@ public class CategoriaServicoDAO extends DAO {
 		CategoriaServico categoriaServico = null;
 		
 		try{
-			TypedQuery<CategoriaServico> typedQuery = entityManager.createQuery("SELECT cs FROM CategoriaServico cs WHERE cs.nome = :nome", 
-					CategoriaServico.class);
+			TypedQuery<CategoriaServico> typedQuery = entityManager.createQuery("SELECT cs "
+					+ "FROM CategoriaServico cs "
+					+ "WHERE cs.nome = :nome", CategoriaServico.class);
 			typedQuery.setParameter("nome", nome);			
 			categoriaServico = typedQuery.getSingleResult();
 		}

@@ -7,15 +7,16 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.Lance;
+//import br.com.personalassistant.entidades.PK;
 import br.com.personalassistant.excecoes.NaoExistemObjetosException;
-import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
+//import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
-public class LanceDAO extends DAO {
+public class LanceDAO extends DAO<Lance> {
 
 	private static final long serialVersionUID = -902709003677742503L;
 
-	public void save(Lance lance) throws PersistenciaException{
+	/*public void save(Lance lance) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
 		
@@ -99,6 +100,32 @@ public class LanceDAO extends DAO {
 		}
 		
 		return lance;
+	}*/
+	
+	public List<Lance> getAllByIdAssistente(Long id) throws PersistenciaException, NaoExistemObjetosException {
+		
+		EntityManager entityManager = getEntityManager();
+		List<Lance> lances = null;
+		
+		try{
+			TypedQuery<Lance> typedQuery = entityManager.createQuery("SELECT l"
+					+ "FROM Lance l "
+					+ "WHERE l.assistente.pk.id = :id ", Lance.class);
+			typedQuery.setParameter("id", id);
+			 
+			lances = typedQuery.getResultList();
+		}
+		catch(PersistenceException ex){
+			
+			if(lances == null){
+				throw new NaoExistemObjetosException("Não existem lances");
+			}
+			
+			ex.printStackTrace();
+			throw new PersistenceException("Erro ao recuperar lances");
+		}
+		
+		return lances;
 	}
 	
 	

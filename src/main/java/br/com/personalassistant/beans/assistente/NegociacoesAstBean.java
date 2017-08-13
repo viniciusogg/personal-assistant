@@ -33,7 +33,7 @@ public class NegociacoesAstBean extends AbstractBean {
 		try {
 			this.assistente = assistenteService.getAssistenteByEmail(getEmailUsuarioLogado());
 			
-			this.negociacoes = negociacaoService.getToAssistenteAllById(assistente.getId());
+			this.negociacoes = negociacaoService.getToAssistenteAllById(assistente.getPk().getId());
 		} 
 		catch (ServiceException | NaoExistemObjetosException | ObjetoNaoExisteException e) {
 			e.printStackTrace();

@@ -1,21 +1,23 @@
 package br.com.personalassistant.dao;
 
-import java.util.List;
+//import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.Administrador;
-import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.entidades.PK;
+//import br.com.personalassistant.entidades.PK;
+//import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
-public class AdministradorDAO extends DAO {
+public class AdministradorDAO extends DAO<Administrador> {
 
 	private static final long serialVersionUID = -902709003677742503L;
 
-	public void save(Administrador administrador) throws PersistenciaException{
+	/*public void save(Administrador administrador) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
 		
@@ -33,7 +35,9 @@ public class AdministradorDAO extends DAO {
 		EntityManager entityManager = getEntityManager();
 		
 		try{
-			entityManager.remove(entityManager.getReference(administrador.getClass(), administrador.getId()));
+			//PK pkAdm = new PK(administrador.getId(), administrador.getUltimaAtualizacao());
+			entityManager.remove(entityManager.getReference(administrador.getClass(), 
+					new PK(administrador.getId(), administrador.getUltimaAtualizacao())));
 		}
 		catch(PersistenceException ex){
 			ex.printStackTrace();
@@ -47,7 +51,8 @@ public class AdministradorDAO extends DAO {
 		Administrador administradorAtualizado = administrador; 
 		
 		try{
-			entityManager.find(administrador.getClass(), administrador.getId());
+			entityManager.find(administrador.getClass(), 
+					new PK(administrador.getId(), administrador.getUltimaAtualizacao()));
 			entityManager.merge(administrador);
 		}
 		catch(PersistenceException ex){
@@ -64,7 +69,8 @@ public class AdministradorDAO extends DAO {
 		List<Administrador> administradores = null;
 		
 		try{
-			TypedQuery<Administrador> typedQuery = entityManager.createQuery("SELECT administrador FROM Administrador administrador", Administrador.class);
+			TypedQuery<Administrador> typedQuery = entityManager.createQuery("SELECT administrador "
+					+ "FROM Administrador administrador", Administrador.class);
 			administradores = typedQuery.getResultList();
 		}
 		catch(PersistenceException ex){
@@ -80,13 +86,13 @@ public class AdministradorDAO extends DAO {
 		return administradores;
 	}
 	
-	public Administrador getById(Long id) throws PersistenciaException, ObjetoNaoExisteException {
+	public Administrador getById(PK pk) throws PersistenciaException, ObjetoNaoExisteException {
 		
 		EntityManager entityManager = getEntityManager();
 		Administrador administrador = null;
 		
 		try{
-			administrador = entityManager.find(Administrador.class, id);
+			administrador = entityManager.find(Administrador.class, pk);
 		}
 		catch(PersistenceException ex){
 			
@@ -99,17 +105,17 @@ public class AdministradorDAO extends DAO {
 		}
 		
 		return administrador;
-	}
+	}*/
 	
-	public Long getIdByEmail(String email) throws PersistenciaException, ObjetoNaoExisteException {
+	public PK getIdByEmail(String email) throws PersistenciaException, ObjetoNaoExisteException {
 		
 		EntityManager entityManager = getEntityManager();
-		Long id = null;
+		PK id = null;
 		
 		try{
-			TypedQuery<Long> typedQuery = entityManager.createQuery("SELECT a.id "
+			TypedQuery<PK> typedQuery = entityManager.createQuery("SELECT a.pk "
 					+ "FROM Administrador a "
-					+ "WHERE a.email = :email", Long.class);
+					+ "WHERE a.email = :email", PK.class);
 			
 			typedQuery.setParameter("email", email);
 			

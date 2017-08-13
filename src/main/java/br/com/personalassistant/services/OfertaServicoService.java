@@ -3,7 +3,7 @@ package br.com.personalassistant.services;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -13,7 +13,7 @@ import javax.inject.Inject;
 
 import br.com.personalassistant.dao.OfertaServicoDAO;
 import br.com.personalassistant.entidades.OfertaServico;
-import br.com.personalassistant.enums.ESTADO_OFERTA;
+//import br.com.personalassistant.enums.ESTADO_OFERTA;
 import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
@@ -79,7 +79,7 @@ public class OfertaServicoService implements Serializable {
 		try{
 			List<OfertaServico> ofertas = this.ofertaServicoDAO.getAllByIdCategoriaServico(id);
 			
-			List<OfertaServico> ofertasValidas = new ArrayList<OfertaServico>();
+			/*List<OfertaServico> ofertasValidas = new ArrayList<OfertaServico>();
 			
 			for(OfertaServico o: ofertas){
 				if(!this.isDataOfertaValida(o.getDataFinalOferta())){
@@ -89,9 +89,9 @@ public class OfertaServicoService implements Serializable {
 				else{					
 					ofertasValidas.add(o);
 				}
-			}
+			}*/
 			
-			return ofertasValidas;
+			return ofertas;
 		}
 		catch(PersistenciaException ex){
 			throw new ServiceException(ex.getMessage());
@@ -102,7 +102,7 @@ public class OfertaServicoService implements Serializable {
 		try{
 			List<OfertaServico> ofertas = this.ofertaServicoDAO.getAllByIdContratante(id);
 			
-			List<OfertaServico> ofertasValidas = new ArrayList<OfertaServico>();
+			/*List<OfertaServico> ofertasValidas = new ArrayList<OfertaServico>();
 			
 			for(OfertaServico o: ofertas){
 				if(!this.isDataOfertaValida(o.getDataFinalOferta())){
@@ -112,9 +112,9 @@ public class OfertaServicoService implements Serializable {
 				else{					
 					ofertasValidas.add(o);
 				}
-			}
+			}*/
 			
-			return ofertasValidas;
+			return ofertas;
 		}
 		catch(PersistenciaException ex){
 			throw new ServiceException(ex.getMessage());

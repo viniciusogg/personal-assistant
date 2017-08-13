@@ -16,6 +16,7 @@ import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.ServiceException;
 import br.com.personalassistant.services.ContratanteService;
 import br.com.personalassistant.services.NegociacaoService;
+import br.com.personalassistant.services.UsuarioService;
 
 @Named
 @ViewScoped
@@ -25,15 +26,16 @@ public class NegociacoesCteBean extends AbstractBean {
 
 	@Inject private NegociacaoService negociacaoService;
 	@Inject private ContratanteService contratanteService;
+	@Inject private UsuarioService usuarioService;
 	private List<Negociacao> negociacoes;
 	private Contratante contratante;
 	
 	public void preRenderView(){
 		
 		try {
-			this.contratante = contratanteService.getContratanteByEmail(getEmailUsuarioLogado());
+			this.contratante = (Contratante) usuarioService.getUsuarioByEmail(getEmailUsuarioLogado());
 			
-			this.negociacoes = negociacaoService.getToContratanteAllById(contratante.getId());
+			this.negociacoes = negociacaoService.getToContratanteAllById(contratante.getPk().getId());
 		} 
 		catch (ServiceException | NaoExistemObjetosException | ObjetoNaoExisteException e) {
 			e.printStackTrace();

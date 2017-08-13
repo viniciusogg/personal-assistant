@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import br.com.personalassistant.beans.AbstractBean;
 import br.com.personalassistant.entidades.Administrador;
+import br.com.personalassistant.entidades.PK;
 import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.ServiceException;
@@ -49,9 +50,9 @@ public class AdministradoresAdmBean extends AbstractBean{
 		String nomeAdministradorRemovido = this.administrador.getNome();
 		
 		try {
-			Long idRemovido = this.administrador.getId();
+			PK idRemovido = this.administrador.getPk();
 						
-			Long idAtual = administradorService.getIdByEmail(getEmailUsuarioLogado());
+			PK idAtual = administradorService.getIdByEmail(getEmailUsuarioLogado());
 			
 			boolean idsIguais = idRemovido.equals(idAtual);
 

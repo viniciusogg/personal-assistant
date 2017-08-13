@@ -1,9 +1,7 @@
 package br.com.personalassistant.entidades;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -14,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -22,6 +21,7 @@ import javax.persistence.TemporalType;
 
 import br.com.personalassistant.enums.ESTADO_SERVICO;
 import br.com.personalassistant.enums.TIPO_PAGAMENTO;
+import br.com.personalassistant.util.DataAtual;
 
 @Table(name="TB_SERVICO")
 @Entity(name = "Servico")
@@ -49,7 +49,11 @@ public class Servico implements Serializable {
 	private TIPO_PAGAMENTO tipoPagamento;
 	
 	@ManyToOne
-	@JoinColumn(name = "categoria_servico_FK", nullable = false)
+	@JoinColumns({
+		@JoinColumn(name = "categoriaServico_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoCategoriaServico_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
+	//@JoinColumn(name="categoriaServico_FK")
 	private CategoriaServico categoriaServico;
 	
 	@OneToOne
@@ -61,11 +65,19 @@ public class Servico implements Serializable {
 	private AvaliacaoContratante avaliacaoContratanteRecebeu;
 	
 	@ManyToOne
-	@JoinColumn(name = "assistente_FK")
+	@JoinColumns({
+		@JoinColumn(name = "assistente_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoAssistente_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
+	//@JoinColumn(name="assistente_FK")
 	private Assistente assistente;
 	
 	@ManyToOne
-	@JoinColumn(name = "contratante_FK")
+	@JoinColumns({
+		@JoinColumn(name = "contratante_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoContratante_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
+	//@JoinColumn(name="contratante_FK")
 	private Contratante contratante;
 	
 	@Embedded
@@ -73,17 +85,18 @@ public class Servico implements Serializable {
 	private DataRealizacaoServico dataRealizacaoServico;
 	
 	@OneToOne
-	@JoinColumn(name = "endereco_FK")
+	@JoinColumns({
+		@JoinColumn(name = "endereco_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoEndereco_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
+	//@JoinColumn(name="endereco_FK")
 	private Endereco endereco;
 	
 	public Servico(){
 		super();
 		
 		this.status = ESTADO_SERVICO.EM_ANDAMENTO;
-		
-		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(new Date());
-		this.dataConclusaoNegociacao = calendar.getTime();
+		this.dataConclusaoNegociacao = DataAtual.getDataAtual();
 	}
 	
 	public Servico(Double preco, TIPO_PAGAMENTO tipoPagamento,
@@ -96,12 +109,8 @@ public class Servico implements Serializable {
 		this.assistente = assistente;
 		this.contratante = contratante;
 		this.dataRealizacaoServico = dataRealizacaoServico;
-		
 		this.status = ESTADO_SERVICO.EM_ANDAMENTO;
-		
-		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(new Date());
-		this.dataConclusaoNegociacao = calendar.getTime();
+		this.dataConclusaoNegociacao = DataAtual.getDataAtual();
 	}
 
 	public ESTADO_SERVICO getStatus() {

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.personalassistant.dao.ServicoDAO;
+import br.com.personalassistant.entidades.PK;
 import br.com.personalassistant.entidades.Servico;
 import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
@@ -68,7 +69,7 @@ public class ServicoService implements Serializable {
 		}
 	}
 	
-	public List<Servico> getAllByIdAssistente(Long id) throws NaoExistemObjetosException, ServiceException{
+	public List<Servico> getAllByIdAssistente(PK id) throws NaoExistemObjetosException, ServiceException{
 		try{
 			return this.servicoDAO.getAllByIdAssistente(id);
 		}

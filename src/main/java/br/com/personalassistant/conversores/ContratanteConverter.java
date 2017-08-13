@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import br.com.personalassistant.services.ContratanteService;
 import br.com.personalassistant.entidades.Contratante;
+import br.com.personalassistant.entidades.PK;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.ServiceException;
 
@@ -31,7 +32,7 @@ public class ContratanteConverter implements Converter {
 		}
 
 		try {
-			Contratante contratante = contratanteService.getById(Long.valueOf(value));
+			Contratante contratante = contratanteService.getById(PK.class.cast(value));
 			return contratante;
 		} 
 		catch (NumberFormatException | ServiceException | ObjetoNaoExisteException ex) {
@@ -53,7 +54,7 @@ public class ContratanteConverter implements Converter {
 		}
 
 		Contratante contratante = (Contratante) value;
-		return String.valueOf(contratante.getId());
+		return String.valueOf(contratante.getPk());
 	}
 
 }

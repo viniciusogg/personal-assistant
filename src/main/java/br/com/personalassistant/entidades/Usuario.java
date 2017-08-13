@@ -5,11 +5,10 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -20,24 +19,21 @@ import br.com.personalassistant.enums.TIPO_USUARIO;
 
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "Discriminador", discriminatorType = DiscriminatorType.STRING)
-@Table(name = "TB_USUARIO", uniqueConstraints = {
-		@UniqueConstraint(name = "UC_USUARIO", columnNames = {"email"})})
+@Table(name = "TB_USUARIO", uniqueConstraints = {@UniqueConstraint(name = "UC_USUARIO", columnNames = {"email"})})
 @Entity(name = "Usuario")
 public abstract class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1694937550826272267L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	private Long id;
+	@EmbeddedId
+	private PK pk;
 	
 	@Column(nullable = false)
 	private String nome;
 	
-	@Column(nullable = false)
 	private String email;
 
-	@Column(nullable = false)
 	private String senha;
 	
 	@Column(nullable = false)
@@ -46,9 +42,13 @@ public abstract class Usuario implements Serializable{
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private TIPO_USUARIO tipoUsuario;
-	
-	public Long getId() {
-		return id;
+
+	public PK getPk() {
+		return pk;
+	}
+
+	public void setPk(PK pk) {
+		this.pk = pk;
 	}
 
 	public String getNome() {
@@ -95,10 +95,11 @@ public abstract class Usuario implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((numTelefonico == null) ? 0 : numTelefonico.hashCode());
+		result = prime * result + ((pk == null) ? 0 : pk.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
+		result = prime * result + ((tipoUsuario == null) ? 0 : tipoUsuario.hashCode());
 		return result;
 	}
 
@@ -116,8 +117,6 @@ public abstract class Usuario implements Serializable{
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (id != other.id)
-			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
@@ -128,18 +127,25 @@ public abstract class Usuario implements Serializable{
 				return false;
 		} else if (!numTelefonico.equals(other.numTelefonico))
 			return false;
+		if (pk == null) {
+			if (other.pk != null)
+				return false;
+		} else if (!pk.equals(other.pk))
+			return false;
 		if (senha == null) {
 			if (other.senha != null)
 				return false;
 		} else if (!senha.equals(other.senha))
+			return false;
+		if (tipoUsuario != other.tipoUsuario)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", numTelefonico="
-				+ numTelefonico + "]";
+		return "Usuario [pk=" + pk + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", numTelefonico="
+				+ numTelefonico + ", tipoUsuario=" + tipoUsuario + "]";
 	}
-	
+
 }

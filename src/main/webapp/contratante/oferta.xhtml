@@ -9,7 +9,7 @@
 		template="index.xhtml">
 		
 	<f:metadata>
-		<o:viewParam name="id" value="#{lancesOfertaBean.ofertaServico}" converter="conversorOfertaServico" />
+		<o:viewParam name="id" value="#{lancesOfertaCteBean.ofertaServico}" converter="conversorOfertaServico" />
 		<!-- <f:event listener="#{lancesOfertaBean.preRenderView}" type="preRenderView" /> -->
 	</f:metadata>
 		
@@ -28,18 +28,18 @@
 					<p:fieldset legend="DETALHES DO SERVIÇO" styleClass="fieldset">
 						<div class="ui-g-12">
 							<div class="ui-g-12">
-								<p:outputLabel value="DESCRIÇÃO: #{lancesOfertaServicoBean.ofertaServico.descricao}"/>
+								<p:outputLabel value="DESCRIÇÃO: #{lancesOfertaCteBean.ofertaServico.descricao}"/>
 							</div>
 						</div>
 						
 						<div class="ui-g-6">
 							<div class="ui-g-12">
-								<p:outputLabel value="PREÇO FIXO: R$ #{lancesOfertaServicoBean.ofertaServico.precoFixo}"/>
+								<p:outputLabel value="PREÇO FIXO: R$ #{lancesOfertaCteBean.ofertaServico.precoFixo}"/>
 							</div>
 						</div>
 						<div class="ui-g-6">
 							<div class="ui-g-12">
-								<p:outputLabel value="PREÇO HORA TRABALHADA: R$ #{lancesOfertaServicoBean.ofertaServico.precoHora}"/>
+								<p:outputLabel value="PREÇO HORA TRABALHADA: R$ #{lancesOfertaCteBean.ofertaServico.precoHora}"/>
 							</div>
 						</div>
 						
@@ -52,11 +52,11 @@
 						<div class="ui-g-6">
 							<div class="ui-g-12">
 								<p:outputLabel value="DATA DE REALIZAÇÃO: Entre"/>
-								<p:outputLabel value="#{lancesOfertaServicoBean.ofertaServico.dataRealizacaoServico.dataRealizacaoInicial}">
+								<p:outputLabel value="#{lancesOfertaCteBean.ofertaServico.dataRealizacaoServico.dataRealizacaoInicial}">
 									<f:convertDateTime pattern="dd/MM/yyyy"/>							
 								</p:outputLabel>
 								<p:outputLabel value="e"/>
-								<p:outputLabel value="#{lancesOfertaServicoBean.ofertaServico.dataRealizacaoServico.dataRealizacaoLimite}">
+								<p:outputLabel value="#{lancesOfertaCteBean.ofertaServico.dataRealizacaoServico.dataRealizacaoLimite}">
 									<f:convertDateTime pattern="dd/MM/yyyy"/>							
 								</p:outputLabel>
 							</div>
@@ -67,8 +67,8 @@
 								<p:outputLabel value="HABILIDADES NECESSÁRIAS PARA EXECUÇÃO DO SERVIÇO" styleClass="label-capacidades-necessarias-oferta"/>
 							</div>
 							<!-- <div class="ui-g-10 div-capacidades-servico"> -->
-							<p:panel header="#{ofertaServicoCteBean.ofertaServico.categoriaServico.nome}" styleClass="ui-g-12">
-								<ui:repeat value="#{ofertaServicoCteBean.ofertaServico.capacidades}" var="capacidade">
+							<p:panel header="#{lancesOfertaCteBean.ofertaServico.categoriaServico.nome}" styleClass="ui-g-12">
+								<ui:repeat value="#{lancesOfertaCteBean.ofertaServico.capacidades}" var="capacidade">
 									<p:outputLabel value="#{capacidade.nome}" styleClass="label-capacidade"/>							
 								</ui:repeat>
 							</p:panel>
@@ -76,22 +76,22 @@
 						</div>
 						
 						<p:fieldset legend="INFORMAÇÕES DE ENDEREÇO"
-								rendered="#{lancesOfertaServicoBean.ofertaServico.endereco != null}" styleClass="fieldset" >
+								rendered="#{lancesOfertaCteBean.ofertaServico.endereco != null}" styleClass="fieldset" >
 							<ui:include src="/WEB-INF/templates/_infoEndereco.xhtml">
-								<ui:param name="rua" value="#{lancesOfertaServicoBean.ofertaServico.endereco != null ? 
-										lancesOfertaServicoBean.ofertaServico.endereco.rua : '#'}"/>
-								<ui:param name="numero" value="#{lancesOfertaServicoBean.ofertaServico.endereco != null ? 
-										lancesOfertaServicoBean.ofertaServico.endereco.numero : '#'}"/>
-								<ui:param name="cep" value="#{lancesOfertaServicoBean.ofertaServico.endereco != null ? 
-										lancesOfertaServicoBean.ofertaServico.endereco.cep : '#'}" />
-								<ui:param name="bairro" value="#{lancesOfertaServicoBean.ofertaServico.endereco != null ? 
-										lancesOfertaServicoBean.ofertaServico.endereco.bairro : '#'}"/>
-								<ui:param name="referencia" value="#{lancesOfertaServicoBean.ofertaServico.endereco != null ? 
-										lancesOfertaServicoBean.ofertaServico.endereco.referencia : '#'}"/>
-								<ui:param name="estado" value="#{lancesOfertaServicoBean.ofertaServico.endereco != null ? 
-										lancesOfertaServicoBean.ofertaServico.endereco.estado : '#'}" />
-								<ui:param name="cidade" value="#{lancesOfertaServicoBean.ofertaServico.endereco != null ? 
-										lancesOfertaServicoBean.ofertaServico.endereco.cidade : '#'}" />					
+								<ui:param name="rua" value="#{lancesOfertaCteBean.ofertaServico.endereco != null ? 
+										lancesOfertaCteBean.ofertaServico.endereco.rua : '#'}"/>
+								<ui:param name="numero" value="#{lancesOfertaCteBean.ofertaServico.endereco != null ? 
+										lancesOfertaCteBean.ofertaServico.endereco.numero : '#'}"/>
+								<ui:param name="cep" value="#{lancesOfertaCteBean.ofertaServico.endereco != null ? 
+										lancesOfertaCteBean.ofertaServico.endereco.cep : '#'}" />
+								<ui:param name="bairro" value="#{lancesOfertaCteBean.ofertaServico.endereco != null ? 
+										lancesOfertaCteBean.ofertaServico.endereco.bairro : '#'}"/>
+								<ui:param name="referencia" value="#{lancesOfertaCteBean.ofertaServico.endereco != null ? 
+										lancesOfertaCteBean.ofertaServico.endereco.referencia : '#'}"/>
+								<ui:param name="estado" value="#{lancesOfertaCteBean.ofertaServico.endereco != null ? 
+										lancesOfertaCteBean.ofertaServico.endereco.estado : '#'}" />
+								<ui:param name="cidade" value="#{lancesOfertaCteBean.ofertaServico.endereco != null ? 
+										lancesOfertaCteBean.ofertaServico.endereco.cidade : '#'}" />					
 							</ui:include>
 						</p:fieldset>
 					</p:fieldset>					
@@ -124,7 +124,7 @@
 							</div>
 							
 							<div class="ui-g-1 div-superior-servico">
-								<p:commandButton title="Aceitar lance" styleClass="botao-iniciar-negociacao" 
+								<p:commandButton title="Aceitar lance" rendered="#{lancesOfertaCteBean.ofertaServico.status != 'ARREMATADA'}" styleClass="botao-iniciar-negociacao" 
 										icon="ui-icon-check" update="msg" onclick="PF('dialogAceitarLance').show()" /> 
 									 				
 								<p:confirmDialog appendTo="@(body)" message="Confirma que aceita o lance ?"
@@ -146,7 +146,7 @@
 							
 							<div class="ui-g-3 sub-div-info-servico">
 								<p:rating value="#{lance.assistente.reputacao}" readonly="true"/>
-								<p:outputLabel value="#{lance.assistente.nivelReputacao}" styleClass="sub-div-info-servico-label-descritiva ui-g-12"/>					
+								<p:outputLabel value="reputacao" styleClass="sub-div-info-servico-label-descritiva ui-g-12"/>					
 							</div>
 							
 							<div class="ui-g-3 sub-div-info-servico">

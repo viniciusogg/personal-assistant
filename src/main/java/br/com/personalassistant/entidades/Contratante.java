@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -29,17 +30,18 @@ public class Contratante extends Usuario{
 	
 	@OneToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinColumn(name = "favorito_do_contratante_FK")
+	@JoinColumns({
+		@JoinColumn(name = "contratante_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoContratante_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
 	private List<Assistente> assistentesFavoritos; // unidirecional
 	
-	@JoinColumn(name = "endereco_FK", nullable = false)
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.REMOVE)
+	@JoinColumns({
+		@JoinColumn(name = "endereco_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoEndereco_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
 	private Endereco endereco; // unidirecional
-	
-	/*@OneToMany(mappedBy="contratante")
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@Column(name = "contratante_FK")
-	private List<Proposta> propostas; // bidirecional*/
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "contratante")
@@ -48,6 +50,7 @@ public class Contratante extends Usuario{
 	
 	public Contratante() {
 		super();
+		this.setTipoUsuario(TIPO_USUARIO.CONTRATANTE);
 	}
 
 	public Contratante(String nome, String email, String senha, String numTelefonico,
@@ -77,14 +80,6 @@ public class Contratante extends Usuario{
 		this.endereco = endereco;
 	}
 
-	/*public List<Proposta> getPropostas() {
-		return propostas;
-	}
-
-	public void setPropostas(List<Proposta> propostas) {
-		this.propostas = propostas;
-	}*/
-
 	public List<OfertaServico> getOfertasServicos() {
 		return ofertasServicos;
 	}
@@ -102,55 +97,11 @@ public class Contratante extends Usuario{
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((assistentesFavoritos == null) ? 0 : assistentesFavoritos.hashCode());
-		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result + ((ofertasServicos == null) ? 0 : ofertasServicos.hashCode());
-		//result = prime * result + ((propostas == null) ? 0 : propostas.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Contratante other = (Contratante) obj;
-		if (assistentesFavoritos == null) {
-			if (other.assistentesFavoritos != null)
-				return false;
-		} else if (!assistentesFavoritos.equals(other.assistentesFavoritos))
-			return false;
-		if (endereco == null) {
-			if (other.endereco != null)
-				return false;
-		} else if (!endereco.equals(other.endereco))
-			return false;
-		if (ofertasServicos == null) {
-			if (other.ofertasServicos != null)
-				return false;
-		} else if (!ofertasServicos.equals(other.ofertasServicos))
-			return false;
-		/*if (propostas == null) {
-			if (other.propostas != null)
-				return false;
-		} else if (!propostas.equals(other.propostas))
-			return false;*/
-		return true;
-	}
-
-	@Override
 	public String toString() {
-		return "Contratante [assistentesFavoritos=" + assistentesFavoritos + ", endereco=" + endereco + ", ofertasServicos=" + ofertasServicos
-				+ ", getId()=" + getId() + ", getNome()=" + getNome()
-				+ ", getEmail()=" + getEmail() + ", getSenha()=" + getSenha() + ", getNumTelefonico()="
+		return "Contratante [reputacao=" + reputacao + ", assistentesFavoritos=" + assistentesFavoritos + ", endereco="
+				+ endereco + ", ofertasServicos=" + ofertasServicos + ", getPk()=" + getPk() + ", getNome()="
+				+ getNome() + ", getEmail()=" + getEmail() + ", getSenha()=" + getSenha() + ", getNumTelefonico()="
 				+ getNumTelefonico() + ", getTipoUsuario()=" + getTipoUsuario() + "]";
-	} //", propostas=" + propostas
-	
+	}
 	
 }

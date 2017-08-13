@@ -1,22 +1,23 @@
 package br.com.personalassistant.dao;
 
 import java.util.ArrayList;
-import java.util.List;
+//import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.personalassistant.entidades.AvaliacaoAssistente;
-import br.com.personalassistant.excecoes.NaoExistemObjetosException;
+import br.com.personalassistant.entidades.PK;
+//import br.com.personalassistant.excecoes.NaoExistemObjetosException;
 import br.com.personalassistant.excecoes.ObjetoNaoExisteException;
 import br.com.personalassistant.excecoes.PersistenciaException;
 
-public class AvaliacaoAssistenteDAO extends DAO {
+public class AvaliacaoAssistenteDAO extends DAO<AvaliacaoAssistente> {
 
 	private static final long serialVersionUID = -902709003677742503L;
 
-	public void save(AvaliacaoAssistente avaliacaoAssistente) throws PersistenciaException{
+/*	public void save(AvaliacaoAssistente avaliacaoAssistente) throws PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
 		
@@ -100,20 +101,21 @@ public class AvaliacaoAssistenteDAO extends DAO {
 		}
 		
 		return avaliacaoAssistente;
-	}
+	}*/
 	
-	public Long getTotalAvaliacoesById(Long id) throws ObjetoNaoExisteException, PersistenciaException{
+	public Long getTotalAvaliacoesById(PK id) throws ObjetoNaoExisteException, PersistenciaException{
 		
 		EntityManager entityManager = getEntityManager();
 		Long total = new Long(0);
 		
 		try{
-			TypedQuery<Long> consultaTotal = entityManager.createQuery("SELECT COUNT(a) "
-					+ "FROM AvaliacaoAssistente a, Servico s "
-					+ "WHERE s.assistente.id = :id "
-					+ "AND s.avaliacaoAssistenteRecebeu.id = a.id "
+			TypedQuery<Long> consultaTotal = entityManager.createQuery("SELECT COUNT(aa) "
+					+ "FROM AvaliacaoAssistente aa, Servico s "
+					+ "WHERE s.assistente.pk.id = :id "
+					+ "AND s.avaliacaoAssistenteRecebeu.id = aa.id "
 					+ "AND s.status = 'CONCLUIDO'", Long.class);
-			consultaTotal.setParameter("id", id);
+			consultaTotal.setParameter("id", id.getId());
+			consultaTotal.setParameter("ultimaAtualizacao", id.getUltimaAtualizacao());
 			total = consultaTotal.getSingleResult();
 		}
 		catch(PersistenceException ex){
@@ -129,7 +131,7 @@ public class AvaliacaoAssistenteDAO extends DAO {
 		return total;
 	}
 	
-	public ArrayList<Double> getAvaliacoesByIdAssistente(Long id) throws PersistenciaException, ObjetoNaoExisteException{
+	public ArrayList<Double> getAvaliacoesByIdAssistente(PK id) throws PersistenciaException, ObjetoNaoExisteException{
 
 		EntityManager entityManager = getEntityManager();
 		
@@ -144,61 +146,66 @@ public class AvaliacaoAssistenteDAO extends DAO {
 		try{
 			Long totalAvaliacoes = getTotalAvaliacoesById(id);
 			
-			TypedQuery<Long> consultaUm = entityManager.createQuery("SELECT COUNT(a) "
-					+ "FROM AvaliacaoAssistente a, Servico s "
+			TypedQuery<Long> consultaUm = entityManager.createQuery("SELECT COUNT(aa) "
+					+ "FROM AvaliacaoAssistente aa, Servico s "
 					+ "WHERE a.mediaAvaliacao = 1 "
-					+ "AND s.assistente.id = :id "
-					+ "AND s.avaliacaoAssistenteRecebeu.id = a.id "
+					+ "AND s.assistente.pk.id = :id AND s.assistente.pk.ultimaAtualizacao = :ultimaAtualizacao "
+					+ "AND s.avaliacaoAssistenteRecebeu.id = aa.id "
 					+ "AND s.status = 'CONCLUIDO'", Long.class);
-			consultaUm.setParameter("id", id);
+			consultaUm.setParameter("id", id.getId());
+			consultaUm.setParameter("ultimaAtualizacao", id.getUltimaAtualizacao());
 			
 			if(consultaUm.getSingleResult() != null && consultaUm.getSingleResult() != 0.0){
 				umaEstrela = (double) ((consultaUm.getSingleResult()/totalAvaliacoes) * 100);
 			}
 			
-			TypedQuery<Long> consultaDois = entityManager.createQuery("SELECT COUNT(a) "
-					+ "FROM AvaliacaoAssistente a, Servico s "
+			TypedQuery<Long> consultaDois = entityManager.createQuery("SELECT COUNT(aa) "
+					+ "FROM AvaliacaoAssistente aa, Servico s "
 					+ "WHERE a.mediaAvaliacao = 2 "
-					+ "AND s.assistente.id = :id "
-					+ "AND s.avaliacaoAssistenteRecebeu.id = a.id "
+					+ "AND s.assistente.pk.id = :id AND s.assistente.pk.ultimaAtualizacao = :ultimaAtualizacao "
+					+ "AND s.avaliacaoAssistenteRecebeu.id = aa.id "
 					+ "AND s.status = 'CONCLUIDO'", Long.class);
-			consultaDois.setParameter("id", id);
+			consultaDois.setParameter("id", id.getId());
+			consultaDois.setParameter("ultimaAtualizacao", id.getUltimaAtualizacao());
 			
 			if(consultaDois.getSingleResult() != null && consultaDois.getSingleResult() != 0.0){
 				duasEstrelas = (double) (consultaDois.getSingleResult()/totalAvaliacoes) * 100;				
 			}
 			
-			TypedQuery<Long> consultaTres = entityManager.createQuery("SELECT COUNT(a) "
-					+ "FROM AvaliacaoAssistente a, Servico s "
+			TypedQuery<Long> consultaTres = entityManager.createQuery("SELECT COUNT(aa) "
+					+ "FROM AvaliacaoAssistente aa, Servico s "
 					+ "WHERE a.mediaAvaliacao = 3 "
-					+ "AND s.assistente.id = :id "
-					+ "AND s.avaliacaoAssistenteRecebeu.id = a.id "
+					+ "AND s.assistente.pk.id = :id AND s.assistente.pk.ultimaAtualizacao = :ultimaAtualizacao "
+					+ "AND s.avaliacaoAssistenteRecebeu.id = aa.id "
 					+ "AND s.status = 'CONCLUIDO'", Long.class);
-			consultaTres.setParameter("id", id);
+			consultaTres.setParameter("id", id.getId());
+			consultaTres.setParameter("ultimaAtualizacao", id.getUltimaAtualizacao());
 
 			if(consultaTres.getSingleResult() != null && consultaTres.getSingleResult() != 0.0){
 				tresEstrelas = (double) (consultaTres.getSingleResult()/totalAvaliacoes) * 100;
 			}
 			
-			TypedQuery<Long> consultaQuatro = entityManager.createQuery("SELECT COUNT(a) "
-					+ "FROM AvaliacaoAssistente a, Servico s "
+			TypedQuery<Long> consultaQuatro = entityManager.createQuery("SELECT COUNT(aa) "
+					+ "FROM AvaliacaoAssistente aa, Servico s "
 					+ "WHERE a.mediaAvaliacao = 4 "
-					+ "AND s.assistente.id = :id "
-					+ "AND s.avaliacaoAssistenteRecebeu.id = a.id "
+					+ "AND s.assistente.pk.id = :id AND s.assistente.pk.ultimaAtualizacao = :ultimaAtualizacao "
+					+ "AND s.avaliacaoAssistenteRecebeu.id = aa.id "
 					+ "AND s.status = 'CONCLUIDO'", Long.class);
-			consultaQuatro.setParameter("id", id);
+			consultaQuatro.setParameter("id", id.getId());
+			consultaQuatro.setParameter("ultimaAtualizacao", id.getUltimaAtualizacao());
 			
 			if(consultaQuatro.getSingleResult() != null && consultaQuatro.getSingleResult() != 0.0){
 				quatroEstrelas = (double) (consultaQuatro.getSingleResult()/totalAvaliacoes) * 100;
 			}
 			
-			TypedQuery<Long> consultaCinco = entityManager.createQuery("SELECT COUNT(a) "
-					+ "FROM AvaliacaoAssistente a, Servico s "
+			TypedQuery<Long> consultaCinco = entityManager.createQuery("SELECT COUNT(aa) "
+					+ "FROM AvaliacaoAssistente aa, Servico s "
 					+ "WHERE a.mediaAvaliacao = 5 "
-					+ "AND s.assistente.id = :id "
-					+ "AND s.avaliacaoAssistenteRecebeu.id = a.id "
+					+ "AND s.assistente.pk.id = :id AND s.assistente.pk.ultimaAtualizacao = :ultimaAtualizacao "
+					+ "AND s.avaliacaoAssistenteRecebeu.id = aa.id "
 					+ "AND s.status = 'CONCLUIDO'", Long.class);
-			consultaCinco.setParameter("id", id);
+			consultaCinco.setParameter("id", id.getId());
+			consultaCinco.setParameter("ultimaAtualizacao", id.getUltimaAtualizacao());
 			
 			if(consultaCinco.getSingleResult() != null && consultaCinco.getSingleResult() != 0.0){
 				cincoEstrelas = (double) (consultaCinco.getSingleResult()/totalAvaliacoes) * 100;

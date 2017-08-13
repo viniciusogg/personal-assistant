@@ -10,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity(name = "Capacidade")
-@Table(name = "TB_CAPACIDADE") //, uniqueConstraints = {@UniqueConstraint(name = "UC_CAPACIDADE", columnNames = {"nome"})}
-public class Capacidade implements Serializable{	   // restrição de unicidade Para evitar duplicação no banco..
+@Table(name = "TB_CAPACIDADE")
+public class Capacidade implements Serializable{	  
 
 	private static final long serialVersionUID = -8996005601094291022L;
 

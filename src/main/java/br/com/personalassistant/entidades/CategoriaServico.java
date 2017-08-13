@@ -3,10 +3,8 @@ package br.com.personalassistant.entidades;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -17,9 +15,8 @@ public class CategoriaServico implements Serializable{
 
 	private static final long serialVersionUID = 5931600135186301826L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	private Long id;
+	@EmbeddedId
+	private PK pk;
 	
 	@Column(nullable = false)
 	private String nome;
@@ -33,8 +30,12 @@ public class CategoriaServico implements Serializable{
 		this.nome = nome;
 	}
 
-	public Long getId() {
-		return id;
+	public PK getPk() {
+		return pk;
+	}
+	
+	public void setPk(PK pk){
+		this.pk = pk;
 	}
 
 	public String getNome() {
@@ -49,8 +50,8 @@ public class CategoriaServico implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((pk == null) ? 0 : pk.hashCode());
 		return result;
 	}
 
@@ -63,22 +64,22 @@ public class CategoriaServico implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		CategoriaServico other = (CategoriaServico) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
+			return false;
+		if (pk == null) {
+			if (other.pk != null)
+				return false;
+		} else if (!pk.equals(other.pk))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "CategoriaServico [id=" + id + ", nome=" + nome + "]";
+		return "CategoriaServico [pk=" + pk + ", nome=" + nome + "]";
 	}
 	
 }

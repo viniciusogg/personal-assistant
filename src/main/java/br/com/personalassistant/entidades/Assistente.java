@@ -8,13 +8,17 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+
+import br.com.personalassistant.enums.TIPO_USUARIO;
 
 @Table(name = "TB_ASSISTENTE")
 @Entity(name = "Assistente")
@@ -38,26 +42,42 @@ public class Assistente extends Usuario{
 	@Transient
 	private int reputacao;
 	
-	@JoinColumn(name = "endereco_FK", nullable = false)
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumns({
+		@JoinColumn(name = "endereco_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoEndereco_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
+	//@JoinColumn(name="endereco_FK", nullable=false)
 	private Endereco endereco; // unidirecional
 
 	@OneToOne
-	@JoinColumn(name = "categoriaServico_FK", nullable = false)
+	@JoinColumns({
+		@JoinColumn(name = "categoriaServico_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoCategoriaServico_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
+	//@JoinColumn(name="categoriaServico_FK", nullable=false)
 	private CategoriaServico categoriaServico; // unidirecional
 
-	@Column(name="assistente_FK")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "assistente")
-	private List<Lance> lances = new ArrayList<Lance>(); // bidirecional
+	@Columns(columns = {
+		@Column(name = "assistente_FK"),
+		@Column(name = "ultimaAtualizacaoAssistente_FK")})
+	//@Column(name="assistente_FK")
+	private List<Lance> lances = new ArrayList<Lance>(); // bidirecional 
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "assistente_FK")
+	@JoinColumns({
+		@JoinColumn(name = "assistente_FK", referencedColumnName="id_PK"),
+		@JoinColumn(name = "ultimaAtualizacaoAssistente_FK", referencedColumnName="ultimaAtualizacao_PK")
+	})
+	//@JoinColumn(name="assistente_FK")
 	private List<Capacidade> capacidades; // unidirecional
 	
 	public Assistente() {
 		super();
+		this.setTipoUsuario(TIPO_USUARIO.ASSISTENTE);
 	}
 
 	public Assistente(Double precoFixo, Double precoHora, Endereco endereco, CategoriaServico categoriaServico,
@@ -68,6 +88,7 @@ public class Assistente extends Usuario{
 		this.endereco = endereco;
 		this.categoriaServico = categoriaServico;
 		this.capacidades = capacidades;
+		this.setTipoUsuario(TIPO_USUARIO.ASSISTENTE);
 	}
 
 	public Double getPrecoFixo() {
@@ -141,7 +162,7 @@ public class Assistente extends Usuario{
 	public void setReputacao(int reputacao) {
 		this.reputacao = reputacao;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -150,8 +171,11 @@ public class Assistente extends Usuario{
 		result = prime * result + ((categoriaServico == null) ? 0 : categoriaServico.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((lances == null) ? 0 : lances.hashCode());
+		result = prime * result + ((nivelExperiencia == null) ? 0 : nivelExperiencia.hashCode());
 		result = prime * result + ((precoFixo == null) ? 0 : precoFixo.hashCode());
 		result = prime * result + ((precoHora == null) ? 0 : precoHora.hashCode());
+		result = prime * result + ((quantServicosPrestados == null) ? 0 : quantServicosPrestados.hashCode());
+		result = prime * result + reputacao;
 		return result;
 	}
 
@@ -184,6 +208,11 @@ public class Assistente extends Usuario{
 				return false;
 		} else if (!lances.equals(other.lances))
 			return false;
+		if (nivelExperiencia == null) {
+			if (other.nivelExperiencia != null)
+				return false;
+		} else if (!nivelExperiencia.equals(other.nivelExperiencia))
+			return false;
 		if (precoFixo == null) {
 			if (other.precoFixo != null)
 				return false;
@@ -194,16 +223,24 @@ public class Assistente extends Usuario{
 				return false;
 		} else if (!precoHora.equals(other.precoHora))
 			return false;
+		if (quantServicosPrestados == null) {
+			if (other.quantServicosPrestados != null)
+				return false;
+		} else if (!quantServicosPrestados.equals(other.quantServicosPrestados))
+			return false;
+		if (reputacao != other.reputacao)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Assistente [quantServicos=" + getQuantServicosPrestados() + ", precoFixo=" + precoFixo
-				+ ", precoHora=" + precoHora + ", endereco=" + endereco + ", categoriaServico=" + categoriaServico
-				+ ", lances=" + lances + ", capacidades=" + capacidades + ", getId()="
-				+ getId() + ", getNome()=" + getNome() + ", getEmail()=" + getEmail() + ", getSenha()=" + getSenha()
-				+ ", getNumTelefonico()=" + getNumTelefonico() + ", getTipoUsuario()=" + getTipoUsuario() + "]";
+		return "Assistente [precoFixo=" + precoFixo + ", precoHora=" + precoHora + ", quantServicosPrestados="
+				+ quantServicosPrestados + ", nivelExperiencia=" + nivelExperiencia + ", reputacao=" + reputacao
+				+ ", endereco=" + endereco + ", categoriaServico=" + categoriaServico + ", lances=" + lances
+				+ ", capacidades=" + capacidades + ", getPk()=" + getPk() + ", getNome()=" + getNome() + ", getEmail()="
+				+ getEmail() + ", getSenha()=" + getSenha() + ", getNumTelefonico()=" + getNumTelefonico()
+				+ ", getTipoUsuario()=" + getTipoUsuario() + "]";
 	}
 	
 }
