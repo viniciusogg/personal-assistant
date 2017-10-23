@@ -99,12 +99,13 @@ public abstract class DAO<T> implements Serializable{
 		return t;
 	}
 	
-	public T getById(PK id) throws PersistenciaException, ObjetoNaoExisteException {
+	@SuppressWarnings({ "unchecked", "null" })
+	public T getById(Long id) throws PersistenciaException, ObjetoNaoExisteException {
 		
 		T t = null;
 		
-		try{
-			t = (T) this.entityManager.find(type, id);
+		try{			
+			t = (T) this.entityManager.find(t.getClass(), id);
 		}
 		catch(PersistenceException ex){
 			
@@ -119,13 +120,12 @@ public abstract class DAO<T> implements Serializable{
 		return t;
 	}
 	
-	@SuppressWarnings({ "unchecked", "null" })
-	public T getById(Long id) throws PersistenciaException, ObjetoNaoExisteException {
+	public T getById(PK id) throws PersistenciaException, ObjetoNaoExisteException {
 		
 		T t = null;
 		
-		try{			
-			t = (T) this.entityManager.find(t.getClass(), id);
+		try{
+			t = (T) this.entityManager.find(type, id);
 		}
 		catch(PersistenceException ex){
 			
